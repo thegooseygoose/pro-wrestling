@@ -1,0 +1,12 @@
+# Only the playable game goes on GitHub (the user's call): everything else in this folder stays local -
+# tools/ (wrestler reference photos, NES captures, build scripts), the exe build, source art, notes.
+/*
+!/.gitignore
+!/README.md
+!/index.html
+!/game.js
+!/sounds.js
+!/goose-prandini-media.png
+!/sprites/
+!/music/
+sprites/*_bak_*
