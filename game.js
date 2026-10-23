@@ -28,35 +28,35 @@ var PORTRAIT = {};
 /* Atlas frame rects embedded inline (keys "row.frame") so the game needs NO
    fetch() — it runs from a double-clicked file:// page, where fetch is blocked.
    Images still load fine over file:// via Image.src. */
-var ATLAS_DATA = {"STAR MAN":{"sheet":"sprites/star_keyed.png?v=16","frames":{"0.0":[5,5,14,56],"0.1":[23,6,14,55],"0.2":[41,4,14,57],"0.3":[59,5,14,56],"0.4":[77,6,16,55],"0.5":[97,6,16,55],"0.6":[121,10,48,48],"1.0":[5,65,14,56],"1.1":[23,65,23,56],"1.2":[50,66,16,55],"1.3":[70,66,16,55],"1.4":[90,65,14,56],"2.0":[108,87,35,34],"3.0":[5,125,8,54],"3.1":[17,127,25,52],"3.2":[46,125,8,54],"3.3":[58,127,25,52],"3.4":[87,130,19,49],"3.5":[110,136,31,43],"3.6":[145,124,15,55],"4.0":[5,183,15,55],"4.1":[24,183,15,55],"4.2":[43,188,16,50],"4.3":[63,196,16,42],"4.4":[83,206,17,32],"4.5":[104,198,16,40],"4.6":[124,190,16,48],"4.7":[144,197,17,41],"4.8":[165,214,25,24],"4.9":[214,206,24,32],"5.0":[5,250,20,56],"5.1":[29,251,21,55],"5.2":[54,242,32,64],"5.3":[90,255,18,51],"6.0":[5,310,20,56],"6.1":[29,311,15,55],"6.2":[126,311,14,55],"6.3":[199,311,11,55],"7.0":[48,347,30,19],"7.1":[144,347,30,19],"8.0":[178,326,17,40],"9.0":[49,370,23,63],"9.1":[82,350,40,16],"10.0":[5,377,20,56],"10.1":[29,376,16,57],"10.2":[76,378,20,55],"10.3":[156,381,16,52],"11.0":[100,402,24,31],"11.1":[128,402,24,25],"12.0":[5,442,20,56],"12.1":[29,443,11,55],"12.2":[44,443,20,55],"12.3":[68,437,11,61],"12.4":[83,438,20,60],"12.5":[107,447,19,51],"12.6":[174,452,18,46],"13.0":[130,476,40,22],"14.0":[5,502,20,56],"14.1":[29,515,14,43],"14.2":[47,514,17,44],"14.3":[68,514,17,44],"14.4":[89,507,20,51],"15.0":[113,535,32,23],"15.1":[149,535,32,23],"16.0":[5,562,14,59],"16.1":[23,562,14,59],"16.2":[41,580,12,41],"16.3":[57,575,14,46],"16.4":[75,566,14,55],"17.0":[93,589,16,32],"17.1":[201,591,24,30],"17.2":[229,580,16,41],"17.3":[249,579,16,42],"17.4":[269,597,32,24],"17.5":[305,596,32,25],"18.0":[5,652,19,30],"18.1":[28,652,24,30],"18.2":[56,625,19,57],"18.3":[79,625,19,57],"18.4":[102,660,40,22],"18.5":[146,666,40,16],"18.6":[191,666,39,16],"18.7":[234,627,20,55],"18.8":[258,627,17,55],"18.9":[279,636,18,46],"19.0":[5,697,18,48],"19.1":[27,696,18,49],"19.2":[49,691,18,54],"19.3":[71,686,18,59],"19.4":[93,713,16,32],"19.5":[113,713,16,32],"19.6":[133,697,21,48],"19.7":[158,697,21,48],"SLAM":[5,761,32,64],"SLAM1":[5,829,32,64],"SLAM2":[39,829,63,55],"SLAM3":[104,829,62,51],"SLAM4":[168,829,62,51],"SLAM5":[232,829,59,56],"PICKUP1":[2,897,40,34],"PICKUP2":[44,897,34,52],"PICKUP3":[80,897,36,56],"PICKUP4":[118,897,38,57],"PILE1":[2,958,26,51],"PILE2":[30,958,36,43],"PILE3":[68,958,22,63],"PILE4":[92,958,24,65],"PILE5":[118,958,24,39],"SUPLEX1":[2,1050,20,56],"SUPLEX2":[24,1050,20,55],"SUPLEX3":[46,1050,28,51],"SUPLEX4":[76,1050,21,86],"SUPLEX5":[99,1050,42,51],"SUPLEX6":[143,1050,41,34],"SUPLEX7":[186,1050,65,22],"SUPLEX8":[253,1050,62,46],"PINON":[319,1050,16,14],"KNOCKB":[172,2,19,54],"LIEFLAT":[194,2,40,14],"LIEGRAB":[193,18,40,15],"PFSQUAT":[171,58,17,53],"PFSTRAIN":[145,60,17,56],"PFBENT":[190,112,19,30],"SXA1":[211,112,20,56],"SXA2":[233,112,16,55],"SXA3":[251,112,16,61],"SXA4":[236,1,12,41],"SXA5":[164,113,14,55],"SXA6":[269,130,16,32],"SXA7":[190,58,40,14],"SXR1":[287,130,12,41],"SXR2":[301,130,16,55],"SXR3":[319,130,20,51],"SXR4":[232,58,40,22],"SXR5":[180,144,18,46],"SXR6":[269,164,14,56],"SOFLIP":[285,173,14,55],"SOTAKE":[240,175,20,56],"BITE0":[319,183,17,50],"BITE1":[262,222,17,50],"BITEF0":[301,187,16,43],"BITEF1":[281,230,16,43],"BOOT":[299,235,34,55],"SKH":[110,240,48,55],"SKM":[160,240,45,37],"PBSIT":[223,307,25,39],"PBDROP":[239,275,43,30],"PBINV":[160,279,14,56],"PBLIFT":[284,292,38,46],"PBOVER":[176,281,45,27],"PBFALL":[200,170,36,28],"PBHUG":[324,292,20,56],"PBFOLD":[207,240,22,33],"PBUP1":[46,308,44,33],"PBUP2":[265,340,37,45],"PBTIP":[212,348,35,36],"PBPIN":[92,308,30,33],"PBTSIT":[304,350,24,39],"WHIPD":[174,368,22,51],"CLOTH":[198,386,25,52],"BKNEEL":[225,386,18,43],"BBLIE":[245,387,41,34],"NSKM":[288,391,45,37],"NSKH":[245,430,48,55],"SSP1":[274,58,40,16],"SSP2":[316,58,30,19],"SSP3":[98,368,37,32],"SSP4":[295,430,14,55],"SSP5":[106,63,30,19],"SSP6":[128,435,39,16],"SSP7":[231,240,25,24],"SSP8":[190,94,15,14],"SSPC":[81,181,22,15],"CLRUN":[311,430,25,52],"CLRUN2":[194,440,19,54]}},"THE AMAZON":{"sheet":"sprites/amazon_keyed.png?v=12","frames":{"0.0":[13,9,14,57],"0.1":[31,9,14,56],"0.2":[49,9,14,57],"0.3":[68,9,14,56],"0.4":[85,9,16,56],"0.5":[106,9,16,56],"0.6":[130,1,67,64],"0.7":[201,17,18,48],"0.8":[221,16,18,49],"1.0":[13,80,23,57],"1.1":[39,81,35,35],"1.2":[77,83,25,53],"1.3":[108,81,8,55],"1.4":[121,81,19,50],"1.5":[143,83,25,53],"1.6":[172,81,19,55],"1.7":[196,81,15,55],"2.0":[9,145,15,56],"2.1":[27,145,15,56],"2.2":[46,150,16,51],"2.3":[68,159,16,42],"2.4":[89,169,17,32],"2.5":[109,153,16,48],"2.6":[131,160,17,41],"2.7":[153,177,25,24],"2.8":[201,169,24,32],"3.0":[7,208,17,56],"3.1":[31,208,20,56],"3.2":[151,233,24,30],"3.3":[179,221,16,42],"3.4":[201,222,16,41],"4.0":[10,277,20,57],"4.1":[36,278,21,56],"4.2":[65,282,18,52],"4.3":[94,277,16,57],"4.4":[120,278,20,56],"4.5":[148,278,11,56],"4.6":[165,277,11,57],"4.7":[184,282,20,52],"5.0":[210,312,40,22],"6.0":[10,345,16,53],"6.1":[32,346,16,52],"6.2":[55,341,18,57],"6.3":[81,341,18,57],"6.4":[108,356,16,42],"6.5":[130,355,16,43],"6.6":[156,341,14,57],"6.7":[179,341,14,57],"6.8":[199,341,14,57],"6.9":[220,341,19,57],"7.0":[10,405,14,59],"7.1":[32,405,14,59],"7.2":[52,410,19,54],"7.3":[212,417,18,47],"8.0":[7,469,14,57],"8.1":[26,501,32,25],"8.2":[65,494,16,32],"8.3":[91,473,25,53],"8.4":[121,470,16,56],"8.5":[143,495,24,31],"8.6":[172,473,16,53],"8.7":[200,497,14,29],"8.8":[221,496,15,30],"9.0":[8,546,18,54],"9.1":[30,541,18,59],"9.2":[59,556,19,45],"9.3":[84,555,19,46],"7.4":[125,450,40,14],"SLAMMED":[5,615,32,25],"KICKT":[212,68,28,35],"PINON":[170,2,16,14],"ASLAM1":[2,869,32,65],"ASLAM2":[36,869,32,64],"ASLAM3":[70,869,63,56],"ASLAM4":[135,869,62,52],"ASLAM5":[199,869,62,52],"ASUP1":[263,869,20,56],"ASUP2":[285,869,25,87],"ASUP3":[312,869,21,86],"ASUP4":[335,869,42,52],"ASUP5":[2,958,41,34],"ASUP6":[45,958,65,22],"ASUP7":[112,958,62,47],"SUPLEX1":[2,644,20,57],"SUPLEX2":[24,644,20,56],"SUPLEX3":[46,644,28,52],"SUPLEX4":[76,644,21,86],"SUPLEX5":[99,644,42,52],"SUPLEX6":[143,644,41,34],"SUPLEX7":[186,644,70,23],"SUPLEX8":[258,644,62,47],"SLAM1":[2,732,32,64],"SLAM2":[36,732,62,56],"SLAM3":[100,732,62,52],"SLAM4":[164,732,62,52],"SLAM5":[228,732,59,57],"PILE1":[289,732,26,51],"PILE2":[317,732,36,43],"PILE3":[355,732,22,63],"PILE4":[2,798,24,65],"PILE5":[28,798,24,39],"PFSQUAT":[241,1,17,53],"PFSTRAIN":[260,1,17,56],"PFBENT":[279,1,19,30],"SXR1":[300,1,12,41],"SXR2":[314,1,16,56],"SXR3":[332,1,20,52],"SXR4":[354,1,40,22],"SXR5":[354,25,18,47],"SXR6":[374,25,14,57],"SXA1":[279,44,20,57],"SXA2":[332,55,16,56],"SXA3":[242,56,16,63],"SXA4":[260,59,12,41],"SXA5":[301,59,14,55],"SXA6":[350,74,16,32],"SXA7":[350,108,40,14],"PBSIT":[260,103,25,40],"PBDROP":[292,116,43,30],"PBINV":[213,105,14,57],"PBLIFT":[337,124,40,46],"PBOVER":[150,138,46,27],"PBFALL":[270,148,36,28],"PBFOLD":[308,148,22,33],"PBUP1":[332,172,44,34],"PBUP2":[229,159,37,46],"PBTIP":[268,178,35,38],"PBPIN":[53,203,31,33],"WHIPD":[305,183,22,52],"CLOTH":[219,207,25,53],"BKA1":[38,118,32,25],"BKA2":[86,203,40,16],"BKA3":[128,203,40,16],"BBLIE":[329,208,41,34]}}};
+var ATLAS_DATA = {"STAR MAN":{"sheet":"sprites/star_keyed.png?v=32","frames":{"0.0":[5,5,14,56],"0.1":[23,6,14,55],"0.2":[41,4,14,57],"0.3":[59,5,14,56],"0.4":[77,6,16,55],"0.5":[97,6,16,55],"0.6":[121,10,48,48],"1.0":[5,65,14,56],"1.1":[23,65,23,56],"1.2":[50,66,16,55],"1.3":[70,66,16,55],"1.4":[90,65,14,56],"2.0":[108,87,35,34],"3.0":[5,125,8,54],"3.1":[17,127,25,52],"3.2":[46,125,8,54],"3.3":[58,127,25,52],"3.4":[87,130,19,49],"3.5":[110,136,31,43],"3.6":[145,124,15,55],"4.0":[5,183,15,55],"4.1":[24,183,15,55],"4.2":[43,188,16,50],"4.3":[63,196,16,42],"4.4":[83,206,17,32],"4.5":[104,198,16,40],"4.6":[124,190,16,48],"4.7":[144,197,17,41],"4.8":[165,214,25,24],"4.9":[214,206,24,32],"5.0":[5,250,20,56],"5.1":[29,251,21,55],"5.2":[54,242,32,64],"5.3":[90,255,18,51],"6.0":[5,310,20,56],"6.1":[29,311,15,55],"6.2":[126,311,14,55],"6.3":[199,311,11,55],"7.0":[48,347,30,19],"7.1":[144,347,30,19],"8.0":[178,326,17,40],"9.0":[49,370,23,63],"9.1":[82,350,40,16],"10.0":[5,377,20,56],"10.1":[29,376,16,57],"10.2":[76,378,20,55],"10.3":[156,381,16,52],"11.0":[100,402,24,31],"11.1":[128,402,24,25],"12.0":[5,442,20,56],"12.1":[29,443,11,55],"12.2":[44,443,20,55],"12.3":[68,437,11,61],"12.4":[83,438,20,60],"12.5":[107,447,19,51],"12.6":[174,452,18,46],"13.0":[130,476,40,22],"14.0":[5,502,20,56],"14.1":[29,515,14,43],"14.2":[47,514,17,44],"14.3":[68,514,17,44],"14.4":[89,507,20,51],"15.0":[113,535,32,23],"15.1":[149,535,32,23],"16.0":[5,562,14,59],"16.1":[23,562,14,59],"16.2":[41,580,12,41],"16.3":[57,575,14,46],"16.4":[75,566,14,55],"17.0":[93,589,16,32],"17.1":[201,591,24,30],"17.2":[229,580,16,41],"17.3":[249,579,16,42],"17.4":[269,597,32,24],"17.5":[305,596,32,25],"18.0":[5,652,19,30],"18.1":[28,652,24,30],"18.2":[56,625,19,57],"18.3":[79,625,19,57],"18.4":[102,660,40,22],"18.5":[146,666,40,16],"18.6":[191,666,39,16],"18.7":[234,627,20,55],"18.8":[258,627,17,55],"18.9":[279,636,18,46],"19.0":[5,697,18,48],"19.1":[27,696,18,49],"19.2":[49,691,18,54],"19.3":[71,686,18,59],"19.4":[93,713,16,32],"19.5":[113,713,16,32],"19.6":[133,697,21,48],"19.7":[158,697,21,48],"SLAM":[5,761,32,64],"SLAM1":[5,829,32,64],"SLAM2":[39,829,63,55],"SLAM3":[104,829,62,51],"SLAM4":[168,829,62,51],"SLAM5":[232,829,59,56],"PICKUP1":[2,897,40,34],"PICKUP2":[44,897,34,52],"PICKUP3":[80,897,36,56],"PICKUP4":[118,897,38,57],"PILE1":[2,958,26,51],"PILE2":[30,958,36,43],"PILE3":[68,958,22,63],"PILE4":[92,958,24,65],"PILE5":[118,958,24,39],"SUPLEX1":[2,1050,20,56],"SUPLEX2":[24,1050,20,55],"SUPLEX3":[46,1050,28,51],"SUPLEX4":[76,1050,21,86],"SUPLEX5":[99,1050,42,51],"SUPLEX6":[143,1050,41,34],"SUPLEX7":[186,1050,65,22],"SUPLEX8":[253,1050,62,46],"PINON":[319,1050,16,14],"KNOCKB":[172,2,19,54],"LIEFLAT":[194,2,40,14],"LIEGRAB":[193,18,40,15],"PFSQUAT":[171,58,17,53],"PFSTRAIN":[145,60,17,56],"PFBENT":[190,112,19,30],"SXA1":[211,112,20,56],"SXA2":[233,112,16,55],"SXA3":[251,112,16,61],"SXA4":[236,1,12,41],"SXA5":[164,113,14,55],"SXA6":[269,130,16,32],"SXA7":[190,58,40,14],"SXR1":[287,130,12,41],"SXR2":[301,130,16,55],"SXR3":[319,130,20,51],"SXR4":[232,58,40,22],"SXR5":[180,144,18,46],"SXR6":[269,164,14,56],"SOFLIP":[285,173,14,55],"SOTAKE":[240,175,20,56],"BITE0":[319,183,17,50],"BITE1":[262,222,17,50],"BITEF0":[301,187,16,43],"BITEF1":[281,230,16,43],"BOOT":[299,235,34,55],"SKH":[110,240,48,55],"SKM":[160,240,45,37],"PBSIT":[223,307,25,39],"PBDROP":[239,275,43,30],"PBINV":[160,279,14,56],"PBLIFT":[284,292,38,46],"PBOVER":[176,281,45,27],"PBFALL":[200,170,36,28],"PBHUG":[324,292,20,56],"PBFOLD":[207,240,22,33],"PBUP1":[46,308,44,33],"PBUP2":[265,340,37,45],"PBTIP":[212,348,35,36],"PBPIN":[92,308,30,33],"PBTSIT":[304,350,24,39],"WHIPD":[174,368,22,51],"CLOTH":[198,386,25,52],"BKNEEL":[225,386,18,43],"BBLIE":[245,387,41,34],"NSKM":[288,391,45,37],"NSKH":[245,430,48,55],"SSP1":[274,58,40,16],"SSP2":[316,58,30,19],"SSP3":[98,368,37,32],"SSP4":[295,430,14,55],"SSP5":[106,63,30,19],"SSP6":[128,435,39,16],"SSP7":[231,240,25,24],"SSP8":[190,94,15,14],"SSPC":[81,181,22,15],"CLRUN":[311,430,25,52],"CLRUN2":[194,440,19,54],"DVV0":[215,487,38,29],"DVV30":[255,487,36,33],"DVV60":[293,487,36,35],"DVV90":[183,500,29,38],"DVA30":[214,518,32,50],"DVA60":[111,500,51,31],"DVA90":[248,524,56,14],"DVV15":[306,524,37,30],"DVV45":[248,540,37,32],"DVA15":[299,623,20,54],"DVA45":[111,560,43,41],"DVF0":[287,556,53,19],"DVF25":[156,560,50,26],"DVF55":[299,679,35,43],"DMF25":[181,684,33,50],"DMF55":[144,622,48,39],"DMF90":[1,623,49,18],"DVL":[215,440,27,34],"DVLD":[216,684,43,28],"DVF10":[216,714,53,21],"DVF40":[271,724,43,35],"DVF70":[316,724,29,49],"DMF10":[321,623,23,50],"DMF40":[181,737,41,46],"DMF70":[39,747,50,30],"DVB10":[91,747,53,22],"DVB25":[224,761,48,28],"DVB40":[274,761,39,40],"DVB55":[146,747,30,48],"DVB70":[91,771,24,52],"DMB10":[117,771,21,50],"DMB25":[315,775,31,49],"DMB40":[39,779,38,47],"DMB55":[178,785,44,40],"DMB70":[224,791,47,34],"DMBL1":[293,826,48,26],"DMBL2":[293,854,49,20],"DMBL3":[293,876,49,18],"DMBL4":[158,882,50,21],"DMBS1":[210,887,48,25],"DMBS2":[260,896,48,20],"DMBS3":[158,905,48,18],"DMBS4":[208,914,47,19],"DMBS0":[257,918,47,27],"DMBSA":[158,925,48,22],"DMBSB":[208,947,48,18],"DMBS5":[258,947,44,24],"DMBS6":[100,623,40,28],"DMSIT":[213,623,19,26],"DDA20":[310,896,19,44],"DDA45":[306,942,30,36],"DDA70":[91,684,39,25],"DDA90":[128,453,43,14],"DDV20":[271,684,22,30],"DDV45":[140,797,24,28],"DDV70":[158,949,26,26],"DDV90":[186,967,27,25],"DDS60":[1,933,36,23],"DDS30":[215,967,33,28],"DDVL40":[163,192,34,20],"DDVL20":[267,577,37,16]}},"THE AMAZON":{"sheet":"sprites/amazon_keyed.png?v=23","frames":{"0.0":[13,9,14,57],"0.1":[31,9,14,56],"0.2":[49,9,14,57],"0.3":[68,9,14,56],"0.4":[85,9,16,56],"0.5":[106,9,16,56],"0.6":[130,1,67,64],"0.7":[201,17,18,48],"0.8":[221,16,18,49],"1.0":[13,80,23,57],"1.1":[39,81,35,35],"1.2":[77,83,25,53],"1.3":[108,81,8,55],"1.4":[121,81,19,50],"1.5":[143,83,25,53],"1.6":[172,81,19,55],"1.7":[196,81,15,55],"2.0":[9,145,15,56],"2.1":[27,145,15,56],"2.2":[46,150,16,51],"2.3":[68,159,16,42],"2.4":[89,169,17,32],"2.5":[109,153,16,48],"2.6":[131,160,17,41],"2.7":[153,177,25,24],"2.8":[201,169,24,32],"3.0":[7,208,17,56],"3.1":[31,208,20,56],"3.2":[151,233,24,30],"3.3":[179,221,16,42],"3.4":[201,222,16,41],"4.0":[10,277,20,57],"4.1":[36,278,21,56],"4.2":[65,282,18,52],"4.3":[94,277,16,57],"4.4":[120,278,20,56],"4.5":[148,278,11,56],"4.6":[165,277,11,57],"4.7":[184,282,20,52],"5.0":[210,312,40,22],"6.0":[10,345,16,53],"6.1":[32,346,16,52],"6.2":[55,341,18,57],"6.3":[81,341,18,57],"6.4":[108,356,16,42],"6.5":[130,355,16,43],"6.6":[156,341,14,57],"6.7":[179,341,14,57],"6.8":[199,341,14,57],"6.9":[220,341,19,57],"7.0":[10,405,14,59],"7.1":[32,405,14,59],"7.2":[52,410,19,54],"7.3":[212,417,18,47],"8.0":[7,469,14,57],"8.1":[26,501,32,25],"8.2":[65,494,16,32],"8.3":[91,473,25,53],"8.4":[121,470,16,56],"8.5":[143,495,24,31],"8.6":[172,473,16,53],"8.7":[200,497,14,29],"8.8":[221,496,15,30],"9.0":[8,546,18,54],"9.1":[30,541,18,59],"9.2":[59,556,19,45],"9.3":[84,555,19,46],"7.4":[125,450,40,14],"SLAMMED":[5,615,32,25],"KICKT":[212,68,28,35],"PINON":[170,2,16,14],"ASLAM1":[2,869,32,65],"ASLAM2":[36,869,32,64],"ASLAM3":[70,869,63,56],"ASLAM4":[135,869,62,52],"ASLAM5":[199,869,62,52],"ASUP1":[263,869,20,56],"ASUP2":[285,869,25,87],"ASUP3":[312,869,21,86],"ASUP4":[335,869,42,52],"ASUP5":[2,958,41,34],"ASUP6":[45,958,65,22],"ASUP7":[112,958,62,47],"SUPLEX1":[2,644,20,57],"SUPLEX2":[24,644,20,56],"SUPLEX3":[46,644,28,52],"SUPLEX4":[76,644,21,86],"SUPLEX5":[99,644,42,52],"SUPLEX6":[143,644,41,34],"SUPLEX7":[186,644,70,23],"SUPLEX8":[258,644,62,47],"SLAM1":[2,732,32,64],"SLAM2":[36,732,62,56],"SLAM3":[100,732,62,52],"SLAM4":[164,732,62,52],"SLAM5":[228,732,59,57],"PILE1":[289,732,26,51],"PILE2":[317,732,36,43],"PILE3":[355,732,22,63],"PILE4":[2,798,24,65],"PILE5":[28,798,24,39],"PFSQUAT":[241,1,17,53],"PFSTRAIN":[260,1,17,56],"PFBENT":[279,1,19,30],"SXR1":[300,1,12,41],"SXR2":[314,1,16,56],"SXR3":[332,1,20,52],"SXR4":[354,1,40,22],"SXR5":[354,25,18,47],"SXR6":[374,25,14,57],"SXA1":[279,44,20,57],"SXA2":[332,55,16,56],"SXA3":[242,56,16,63],"SXA4":[260,59,12,41],"SXA5":[301,59,14,55],"SXA6":[350,74,16,32],"SXA7":[350,108,40,14],"PBSIT":[260,103,25,40],"PBDROP":[292,116,43,30],"PBINV":[213,105,14,57],"PBLIFT":[337,124,40,46],"PBOVER":[150,138,46,27],"PBFALL":[270,148,36,28],"PBFOLD":[308,148,22,33],"PBUP1":[332,172,44,34],"PBUP2":[229,159,37,46],"PBTIP":[268,178,35,38],"PBPIN":[53,203,31,33],"WHIPD":[305,183,22,52],"CLOTH":[219,207,25,53],"BKA1":[38,118,32,25],"BKA2":[86,203,40,16],"BKA3":[128,203,40,16],"BBLIE":[329,208,41,34],"DVV0":[246,218,37,29],"DVV30":[285,237,36,33],"DVV60":[323,244,36,35],"DVV90":[361,244,29,37],"DVV15":[246,249,36,32],"DVV45":[206,265,37,33],"DVF0":[86,221,53,19],"DVF25":[284,281,49,27],"DVF55":[335,283,35,44],"DVL":[229,121,28,34],"DVLD":[252,310,44,28],"DVF10":[298,329,53,22],"DVF40":[353,329,43,36],"DVF70":[241,340,29,50],"DVB10":[272,353,53,23],"DVB25":[327,367,48,29],"DVB40":[272,378,39,41],"DVB55":[313,398,30,49],"DVB70":[241,392,24,52],"DDV20":[372,208,22,30],"DDV45":[372,283,24,28],"DDV70":[345,398,26,26],"DDV90":[245,283,27,25]}}};
 // TODD QUALITY = the user's own wrestler: Star Man's full frame set repainted (tools/py/repaint2.py:
 // slicked-back hair, horseshoe mustache, bare arms, black tank top, gold chain, purple track pants with a
 // gold stripe, black sneakers) — same rects, own sheet (file names still say 'heavy').
-ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=28', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=45', frames:ATLAS_DATA['STAR MAN'].frames };
 // LOKOMBO = the user's 4th wrestler (from their photos): Star Man's full frame set recoloured (deep brown skin, black
 // trunks, black knee pads) with Todd's head designs re-stamped in his colours (black flat-top, beard) —
 // tools/py/build_lokombo.py. Same rects, own sheet.
-ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=9', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=26', frames:ATLAS_DATA['STAR MAN'].frames };
 // SCOTTY MAC = the user's 5th wrestler (from their photos): TODD's art recoloured (black vest, silver chain, sky-blue
 // pants, bleached-blond hair, grey beard) — tools/py/build_scotty.py. Same rects, own sheet.
-ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=10', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=27', frames:ATLAS_DATA['STAR MAN'].frames };
 // NICK PRICE = the user's 6th wrestler (from their photo): Lokombo's recipe in his colours — Star's frames recoloured (pale
 // skin, black trunks, black knee pads/boots) + his OWN head designs (tools/py/nick_heads.py: top-knot, shaved sides, full
 // reddish beard — the user: "his face looks too similar to Todd's") — tools/py/build_nick.py;
 // his own superkick frames NSKM/NSKH via build_hbk.py --sheet nick_keyed.png. Same rects, own sheet.
-ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=8', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=25', frames:ATLAS_DATA['STAR MAN'].frames };
 // AIR ADONIS = the user's 7th wrestler (from their photos, tools/adonis_photos): Nick's recipe in his colours — Star's
 // frames recoloured (tan skin, black trunks + boots) + his own heads (tools/py/adonis_heads.py: black BACKWARDS cap,
 // short dark beard) — tools/py/build_adonis.py — then his colour TATTOO SLEEVES (tools/py/build_adonis_tattoo.py).
-ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=6', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=23', frames:ATLAS_DATA['STAR MAN'].frames };
 // MACHETE BROWN = the user's 8th wrestler (from their photo): TODD's art (like Scotty) with his own heads (tools/py/
 // machete_heads.py: short dark hair greying at the sides, BIG grey beard), Todd's tank -> an open black leather jacket,
 // the chain -> the red print of his tee, black pants, jacket sleeves over Todd's bare arms — tools/py/build_machete.py.
-ATLAS_DATA['MACHETE BROWN'] = { sheet:'sprites/machete_keyed.png?v=6', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['MACHETE BROWN'] = { sheet:'sprites/machete_keyed.png?v=23', frames:ATLAS_DATA['STAR MAN'].frames };
 // MIRROR MATCHES (the user): the CPU copy of the same wrestler is drawn from '<NAME>#ALT' — same frames, his costume in
 // other colours (tools/py/build_mirror.py). Game logic keeps e.def.name; drawing goes through artKey(e).
 var ALT_SHEET = { 'STAR MAN':'star', 'THE AMAZON':'amazon', 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=10', frames:ATLAS_DATA[_an].frames };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=26', frames:ATLAS_DATA[_an].frames };
 for (var _nm in ATLAS_DATA) {
   ATLAS[_nm] = ATLAS_DATA[_nm].frames;
   (function(name, src){
@@ -77,64 +77,64 @@ PORTRAIT['MACHETE BROWN'] = load('sprites/portrait_machete.png?v=2');   // same 
 // Throw frames have the victim drawn in, so some pairings use their own copy of the attacker's sheet
 // (same rects): Star<->Todd get a Star-shaped victim, the Amazon's throws get Todd repainted in.
 var SHEET_VS = {
-  'STAR MAN|TODD QUALITY':   load('sprites/star_vs_heavy.png?v=5'),
-  'TODD QUALITY|STAR MAN':   load('sprites/heavy_vs_star.png?v=8'),
-  'THE AMAZON|TODD QUALITY': load('sprites/amazon_vs_heavy.png?v=5'),
+  'STAR MAN|TODD QUALITY':   load('sprites/star_vs_heavy.png?v=12'),
+  'TODD QUALITY|STAR MAN':   load('sprites/heavy_vs_star.png?v=15'),
+  'THE AMAZON|TODD QUALITY': load('sprites/amazon_vs_heavy.png?v=7'),
   // LOKOMBO's pairings (tools/py/build_lokombo.py); vs the Amazon he uses his own sheet, like Star
-  'LOKOMBO|STAR MAN':        load('sprites/lokombo_vs_star.png?v=2'),
-  'LOKOMBO|TODD QUALITY':    load('sprites/lokombo_vs_heavy.png?v=3'),
-  'STAR MAN|LOKOMBO':        load('sprites/star_vs_lokombo.png?v=2'),
-  'TODD QUALITY|LOKOMBO':    load('sprites/heavy_vs_lokombo.png?v=4'),
-  'THE AMAZON|LOKOMBO':      load('sprites/amazon_vs_lokombo.png?v=3'),
+  'LOKOMBO|STAR MAN':        load('sprites/lokombo_vs_star.png?v=9'),
+  'LOKOMBO|TODD QUALITY':    load('sprites/lokombo_vs_heavy.png?v=10'),
+  'STAR MAN|LOKOMBO':        load('sprites/star_vs_lokombo.png?v=9'),
+  'TODD QUALITY|LOKOMBO':    load('sprites/heavy_vs_lokombo.png?v=11'),
+  'THE AMAZON|LOKOMBO':      load('sprites/amazon_vs_lokombo.png?v=5'),
   // SCOTTY MAC's pairings (tools/py/build_scotty.py); vs the Amazon he uses his own sheet
-  'SCOTTY MAC|STAR MAN':     load('sprites/scotty_vs_star.png?v=3'),
-  'SCOTTY MAC|TODD QUALITY': load('sprites/scotty_vs_heavy.png?v=4'),
-  'SCOTTY MAC|LOKOMBO':      load('sprites/scotty_vs_lokombo.png?v=4'),
-  'STAR MAN|SCOTTY MAC':     load('sprites/star_vs_scotty.png?v=2'),
-  'TODD QUALITY|SCOTTY MAC': load('sprites/heavy_vs_scotty.png?v=4'),
-  'THE AMAZON|SCOTTY MAC':   load('sprites/amazon_vs_scotty.png?v=2'),
-  'LOKOMBO|SCOTTY MAC':      load('sprites/lokombo_vs_scotty.png?v=3'),
+  'SCOTTY MAC|STAR MAN':     load('sprites/scotty_vs_star.png?v=10'),
+  'SCOTTY MAC|TODD QUALITY': load('sprites/scotty_vs_heavy.png?v=11'),
+  'SCOTTY MAC|LOKOMBO':      load('sprites/scotty_vs_lokombo.png?v=11'),
+  'STAR MAN|SCOTTY MAC':     load('sprites/star_vs_scotty.png?v=9'),
+  'TODD QUALITY|SCOTTY MAC': load('sprites/heavy_vs_scotty.png?v=11'),
+  'THE AMAZON|SCOTTY MAC':   load('sprites/amazon_vs_scotty.png?v=4'),
+  'LOKOMBO|SCOTTY MAC':      load('sprites/lokombo_vs_scotty.png?v=10'),
   // NICK PRICE's pairings (tools/py/build_nick.py); vs the Amazon he uses his own sheet
-  'NICK PRICE|STAR MAN':     load('sprites/nick_vs_star.png?v=5'),
-  'NICK PRICE|TODD QUALITY': load('sprites/nick_vs_heavy.png?v=6'),
-  'NICK PRICE|LOKOMBO':      load('sprites/nick_vs_lokombo.png?v=6'),
-  'NICK PRICE|SCOTTY MAC':   load('sprites/nick_vs_scotty.png?v=6'),
-  'STAR MAN|NICK PRICE':     load('sprites/star_vs_nick.png?v=4'),
-  'TODD QUALITY|NICK PRICE': load('sprites/heavy_vs_nick.png?v=6'),
-  'THE AMAZON|NICK PRICE':   load('sprites/amazon_vs_nick.png?v=5'),
-  'LOKOMBO|NICK PRICE':      load('sprites/lokombo_vs_nick.png?v=5'),
-  'SCOTTY MAC|NICK PRICE':   load('sprites/scotty_vs_nick.png?v=6'),
+  'NICK PRICE|STAR MAN':     load('sprites/nick_vs_star.png?v=12'),
+  'NICK PRICE|TODD QUALITY': load('sprites/nick_vs_heavy.png?v=13'),
+  'NICK PRICE|LOKOMBO':      load('sprites/nick_vs_lokombo.png?v=13'),
+  'NICK PRICE|SCOTTY MAC':   load('sprites/nick_vs_scotty.png?v=13'),
+  'STAR MAN|NICK PRICE':     load('sprites/star_vs_nick.png?v=11'),
+  'TODD QUALITY|NICK PRICE': load('sprites/heavy_vs_nick.png?v=13'),
+  'THE AMAZON|NICK PRICE':   load('sprites/amazon_vs_nick.png?v=7'),
+  'LOKOMBO|NICK PRICE':      load('sprites/lokombo_vs_nick.png?v=12'),
+  'SCOTTY MAC|NICK PRICE':   load('sprites/scotty_vs_nick.png?v=13'),
   // AIR ADONIS's pairings (tools/py/build_adonis.py + build_adonis_tattoo.py); vs the Amazon he uses his own sheet
-  'AIR ADONIS|STAR MAN':     load('sprites/adonis_vs_star.png?v=2'),
-  'AIR ADONIS|TODD QUALITY': load('sprites/adonis_vs_heavy.png?v=3'),
-  'AIR ADONIS|LOKOMBO':      load('sprites/adonis_vs_lokombo.png?v=3'),
-  'AIR ADONIS|SCOTTY MAC':   load('sprites/adonis_vs_scotty.png?v=3'),
-  'AIR ADONIS|NICK PRICE':   load('sprites/adonis_vs_nick.png?v=3'),
-  'STAR MAN|AIR ADONIS':     load('sprites/star_vs_adonis.png?v=2'),
-  'TODD QUALITY|AIR ADONIS': load('sprites/heavy_vs_adonis.png?v=4'),
-  'THE AMAZON|AIR ADONIS':   load('sprites/amazon_vs_adonis.png?v=3'),
-  'LOKOMBO|AIR ADONIS':      load('sprites/lokombo_vs_adonis.png?v=3'),
-  'SCOTTY MAC|AIR ADONIS':   load('sprites/scotty_vs_adonis.png?v=4'),
-  'NICK PRICE|AIR ADONIS':   load('sprites/nick_vs_adonis.png?v=3'),
+  'AIR ADONIS|STAR MAN':     load('sprites/adonis_vs_star.png?v=9'),
+  'AIR ADONIS|TODD QUALITY': load('sprites/adonis_vs_heavy.png?v=10'),
+  'AIR ADONIS|LOKOMBO':      load('sprites/adonis_vs_lokombo.png?v=10'),
+  'AIR ADONIS|SCOTTY MAC':   load('sprites/adonis_vs_scotty.png?v=10'),
+  'AIR ADONIS|NICK PRICE':   load('sprites/adonis_vs_nick.png?v=10'),
+  'STAR MAN|AIR ADONIS':     load('sprites/star_vs_adonis.png?v=9'),
+  'TODD QUALITY|AIR ADONIS': load('sprites/heavy_vs_adonis.png?v=11'),
+  'THE AMAZON|AIR ADONIS':   load('sprites/amazon_vs_adonis.png?v=5'),
+  'LOKOMBO|AIR ADONIS':      load('sprites/lokombo_vs_adonis.png?v=10'),
+  'SCOTTY MAC|AIR ADONIS':   load('sprites/scotty_vs_adonis.png?v=11'),
+  'NICK PRICE|AIR ADONIS':   load('sprites/nick_vs_adonis.png?v=10'),
   // MACHETE BROWN's pairings (tools/py/build_machete.py); vs the Amazon he uses his own sheet
-  'MACHETE BROWN|STAR MAN':     load('sprites/machete_vs_star.png?v=3'),
-  'MACHETE BROWN|TODD QUALITY': load('sprites/machete_vs_heavy.png?v=4'),
-  'MACHETE BROWN|LOKOMBO':      load('sprites/machete_vs_lokombo.png?v=5'),
-  'MACHETE BROWN|SCOTTY MAC':   load('sprites/machete_vs_scotty.png?v=4'),
-  'MACHETE BROWN|NICK PRICE':   load('sprites/machete_vs_nick.png?v=4'),
-  'MACHETE BROWN|AIR ADONIS':   load('sprites/machete_vs_adonis.png?v=4'),
-  'STAR MAN|MACHETE BROWN':     load('sprites/star_vs_machete.png?v=2'),
-  'TODD QUALITY|MACHETE BROWN': load('sprites/heavy_vs_machete.png?v=4'),
-  'THE AMAZON|MACHETE BROWN':   load('sprites/amazon_vs_machete.png?v=2'),
-  'LOKOMBO|MACHETE BROWN':      load('sprites/lokombo_vs_machete.png?v=3'),
-  'SCOTTY MAC|MACHETE BROWN':   load('sprites/scotty_vs_machete.png?v=4'),
-  'NICK PRICE|MACHETE BROWN':   load('sprites/nick_vs_machete.png?v=3'),
-  'AIR ADONIS|MACHETE BROWN':   load('sprites/adonis_vs_machete.png?v=3')
+  'MACHETE BROWN|STAR MAN':     load('sprites/machete_vs_star.png?v=10'),
+  'MACHETE BROWN|TODD QUALITY': load('sprites/machete_vs_heavy.png?v=11'),
+  'MACHETE BROWN|LOKOMBO':      load('sprites/machete_vs_lokombo.png?v=12'),
+  'MACHETE BROWN|SCOTTY MAC':   load('sprites/machete_vs_scotty.png?v=11'),
+  'MACHETE BROWN|NICK PRICE':   load('sprites/machete_vs_nick.png?v=11'),
+  'MACHETE BROWN|AIR ADONIS':   load('sprites/machete_vs_adonis.png?v=11'),
+  'STAR MAN|MACHETE BROWN':     load('sprites/star_vs_machete.png?v=9'),
+  'TODD QUALITY|MACHETE BROWN': load('sprites/heavy_vs_machete.png?v=11'),
+  'THE AMAZON|MACHETE BROWN':   load('sprites/amazon_vs_machete.png?v=4'),
+  'LOKOMBO|MACHETE BROWN':      load('sprites/lokombo_vs_machete.png?v=10'),
+  'SCOTTY MAC|MACHETE BROWN':   load('sprites/scotty_vs_machete.png?v=11'),
+  'NICK PRICE|MACHETE BROWN':   load('sprites/nick_vs_machete.png?v=10'),
+  'AIR ADONIS|MACHETE BROWN':   load('sprites/adonis_vs_machete.png?v=10')
 };
 function artKey(e){ return e && e.alt ? e.def.name+'#ALT' : e.def.name; }   // whose art: the mirror-match copy has his own
 for (var _an in ALT_SHEET){ var _w=ALT_SHEET[_an];
-  SHEET_VS[_an+'|'+_an+'#ALT'] = load('sprites/'+_w+'_vs_'+_w+'alt.png?v=6');     // him throwing his alt copy
-  SHEET_VS[_an+'#ALT|'+_an] = load('sprites/'+_w+'alt_vs_'+_w+'.png?v=6'); }      // the alt copy throwing him
+  SHEET_VS[_an+'|'+_an+'#ALT'] = load('sprites/'+_w+'_vs_'+_w+'alt.png?v=15');     // him throwing his alt copy
+  SHEET_VS[_an+'#ALT|'+_an] = load('sprites/'+_w+'alt_vs_'+_w+'.png?v=15'); }      // the alt copy throwing him
 function sheetVs(e){ var o=foe(e), im=o && SHEET_VS[artKey(e)+'|'+artKey(o)]; return (im && imgOk(im)) ? im : SHEET[artKey(e)]; }
 function starLike(e){ return e.def.name==='STAR MAN' || e.def.base==='STAR MAN'; }
 function load(src){ var im=new Image(); im.src=src; return im; }
@@ -760,6 +760,7 @@ function startEntrances(){
     var home=e.x;                                  // his spot for the bell (95 / 161)
     e.ent={ t:0, i:0, wp:[[ENT_RAMP.x0, ENT_FEET], [ENT_RAMP.x1, ENT_FEET+ENT_RAMP.drop], [-26, ENT_FEET+ENT_RAMP.drop], [-26, FLOOR.f1], [home-24, FLOOR.f1], 'roll', [home, 110]] };
     e.x=ENT_DOOR_X; e.y=ENT_FEET; e.face=1; e.out=true; e.hidden=true; e.state='idle'; e.anim=0;
+    if (e.def.name==='MACHETE BROWN') e.ent.wp.splice(0, 0, [ENT_RAMP.x0-30, ENT_FEET], 'argue');   // v321: he stops to argue with the fans
   });
   match.ent={ order:order, k:-1, cur:null, wait:20 };
   camX=-CAM_MAX-ENT_W;
@@ -784,6 +785,7 @@ function entSkip(){
 function updateEntrance(){
   var E=match.ent; if (!E) return;
   entShowTick();
+  if (E.bub) E.bub = E.bub.filter(function(b){ return ++b.t < ARGUE_BUB_T; });
   if (!E.cur){ if (E.wait-- <= 0) entNext(); return; }
   var e=E.cur, N=e.ent; N.t++;
   // camera: follow him (the entrance stage is left of the arena)
@@ -803,11 +805,64 @@ function updateEntrance(){
   }
   var w=N.wp[N.i];
   if (w==='roll'){ e.face=1; startRoll(e, 'in'); return; }
+  if (w==='argue'){ argueTick(e, N); return; }
   var dx=w[0]-e.x, dy=w[1]-e.y, d=Math.sqrt(dx*dx+dy*dy);
   if (d<=ENT_SPEED){ e.x=w[0]; e.y=w[1]; N.i++; return; }
   e.x += dx/d*ENT_SPEED; e.y += dy/d*ENT_SPEED;
   if (Math.abs(dx)>0.5) e.face = dx>0 ? 1 : -1;
   e.state='walk'; e.anim++;
+}
+/* ---- MACHETE BROWN's ENTRANCE (v321, the user: 'for Machete's entrance have him argue with the crowd'): halfway down
+   the aisle he stops, jabs a finger at the fans and yells at them (speech bubbles), they boo him back, he turns on the
+   other side, then throws his arms up at them and walks on. [tick, face (1 = toward the ring), pose, who, line] ---- */
+var ARGUE = [
+  [0,   -1, 'idle'],
+  [6,   -1, 'point', 'm', 'SHUT UP!'],
+  [34,  -1, 'idle',  'c', 'BOOO!'],
+  [44,  -1, 'idle',  'c', 'YOU SUCK!'],
+  [62,   1, 'point', 'm', 'WHAT?!'],
+  [90,   1, 'idle',  'c', 'BOOO!'],
+  [98,   1, 'idle',  'c', 'LOSER!'],
+  [114, -1, 'point', 'm', 'SAY IT AGAIN!'],
+  [146,  1, 'win',   'm', 'HA!']
+];
+var ARGUE_END = 176, ARGUE_BUB_T = 40;
+function argueTick(e, N){
+  var t = N.ag = (N.ag||0) + 1, E = match.ent;
+  ARGUE.forEach(function(r){
+    if (r[0] !== t) return;
+    e.face = r[1];
+    if (r[2]==='point'){ e.state='atk'; e.move='punch'; e.t=0; sfx.whoosh(); }
+    else if (r[2]==='win'){ e.state='win'; e.anim=0; }
+    else if (e.state!=='atk'){ e.state='idle'; }
+    if (r[3]){
+      E.bub = E.bub || [];
+      if (r[3]==='m') E.bub.push({ who:'m', text:r[4], t:0, x: e.x + e.face*6, y: e.y - 66 });
+      else { var sd = Math.random()<0.5 ? -1 : 1;
+        E.bub.push({ who:'c', text:r[4], t:0, x: e.x + sd*(34 + Math.random()*30), y: e.y - 78 - Math.random()*14 });
+        sfx.cheer && sfx.cheer(0.08); }
+    }
+  });
+  if (e.state==='atk'){ e.t++; if (e.t > 21){ e.state='idle'; e.t=0; } }
+  else e.anim++;
+  if (t >= ARGUE_END){ N.i++; e.state='walk'; e.t=0; }
+}
+function drawArgue(){                                       // screen space: his yells (white speech boxes) + the fans' boos
+  var E=match && match.ent; if (!E || !E.bub) return;
+  E.bub.forEach(function(b){
+    var sx = Math.round(b.x - camX), up = b.who==='c' ? Math.floor(b.t/4) : 0, sy = Math.round(b.y + camY) - up;
+    if (b.t > ARGUE_BUB_T - 8 && (b.t & 2)) return;         // blink out
+    var w = textW(b.text);
+    if (b.who==='m'){
+      var x = sx - Math.round(w/2) - 3;
+      g.fillStyle='#000'; g.fillRect(x-1, sy-1, w+8, 13);
+      g.fillStyle='#fff'; g.fillRect(x, sy, w+6, 11);
+      g.fillStyle='#fff'; g.fillRect(sx-1, sy+11, 3, 2); g.fillRect(sx, sy+13, 1, 2);   // the tail, down to his mouth
+      drawText(b.text, x+3, sy+2, '#c01818');
+    } else {
+      drawTextSh(b.text, sx, sy, '#ffd23a', 1, '#000');
+    }
+  });
 }
 /* ---- ENTRANCE SHOW (the user: "make it look even better"): the stage's VIDEO SCREEN shows the man coming out, PYRO
    fountains either side of the curtain as he steps through (with a white flash), FOG rolling out of the curtain, the
@@ -890,6 +945,7 @@ function drawEntShow(){                                   // world space, over t
 function drawEntOverlay(){                                // screen space: the pyro flash + the TV name plate
   var E=match && match.ent; if (!E || match.phase!=='entrance') return;
   if (E.flash>0){ g.fillStyle='rgba(255,255,240,'+(E.flash/22)+')'; g.fillRect(0,0,W,H); }
+  drawArgue();                                              // Machete arguing with the crowd (v321)
   var e=E.cur; if (!e) return;
   var t=e.ent.t, inT=Math.min(1, t/18), outT = t>260 ? Math.min(1,(t-260)/18) : 0;
   if (outT>=1) return;
@@ -1189,7 +1245,9 @@ function updateEntity(e){
       else if (e.t>8){ e.state='idle'; e.t=0; e.inv=12; }   // 8-frame punch recoil (real NES, every wrestler)
       break;
     case 'down': {
-      e.t++; e.downT--;
+      e.t++;
+      if (f && (f.state==='dvd' || f.state==='ddt')) break;   // v313: stays flat until Machete is back up, THEN his normal stay-down time starts (like every other move)
+      e.downT--;
       if (!e.cpu && !match.pin){ e.downT -= mash*3; }
       if (e.downT<=0 && !match.pin){ e.state='getup'; e.t=0; e.inv=40; }
       break;
@@ -1221,6 +1279,7 @@ function updateEntity(e){
     case 'btb': updateBTB(e); break;               // Todd's belly-to-back suplex
     case 'bkb': updateBKB(e); break;               // Todd's back breaker
     case 'dvd': updateDVD(e); break;               // Machete's Death Valley Driver
+    case 'ddt': updateDDT(e); break;               // Machete's DDT
     case 'pb': e.t++;                                                      // Todd's powerbomb
       if (e.t===PB_SEQ[1][0] || e.t===PB_SEQ[5][0]) sfx.whoosh();         // the lift, the throw down
       if (e.t===PB_IMPACT) pbImpact(e); break;
@@ -1286,24 +1345,20 @@ function startLock(a,b){
 // TIE-UP kick-button slots per wrestler (the user: "the A button has up + A, down + A and left OR right + A").
 // UP + A is the suplex for everyone; these are the side (LEFT or RIGHT), DOWN and PLAIN (A alone, no direction) slots. Empty = nothing.
 var TIE_A = {
-  'STAR MAN':     { side:{ ok:function(a,v){ return true; },          go:startSomer },                    // somersault kick
-                    plain:{ ok:canBrain, go:startBrain } },                                             // brain buster (the user's)
+  'STAR MAN':     { side:{ ok:function(a,v){ return canBTB(a); },      go:startBTB },                      // belly-to-back suplex (the user: L/R + A)
+                    down:{ ok:function(a,v){ return true; },          go:startSomer } },                  // somersault kick (the user: DOWN + A)
   'THE AMAZON':   { side:{ ok:function(a,v){ return canBite(a,v); },  go:function(a,v){ startBite(a,v,'side'); } },   // piranha bite
-                    down:{ ok:function(a,v){ return canBite(a,v); },  go:function(a,v){ startBite(a,v,'front'); } }, // front bite (= the real game's Down+A)
-                    plain:{ ok:canBrain, go:startBrain } },                                             // brain buster
+                    down:{ ok:function(a,v){ return canBite(a,v); },  go:function(a,v){ startBite(a,v,'front'); } } }, // front bite (= the real game's Down+A)
   'TODD QUALITY': { down:{ ok:function(a,v){ return canPile(a) && !!ATLAS[a.def.name]['PILE1']; }, go:tryPile },     // piledriver
-                    side:{ ok:function(a,v){ return canBTB(a); },      go:startBTB },                      // belly-to-back suplex (King Slender's Toward+A, real game)
-                    plain:{ ok:function(a,v){ return canBKB(a); },     go:startBKB } },                     // back breaker (King Slender's A alone, real game)
-  'LOKOMBO':      { down:{ ok:function(a,v){ return canPB(a); },      go:tryPB },                         // powerbomb (the user: DOWN + A)
-                    plain:{ ok:canBrain, go:startBrain } },                                             // brain buster
-  'SCOTTY MAC':   { side:{ ok:function(a,v){ return canHBK(a); },     go:startHBK },                      // superkick
-                    plain:{ ok:canBrain, go:startBrain } },                                             // brain buster
-  'NICK PRICE':   { side:{ ok:function(a,v){ return canHBK(a); },     go:startHBK },                      // superkick
-                    down:{ ok:function(a,v){ return canBTB(a); },     go:startBTB },                      // belly-to-back suplex
-                    plain:{ ok:canBrain, go:startBrain } },                                             // brain buster
-  'AIR ADONIS':   { plain:{ ok:canBrain, go:startBrain } },                                             // brain buster (everyone but Todd)
+                    side:{ ok:function(a,v){ return canBKB(a); },     go:startBKB } },                     // back breaker (the user, v295: L/R + A)
+  'LOKOMBO':      { down:{ ok:function(a,v){ return canPB(a); },      go:tryPB } },                       // powerbomb (the user: DOWN + A)
+  'SCOTTY MAC':   { down:{ ok:function(a,v){ return canHBK(a); },     go:startHBK },                      // superkick (the user, v295: DOWN + A)
+                    side:{ ok:function(a,v){ return canBTB(a); },      go:startBTB } },                    // belly-to-back suplex (L/R + A)
+  'NICK PRICE':   { up:{ ok:canBrain, go:startBrain },                                                // brain buster (the user, v295: UP + A, in place of the suplex)
+                    side:{ ok:function(a,v){ return canBTB(a); },      go:startBTB } },                    // belly-to-back suplex (L/R + A); DOWN blank for now
+  'AIR ADONIS':   { },
   'MACHETE BROWN':{ down:{ ok:function(a,v){ return canDVD(a); },    go:startDVD },                      // Death Valley Driver (the user: DOWN + X)
-                    plain:{ ok:canBrain, go:startBrain } }                                              // brain buster
+                    side:{ ok:function(a,v){ return canDDT(a); },    go:startDDT } }                     // Death Valley Driver (the user: DOWN + X)
 };
 function updateLock(){
   var L=match.lock; L.t++;
@@ -1317,11 +1372,11 @@ function updateLock(){
     var PA=ATLAS[pl.def.name]||{};
     if (pPunch() && (kL() || kR()) && canWhip(pl)){ startWhip(pl, cp); return; }   // LEFT or RIGHT + Z (pad X) = IRISH WHIP (the user; real Toward/Away+B both whip)
     if (pPunch()){ doThrow(pl, cp); return; }
-    if (pKick() && kU() && PA['SUPLEX1']){ trySuplex(pl, cp); return; }
+    if (pKick() && kU()){ var um=(TIE_A[pl.def.name]||{}).up; if (um){ if (um.ok(pl,cp)) um.go(pl,cp); return; } if (PA['SUPLEX1']){ trySuplex(pl, cp); return; } }   // UP slot (Nick's brain buster) replaces the suplex
     if (pKick() && kD()){ var dm=(TIE_A[pl.def.name]||{}).down; if (dm && dm.ok(pl,cp)){ dm.go(pl,cp); return; } }
     if (pKick() && (kL() || kR())){ var sm=(TIE_A[pl.def.name]||{}).side; if (sm && sm.ok(pl,cp)){ sm.go(pl,cp); return; } }
     if (pKick() && !kU() && !kD() && !kL() && !kR()){ var nm=(TIE_A[pl.def.name]||{}).plain; if (nm && nm.ok(pl,cp)){ nm.go(pl,cp); return; } }
-    if ((pressed['s']||pressed['S']) && PA['SUPLEX1']){ trySuplex(pl, cp); return; }
+    if ((pressed['s']||pressed['S']) && PA['SUPLEX1'] && !(TIE_A[pl.def.name]||{}).up){ trySuplex(pl, cp); return; }
   }
   // CPU builds up and eventually slams the player. HARD instead goes the moment its reaction time (D.react) is up —
   // so you have to be quick (mash!) to get your move in first.
@@ -1332,15 +1387,16 @@ function updateLock(){
   if (D.react ? L.t>=L.cpuT : (cp.grip>D.grip && L.t>D.gripT)){   // the CPU wins the tie-up: an even pick of its moves
     // risky = can be countered (suplex, piledriver); safe = can't (body slam, Star's somersault kick, the Amazon's bites)
     var CA=ATLAS[cp.def.name]||{}, risky=[], safe=[function(){ doThrow(cp, pl); }];
-    if (CA['SUPLEX1']) risky.push(function(){ trySuplex(cp, pl); });
+    if (CA['SUPLEX1'] && !(TIE_A[cp.def.name]||{}).up) risky.push(function(){ trySuplex(cp, pl); });
     if (CA['PILE1'] && canPile(cp)) risky.push(function(){ tryPile(cp, pl); });
-    if (cp.def.name==='STAR MAN') safe.push(function(){ startSomer(cp, pl); });
+    if (cp.def.name==='STAR MAN') safe.push(function(){ startSomer(cp, pl); });   // (+ his belly-to-back via canBTB)
     if (canBite(cp, pl)) safe.push(function(){ startBite(cp, pl, 'side'); }, function(){ startBite(cp, pl, 'front'); });
     if (canHBK(cp)) safe.push(function(){ startHBK(cp, pl); });
     if (canBTB(cp)) safe.push(function(){ startBTB(cp, pl); });   // Todd's belly-to-back suplex
     if (canBKB(cp)) safe.push(function(){ startBKB(cp, pl); });   // Todd's back breaker
     if (canDVD(cp)) safe.push(function(){ startDVD(cp, pl); });   // Machete's Death Valley Driver
-    if (canBrain(cp) && CA['SUPLEX1']) safe.push(function(){ startBrain(cp, pl); });   // brain buster (everyone but Todd)
+    if (canDDT(cp)) safe.push(function(){ startDDT(cp, pl); });   // Machete's DDT
+    if (canBrain(cp) && CA['SUPLEX1']) safe.push(function(){ startBrain(cp, pl); });   // brain buster (Nick Price only)
     if (canWhip(cp)) safe.push(function(){ startWhip(cp, pl); });   // anyone can Irish-whip
     if (canPB(cp)) risky.push(function(){ tryPB(cp, pl); });   // the powerbomb can be resisted, like the piledriver
     var pool = risky.concat(safe);
@@ -1424,7 +1480,7 @@ function biteDrop(e){                                  // the man drops flat whe
    face (measured on his knocked-back pose). Timeline = SEQ['TODD QUALITY'].hbk. ---- */
 var HBK_PUNCH = 4, HBK_WALK0 = 9, HBK_WALK1 = 23, HBK_KICK = 46, HBK_T = 61;   // after the steps back he holds an extra 11 ticks = 0.25 real s   // (sped up 25% twice: 6/16/40/62/90 -> 5/12/30/46/67 -> these)
 var HBK_STAGGER = 5, HBK_BACK = 14, HBK_DMG = 22, HBK_FALL = 5;   // HBK_FALL: ticks rocked before he drops (a kick is 19)
-function canHBK(a){ return (a.def.name==='SCOTTY MAC' || a.def.name==='NICK PRICE') && !!ATLAS[a.def.name]['SKH']; }   // Scotty Mac + Nick Price (the user)
+function canHBK(a){ return a.def.name==='SCOTTY MAC' && !!ATLAS[a.def.name]['SKH']; }   // Scotty Mac only (the user, v295: Nick lost it)
 function startHBK(a,v){
   match.lock=null; a.grip=v.grip=0; mash=0;
   a.state='hbk'; a.t=0; a.anim=0; a.move='hbk';
@@ -1947,7 +2003,7 @@ var BTB_A = [[0,'5.0',8,6,0],[1,'14.1',8,2,0],[8,'14.1',12,2,1],[15,'14.2',13,1,
 var BTB_V = { star:  [[0,'18.2',6,0,0],[21,'13.0',9,-41,1],[51,'17.0',48,0,1]],
              amazon:[[0,'6.9',6,0,1],[21,'5.0',9,-41,1],[51,'8.2',48,0,1]] };
 var BTB_HIT = 51, BTB_T = 81, BTB_DMG = 24;
-function canBTB(a){ return (a.def.name==='TODD QUALITY' || a.def.name==='NICK PRICE') && !!ATLAS[a.def.name]['15.0']; }   // Todd + Nick Price (the user)
+function canBTB(a){ return (a.def.name==='SCOTTY MAC' || a.def.name==='NICK PRICE' || a.def.name==='STAR MAN') && !!ATLAS[a.def.name]['15.0']; }   // Star Man + Scotty Mac + Nick Price (the user, v295: not Todd any more)
 function startBTB(a, v){
   match.lock=null; a.grip=v.grip=0; mash=0;
   a.state='btb'; a.t=0; a.anim=0; a.bbf = v.x>=a.x ? 1 : -1; a.bbx = Math.round(a.x); a.bby = Math.round(a.y);
@@ -2025,68 +2081,152 @@ function drawBKB(a){
   else { blit(artKey(a), pa); blit(artKey(v), pv); }                 // draped over the knee: the man in front
 }
 
-/* ---- MACHETE BROWN's DEATH VALLEY DRIVER (the user's move, not in the NES game). Tie-up DOWN + X. Built from frames
-   that already exist: the hoist is Todd's back breaker lift (Machete = Todd's body: '5.1' arms up, the man upside down
-   overhead 17.4/17.5 then flat across his shoulders 9.1), a fireman's-carry hold, then the two of them TIP OVER as one
-   piece about Machete's feet (rotated on the canvas) toward the man's head end, so the man is driven down head-first
-   while Machete falls on his back; the man crumples on his neck (17.0 / the Amazon 8.2), then lies flat; Machete gets
-   up. Not resisted. Same table format as the back breaker: [tick, frame, left vs the lifter's start x+1, bottom vs his
-   feet, flipped?] with the man on his RIGHT. ---- */
-var DVD_A = [[0,'5.1',-10,-1,0]];
-var DVD_V = { star:  [[0,'17.4',-19,-41,0],[3,'17.5',-19,-40,0],[39,'9.1',-16,-45,0]],
-              amazon:[[0,'BKA1',-19,-40,0],[39,'BKA2',-16,-45,0]] };
-var DVD_FALL = 78, DVD_HIT = 90, DVD_UP = 116, DVD_T = 132, DVD_DMG = 28;
-var DVD_DIR = -1;           // which way the pair tips (toward the man's head end), for the man on his right
-var DVD_LIE = { a:['SXR4', -4, 0, 0],   // Machete on his back after the drop [frame, left vs the pivot (fall side +), bottom, flip]
-                kneel:['12.6', -10, 0, 0],
-                star:['17.0', 38, 0, 1], amazon:['8.2', 38, 0, 1], flat:['LIEFLAT', 36, -1, 1], flatA:['7.4', 36, 0, 1] };
-function canDVD(a){ return a.def.name==='MACHETE BROWN' && !!ATLAS[a.def.name]['5.1']; }
+/* ---- MACHETE BROWN's DEATH VALLEY DRIVER (the user's move). Tie-up DOWN + X. v297, redone frame by frame after the
+   user's Fire Pro World reference (standing, not off the top rope): he DUCKS under (11.0, the man bent over his back
+   PFBENT), CROUCHES with the man draped face-down across his shoulders (PFSQUAT + DVV0), STANDS in the fireman's carry
+   (5.1 + DVV0, the man's head end drooping down his back), then the carry TIPS OVER toward the man's head (DVA30/DVV30,
+   DVA60/DVV60 - RotSprite) and lands as an exact quarter turn (DVA90/DVV90): Machete flat on his back, the man planted
+   upside down on his head beside Machete's head, legs up. The man topples flat, Machete sits up and gets up first.
+   New frames: tools/py/build_dvd.py (every Star-shaped sheet + the Amazon's). DVD_SEQ: [first tick, Machete frame,
+   left, bottom, the man's frame, left, bottom, man in front?]  v298: the carry is the user-approved FIREMAN'S CARRY
+   (the man's own 0.0 folded at the waist over Machete's shoulder, back up; Machete 0.0, hands at his chest). vs X = start x+1, Y = his feet, the man on his RIGHT (f=1);
+   mirrored for f=-1. The pair lands on the side BEHIND Machete (-f). ---- */
+var DVD_SEQ = [
+  [0,  '11.0',    -18,  0, 'PFBENT',  2,  -2, false, false],   // ducks under, the man bent over his back
+  [5,  'PFSQUAT', -10,  0, '17.1',  -12, -18, false, false],   // hoisting him up over his shoulder (v307 in-between)
+  [10, 'PFSQUAT', -10,  0, 'DVV0',  -18, -22, false, false],   // crouched, the man folded over his shoulder
+  [18, 'PFSTRAIN', -9,  0, 'DVV0',  -17, -25, false, false],   // straining up (v301 in-between)
+  [26, '0.0',      -7,  0, 'DVV0',  -16, -27, false, false],   // up: the FIREMAN'S CARRY (the user's pick, carry A) - the man bobs
+  // v304 (the user: 'you have to create new frames'; approved storyboard tools/dvd_front_storyboard.png): Machete TURNS
+  // TO FACE THE CAMERA with the man across both shoulders (19.1 + DVF0), then falls SIDEWAYS toward the man's head
+  // (DMF25/DVF25, DMF55/DVF55 - tools/py/build_dvd_front.py) and lands on his side (DMF90), the man on his back beside
+  // Machete's head (his own down pose).
+  [42, 'PFSTRAIN', -9,  0, 'DVV0',  -17, -25, false, false],  // a dip at the knees as he turns (v306)
+  [46, '19.1',     -9,  0, 'DVF0',  -25, -30, false, false],  // turned to the front: across both shoulders
+  // v310 (the user: 'Machete looks the same in each frame - he needs a transition'): Machete BENDS at the hips as he
+  // falls (tools/py/build_dvd_bend.py: upper body first, legs lagging), his back hits with his legs swung UP, then they
+  // come down, he lies flat, lifts his head and sits up. The hip stays over X. Eased: 5,4,3,2 ticks.
+  [62, 'DMB10',   -13,  0, 'DVB10', -27, -27, false, false],  // falling sideways (v310 bend: upper body first, legs lag)
+  [66, 'DMB25',   -19,  0, 'DVB25', -27, -20, false, false],
+  [69, 'DMB40',   -23,  0, 'DVB40', -25, -12, false, false],
+  [72, 'DMB55',   -25,  0, 'DVB55', -24,  -4, true,  false],
+  // v311/v312: the landing ON HIS SIDE FACING THE CAMERA (DMBS* = his 19.0, arms in front of his chest), every step an
+  // in-between (the user: 'smooth all transitions')
+  [74, 'DMBS0',   -24,  0, 'DVB70', -30,  -6, true,  false],  // last of the fall, arms coming in front of his chest
+  // v316 (the user: 'when the opponent lands in the L, Machete lands SEATED'): from the fall straight up into the
+  // front-facing sit (DMSIT) - seated by the time the man hits; the man lands closer (Machete is upright, not lying)
+  [77, 'DMBS5',   -20,  0, 'DVB70', -28,  -3, true,  false],  // landing: swinging up into the sit; the man still coming down
+  [79, 'DMBS6',   -16,  0, 'DVB70', -26,  -1, true,  false],
+  [81, 'DMSIT',    -9,  0, 'DVL',   -43,   0, true,  false],  // IMPACT: Machete SEATED facing us, the man beside him in an L
+  [94, 'DMSIT',    -9,  0, 'DVLD',  -59,   0, true,  false],  // the man's legs on their way down
+  [102,'DMSIT',    -9,  0, null,      0,   0, true,  false],  // the man flat (LIEFLAT); Machete still sitting
+  [132,'12.6',     -9,  0, null,      0,   0, true,  true ]   // kneels up
+];
+var DVD_HIT = 81, DVD_FLAT = 102, DVD_END = 140, DVD_DMG = 28, DVD_HEAD = 14;   // v308 (the user: 'not take up so much space'): he falls about his hips, feet sliding out 28 px, so he lands where he stood   // DVD_HEAD: Machete's head end when he lies on his side (DMF90)
+function canDVD(a){ return a.def.name==='MACHETE BROWN' && !!ATLAS[a.def.name]['DVA90']; }
 function startDVD(a, v){
   match.lock=null; a.grip=v.grip=0; mash=0;
   a.state='dvd'; a.t=0; a.anim=0; a.bbf = v.x>=a.x ? 1 : -1; a.bbx = Math.round(a.x); a.bby = Math.round(a.y);
   v.state='lifted'; v.t=0;
   sfx.whoosh();
 }
+function dvdPhase(t){ var p=DVD_SEQ[0]; for (var i=0;i<DVD_SEQ.length;i++) if (t>=DVD_SEQ[i][0]) p=DVD_SEQ[i]; return p; }
 function updateDVD(a){
   a.t++;
-  if (a.t===39 || a.t===DVD_FALL) sfx.whoosh();
-  if (a.t===DVD_HIT){ var v=foe(a), s=a.bbf*DVD_DIR; hurtBy(v, DVD_DMG); shake=14; freeze=8; sfx.crash(); crowdBoost && crowdBoost(.5); addDust(a.bbx + 1 + s*30, a.bby, 14); }
-  if (a.t>=DVD_T) finishDVD(a);
-}
-function finishDVD(a){
-  var v=foe(a), f=a.bbf, s=f*DVD_DIR, X=a.bbx+1;
-  a.state='idle'; a.t=0; a.x = X; a.y = a.bby; a.face = s;
-  v.face = s; v.knock=null;
-  if (ATLAS[v.def.name]['LIEFLAT']){ v.lie='LIEFLAT'; v.x = X + s*55; v.y = a.bby - 2; }
-  else { v.lie=null; v.kickLie=false; v.x = X + s*46; v.y = a.bby - 1; }
-  knockDown(v); clamp(a); clamp(v);
-}
-function dvdAngle(t){                        // 0 upright .. 1 tipped flat (ease-in: a slow lean, then he drops)
-  if (t < DVD_FALL) return 0; var k=Math.min(1, (t-DVD_FALL)/(DVD_HIT-DVD_FALL)); return k*k;
+  var v=foe(a), f=a.bbf, X=a.bbx+1, Y=a.bby;
+  if (a.t===8 || a.t===26 || a.t===46 || a.t===66) sfx.whoosh();
+  if (a.t===77){ shake=6; sfx.slam && sfx.slam(); addDust(X - f*2, Y, 8); }   // Machete's back hits the mat a beat before the man
+  if (a.t===DVD_HIT){                                                       // lands beside Machete's head in an L (drawn below)
+    hurtBy(v, DVD_DMG); shake=16; freeze=10; sfx.crash(); crowdBoost && crowdBoost(.6); addDust(X - f*(DVD_HEAD+10), Y, 18);
+  }
+  if (a.t===DVD_FLAT){                                                      // his legs come down: his own down pose, same spot
+    var sv=starLike(v), lr=ATLAS[v.def.name][sv ? '18.4' : '7.4'], hw=Math.round(lr[2]/2);
+    v.knock=null; v.lie=null; v.kickLie=false;
+    v.face = sv ? f : -f;                                                   // his head toward Machete's head
+    v.x = X - f*(DVD_HEAD + 2 + hw); v.y = Y - 2;
+    if (ATLAS[v.def.name]['LIEFLAT']){                                      // v314 (the user: 'have him FLAT, not this' = 18.4 legs up): lies FLAT (LIEFLAT, drawn x-21..x+19, head on the +x end unmirrored)
+      v.lie = 'LIEFLAT'; v.face = -f; v.x = X - f*(DVD_HEAD + 2 + 19);
+    }
+    knockDown(v); clamp(v);                                                // v313: his stay-down timer waits for Machete (see case down)
+  }
+  if (a.t>=DVD_END){                                                        // up from his knee
+    a.state='idle'; a.t=0; a.x = X - f*1; a.y = Y; a.face = -f; a.faceLock=10; clamp(a);
+  }
 }
 function drawDVD(a){
-  var v=foe(a), f=a.bbf, X=a.bbx+1, Y=a.bby, t=a.t, s=f*DVD_DIR, sv=starLike(v);
-  var blit=function(name, p){ var r=ATLAS[name][p[1]]; if (!r) return;
-    var L = f>0 ? X + p[2] : X - p[2] - r[2], fl = f>0 ? !!p[4] : !p[4];
-    blitAt(name, p[1], L, Y + p[3], fl); };
-  var lie=function(name, p){ var r=ATLAS[name][p[0]]; if (!r) return;      // placed on the FALL side (s), not the lift side
-    var L = s>0 ? X + p[1] : X - p[1] - r[2], fl = s>0 ? !!p[3] : !p[3];
-    blitAt(name, p[0], L, Y + p[2], fl); };
-  if (t < DVD_HIT){                                             // the hoist + carry, then the whole pair tips over
-    var pv=bbPhase(sv ? DVD_V.star : DVD_V.amazon, t), ang=dvdAngle(t)*Math.PI/2*0.92;
-    drawShadow({state:'idle', x:X, y:Y, def:a.def});
-    g.save(); g.translate(X, Y); g.rotate(s*ang); g.translate(-X, -Y);
-    if (t < 39){ blit(artKey(v), pv); blit(artKey(a), DVD_A[0]); }   // overhead: his head in front
-    else { blit(artKey(a), DVD_A[0]); blit(artKey(v), pv); }       // across the shoulders: the man in front
-    g.restore();
-    return;
+  var v=foe(a), f=a.bbf, X=a.bbx+1, Y=a.bby, t=a.t, p=dvdPhase(t);
+  var put=function(name, fid, l, b, turn){ if (!ATLAS[name][fid]) fid = PICKUP_VIC_AMAZON[fid] || fid;   // (the Amazon: his own hunched frame)
+    var r=ATLAS[name][fid]; if (!r) return;
+    blitAt(name, fid, f>0 ? X + l : X - l - r[2], Y + b, turn ? f>0 : f<0); };
+  var man = t < DVD_FLAT && p[4];
+  drawShadow({state: t>=DVD_HIT ? 'down' : 'idle', x: X + f*(p[2]+10), y:Y, def:a.def});
+  var bob = ((p[1]==='0.0' || p[1]==='19.1') && (t>>3)&1) ? -1 : 0;                    // the carried man bobs on his shoulder
+  if (man && !p[7]) put(artKey(v), p[4], p[5], p[6]+bob);
+  put(artKey(a), p[1], p[2], p[3], p[8]);
+  if (man && p[7]) put(artKey(v), p[4], p[5], p[6]+bob);
+}
+
+/* ---- MACHETE BROWN's DDT (v319; the user: 'add a new move for Machete, a DDT' - the Jake Roberts DDT, named after
+   the insecticide; tie-up LEFT/RIGHT + X 'for now'). Front facelock (14.1 over the man's PFBENT), Machete falls straight
+   back about his heel (DDA20-90) while the man's head stays locked under his arm and is driven into the mat by Machete's
+   chest (DDV20-90, tools/py/build_ddt.py), then the man flops flat on his front and Machete sits up and kneels.
+   Same columns as DVD_SEQ: [first tick, Machete frame, left, bottom, the man's frame, left, bottom, man in front?, turn] ---- */
+var DDT_SEQ = [
+  [0,  '14.1',    -8,  0, '17.1',   -2, -10, true,  false],   // front facelock: the man's head under his arm (v324: 17.1 so
+                                                                //  his head SHOWS - PFBENT's head was tucked out of sight)
+  // v323 (the user: 'you should see the opponent's head around Machete's arms - right now he goes missing'): the man
+  // is drawn IN FRONT of Machete through the grab and the fall
+  [14, 'DDA20',  -19,  0, 'DDV20',  -9,  -7, true,  false],   // falling straight back...
+  [18, 'DDA45',  -32,  0, 'DDV45', -30,   0, true,  false],
+  [21, 'DDA70',  -42,  0, 'DDV70', -40,   0, true,  false],
+  [23, 'DDA90',  -47,  0, 'DDV90', -42,   1, true,  false],   // IMPACT: the man's head spiked into the mat (v322: drawn in front)
+  [31, 'DDA90',  -47,  0, 'DDVL40',-41,   2, true,  false],   // v322 (the user: 'the ending needs to make sense, not teleport'):
+  [35, 'DDA90',  -47,  0, 'DDVL20',-41,   2, true,  false],   //   his legs come down across Machete...
+  [38, 'DDA90',  -47,  0, null,      0,   0, false, false],   // ...flat on his front, same spot (LIEFLAT, in front of Machete)
+  [46, 'DDS60',  -51,  0, null,      0,   0, false, false],   // v320 'clean it up': Machete sits up about his hips...
+  [50, 'DDS30',  -40,  0, null,      0,   0, false, false],
+  [54, 'PBTSIT', -25,  0, null,      0,   0, false, false],   // ...sitting
+  [64, '12.6',   -22,  0, null,      0,   0, false, false]    // kneels up
+];
+var DDT_HIT = 23, DDT_FLAT = 38, DDT_END = 72, DDT_DMG = 22;
+function canDDT(a){ return a.def.name==='MACHETE BROWN' && !!ATLAS[a.def.name]['DDA90']; }
+function startDDT(a, v){
+  match.lock=null; a.grip=v.grip=0; mash=0;
+  a.state='ddt'; a.t=0; a.anim=0; a.bbf = v.x>=a.x ? 1 : -1; a.bbx = Math.round(a.x); a.bby = Math.round(a.y);
+  v.state='lifted'; v.t=0;
+  sfx.whoosh();
+}
+function ddtPhase(t){ var p=DDT_SEQ[0]; for (var i=0;i<DDT_SEQ.length;i++) if (t>=DDT_SEQ[i][0]) p=DDT_SEQ[i]; return p; }
+function updateDDT(a){
+  a.t++;
+  var v=foe(a), f=a.bbf, X=a.bbx+1, Y=a.bby;
+  if (a.t===14) sfx.whoosh();
+  if (a.t===DDT_HIT){
+    hurtBy(v, DDT_DMG); shake=14; freeze=8; sfx.crash(); crowdBoost && crowdBoost(.5); addDust(X - f*36, Y, 16);
   }
-  drawShadow({state:'down', x:X + s*14, y:Y, def:a.def});
-  drawShadow({state:'down', x:X + s*40, y:Y, def:v.def});
-  if (t < DVD_UP) lie(artKey(a), DVD_LIE.a); else lie(artKey(a), DVD_LIE.kneel);
-  if (t < DVD_HIT + 14) lie(artKey(v), sv ? DVD_LIE.star : DVD_LIE.amazon);   // crumpled on his neck
-  else if (ATLAS[v.def.name]['LIEFLAT']) lie(artKey(v), DVD_LIE.flat);
-  else lie(artKey(v), sv ? DVD_LIE.star : DVD_LIE.flatA);
+  if (a.t===DDT_FLAT){                                                      // flops flat on his front, head by Machete's chest
+    v.knock=null; v.lie=null; v.kickLie=false;
+    if (ATLAS[v.def.name]['LIEFLAT']){ v.lie='LIEFLAT'; v.face=f; v.x = X - f*22; }   // v320: his head exactly where it hit (X-f*41)
+    else { v.face=-f; v.x = X - f*24; }
+    v.y = Y + 1;                                                             // v322: in front of Machete, on the line the DDVL frames used (no jump)
+    knockDown(v); clamp(v);                                                 // stays down until Machete is up (case 'down')
+  }
+  if (a.t>=DDT_END){
+    a.state='idle'; a.t=0; a.x = X - f*14; a.y = Y; a.face = f; a.faceLock=10; clamp(a);   // v322: stands where he knelt
+  }
+}
+function drawDDT(a){
+  var v=foe(a), f=a.bbf, X=a.bbx+1, Y=a.bby, t=a.t, p=ddtPhase(t);
+  var put=function(name, fid, l, b, turn){ var r=ATLAS[name][fid];
+    if (!r && /^DDVL/.test(fid)){ fid='DDV90'; l=-42; b=1; r=ATLAS[name][fid]; }   // (the Amazon: no legs-down frames - stays spiked)
+    if (!r && fid==='17.1'){ fid='PFBENT'; l=6; b=-6; r=ATLAS[name][fid]; }   // (the Amazon: no 17.1 - his own bent-over frame)
+    if (!r) return;
+    blitAt(name, fid, f>0 ? X + l : X - l - r[2], Y + b, turn ? f>0 : f<0); };
+  var man = t < DDT_FLAT && p[4];
+  drawShadow({state: t>=DDT_HIT ? 'down' : 'idle', x: X + f*(p[2]+10), y:Y, def:a.def});
+  if (man && !p[7]) put(artKey(v), p[4], p[5], p[6]);
+  put(artKey(a), p[1], p[2], p[3], p[8]);
+  if (man && p[7]) put(artKey(v), p[4], p[5], p[6]);
 }
 
 var ROPES = {"L":[[0,8,[[15,55,"#0000aa"],[16,55,"#404040"],[15,56,"#0000aa"],[16,56,"#404040"],[15,57,"#0000aa"],[16,57,"#404040"],[15,58,"#0000aa"],[16,58,"#404040"],[15,59,"#0000aa"],[16,59,"#404040"],[15,60,"#0000aa"],[16,60,"#404040"],[15,61,"#0000aa"],[16,61,"#404040"],[15,62,"#0000aa"],[16,62,"#404040"],[15,63,"#404040"],[16,63,"#404040"],[15,64,"#404040"],[16,64,"#404040"],[15,65,"#404040"],[16,65,"#404040"],[15,66,"#404040"],[16,66,"#404040"],[15,67,"#404040"],[16,67,"#404040"],[15,68,"#404040"],[16,68,"#404040"],[15,69,"#404040"],[16,69,"#404040"],[15,70,"#404040"],[16,70,"#404040"],[15,71,"#404040"],[16,71,"#404040"],[15,72,"#404040"],[16,72,"#404040"],[15,73,"#404040"],[16,73,"#404040"],[15,74,"#404040"],[16,74,"#404040"],[15,75,"#404040"],[16,75,"#404040"],[15,76,"#404040"],[16,76,"#404040"],[15,77,"#404040"],[16,77,"#404040"],[15,78,"#404040"],[16,78,"#404040"],[15,79,"#404040"],[16,79,"#404040"],[15,80,"#404040"],[16,80,"#404040"],[15,81,"#404040"],[16,81,"#404040"],[15,82,"#404040"],[16,82,"#404040"],[15,83,"#404040"],[16,83,"#404040"],[15,84,"#404040"],[16,84,"#404040"],[15,85,"#404040"],[16,85,"#404040"],[15,86,"#404040"],[16,86,"#404040"],[15,87,"#404040"],[16,87,"#404040"],[15,88,"#404040"],[16,88,"#404040"],[15,89,"#404040"],[16,89,"#404040"],[15,90,"#404040"],[16,90,"#404040"],[15,91,"#404040"],[16,91,"#404040"],[15,92,"#404040"],[16,92,"#404040"],[15,93,"#404040"],[16,93,"#404040"],[15,94,"#404040"],[16,94,"#404040"],[15,95,"#404040"],[16,95,"#404040"],[15,96,"#404040"],[16,96,"#404040"],[15,97,"#404040"],[16,97,"#404040"],[15,98,"#404040"],[16,98,"#404040"],[15,99,"#404040"],[16,99,"#404040"],[15,100,"#404040"],[16,100,"#404040"],[15,101,"#404040"],[16,101,"#404040"],[15,102,"#404040"],[16,102,"#404040"],[15,103,"#404040"],[16,103,"#404040"],[15,104,"#404040"],[16,104,"#404040"],[15,105,"#404040"],[16,105,"#404040"],[15,106,"#404040"],[16,106,"#404040"],[15,107,"#404040"],[16,107,"#404040"],[15,108,"#404040"],[16,108,"#404040"],[15,109,"#404040"],[16,109,"#404040"],[15,110,"#404040"],[16,110,"#404040"],[15,111,"#404040"],[16,111,"#404040"],[15,112,"#404040"],[16,112,"#404040"],[15,113,"#404040"],[16,113,"#404040"],[15,114,"#404040"],[16,114,"#404040"],[15,115,"#404040"],[16,115,"#404040"],[15,116,"#404040"],[16,116,"#404040"],[15,117,"#404040"],[16,117,"#404040"],[15,118,"#404040"],[16,118,"#404040"]],[[16,36,1],[15,36,2],[16,37,1],[15,37,2],[16,38,1],[15,38,2],[15,40,1],[14,40,2],[15,41,1],[14,41,2],[15,42,1],[14,42,2],[15,43,1],[14,43,2],[15,44,1],[14,44,2],[15,45,1],[14,45,2],[14,46,1],[15,46,1],[14,47,1],[13,47,2],[14,48,1],[13,48,2],[14,49,1],[13,49,2],[14,50,1],[13,50,2],[14,51,1],[13,51,2],[14,52,1],[13,52,2],[14,53,1],[13,53,2],[14,54,1],[13,54,2],[14,55,1],[13,55,2],[14,56,1],[13,56,2],[13,57,1],[14,57,1],[13,58,1],[12,58,2],[13,59,1],[12,59,2],[13,60,1],[12,60,2],[13,61,1],[12,61,2],[13,62,1],[12,62,2],[13,63,1],[12,63,2],[13,64,1],[12,64,2],[13,65,1],[12,65,2],[13,66,1],[12,66,2],[13,102,1],[12,102,2],[13,103,1],[12,103,2],[13,104,1],[12,104,2],[13,105,1],[12,105,2],[13,106,1],[12,106,2],[13,107,1],[12,107,2],[13,108,1],[12,108,2],[13,109,1],[12,109,2],[13,110,1],[14,110,1],[14,111,1],[13,111,2],[14,112,1],[13,112,2],[14,113,1],[13,113,2],[14,114,1],[13,114,2],[14,115,1],[13,115,2],[14,116,1],[13,116,2],[14,117,1],[13,117,2],[14,118,1],[13,118,2],[14,119,1],[13,119,2],[14,120,1],[13,120,2],[14,121,1],[15,121,1],[15,122,1],[14,122,2],[15,123,1],[14,123,2],[15,124,1],[14,124,2],[14,39,2],[15,39,2],[12,100,2],[12,101,2],[13,67,1],[12,67,2],[13,68,1],[12,68,2],[13,69,1],[12,69,2],[13,70,1],[12,70,2],[13,71,1],[12,71,2],[13,72,1],[12,72,2],[13,73,1],[12,73,2],[13,74,1],[12,74,2],[13,75,1],[12,75,2],[13,76,1],[12,76,2],[13,77,1],[12,77,2],[13,78,1],[12,78,2],[13,79,1],[12,79,2],[13,80,1],[12,80,2],[13,81,1],[12,81,2],[13,82,1],[12,82,2],[12,83,1],[11,83,2],[12,84,2],[12,85,2],[12,86,2],[12,87,2],[12,88,2],[12,89,2],[12,90,2],[12,91,2],[12,92,2],[12,93,2],[12,94,2],[12,95,2],[12,96,2],[12,97,2],[12,98,2],[12,99,2]]],[9,14,[[15,55,"#0000aa"],[16,55,"#404040"],[15,56,"#0000aa"],[16,56,"#404040"],[15,57,"#0000aa"],[16,57,"#404040"],[15,58,"#0000aa"],[16,58,"#404040"],[15,59,"#0000aa"],[16,59,"#404040"],[15,60,"#0000aa"],[16,60,"#404040"],[15,61,"#0000aa"],[16,61,"#404040"],[15,62,"#0000aa"],[16,62,"#404040"],[15,63,"#404040"],[16,63,"#404040"],[15,64,"#404040"],[16,64,"#404040"],[15,65,"#404040"],[16,65,"#404040"],[15,66,"#404040"],[16,66,"#404040"],[15,67,"#404040"],[16,67,"#404040"],[15,68,"#404040"],[16,68,"#404040"],[15,69,"#404040"],[16,69,"#404040"],[15,70,"#404040"],[16,70,"#404040"],[15,71,"#404040"],[16,71,"#404040"],[15,72,"#404040"],[16,72,"#404040"],[15,73,"#404040"],[16,73,"#404040"],[15,74,"#404040"],[16,74,"#404040"],[15,75,"#404040"],[16,75,"#404040"],[15,76,"#404040"],[16,76,"#404040"],[15,77,"#404040"],[16,77,"#404040"],[15,78,"#404040"],[16,78,"#404040"],[15,79,"#404040"],[16,79,"#404040"],[15,80,"#404040"],[16,80,"#404040"],[15,81,"#404040"],[16,81,"#404040"],[15,82,"#404040"],[16,82,"#404040"],[15,83,"#404040"],[16,83,"#404040"],[15,84,"#404040"],[16,84,"#404040"],[15,85,"#404040"],[16,85,"#404040"],[15,86,"#404040"],[16,86,"#404040"],[15,87,"#404040"],[16,87,"#404040"],[15,88,"#404040"],[16,88,"#404040"],[15,89,"#404040"],[16,89,"#404040"],[15,90,"#404040"],[16,90,"#404040"],[15,91,"#404040"],[16,91,"#404040"],[15,92,"#404040"],[16,92,"#404040"],[15,93,"#404040"],[16,93,"#404040"],[15,94,"#404040"],[16,94,"#404040"],[15,95,"#404040"],[16,95,"#404040"],[15,96,"#404040"],[16,96,"#404040"],[15,97,"#404040"],[16,97,"#404040"],[15,98,"#404040"],[16,98,"#404040"],[15,99,"#404040"],[16,99,"#404040"],[15,100,"#404040"],[16,100,"#404040"],[15,101,"#404040"],[16,101,"#404040"],[15,102,"#404040"],[16,102,"#404040"],[15,103,"#404040"],[16,103,"#404040"],[15,104,"#404040"],[16,104,"#404040"],[15,105,"#404040"],[16,105,"#404040"],[15,106,"#404040"],[16,106,"#404040"],[15,107,"#404040"],[16,107,"#404040"],[15,108,"#404040"],[16,108,"#404040"],[15,109,"#404040"],[16,109,"#404040"],[15,110,"#404040"],[16,110,"#404040"],[15,111,"#404040"],[16,111,"#404040"],[15,112,"#404040"],[16,112,"#404040"],[15,113,"#404040"],[16,113,"#404040"],[15,114,"#404040"],[16,114,"#404040"],[15,115,"#404040"],[16,115,"#404040"],[15,116,"#404040"],[16,116,"#404040"],[15,117,"#404040"],[16,117,"#404040"],[15,118,"#404040"],[16,118,"#404040"]],[[16,37,1],[16,38,1],[15,38,2],[15,40,1],[15,41,1],[14,41,2],[14,44,1],[13,44,2],[14,45,1],[13,45,2],[14,46,1],[13,46,2],[13,48,1],[13,49,1],[12,49,2],[13,50,1],[12,50,2],[13,51,1],[12,51,2],[13,52,1],[12,52,2],[13,53,1],[12,53,2],[13,54,1],[12,54,2],[12,56,1],[11,56,2],[12,57,1],[11,57,2],[12,58,1],[11,58,2],[12,59,1],[11,59,2],[12,60,1],[11,60,2],[12,61,1],[11,61,2],[11,62,1],[12,62,1],[11,63,1],[10,63,2],[11,64,1],[10,64,2],[11,65,1],[10,65,2],[11,66,1],[10,66,2],[10,75,1],[9,75,2],[11,100,1],[10,100,2],[11,101,1],[10,101,2],[11,102,1],[10,102,2],[11,103,1],[10,103,2],[11,104,1],[10,104,2],[11,105,1],[12,105,1],[12,106,1],[11,106,2],[12,107,1],[11,107,2],[12,108,1],[11,108,2],[12,109,1],[11,109,2],[12,110,1],[11,110,2],[12,111,1],[11,111,2],[13,113,1],[12,113,2],[13,114,1],[12,114,2],[13,115,1],[12,115,2],[13,116,1],[12,116,2],[13,117,1],[12,117,2],[13,118,1],[12,118,2],[13,119,1],[14,121,1],[13,121,2],[14,122,1],[13,122,2],[14,123,1],[13,123,2],[16,36,2],[15,39,2],[14,42,2],[14,43,2],[13,47,2],[11,55,2],[12,55,2],[10,67,2],[9,74,2],[9,76,2],[10,99,2],[11,112,2],[12,112,2],[13,120,2],[14,124,2],[10,68,2],[10,69,2],[10,70,2],[9,71,2],[9,72,2],[9,73,2],[9,77,2],[9,78,2],[9,79,2],[9,80,2],[9,81,2],[9,82,2],[9,83,2],[9,84,2],[9,85,2],[9,86,2],[9,87,2],[10,88,2],[10,89,2],[10,90,2],[10,91,2],[10,92,2],[10,93,2],[10,94,2],[10,95,2],[10,96,2],[10,97,2],[10,98,2]]],[15,15,[[15,55,"#0000aa"],[16,55,"#404040"],[15,56,"#0000aa"],[16,56,"#404040"],[15,57,"#0000aa"],[16,57,"#404040"],[15,58,"#0000aa"],[16,58,"#404040"],[15,59,"#0000aa"],[16,59,"#404040"],[15,60,"#0000aa"],[16,60,"#404040"],[15,61,"#0000aa"],[16,61,"#404040"],[15,62,"#0000aa"],[16,62,"#404040"],[15,63,"#404040"],[16,63,"#404040"],[15,64,"#404040"],[16,64,"#404040"],[15,65,"#404040"],[16,65,"#404040"],[15,66,"#404040"],[16,66,"#404040"],[15,67,"#404040"],[16,67,"#404040"],[15,68,"#404040"],[16,68,"#404040"],[15,69,"#404040"],[16,69,"#404040"],[15,70,"#404040"],[16,70,"#404040"],[15,71,"#404040"],[16,71,"#404040"],[15,72,"#404040"],[16,72,"#404040"],[15,73,"#404040"],[16,73,"#404040"],[15,74,"#404040"],[16,74,"#404040"],[15,75,"#404040"],[16,75,"#404040"],[15,76,"#404040"],[16,76,"#404040"],[15,77,"#404040"],[16,77,"#404040"],[15,78,"#404040"],[16,78,"#404040"],[15,79,"#404040"],[16,79,"#404040"],[15,80,"#404040"],[16,80,"#404040"],[15,81,"#404040"],[16,81,"#404040"],[15,82,"#404040"],[16,82,"#404040"],[15,83,"#404040"],[16,83,"#404040"],[15,84,"#404040"],[16,84,"#404040"],[15,85,"#404040"],[16,85,"#404040"],[15,86,"#404040"],[16,86,"#404040"],[15,87,"#404040"],[16,87,"#404040"],[15,88,"#404040"],[16,88,"#404040"],[15,89,"#404040"],[16,89,"#404040"],[15,90,"#404040"],[16,90,"#404040"],[15,91,"#404040"],[16,91,"#404040"],[15,92,"#404040"],[16,92,"#404040"],[15,93,"#404040"],[16,93,"#404040"],[15,94,"#404040"],[16,94,"#404040"],[15,95,"#404040"],[16,95,"#404040"],[15,96,"#404040"],[16,96,"#404040"],[15,97,"#404040"],[16,97,"#404040"],[15,98,"#404040"],[16,98,"#404040"],[15,99,"#404040"],[16,99,"#404040"],[15,100,"#404040"],[16,100,"#404040"],[15,101,"#404040"],[16,101,"#404040"],[15,102,"#404040"],[16,102,"#404040"],[15,103,"#404040"],[16,103,"#404040"],[15,104,"#404040"],[16,104,"#404040"],[15,105,"#404040"],[16,105,"#404040"],[15,106,"#404040"],[16,106,"#404040"],[15,107,"#404040"],[16,107,"#404040"],[15,108,"#404040"],[16,108,"#404040"],[15,109,"#404040"],[16,109,"#404040"],[15,110,"#404040"],[16,110,"#404040"],[15,111,"#404040"],[16,111,"#404040"],[15,112,"#404040"],[16,112,"#404040"],[15,113,"#404040"],[16,113,"#404040"],[15,114,"#404040"],[16,114,"#404040"],[15,115,"#404040"],[16,115,"#404040"],[15,116,"#404040"],[16,116,"#404040"],[15,117,"#404040"],[16,117,"#404040"],[15,118,"#404040"],[16,118,"#404040"]],[[16,37,1],[16,38,1],[15,38,2],[15,40,1],[15,41,1],[14,41,2],[14,44,1],[13,44,2],[14,45,1],[13,45,2],[14,46,1],[13,46,2],[13,48,1],[13,49,1],[12,49,2],[13,50,1],[12,50,2],[13,51,1],[12,51,2],[13,52,1],[12,52,2],[13,53,1],[12,53,2],[13,54,1],[12,54,2],[12,56,1],[11,56,2],[12,57,1],[11,57,2],[12,58,1],[11,58,2],[12,59,1],[11,59,2],[12,60,1],[11,60,2],[12,61,1],[11,61,2],[11,62,1],[12,62,1],[11,63,1],[10,63,2],[11,64,1],[10,64,2],[11,65,1],[10,65,2],[11,66,1],[10,66,2],[11,67,1],[10,67,2],[11,68,1],[10,68,2],[11,69,1],[10,69,2],[11,70,1],[10,70,2],[11,71,1],[10,71,2],[11,72,1],[10,72,2],[10,73,1],[11,73,1],[10,74,1],[9,74,2],[10,75,1],[9,75,2],[10,76,1],[9,76,2],[10,77,1],[9,77,2],[10,78,1],[9,78,2],[10,79,1],[9,79,2],[10,80,1],[9,80,2],[10,81,1],[9,81,2],[10,82,1],[9,82,2],[10,83,1],[9,83,2],[10,84,1],[9,84,2],[10,85,1],[9,85,2],[10,86,1],[9,86,2],[10,87,1],[9,87,2],[10,88,1],[9,88,2],[10,89,1],[9,89,2],[10,90,1],[9,90,2],[10,91,1],[9,91,2],[10,92,1],[9,92,2],[10,93,1],[9,93,2],[10,94,1],[11,94,1],[11,95,1],[10,95,2],[11,96,1],[10,96,2],[11,97,1],[10,97,2],[11,98,1],[10,98,2],[11,99,1],[10,99,2],[11,100,1],[10,100,2],[11,101,1],[10,101,2],[11,102,1],[10,102,2],[11,103,1],[10,103,2],[11,104,1],[10,104,2],[11,105,1],[12,105,1],[12,106,1],[11,106,2],[12,107,1],[11,107,2],[12,108,1],[11,108,2],[12,109,1],[11,109,2],[12,110,1],[11,110,2],[12,111,1],[11,111,2],[13,113,1],[12,113,2],[13,114,1],[12,114,2],[13,115,1],[12,115,2],[13,116,1],[12,116,2],[13,117,1],[12,117,2],[13,118,1],[12,118,2],[13,119,1],[14,121,1],[13,121,2],[14,122,1],[13,122,2],[14,123,1],[13,123,2],[16,36,2],[15,39,2],[14,42,2],[14,43,2],[13,47,2],[11,55,2],[12,55,2],[11,112,2],[12,112,2],[13,120,2],[14,124,2]]],[16,16,[[15,55,"#0000aa"],[16,55,"#404040"],[15,56,"#0000aa"],[16,56,"#404040"],[15,57,"#0000aa"],[16,57,"#404040"],[15,58,"#0000aa"],[16,58,"#404040"],[15,59,"#0000aa"],[16,59,"#404040"],[15,60,"#0000aa"],[16,60,"#404040"],[15,61,"#0000aa"],[16,61,"#404040"],[15,62,"#0000aa"],[16,62,"#404040"],[15,63,"#404040"],[16,63,"#404040"],[15,64,"#404040"],[16,64,"#404040"],[15,65,"#404040"],[16,65,"#404040"],[15,66,"#404040"],[16,66,"#404040"],[15,67,"#404040"],[16,67,"#404040"],[15,68,"#404040"],[16,68,"#404040"],[15,69,"#404040"],[16,69,"#404040"],[15,70,"#404040"],[16,70,"#404040"],[15,71,"#404040"],[16,71,"#404040"],[15,72,"#404040"],[16,72,"#404040"],[15,73,"#404040"],[16,73,"#404040"],[15,74,"#404040"],[16,74,"#404040"],[15,75,"#404040"],[16,75,"#404040"],[15,76,"#404040"],[16,76,"#404040"],[15,77,"#404040"],[16,77,"#404040"],[15,78,"#404040"],[16,78,"#404040"],[15,79,"#404040"],[16,79,"#404040"],[15,80,"#404040"],[16,80,"#404040"],[15,81,"#404040"],[16,81,"#404040"],[15,82,"#404040"],[16,82,"#404040"],[15,83,"#404040"],[16,83,"#404040"],[15,84,"#404040"],[16,84,"#404040"],[15,85,"#404040"],[16,85,"#404040"],[15,86,"#404040"],[16,86,"#404040"],[15,87,"#404040"],[16,87,"#404040"],[15,88,"#404040"],[16,88,"#404040"],[15,89,"#404040"],[16,89,"#404040"],[15,90,"#404040"],[16,90,"#404040"],[15,91,"#404040"],[16,91,"#404040"],[15,92,"#404040"],[16,92,"#404040"],[15,93,"#404040"],[16,93,"#404040"],[15,94,"#404040"],[16,94,"#404040"],[15,95,"#404040"],[16,95,"#404040"],[15,96,"#404040"],[16,96,"#404040"],[15,97,"#404040"],[16,97,"#404040"],[15,98,"#404040"],[16,98,"#404040"],[15,99,"#404040"],[16,99,"#404040"],[15,100,"#404040"],[16,100,"#404040"],[15,101,"#404040"],[16,101,"#404040"],[15,102,"#404040"],[16,102,"#404040"],[15,103,"#404040"],[16,103,"#404040"],[15,104,"#404040"],[16,104,"#404040"],[15,105,"#404040"],[16,105,"#404040"],[15,106,"#404040"],[16,106,"#404040"],[15,107,"#404040"],[16,107,"#404040"],[15,108,"#404040"],[16,108,"#404040"],[15,109,"#404040"],[16,109,"#404040"],[15,110,"#404040"],[16,110,"#404040"],[15,111,"#404040"],[16,111,"#404040"],[15,112,"#404040"],[16,112,"#404040"],[15,113,"#404040"],[16,113,"#404040"],[15,114,"#404040"],[16,114,"#404040"],[15,115,"#404040"],[16,115,"#404040"],[15,116,"#404040"],[16,116,"#404040"],[15,117,"#404040"],[16,117,"#404040"],[15,118,"#404040"],[16,118,"#404040"]],[[16,37,1],[16,38,1],[15,38,2],[15,40,1],[15,41,1],[14,41,2],[14,44,1],[13,44,2],[14,45,1],[13,45,2],[14,46,1],[13,46,2],[13,48,1],[13,49,1],[12,49,2],[13,50,1],[12,50,2],[13,51,1],[12,51,2],[13,52,1],[12,52,2],[13,53,1],[12,53,2],[13,54,1],[12,54,2],[12,56,1],[11,56,2],[12,57,1],[11,57,2],[12,58,1],[11,58,2],[12,59,1],[11,59,2],[12,60,1],[11,60,2],[12,61,1],[11,61,2],[11,62,1],[12,62,1],[11,63,1],[10,63,2],[11,64,1],[10,64,2],[11,65,1],[10,65,2],[11,66,1],[10,66,2],[11,67,1],[10,67,2],[11,68,1],[10,68,2],[11,69,1],[10,69,2],[11,70,1],[10,70,2],[11,71,1],[10,71,2],[11,72,1],[10,72,2],[10,73,1],[11,73,1],[10,74,1],[9,74,2],[10,75,1],[9,75,2],[10,76,1],[9,76,2],[10,77,1],[9,77,2],[10,78,1],[9,78,2],[10,79,1],[9,79,2],[10,80,1],[9,80,2],[10,81,1],[9,81,2],[10,82,1],[9,82,2],[10,83,1],[9,83,2],[10,84,1],[9,84,2],[10,85,1],[9,85,2],[10,86,1],[9,86,2],[10,87,1],[9,87,2],[10,88,1],[9,88,2],[10,89,1],[9,89,2],[10,90,1],[9,90,2],[10,91,1],[9,91,2],[10,92,1],[9,92,2],[10,93,1],[9,93,2],[10,94,1],[11,94,1],[11,95,1],[10,95,2],[11,96,1],[10,96,2],[11,97,1],[10,97,2],[11,98,1],[10,98,2],[11,99,1],[10,99,2],[11,100,1],[10,100,2],[11,101,1],[10,101,2],[11,102,1],[10,102,2],[11,103,1],[10,103,2],[11,104,1],[10,104,2],[11,105,1],[13,113,1],[12,113,2],[13,114,1],[12,114,2],[13,115,1],[12,115,2],[13,116,1],[12,116,2],[13,117,1],[12,117,2],[13,118,1],[12,118,2],[13,119,1],[14,121,1],[13,121,2],[14,122,1],[13,122,2],[14,123,1],[13,123,2],[16,36,2],[15,39,2],[14,42,2],[14,43,2],[13,47,2],[11,55,2],[12,55,2],[11,106,2],[11,107,2],[11,108,2],[11,109,2],[11,110,2],[11,111,2],[11,112,2],[12,112,2],[13,120,2],[14,124,2]]],[17,23,[[15,55,"#0000aa"],[16,55,"#404040"],[15,56,"#0000aa"],[16,56,"#404040"],[15,57,"#0000aa"],[16,57,"#404040"],[15,58,"#0000aa"],[16,58,"#404040"],[15,59,"#0000aa"],[16,59,"#404040"],[15,60,"#0000aa"],[16,60,"#404040"],[15,61,"#0000aa"],[16,61,"#404040"],[15,62,"#0000aa"],[16,62,"#404040"],[15,63,"#404040"],[16,63,"#404040"],[15,64,"#404040"],[16,64,"#404040"],[15,65,"#404040"],[16,65,"#404040"],[15,66,"#404040"],[16,66,"#404040"],[15,67,"#404040"],[16,67,"#404040"],[15,68,"#404040"],[16,68,"#404040"],[15,69,"#404040"],[16,69,"#404040"],[15,70,"#404040"],[16,70,"#404040"],[15,71,"#404040"],[16,71,"#404040"],[15,72,"#404040"],[16,72,"#404040"],[15,73,"#404040"],[16,73,"#404040"],[15,74,"#404040"],[16,74,"#404040"],[15,75,"#404040"],[16,75,"#404040"],[15,76,"#404040"],[16,76,"#404040"],[15,77,"#404040"],[16,77,"#404040"],[15,78,"#404040"],[16,78,"#404040"],[15,79,"#404040"],[16,79,"#404040"],[15,80,"#404040"],[16,80,"#404040"],[15,81,"#404040"],[16,81,"#404040"],[15,82,"#404040"],[16,82,"#404040"],[15,83,"#404040"],[16,83,"#404040"],[15,84,"#404040"],[16,84,"#404040"],[15,85,"#404040"],[16,85,"#404040"],[15,86,"#404040"],[16,86,"#404040"],[15,87,"#404040"],[16,87,"#404040"],[15,88,"#404040"],[16,88,"#404040"],[15,89,"#404040"],[16,89,"#404040"],[15,90,"#404040"],[16,90,"#404040"],[15,91,"#404040"],[16,91,"#404040"],[15,92,"#404040"],[16,92,"#404040"],[15,93,"#404040"],[16,93,"#404040"],[15,94,"#404040"],[16,94,"#404040"],[15,95,"#404040"],[16,95,"#404040"],[15,96,"#404040"],[16,96,"#404040"],[15,97,"#404040"],[16,97,"#404040"],[15,98,"#404040"],[16,98,"#404040"],[15,99,"#404040"],[16,99,"#404040"],[15,100,"#404040"],[16,100,"#404040"],[15,101,"#404040"],[16,101,"#404040"],[15,102,"#404040"],[16,102,"#404040"],[15,103,"#404040"],[16,103,"#404040"],[15,104,"#404040"],[16,104,"#404040"],[15,105,"#404040"],[16,105,"#404040"],[15,106,"#404040"],[16,106,"#404040"],[15,107,"#404040"],[16,107,"#404040"],[15,108,"#404040"],[16,108,"#404040"],[15,109,"#404040"],[16,109,"#404040"],[15,110,"#404040"],[16,110,"#404040"],[15,111,"#404040"],[16,111,"#404040"],[15,112,"#404040"],[16,112,"#404040"],[15,113,"#404040"],[16,113,"#404040"],[15,114,"#404040"],[16,114,"#404040"],[15,115,"#404040"],[16,115,"#404040"],[15,116,"#404040"],[16,116,"#404040"],[15,117,"#404040"],[16,117,"#404040"],[15,118,"#404040"],[16,118,"#404040"]],[[16,36,1],[15,36,2],[16,37,1],[15,37,2],[16,38,1],[15,38,2],[15,40,1],[14,40,2],[15,41,1],[14,41,2],[15,42,1],[14,42,2],[15,43,1],[14,43,2],[15,44,1],[14,44,2],[15,45,1],[14,45,2],[14,46,1],[15,46,1],[14,47,1],[13,47,2],[14,48,1],[13,48,2],[14,49,1],[13,49,2],[14,50,1],[13,50,2],[14,51,1],[13,51,2],[14,52,1],[13,52,2],[14,53,1],[13,53,2],[14,54,1],[13,54,2],[14,55,1],[13,55,2],[14,56,1],[13,56,2],[13,57,1],[14,57,1],[13,58,1],[12,58,2],[13,59,1],[12,59,2],[13,60,1],[12,60,2],[13,61,1],[12,61,2],[13,62,1],[12,62,2],[13,63,1],[12,63,2],[13,64,1],[12,64,2],[13,65,1],[12,65,2],[13,66,1],[12,66,2],[13,67,1],[12,67,2],[13,68,1],[12,68,2],[13,69,1],[12,69,2],[13,70,1],[12,70,2],[13,71,1],[12,71,2],[13,72,1],[12,72,2],[12,73,1],[13,73,1],[12,74,1],[11,74,2],[12,75,1],[11,75,2],[12,76,1],[11,76,2],[12,77,1],[11,77,2],[12,78,1],[11,78,2],[12,79,1],[11,79,2],[12,80,1],[11,80,2],[12,81,1],[11,81,2],[12,82,1],[11,82,2],[12,83,1],[11,83,2],[12,84,1],[11,84,2],[12,85,1],[11,85,2],[12,86,1],[11,86,2],[12,87,1],[11,87,2],[12,88,1],[11,88,2],[12,89,1],[11,89,2],[12,90,1],[11,90,2],[12,91,1],[11,91,2],[12,92,1],[11,92,2],[12,93,1],[11,93,2],[12,94,1],[13,94,1],[13,95,1],[12,95,2],[13,96,1],[12,96,2],[13,97,1],[12,97,2],[13,98,1],[12,98,2],[13,99,1],[12,99,2],[13,100,1],[12,100,2],[13,101,1],[12,101,2],[13,102,1],[12,102,2],[13,103,1],[12,103,2],[13,104,1],[12,104,2],[13,105,1],[12,105,2],[13,106,1],[12,106,2],[13,107,1],[12,107,2],[13,108,1],[12,108,2],[13,109,1],[12,109,2],[13,110,1],[14,110,1],[14,111,1],[13,111,2],[14,112,1],[13,112,2],[14,113,1],[13,113,2],[14,114,1],[13,114,2],[14,115,1],[13,115,2],[14,116,1],[13,116,2],[14,117,1],[13,117,2],[14,118,1],[13,118,2],[14,119,1],[13,119,2],[14,120,1],[13,120,2],[14,121,1],[15,121,1],[15,122,1],[14,122,2],[15,123,1],[14,123,2],[15,124,1],[14,124,2],[14,39,2],[15,39,2]]]],"R":[[0,0,[[237,55,"#404040"],[238,55,"#ffbeb2"],[237,56,"#404040"],[238,56,"#ffbeb2"],[237,57,"#404040"],[238,57,"#ffbeb2"],[237,58,"#404040"],[238,58,"#ffbeb2"],[237,59,"#404040"],[238,59,"#ffbeb2"],[237,60,"#404040"],[238,60,"#ffbeb2"],[237,61,"#404040"],[238,61,"#ffbeb2"],[237,62,"#404040"],[238,62,"#ffbeb2"],[237,63,"#404040"],[238,63,"#404040"],[237,64,"#404040"],[238,64,"#404040"],[237,65,"#404040"],[238,65,"#404040"],[237,66,"#404040"],[238,66,"#404040"],[237,67,"#404040"],[238,67,"#404040"],[237,68,"#404040"],[238,68,"#404040"],[237,69,"#404040"],[238,69,"#404040"],[237,70,"#404040"],[238,70,"#404040"],[237,71,"#404040"],[238,71,"#404040"],[237,72,"#404040"],[238,72,"#404040"],[237,73,"#404040"],[238,73,"#404040"],[237,74,"#404040"],[238,74,"#404040"],[237,75,"#404040"],[238,75,"#404040"],[237,76,"#404040"],[238,76,"#404040"],[237,77,"#404040"],[238,77,"#404040"],[237,78,"#404040"],[238,78,"#404040"],[237,79,"#404040"],[238,79,"#404040"],[237,80,"#404040"],[238,80,"#404040"],[237,81,"#404040"],[238,81,"#404040"],[237,82,"#404040"],[238,82,"#404040"],[237,83,"#404040"],[238,83,"#404040"],[237,84,"#404040"],[238,84,"#404040"],[237,85,"#404040"],[238,85,"#404040"],[237,86,"#404040"],[238,86,"#404040"],[237,87,"#404040"],[238,87,"#404040"],[237,88,"#404040"],[238,88,"#404040"],[237,89,"#404040"],[238,89,"#404040"],[237,90,"#404040"],[238,90,"#404040"],[237,91,"#404040"],[238,91,"#404040"],[237,92,"#404040"],[238,92,"#404040"],[237,93,"#404040"],[238,93,"#404040"],[237,94,"#404040"],[238,94,"#404040"],[237,95,"#404040"],[238,95,"#404040"],[237,96,"#404040"],[238,96,"#404040"],[237,97,"#404040"],[238,97,"#404040"],[237,98,"#404040"],[238,98,"#404040"],[237,99,"#404040"],[238,99,"#404040"],[237,100,"#404040"],[238,100,"#404040"],[237,101,"#404040"],[238,101,"#404040"],[237,102,"#404040"],[238,102,"#404040"],[237,103,"#404040"],[238,103,"#404040"],[237,104,"#404040"],[238,104,"#404040"],[237,105,"#404040"],[238,105,"#404040"],[237,106,"#404040"],[238,106,"#404040"],[237,107,"#404040"],[238,107,"#404040"],[237,108,"#404040"],[238,108,"#404040"],[237,109,"#404040"],[238,109,"#404040"],[237,110,"#404040"],[238,110,"#404040"],[237,111,"#404040"],[238,111,"#404040"],[237,112,"#404040"],[238,112,"#404040"],[237,113,"#404040"],[238,113,"#404040"],[237,114,"#404040"],[238,114,"#404040"],[237,115,"#404040"],[238,115,"#404040"],[237,116,"#404040"],[238,116,"#404040"],[237,117,"#404040"],[238,117,"#404040"],[237,118,"#404040"],[238,118,"#404040"]],[[237,37,1],[237,38,1],[238,38,2],[238,40,1],[238,41,1],[239,41,2],[239,44,1],[240,44,2],[239,45,1],[240,45,2],[239,46,1],[240,46,2],[240,48,1],[240,49,1],[241,49,2],[240,50,1],[241,50,2],[240,51,1],[241,51,2],[240,52,1],[241,52,2],[240,53,1],[241,53,2],[240,54,1],[241,54,2],[241,56,1],[242,56,2],[241,57,1],[242,57,2],[241,58,1],[242,58,2],[241,59,1],[242,59,2],[241,60,1],[242,60,2],[241,61,1],[242,61,2],[241,62,1],[242,62,1],[242,63,1],[243,63,2],[242,64,1],[243,64,2],[242,65,1],[243,65,2],[242,66,1],[243,66,2],[243,74,1],[244,74,2],[243,75,1],[244,75,2],[242,100,1],[243,100,2],[242,101,1],[243,101,2],[242,102,1],[243,102,2],[242,103,1],[243,103,2],[242,104,1],[243,104,2],[241,105,1],[242,105,1],[241,106,1],[242,106,2],[241,107,1],[242,107,2],[241,108,1],[242,108,2],[241,109,1],[242,109,2],[241,110,1],[242,110,2],[241,111,1],[242,111,2],[240,113,1],[241,113,2],[240,114,1],[241,114,2],[240,115,1],[241,115,2],[240,116,1],[241,116,2],[240,117,1],[241,117,2],[240,118,1],[241,118,2],[240,119,1],[239,121,1],[240,121,2],[239,122,1],[240,122,2],[239,123,1],[240,123,2],[237,36,2],[238,39,2],[239,42,2],[239,43,2],[240,47,2],[241,55,2],[242,55,2],[243,67,2],[243,68,2],[244,76,2],[243,99,2],[241,112,2],[242,112,2],[240,120,2],[239,124,2],[243,69,2],[243,70,2],[243,71,2],[243,72,1],[244,72,2],[243,73,1],[244,73,2],[244,77,2],[244,78,2],[244,79,2],[244,80,2],[244,81,2],[244,82,2],[244,83,2],[244,84,2],[244,85,2],[244,86,2],[244,87,2],[243,88,2],[243,89,2],[243,90,2],[243,91,2],[243,92,2],[243,93,2],[243,94,2],[243,95,2],[243,96,2],[243,97,2],[243,98,2]]],[1,8,[[237,55,"#404040"],[238,55,"#ffbeb2"],[237,56,"#404040"],[238,56,"#ffbeb2"],[237,57,"#404040"],[238,57,"#ffbeb2"],[237,58,"#404040"],[238,58,"#ffbeb2"],[237,59,"#404040"],[238,59,"#ffbeb2"],[237,60,"#404040"],[238,60,"#ffbeb2"],[237,61,"#404040"],[238,61,"#ffbeb2"],[237,62,"#404040"],[238,62,"#ffbeb2"],[237,63,"#404040"],[238,63,"#404040"],[237,64,"#404040"],[238,64,"#404040"],[237,65,"#404040"],[238,65,"#404040"],[237,66,"#404040"],[238,66,"#404040"],[237,67,"#404040"],[238,67,"#404040"],[237,68,"#404040"],[238,68,"#404040"],[237,69,"#404040"],[238,69,"#404040"],[237,70,"#404040"],[238,70,"#404040"],[237,71,"#404040"],[238,71,"#404040"],[237,72,"#404040"],[238,72,"#404040"],[237,73,"#404040"],[238,73,"#404040"],[237,74,"#404040"],[238,74,"#404040"],[237,75,"#404040"],[238,75,"#404040"],[237,76,"#404040"],[238,76,"#404040"],[237,77,"#404040"],[238,77,"#404040"],[237,78,"#404040"],[238,78,"#404040"],[237,79,"#404040"],[238,79,"#404040"],[237,80,"#404040"],[238,80,"#404040"],[237,81,"#404040"],[238,81,"#404040"],[237,82,"#404040"],[238,82,"#404040"],[237,83,"#404040"],[238,83,"#404040"],[237,84,"#404040"],[238,84,"#404040"],[237,85,"#404040"],[238,85,"#404040"],[237,86,"#404040"],[238,86,"#404040"],[237,87,"#404040"],[238,87,"#404040"],[237,88,"#404040"],[238,88,"#404040"],[237,89,"#404040"],[238,89,"#404040"],[237,90,"#404040"],[238,90,"#404040"],[237,91,"#404040"],[238,91,"#404040"],[237,92,"#404040"],[238,92,"#404040"],[237,93,"#404040"],[238,93,"#404040"],[237,94,"#404040"],[238,94,"#404040"],[237,95,"#404040"],[238,95,"#404040"],[237,96,"#404040"],[238,96,"#404040"],[237,97,"#404040"],[238,97,"#404040"],[237,98,"#404040"],[238,98,"#404040"],[237,99,"#404040"],[238,99,"#404040"],[237,100,"#404040"],[238,100,"#404040"],[237,101,"#404040"],[238,101,"#404040"],[237,102,"#404040"],[238,102,"#404040"],[237,103,"#404040"],[238,103,"#404040"],[237,104,"#404040"],[238,104,"#404040"],[237,105,"#404040"],[238,105,"#404040"],[237,106,"#404040"],[238,106,"#404040"],[237,107,"#404040"],[238,107,"#404040"],[237,108,"#404040"],[238,108,"#404040"],[237,109,"#404040"],[238,109,"#404040"],[237,110,"#404040"],[238,110,"#404040"],[237,111,"#404040"],[238,111,"#404040"],[237,112,"#404040"],[238,112,"#404040"],[237,113,"#404040"],[238,113,"#404040"],[237,114,"#404040"],[238,114,"#404040"],[237,115,"#404040"],[238,115,"#404040"],[237,116,"#404040"],[238,116,"#404040"],[237,117,"#404040"],[238,117,"#404040"],[237,118,"#404040"],[238,118,"#404040"]],[[237,36,1],[238,36,2],[237,37,1],[238,37,2],[237,38,1],[238,38,2],[238,40,1],[239,40,2],[238,41,1],[239,41,2],[238,42,1],[239,42,2],[238,43,1],[239,43,2],[238,44,1],[239,44,2],[238,45,1],[239,45,2],[238,46,1],[239,46,1],[239,47,1],[240,47,2],[239,48,1],[240,48,2],[239,49,1],[240,49,2],[239,50,1],[240,50,2],[239,51,1],[240,51,2],[239,52,1],[240,52,2],[239,53,1],[240,53,2],[239,54,1],[240,54,2],[239,55,1],[240,55,2],[239,56,1],[240,56,2],[239,57,1],[240,57,1],[240,58,1],[241,58,2],[240,59,1],[241,59,2],[240,60,1],[241,60,2],[240,61,1],[241,61,2],[240,62,1],[241,62,2],[240,63,1],[241,63,2],[240,64,1],[241,64,2],[240,65,1],[241,65,2],[240,102,1],[241,102,2],[240,103,1],[241,103,2],[240,104,1],[241,104,2],[240,105,1],[241,105,2],[240,106,1],[241,106,2],[240,107,1],[241,107,2],[240,108,1],[241,108,2],[240,109,1],[241,109,2],[239,110,1],[240,110,1],[239,111,1],[240,111,2],[239,112,1],[240,112,2],[239,113,1],[240,113,2],[239,114,1],[240,114,2],[239,115,1],[240,115,2],[239,116,1],[240,116,2],[239,117,1],[240,117,2],[239,118,1],[240,118,2],[239,119,1],[240,119,2],[239,120,1],[240,120,2],[238,121,1],[239,121,1],[238,122,1],[239,122,2],[238,123,1],[239,123,2],[238,124,1],[239,124,2],[238,39,2],[239,39,2],[241,100,2],[241,101,2],[240,66,1],[241,66,2],[240,67,1],[241,67,2],[240,68,1],[241,68,2],[240,69,1],[241,69,2],[240,70,1],[241,70,2],[240,71,1],[241,71,2],[240,72,1],[241,72,2],[240,73,1],[241,73,2],[240,74,1],[241,74,2],[240,75,1],[241,75,2],[240,76,1],[241,76,2],[240,77,1],[241,77,2],[240,78,1],[241,78,2],[240,79,1],[241,79,2],[240,80,1],[241,80,2],[240,81,1],[241,81,2],[240,82,1],[241,82,2],[241,83,2],[241,84,2],[241,85,2],[241,86,2],[241,87,2],[241,88,2],[241,89,2],[241,90,2],[241,91,2],[241,92,2],[241,93,2],[241,94,2],[241,95,2],[241,96,2],[241,97,2],[241,98,2],[241,99,2]]],[9,14,[[237,55,"#404040"],[238,55,"#ffbeb2"],[237,56,"#404040"],[238,56,"#ffbeb2"],[237,57,"#404040"],[238,57,"#ffbeb2"],[237,58,"#404040"],[238,58,"#ffbeb2"],[237,59,"#404040"],[238,59,"#ffbeb2"],[237,60,"#404040"],[238,60,"#ffbeb2"],[237,61,"#404040"],[238,61,"#ffbeb2"],[237,62,"#404040"],[238,62,"#ffbeb2"],[237,63,"#404040"],[238,63,"#404040"],[237,64,"#404040"],[238,64,"#404040"],[237,65,"#404040"],[238,65,"#404040"],[237,66,"#404040"],[238,66,"#404040"],[237,67,"#404040"],[238,67,"#404040"],[237,68,"#404040"],[238,68,"#404040"],[237,69,"#404040"],[238,69,"#404040"],[237,70,"#404040"],[238,70,"#404040"],[237,71,"#404040"],[238,71,"#404040"],[237,72,"#404040"],[238,72,"#404040"],[237,73,"#404040"],[238,73,"#404040"],[237,74,"#404040"],[238,74,"#404040"],[237,75,"#404040"],[238,75,"#404040"],[237,76,"#404040"],[238,76,"#404040"],[237,77,"#404040"],[238,77,"#404040"],[237,78,"#404040"],[238,78,"#404040"],[237,79,"#404040"],[238,79,"#404040"],[237,80,"#404040"],[238,80,"#404040"],[237,81,"#404040"],[238,81,"#404040"],[237,82,"#404040"],[238,82,"#404040"],[237,83,"#404040"],[238,83,"#404040"],[237,84,"#404040"],[238,84,"#404040"],[237,85,"#404040"],[238,85,"#404040"],[237,86,"#404040"],[238,86,"#404040"],[237,87,"#404040"],[238,87,"#404040"],[237,88,"#404040"],[238,88,"#404040"],[237,89,"#404040"],[238,89,"#404040"],[237,90,"#404040"],[238,90,"#404040"],[237,91,"#404040"],[238,91,"#404040"],[237,92,"#404040"],[238,92,"#404040"],[237,93,"#404040"],[238,93,"#404040"],[237,94,"#404040"],[238,94,"#404040"],[237,95,"#404040"],[238,95,"#404040"],[237,96,"#404040"],[238,96,"#404040"],[237,97,"#404040"],[238,97,"#404040"],[237,98,"#404040"],[238,98,"#404040"],[237,99,"#404040"],[238,99,"#404040"],[237,100,"#404040"],[238,100,"#404040"],[237,101,"#404040"],[238,101,"#404040"],[237,102,"#404040"],[238,102,"#404040"],[237,103,"#404040"],[238,103,"#404040"],[237,104,"#404040"],[238,104,"#404040"],[237,105,"#404040"],[238,105,"#404040"],[237,106,"#404040"],[238,106,"#404040"],[237,107,"#404040"],[238,107,"#404040"],[237,108,"#404040"],[238,108,"#404040"],[237,109,"#404040"],[238,109,"#404040"],[237,110,"#404040"],[238,110,"#404040"],[237,111,"#404040"],[238,111,"#404040"],[237,112,"#404040"],[238,112,"#404040"],[237,113,"#404040"],[238,113,"#404040"],[237,114,"#404040"],[238,114,"#404040"],[237,115,"#404040"],[238,115,"#404040"],[237,116,"#404040"],[238,116,"#404040"],[237,117,"#404040"],[238,117,"#404040"],[237,118,"#404040"],[238,118,"#404040"]],[[237,37,1],[237,38,1],[238,38,2],[238,40,1],[238,41,1],[239,41,2],[239,44,1],[240,44,2],[239,45,1],[240,45,2],[239,46,1],[240,46,2],[240,48,1],[240,49,1],[241,49,2],[240,50,1],[241,50,2],[240,51,1],[241,51,2],[240,52,1],[241,52,2],[240,53,1],[241,53,2],[240,54,1],[241,54,2],[241,56,1],[242,56,2],[241,57,1],[242,57,2],[241,58,1],[242,58,2],[241,59,1],[242,59,2],[241,60,1],[242,60,2],[241,61,1],[242,61,2],[241,62,1],[242,62,1],[242,63,1],[243,63,2],[242,64,1],[243,64,2],[242,65,1],[243,65,2],[242,66,1],[243,66,2],[243,74,1],[244,74,2],[243,75,1],[244,75,2],[242,100,1],[243,100,2],[242,101,1],[243,101,2],[242,102,1],[243,102,2],[242,103,1],[243,103,2],[242,104,1],[243,104,2],[241,105,1],[242,105,1],[241,106,1],[242,106,2],[241,107,1],[242,107,2],[241,108,1],[242,108,2],[241,109,1],[242,109,2],[241,110,1],[242,110,2],[241,111,1],[242,111,2],[240,113,1],[241,113,2],[240,114,1],[241,114,2],[240,115,1],[241,115,2],[240,116,1],[241,116,2],[240,117,1],[241,117,2],[240,118,1],[241,118,2],[240,119,1],[239,121,1],[240,121,2],[239,122,1],[240,122,2],[239,123,1],[240,123,2],[237,36,2],[238,39,2],[239,42,2],[239,43,2],[240,47,2],[241,55,2],[242,55,2],[243,67,2],[243,68,2],[244,76,2],[243,99,2],[241,112,2],[242,112,2],[240,120,2],[239,124,2],[243,69,2],[243,70,2],[243,71,2],[243,72,1],[244,72,2],[243,73,1],[244,73,2],[244,77,2],[244,78,2],[244,79,2],[244,80,2],[244,81,2],[244,82,2],[244,83,2],[244,84,2],[244,85,2],[244,86,2],[244,87,2],[243,88,2],[243,89,2],[243,90,2],[243,91,2],[243,92,2],[243,93,2],[243,94,2],[243,95,2],[243,96,2],[243,97,2],[243,98,2]]],[15,15,[[237,55,"#404040"],[238,55,"#ffbeb2"],[237,56,"#404040"],[238,56,"#ffbeb2"],[237,57,"#404040"],[238,57,"#ffbeb2"],[237,58,"#404040"],[238,58,"#ffbeb2"],[237,59,"#404040"],[238,59,"#ffbeb2"],[237,60,"#404040"],[238,60,"#ffbeb2"],[237,61,"#404040"],[238,61,"#ffbeb2"],[237,62,"#404040"],[238,62,"#ffbeb2"],[237,63,"#404040"],[238,63,"#404040"],[237,64,"#404040"],[238,64,"#404040"],[237,65,"#404040"],[238,65,"#404040"],[237,66,"#404040"],[238,66,"#404040"],[237,67,"#404040"],[238,67,"#404040"],[237,68,"#404040"],[238,68,"#404040"],[237,69,"#404040"],[238,69,"#404040"],[237,70,"#404040"],[238,70,"#404040"],[237,71,"#404040"],[238,71,"#404040"],[237,72,"#404040"],[238,72,"#404040"],[237,73,"#404040"],[238,73,"#404040"],[237,74,"#404040"],[238,74,"#404040"],[237,75,"#404040"],[238,75,"#404040"],[237,76,"#404040"],[238,76,"#404040"],[237,77,"#404040"],[238,77,"#404040"],[237,78,"#404040"],[238,78,"#404040"],[237,79,"#404040"],[238,79,"#404040"],[237,80,"#404040"],[238,80,"#404040"],[237,81,"#404040"],[238,81,"#404040"],[237,82,"#404040"],[238,82,"#404040"],[237,83,"#404040"],[238,83,"#404040"],[237,84,"#404040"],[238,84,"#404040"],[237,85,"#404040"],[238,85,"#404040"],[237,86,"#404040"],[238,86,"#404040"],[237,87,"#404040"],[238,87,"#404040"],[237,88,"#404040"],[238,88,"#404040"],[237,89,"#404040"],[238,89,"#404040"],[237,90,"#404040"],[238,90,"#404040"],[237,91,"#404040"],[238,91,"#404040"],[237,92,"#404040"],[238,92,"#404040"],[237,93,"#404040"],[238,93,"#404040"],[237,94,"#404040"],[238,94,"#404040"],[237,95,"#404040"],[238,95,"#404040"],[237,96,"#404040"],[238,96,"#404040"],[237,97,"#404040"],[238,97,"#404040"],[237,98,"#404040"],[238,98,"#404040"],[237,99,"#404040"],[238,99,"#404040"],[237,100,"#404040"],[238,100,"#404040"],[237,101,"#404040"],[238,101,"#404040"],[237,102,"#404040"],[238,102,"#404040"],[237,103,"#404040"],[238,103,"#404040"],[237,104,"#404040"],[238,104,"#404040"],[237,105,"#404040"],[238,105,"#404040"],[237,106,"#404040"],[238,106,"#404040"],[237,107,"#404040"],[238,107,"#404040"],[237,108,"#404040"],[238,108,"#404040"],[237,109,"#404040"],[238,109,"#404040"],[237,110,"#404040"],[238,110,"#404040"],[237,111,"#404040"],[238,111,"#404040"],[237,112,"#404040"],[238,112,"#404040"],[237,113,"#404040"],[238,113,"#404040"],[237,114,"#404040"],[238,114,"#404040"],[237,115,"#404040"],[238,115,"#404040"],[237,116,"#404040"],[238,116,"#404040"],[237,117,"#404040"],[238,117,"#404040"],[237,118,"#404040"],[238,118,"#404040"]],[[237,37,1],[237,38,1],[238,38,2],[238,40,1],[238,41,1],[239,41,2],[239,44,1],[240,44,2],[239,45,1],[240,45,2],[239,46,1],[240,46,2],[240,48,1],[240,49,1],[241,49,2],[240,50,1],[241,50,2],[240,51,1],[241,51,2],[240,52,1],[241,52,2],[240,53,1],[241,53,2],[240,54,1],[241,54,2],[241,56,1],[242,56,2],[241,57,1],[242,57,2],[241,58,1],[242,58,2],[241,59,1],[242,59,2],[241,60,1],[242,60,2],[241,61,1],[242,61,2],[241,62,1],[242,62,1],[242,63,1],[243,63,2],[242,64,1],[243,64,2],[242,65,1],[243,65,2],[242,66,1],[243,66,2],[242,67,1],[243,67,2],[242,68,1],[243,68,2],[242,69,1],[243,69,2],[242,70,1],[243,70,2],[242,71,1],[243,71,2],[242,72,1],[243,72,2],[242,73,1],[243,73,1],[243,74,1],[244,74,2],[243,75,1],[244,75,2],[243,76,1],[244,76,2],[243,77,1],[244,77,2],[243,78,1],[244,78,2],[243,79,1],[244,79,2],[243,80,1],[244,80,2],[243,81,1],[244,81,2],[243,82,1],[244,82,2],[243,83,1],[244,83,2],[243,84,1],[244,84,2],[243,85,1],[244,85,2],[243,86,1],[244,86,2],[243,87,1],[244,87,2],[243,88,1],[244,88,2],[243,89,1],[244,89,2],[243,90,1],[244,90,2],[243,91,1],[244,91,2],[243,92,1],[244,92,2],[243,93,1],[244,93,2],[242,94,1],[243,94,1],[242,95,1],[243,95,2],[242,96,1],[243,96,2],[242,97,1],[243,97,2],[242,98,1],[243,98,2],[242,99,1],[243,99,2],[242,100,1],[243,100,2],[242,101,1],[243,101,2],[242,102,1],[243,102,2],[242,103,1],[243,103,2],[242,104,1],[243,104,2],[241,105,1],[242,105,1],[241,106,1],[242,106,2],[241,107,1],[242,107,2],[241,108,1],[242,108,2],[241,109,1],[242,109,2],[241,110,1],[242,110,2],[241,111,1],[242,111,2],[240,113,1],[241,113,2],[240,114,1],[241,114,2],[240,115,1],[241,115,2],[240,116,1],[241,116,2],[240,117,1],[241,117,2],[240,118,1],[241,118,2],[240,119,1],[239,121,1],[240,121,2],[239,122,1],[240,122,2],[239,123,1],[240,123,2],[237,36,2],[238,39,2],[239,42,2],[239,43,2],[240,47,2],[241,55,2],[242,55,2],[241,112,2],[242,112,2],[240,120,2],[239,124,2]]],[16,16,[[237,55,"#404040"],[238,55,"#ffbeb2"],[237,56,"#404040"],[238,56,"#ffbeb2"],[237,57,"#404040"],[238,57,"#ffbeb2"],[237,58,"#404040"],[238,58,"#ffbeb2"],[237,59,"#404040"],[238,59,"#ffbeb2"],[237,60,"#404040"],[238,60,"#ffbeb2"],[237,61,"#404040"],[238,61,"#ffbeb2"],[237,62,"#404040"],[238,62,"#ffbeb2"],[237,63,"#404040"],[238,63,"#404040"],[237,64,"#404040"],[238,64,"#404040"],[237,65,"#404040"],[238,65,"#404040"],[237,66,"#404040"],[238,66,"#404040"],[237,67,"#404040"],[238,67,"#404040"],[237,68,"#404040"],[238,68,"#404040"],[237,69,"#404040"],[238,69,"#404040"],[237,70,"#404040"],[238,70,"#404040"],[237,71,"#404040"],[238,71,"#404040"],[237,72,"#404040"],[238,72,"#404040"],[237,73,"#404040"],[238,73,"#404040"],[237,74,"#404040"],[238,74,"#404040"],[237,75,"#404040"],[238,75,"#404040"],[237,76,"#404040"],[238,76,"#404040"],[237,77,"#404040"],[238,77,"#404040"],[237,78,"#404040"],[238,78,"#404040"],[237,79,"#404040"],[238,79,"#404040"],[237,80,"#404040"],[238,80,"#404040"],[237,81,"#404040"],[238,81,"#404040"],[237,82,"#404040"],[238,82,"#404040"],[237,83,"#404040"],[238,83,"#404040"],[237,84,"#404040"],[238,84,"#404040"],[237,85,"#404040"],[238,85,"#404040"],[237,86,"#404040"],[238,86,"#404040"],[237,87,"#404040"],[238,87,"#404040"],[237,88,"#404040"],[238,88,"#404040"],[237,89,"#404040"],[238,89,"#404040"],[237,90,"#404040"],[238,90,"#404040"],[237,91,"#404040"],[238,91,"#404040"],[237,92,"#404040"],[238,92,"#404040"],[237,93,"#404040"],[238,93,"#404040"],[237,94,"#404040"],[238,94,"#404040"],[237,95,"#404040"],[238,95,"#404040"],[237,96,"#404040"],[238,96,"#404040"],[237,97,"#404040"],[238,97,"#404040"],[237,98,"#404040"],[238,98,"#404040"],[237,99,"#404040"],[238,99,"#404040"],[237,100,"#404040"],[238,100,"#404040"],[237,101,"#404040"],[238,101,"#404040"],[237,102,"#404040"],[238,102,"#404040"],[237,103,"#404040"],[238,103,"#404040"],[237,104,"#404040"],[238,104,"#404040"],[237,105,"#404040"],[238,105,"#404040"],[237,106,"#404040"],[238,106,"#404040"],[237,107,"#404040"],[238,107,"#404040"],[237,108,"#404040"],[238,108,"#404040"],[237,109,"#404040"],[238,109,"#404040"],[237,110,"#404040"],[238,110,"#404040"],[237,111,"#404040"],[238,111,"#404040"],[237,112,"#404040"],[238,112,"#404040"],[237,113,"#404040"],[238,113,"#404040"],[237,114,"#404040"],[238,114,"#404040"],[237,115,"#404040"],[238,115,"#404040"],[237,116,"#404040"],[238,116,"#404040"],[237,117,"#404040"],[238,117,"#404040"],[237,118,"#404040"],[238,118,"#404040"]],[[237,37,1],[237,38,1],[238,38,2],[238,40,1],[238,41,1],[239,41,2],[239,44,1],[240,44,2],[239,45,1],[240,45,2],[239,46,1],[240,46,2],[240,48,1],[240,49,1],[241,49,2],[240,50,1],[241,50,2],[240,51,1],[241,51,2],[240,52,1],[241,52,2],[240,53,1],[241,53,2],[240,54,1],[241,54,2],[241,56,1],[242,56,2],[241,57,1],[242,57,2],[241,58,1],[242,58,2],[241,59,1],[242,59,2],[241,60,1],[242,60,2],[241,61,1],[242,61,2],[241,62,1],[242,62,1],[242,63,1],[243,63,2],[242,64,1],[243,64,2],[242,65,1],[243,65,2],[242,66,1],[243,66,2],[242,67,1],[243,67,2],[242,68,1],[243,68,2],[242,69,1],[243,69,2],[242,70,1],[243,70,2],[242,71,1],[243,71,2],[242,72,1],[243,72,2],[242,73,1],[243,73,1],[243,74,1],[244,74,2],[243,75,1],[244,75,2],[243,76,1],[244,76,2],[243,77,1],[244,77,2],[243,78,1],[244,78,2],[243,79,1],[244,79,2],[243,80,1],[244,80,2],[243,81,1],[244,81,2],[243,82,1],[244,82,2],[243,83,1],[244,83,2],[243,84,1],[244,84,2],[243,85,1],[244,85,2],[243,86,1],[244,86,2],[243,87,1],[244,87,2],[243,88,1],[244,88,2],[243,89,1],[244,89,2],[243,90,1],[244,90,2],[243,91,1],[244,91,2],[243,92,1],[244,92,2],[243,93,1],[244,93,2],[242,94,1],[243,94,1],[242,95,1],[243,95,2],[242,96,1],[243,96,2],[242,97,1],[243,97,2],[242,98,1],[243,98,2],[242,99,1],[243,99,2],[242,100,1],[243,100,2],[242,101,1],[243,101,2],[242,102,1],[243,102,2],[242,103,1],[243,103,2],[242,104,1],[243,104,2],[242,105,1],[240,113,1],[241,113,2],[240,114,1],[241,114,2],[240,115,1],[241,115,2],[240,116,1],[241,116,2],[240,117,1],[241,117,2],[240,118,1],[241,118,2],[240,119,1],[239,121,1],[240,121,2],[239,122,1],[240,122,2],[239,123,1],[240,123,2],[237,36,2],[238,39,2],[239,42,2],[239,43,2],[240,47,2],[241,55,2],[242,55,2],[242,106,2],[242,107,2],[242,108,2],[242,109,2],[242,110,2],[242,111,2],[241,112,2],[242,112,2],[240,120,2],[239,124,2]]],[17,23,[[237,55,"#404040"],[238,55,"#ffbeb2"],[237,56,"#404040"],[238,56,"#ffbeb2"],[237,57,"#404040"],[238,57,"#ffbeb2"],[237,58,"#404040"],[238,58,"#ffbeb2"],[237,59,"#404040"],[238,59,"#ffbeb2"],[237,60,"#404040"],[238,60,"#ffbeb2"],[237,61,"#404040"],[238,61,"#ffbeb2"],[237,62,"#404040"],[238,62,"#ffbeb2"],[237,63,"#404040"],[238,63,"#404040"],[237,64,"#404040"],[238,64,"#404040"],[237,65,"#404040"],[238,65,"#404040"],[237,66,"#404040"],[238,66,"#404040"],[237,67,"#404040"],[238,67,"#404040"],[237,68,"#404040"],[238,68,"#404040"],[237,69,"#404040"],[238,69,"#404040"],[237,70,"#404040"],[238,70,"#404040"],[237,71,"#404040"],[238,71,"#404040"],[237,72,"#404040"],[238,72,"#404040"],[237,73,"#404040"],[238,73,"#404040"],[237,74,"#404040"],[238,74,"#404040"],[237,75,"#404040"],[238,75,"#404040"],[237,76,"#404040"],[238,76,"#404040"],[237,77,"#404040"],[238,77,"#404040"],[237,78,"#404040"],[238,78,"#404040"],[237,79,"#404040"],[238,79,"#404040"],[237,80,"#404040"],[238,80,"#404040"],[237,81,"#404040"],[238,81,"#404040"],[237,82,"#404040"],[238,82,"#404040"],[237,83,"#404040"],[238,83,"#404040"],[237,84,"#404040"],[238,84,"#404040"],[237,85,"#404040"],[238,85,"#404040"],[237,86,"#404040"],[238,86,"#404040"],[237,87,"#404040"],[238,87,"#404040"],[237,88,"#404040"],[238,88,"#404040"],[237,89,"#404040"],[238,89,"#404040"],[237,90,"#404040"],[238,90,"#404040"],[237,91,"#404040"],[238,91,"#404040"],[237,92,"#404040"],[238,92,"#404040"],[237,93,"#404040"],[238,93,"#404040"],[237,94,"#404040"],[238,94,"#404040"],[237,95,"#404040"],[238,95,"#404040"],[237,96,"#404040"],[238,96,"#404040"],[237,97,"#404040"],[238,97,"#404040"],[237,98,"#404040"],[238,98,"#404040"],[237,99,"#404040"],[238,99,"#404040"],[237,100,"#404040"],[238,100,"#404040"],[237,101,"#404040"],[238,101,"#404040"],[237,102,"#404040"],[238,102,"#404040"],[237,103,"#404040"],[238,103,"#404040"],[237,104,"#404040"],[238,104,"#404040"],[237,105,"#404040"],[238,105,"#404040"],[237,106,"#404040"],[238,106,"#404040"],[237,107,"#404040"],[238,107,"#404040"],[237,108,"#404040"],[238,108,"#404040"],[237,109,"#404040"],[238,109,"#404040"],[237,110,"#404040"],[238,110,"#404040"],[237,111,"#404040"],[238,111,"#404040"],[237,112,"#404040"],[238,112,"#404040"],[237,113,"#404040"],[238,113,"#404040"],[237,114,"#404040"],[238,114,"#404040"],[237,115,"#404040"],[238,115,"#404040"],[237,116,"#404040"],[238,116,"#404040"],[237,117,"#404040"],[238,117,"#404040"],[237,118,"#404040"],[238,118,"#404040"]],[[237,36,1],[238,36,2],[237,37,1],[238,37,2],[237,38,1],[238,38,2],[238,40,1],[239,40,2],[238,41,1],[239,41,2],[238,42,1],[239,42,2],[238,43,1],[239,43,2],[238,44,1],[239,44,2],[238,45,1],[239,45,2],[238,46,1],[239,46,1],[239,47,1],[240,47,2],[239,48,1],[240,48,2],[239,49,1],[240,49,2],[239,50,1],[240,50,2],[239,51,1],[240,51,2],[239,52,1],[240,52,2],[239,53,1],[240,53,2],[239,54,1],[240,54,2],[239,55,1],[240,55,2],[239,56,1],[240,56,2],[239,57,1],[240,57,1],[240,58,1],[241,58,2],[240,59,1],[241,59,2],[240,60,1],[241,60,2],[240,61,1],[241,61,2],[240,62,1],[241,62,2],[240,63,1],[241,63,2],[240,64,1],[241,64,2],[240,65,1],[241,65,2],[240,66,1],[241,66,2],[240,67,1],[241,67,2],[240,68,1],[241,68,2],[240,69,1],[241,69,2],[240,70,1],[241,70,2],[240,71,1],[241,71,2],[240,72,1],[241,72,2],[240,73,1],[241,73,1],[241,74,1],[242,74,2],[241,75,1],[242,75,2],[241,76,1],[242,76,2],[241,77,1],[242,77,2],[241,78,1],[242,78,2],[241,79,1],[242,79,2],[241,80,1],[242,80,2],[241,81,1],[242,81,2],[241,82,1],[242,82,2],[241,83,1],[242,83,2],[241,84,1],[242,84,2],[241,85,1],[242,85,2],[241,86,1],[242,86,2],[241,87,1],[242,87,2],[241,88,1],[242,88,2],[241,89,1],[242,89,2],[241,90,1],[242,90,2],[241,91,1],[242,91,2],[241,92,1],[242,92,2],[241,93,1],[242,93,2],[240,94,1],[241,94,1],[240,95,1],[241,95,2],[240,96,1],[241,96,2],[240,97,1],[241,97,2],[240,98,1],[241,98,2],[240,99,1],[241,99,2],[240,100,1],[241,100,2],[240,101,1],[241,101,2],[240,102,1],[241,102,2],[240,103,1],[241,103,2],[240,104,1],[241,104,2],[240,105,1],[241,105,2],[240,106,1],[241,106,2],[240,107,1],[241,107,2],[240,108,1],[241,108,2],[240,109,1],[241,109,2],[239,110,1],[240,110,1],[239,111,1],[240,111,2],[239,112,1],[240,112,2],[239,113,1],[240,113,2],[239,114,1],[240,114,2],[239,115,1],[240,115,2],[239,116,1],[240,116,2],[239,117,1],[240,117,2],[239,118,1],[240,118,2],[239,119,1],[240,119,2],[239,120,1],[240,120,2],[238,121,1],[239,121,1],[238,122,1],[239,122,2],[238,123,1],[239,123,2],[238,124,1],[239,124,2],[238,39,2],[239,39,2]]]]};
@@ -2261,7 +2401,7 @@ function finishSuplex(a){
   a.state='idle'; a.t=0; clamp(v); clamp(a);
   roLand(v, 22);                       // over the ropes onto the floor (ring out)
 }
-/* ---- BRAIN BUSTER (the user's move, everyone but Todd: tie-up X alone). The regular suplex up to the straight-up
+/* ---- BRAIN BUSTER (the user's move, NICK PRICE only since v292: tie-up X alone). The regular suplex up to the straight-up
    frame (SUPLEX4 / the Amazon's ASUP3), held there a full second (45 ticks), then he falls back and
    drives the man straight down onto his head. The user: "make it end like SUPLEX6 but the opponent vertical": the lifter
    lies on his back legs up (BBLIE = SUPLEX6/ASUP5 with the man's colours removed, tools/py/build_bbust.py) and the man
@@ -2271,7 +2411,7 @@ function finishSuplex(a){
 var BBU_HOLD = 45, BBU_STUCK = 22, BBU_SIT = 14, BBU_DMG = 24;
 var BBU_LIE  = ['BBLIE',-40,-2];                                   // the lifter on his back, legs up (= SUPLEX6/ASUP5 without the man; same anchor)
 var BBU_HEAD = { star:['6.2',-39,-2], amazon:['8.0',-39,-2] };     // the man stuck vertical on his head, where SUPLEX6 has him crumpled
-function canBrain(a){ return a.def.name!=='TODD QUALITY'; }
+function canBrain(a){ return a.def.name==='NICK PRICE'; }   // the user: ONLY Nick Price does the brain buster
 function bbuVert(a){ var Q=SUPSEQ_BY[a.def.name] || SUPSEQ, acc=0;              // start tick of the straight-up frame
   for (var i=0;i<Q.length;i++){ if (Q[i][0]==='SUPLEX4' || Q[i][0]==='ASUP3') return acc; acc+=Q[i][3]; } return 19; }
 function startBrain(a, v){
@@ -2357,10 +2497,14 @@ var PICKUP_SOLO = {
 };
 var PICKUP_SOLO_T = {};
 for (var pkn in PICKUP_SOLO) PICKUP_SOLO_T[pkn] = PICKUP_SOLO[pkn].reduce(function(n,p){ return n+p[0]; }, 0);
-function canPickup(a,v){ var A=ATLAS[a.def.name]; return !!(A && (A['PICKUP1'] || (PICKUP_SOLO[a.def.name] && starLike(v)))); }
+function canPickup(a,v){ var A=ATLAS[a.def.name]; return !!(A && (A['PICKUP1'] || PICKUP_SOLO[a.def.name])); }   // (the Amazon picks up anyone, his mirror too - the user)
+var PICKUP_VIC_AMAZON = { '17.1':'3.2', '17.2':'9.2' };   // an Amazon being hauled up: his own hunched / dizzy frames
+function pickupVic(v, fid){ return starLike(v) ? fid : (PICKUP_VIC_AMAZON[fid] || fid); }
 // a lying wrestler's head end (screen x), lying bottom, and s = +1 when his head is on the LEFT
 function lieEdge(v){
   if (v.downPose==='LIEFLAT') return { H:v.x-19*v.face, B:v.y+1, s:v.face };   // drawRel(v,'LIEFLAT',-21,1): head on the side he doesn't face
+  if (!starLike(v)){ var ra=ATLAS[v.def.name]['7.4'], ha=Math.round(ra[2]/2);  // the Amazon on his back (7.4): head on the side he doesn't face
+    return { H:v.x-ha*v.face, B:v.y, s:v.face }; }
   var r=ATLAS[v.def.name]['18.4'], hw=Math.round(r[2]/2);                      // 18.4 on his back, head on the side he faces (lieInfo)
   return v.face>0 ? { H:v.x-hw+r[2], B:v.y, s:-1 } : { H:v.x+hw-r[2], B:v.y, s:1 };
 }
@@ -2891,10 +3035,10 @@ function drawPickupSolo(e){
     else drawWrestler(artKey(v), v.x, v.y, v.face, 'down', 0);
     return;
   }
-  var vl=at(artKey(v),ph[4],ph[5]);             // hauled up: the foe is drawn IN FRONT again (real capture)
-  drawShadow({state:'idle', x:vl+ATLAS[v.def.name][ph[4]][2]/2, y:P.B+1, def:v.def});
+  var vf=pickupVic(v, ph[4]), vl=at(artKey(v),vf,ph[5]);   // hauled up: the foe is drawn IN FRONT again (real capture)
+  drawShadow({state:'idle', x:vl+ATLAS[v.def.name][vf][2]/2, y:P.B+1, def:v.def});
   blitAt(artKey(e), ph[1], at(artKey(e),ph[1],ph[2]), P.B+ph[3], fl);
-  blitAt(artKey(v), ph[4], vl, P.B+ph[6], fl);
+  blitAt(artKey(v), vf, vl, P.B+ph[6], fl);
 }
 // The resisted piledriver, laid out like the capture (attacker facing right, his standing sprite's left edge = e.x-7,
 // feet on e.y; the bent defender 7px right of that, 3px off the mat, popping up 14px on the last frame), mirrored
@@ -2970,6 +3114,7 @@ function drawEntity(e){
   if (e.state==='pb'){ drawPB(e); return; }
   if (e.state==='btb'){ drawBTB(e); return; }         // Todd's belly-to-back suplex (draws both men)
   if (e.state==='bkb'){ drawBKB(e); return; }         // Todd's back breaker (draws both men)
+  if (e.state==='ddt'){ drawDDT(e); return; }         // Machete's DDT (draws both men)
   if (e.state==='dvd'){ drawDVD(e); return; }         // Machete's Death Valley Driver (draws both men)
   if (e.state==='whip'){ drawWhipper(e); return; }     // Irish whip (real NES frames)
   if (e.state==='whipped'){ drawWhipped(e); return; }
@@ -3702,25 +3847,25 @@ function drawPause(){
    Z = the punch button (pad X), X = the kick button (pad A). */
 var moveList = null;                     // { i: wrestler shown, sel: move row, top: first visible row, dt: demo tick }
 var ML_SPECIAL = {
-  'STAR MAN':     [['SOMERSAULT KICK', 'TIE-UP  L/R + X', 'somer'], ['FLYING CROSS CHOP', 'WHIP THEN X', 'wxchop'], ['RUNNING CROSS CHOP', 'RUN THEN X', 'xchop']],
+  'STAR MAN':     [['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb'], ['SOMERSAULT KICK', 'TIE-UP  DOWN + X', 'somer'], ['FLYING CROSS CHOP', 'WHIP THEN X', 'wxchop'], ['RUNNING CROSS CHOP', 'RUN THEN X', 'xchop']],
   'AIR ADONIS':   [['SHOOTING STAR PRESS', 'ON TOP  UP + X', 'ssp']],
   'THE AMAZON':   [['PIRANHA BITE', 'TIE-UP  L/R + X', 'biteS'], ['FRONT BITE', 'TIE-UP  DOWN + X', 'biteF']],
-  'TODD QUALITY': [['BIG BOOT', 'DOWN + X', 'bigboot'], ['PILEDRIVER', 'TIE-UP  DOWN + X', 'pile'], ['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb'], ['BACK BREAKER', 'TIE-UP  X', 'bkb']],
+  'TODD QUALITY': [['BIG BOOT', 'DOWN + X', 'bigboot'], ['PILEDRIVER', 'TIE-UP  DOWN + X', 'pile'], ['BACK BREAKER', 'TIE-UP  L/R + X', 'bkb']],
   'LOKOMBO':      [['POWERBOMB', 'TIE-UP  DOWN + X', 'pb']],
-  'SCOTTY MAC':   [['SUPERKICK', 'TIE-UP  L/R + X', 'hbk']],
-  'NICK PRICE':   [['SUPERKICK', 'TIE-UP  L/R + X', 'hbk'], ['BELLY TO BACK', 'TIE-UP  DOWN + X', 'btb']],
-  'MACHETE BROWN':[['DEATH VALLEY DRIVER', 'TIE-UP  DOWN + X', 'dvd']]
+  'SCOTTY MAC':   [['SUPERKICK', 'TIE-UP  DOWN + X', 'hbk'], ['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb']],
+  'NICK PRICE':   [['BRAIN BUSTER', 'TIE-UP  UP + X', 'bbust'], ['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb']],
+  'MACHETE BROWN':[['DEATH VALLEY DRIVER', 'TIE-UP  DOWN + X', 'dvd'], ['DDT', 'TIE-UP  L/R + X', 'ddt']]
 };
 var ML_COMMON = [
   ['PUNCH', 'Z', 'punch'], ['KICK', 'X', 'kick'],
-  ['BODY SLAM', 'TIE-UP  Z', 'slam'], ['SUPLEX', 'TIE-UP  UP + X', 'suplex'], ['BRAIN BUSTER', 'TIE-UP  X', 'bbust'],
+  ['BODY SLAM', 'TIE-UP  Z', 'slam'], ['SUPLEX', 'TIE-UP  UP + X', 'suplex'],
   ['IRISH WHIP', 'TIE-UP  L/R + Z', 'whip'], ['FLYING KNEE', 'WHIP THEN Z', 'wknee'], ['LEAPFROG', 'WHIP THEN UP/DN + Z', 'wfrog'], ['CLOTHESLINE', 'WHIP THEN X', 'wcl'],
   ['RUN', 'DOUBLE-TAP L/R', 'run'], ['RUNNING CLOTHESLINE', 'RUN THEN X', 'rcl'], ['RUNNING JUMP', 'RUN THEN Z', 'rjump'],
   ['CLIMB CORNER', 'BACK CORNER UP+L/R', 'climb'], ['TOP ROPE SPLASH', 'ON TOP  X', 'tsplash'], ['TOP ROPE KNEE DROP', 'ON TOP  Z', 'tknee'],
   ['PICK HIM UP', 'FOE DOWN  Z', 'pickup'], ['PIN', 'FOE DOWN  X', 'pin'], ['KICK OUT', 'PINNED  MASH Z/X', 'kickout']
 ];
 function mlItems(i){ var nm=ROSTER[i].name;
-  return (ML_SPECIAL[nm]||[]).concat(ML_COMMON.filter(function(it){ return !((it[2]==='wcl' || it[2]==='rcl') && nm==='STAR MAN') && !(it[2]==='bbust' && nm==='TODD QUALITY'); })); }   // (Star Man has no clothesline)
+  return (ML_SPECIAL[nm]||[]).concat(ML_COMMON.filter(function(it){ return !((it[2]==='wcl' || it[2]==='rcl') && nm==='STAR MAN') && !(it[2]==='suplex' && (TIE_A[nm]||{}).up); })); }   // (Star Man has no clothesline; Nick's UP is the brain buster)
 // each demo: set-up (gap = apart / lock = start in a tie-up / down = the dummy lies there / downA = the shown man lies
 // there), len = ticks before it replays, ev = {tick: fn(shown man, dummy)}
 var DEMOS = {
@@ -3738,6 +3883,7 @@ var DEMOS = {
   btb:    { lock:1, len:200, ev:{ 30:startBTB } },
   bkb:    { lock:1, len:200, ev:{ 30:startBKB } },
   dvd:    { lock:1, len:230, ev:{ 30:startDVD } },
+  ddt:    { lock:1, len:170, ev:{ 30:startDDT } },
   bbust:  { lock:1, len:220, ev:{ 30:startBrain } },
   whip:   { lock:1, len:230, ev:{ 30:startWhip } },
   run:    { gap:80, len:200, ev:{ 20:function(a,v){ startRun(a, 1); } } },                                   // into him: both down
