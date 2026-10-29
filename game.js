@@ -21,42 +21,72 @@ var _boot = document.getElementById('bootIntro');
 if (_boot) _boot.style.display = 'none';
 
 /* ---------------- assets ---------------- */
-var ARENA = new Image(); ARENA.src = 'sprites/ring_wide.png?v=14'; var ENTIMG = new Image(); ENTIMG.src = 'sprites/entrance.png?v=3';   //v6: the entrance AISLE cut through the left crowd (tools/py/build_entrance.py) | ENTIMG: the ENTRANCE STAGE left of the arena (world x -92-ENT_W .. -92), same tool   // 440x225: the real floor strips either side of OUR ring (ring2.png), drawn at world x -92 (tools/py/build_ring_wide.py)
+var ARENA = new Image(); ARENA.src = 'sprites/ring_wide.png?v=16'; var ENTIMG = new Image(); ENTIMG.src = 'sprites/entrance.png?v=5';   //v6: the entrance AISLE cut through the left crowd (tools/py/build_entrance.py) | ENTIMG: the ENTRANCE STAGE left of the arena (world x -92-ENT_W .. -92), same tool   // 440x225: the real floor strips either side of OUR ring (ring2.png), drawn at world x -92 (tools/py/build_ring_wide.py)
 var SHEET = {}, ATLAS = {}, READY = {};
 var PORTRAIT = {};
 
 /* Atlas frame rects embedded inline (keys "row.frame") so the game needs NO
    fetch() — it runs from a double-clicked file:// page, where fetch is blocked.
    Images still load fine over file:// via Image.src. */
-var ATLAS_DATA = {"STAR MAN":{"sheet":"sprites/star_keyed.png?v=32","frames":{"0.0":[5,5,14,56],"0.1":[23,6,14,55],"0.2":[41,4,14,57],"0.3":[59,5,14,56],"0.4":[77,6,16,55],"0.5":[97,6,16,55],"0.6":[121,10,48,48],"1.0":[5,65,14,56],"1.1":[23,65,23,56],"1.2":[50,66,16,55],"1.3":[70,66,16,55],"1.4":[90,65,14,56],"2.0":[108,87,35,34],"3.0":[5,125,8,54],"3.1":[17,127,25,52],"3.2":[46,125,8,54],"3.3":[58,127,25,52],"3.4":[87,130,19,49],"3.5":[110,136,31,43],"3.6":[145,124,15,55],"4.0":[5,183,15,55],"4.1":[24,183,15,55],"4.2":[43,188,16,50],"4.3":[63,196,16,42],"4.4":[83,206,17,32],"4.5":[104,198,16,40],"4.6":[124,190,16,48],"4.7":[144,197,17,41],"4.8":[165,214,25,24],"4.9":[214,206,24,32],"5.0":[5,250,20,56],"5.1":[29,251,21,55],"5.2":[54,242,32,64],"5.3":[90,255,18,51],"6.0":[5,310,20,56],"6.1":[29,311,15,55],"6.2":[126,311,14,55],"6.3":[199,311,11,55],"7.0":[48,347,30,19],"7.1":[144,347,30,19],"8.0":[178,326,17,40],"9.0":[49,370,23,63],"9.1":[82,350,40,16],"10.0":[5,377,20,56],"10.1":[29,376,16,57],"10.2":[76,378,20,55],"10.3":[156,381,16,52],"11.0":[100,402,24,31],"11.1":[128,402,24,25],"12.0":[5,442,20,56],"12.1":[29,443,11,55],"12.2":[44,443,20,55],"12.3":[68,437,11,61],"12.4":[83,438,20,60],"12.5":[107,447,19,51],"12.6":[174,452,18,46],"13.0":[130,476,40,22],"14.0":[5,502,20,56],"14.1":[29,515,14,43],"14.2":[47,514,17,44],"14.3":[68,514,17,44],"14.4":[89,507,20,51],"15.0":[113,535,32,23],"15.1":[149,535,32,23],"16.0":[5,562,14,59],"16.1":[23,562,14,59],"16.2":[41,580,12,41],"16.3":[57,575,14,46],"16.4":[75,566,14,55],"17.0":[93,589,16,32],"17.1":[201,591,24,30],"17.2":[229,580,16,41],"17.3":[249,579,16,42],"17.4":[269,597,32,24],"17.5":[305,596,32,25],"18.0":[5,652,19,30],"18.1":[28,652,24,30],"18.2":[56,625,19,57],"18.3":[79,625,19,57],"18.4":[102,660,40,22],"18.5":[146,666,40,16],"18.6":[191,666,39,16],"18.7":[234,627,20,55],"18.8":[258,627,17,55],"18.9":[279,636,18,46],"19.0":[5,697,18,48],"19.1":[27,696,18,49],"19.2":[49,691,18,54],"19.3":[71,686,18,59],"19.4":[93,713,16,32],"19.5":[113,713,16,32],"19.6":[133,697,21,48],"19.7":[158,697,21,48],"SLAM":[5,761,32,64],"SLAM1":[5,829,32,64],"SLAM2":[39,829,63,55],"SLAM3":[104,829,62,51],"SLAM4":[168,829,62,51],"SLAM5":[232,829,59,56],"PICKUP1":[2,897,40,34],"PICKUP2":[44,897,34,52],"PICKUP3":[80,897,36,56],"PICKUP4":[118,897,38,57],"PILE1":[2,958,26,51],"PILE2":[30,958,36,43],"PILE3":[68,958,22,63],"PILE4":[92,958,24,65],"PILE5":[118,958,24,39],"SUPLEX1":[2,1050,20,56],"SUPLEX2":[24,1050,20,55],"SUPLEX3":[46,1050,28,51],"SUPLEX4":[76,1050,21,86],"SUPLEX5":[99,1050,42,51],"SUPLEX6":[143,1050,41,34],"SUPLEX7":[186,1050,65,22],"SUPLEX8":[253,1050,62,46],"PINON":[319,1050,16,14],"KNOCKB":[172,2,19,54],"LIEFLAT":[194,2,40,14],"LIEGRAB":[193,18,40,15],"PFSQUAT":[171,58,17,53],"PFSTRAIN":[145,60,17,56],"PFBENT":[190,112,19,30],"SXA1":[211,112,20,56],"SXA2":[233,112,16,55],"SXA3":[251,112,16,61],"SXA4":[236,1,12,41],"SXA5":[164,113,14,55],"SXA6":[269,130,16,32],"SXA7":[190,58,40,14],"SXR1":[287,130,12,41],"SXR2":[301,130,16,55],"SXR3":[319,130,20,51],"SXR4":[232,58,40,22],"SXR5":[180,144,18,46],"SXR6":[269,164,14,56],"SOFLIP":[285,173,14,55],"SOTAKE":[240,175,20,56],"BITE0":[319,183,17,50],"BITE1":[262,222,17,50],"BITEF0":[301,187,16,43],"BITEF1":[281,230,16,43],"BOOT":[299,235,34,55],"SKH":[110,240,48,55],"SKM":[160,240,45,37],"PBSIT":[223,307,25,39],"PBDROP":[239,275,43,30],"PBINV":[160,279,14,56],"PBLIFT":[284,292,38,46],"PBOVER":[176,281,45,27],"PBFALL":[200,170,36,28],"PBHUG":[324,292,20,56],"PBFOLD":[207,240,22,33],"PBUP1":[46,308,44,33],"PBUP2":[265,340,37,45],"PBTIP":[212,348,35,36],"PBPIN":[92,308,30,33],"PBTSIT":[304,350,24,39],"WHIPD":[174,368,22,51],"CLOTH":[198,386,25,52],"BKNEEL":[225,386,18,43],"BBLIE":[245,387,41,34],"NSKM":[288,391,45,37],"NSKH":[245,430,48,55],"SSP1":[274,58,40,16],"SSP2":[316,58,30,19],"SSP3":[98,368,37,32],"SSP4":[295,430,14,55],"SSP5":[106,63,30,19],"SSP6":[128,435,39,16],"SSP7":[231,240,25,24],"SSP8":[190,94,15,14],"SSPC":[81,181,22,15],"CLRUN":[311,430,25,52],"CLRUN2":[194,440,19,54],"DVV0":[215,487,38,29],"DVV30":[255,487,36,33],"DVV60":[293,487,36,35],"DVV90":[183,500,29,38],"DVA30":[214,518,32,50],"DVA60":[111,500,51,31],"DVA90":[248,524,56,14],"DVV15":[306,524,37,30],"DVV45":[248,540,37,32],"DVA15":[299,623,20,54],"DVA45":[111,560,43,41],"DVF0":[287,556,53,19],"DVF25":[156,560,50,26],"DVF55":[299,679,35,43],"DMF25":[181,684,33,50],"DMF55":[144,622,48,39],"DMF90":[1,623,49,18],"DVL":[215,440,27,34],"DVLD":[216,684,43,28],"DVF10":[216,714,53,21],"DVF40":[271,724,43,35],"DVF70":[316,724,29,49],"DMF10":[321,623,23,50],"DMF40":[181,737,41,46],"DMF70":[39,747,50,30],"DVB10":[91,747,53,22],"DVB25":[224,761,48,28],"DVB40":[274,761,39,40],"DVB55":[146,747,30,48],"DVB70":[91,771,24,52],"DMB10":[117,771,21,50],"DMB25":[315,775,31,49],"DMB40":[39,779,38,47],"DMB55":[178,785,44,40],"DMB70":[224,791,47,34],"DMBL1":[293,826,48,26],"DMBL2":[293,854,49,20],"DMBL3":[293,876,49,18],"DMBL4":[158,882,50,21],"DMBS1":[210,887,48,25],"DMBS2":[260,896,48,20],"DMBS3":[158,905,48,18],"DMBS4":[208,914,47,19],"DMBS0":[257,918,47,27],"DMBSA":[158,925,48,22],"DMBSB":[208,947,48,18],"DMBS5":[258,947,44,24],"DMBS6":[100,623,40,28],"DMSIT":[213,623,19,26],"DDA20":[310,896,19,44],"DDA45":[306,942,30,36],"DDA70":[91,684,39,25],"DDA90":[128,453,43,14],"DDV20":[271,684,22,30],"DDV45":[140,797,24,28],"DDV70":[158,949,26,26],"DDV90":[186,967,27,25],"DDS60":[1,933,36,23],"DDS30":[215,967,33,28],"DDVL40":[163,192,34,20],"DDVL20":[267,577,37,16]}},"THE AMAZON":{"sheet":"sprites/amazon_keyed.png?v=23","frames":{"0.0":[13,9,14,57],"0.1":[31,9,14,56],"0.2":[49,9,14,57],"0.3":[68,9,14,56],"0.4":[85,9,16,56],"0.5":[106,9,16,56],"0.6":[130,1,67,64],"0.7":[201,17,18,48],"0.8":[221,16,18,49],"1.0":[13,80,23,57],"1.1":[39,81,35,35],"1.2":[77,83,25,53],"1.3":[108,81,8,55],"1.4":[121,81,19,50],"1.5":[143,83,25,53],"1.6":[172,81,19,55],"1.7":[196,81,15,55],"2.0":[9,145,15,56],"2.1":[27,145,15,56],"2.2":[46,150,16,51],"2.3":[68,159,16,42],"2.4":[89,169,17,32],"2.5":[109,153,16,48],"2.6":[131,160,17,41],"2.7":[153,177,25,24],"2.8":[201,169,24,32],"3.0":[7,208,17,56],"3.1":[31,208,20,56],"3.2":[151,233,24,30],"3.3":[179,221,16,42],"3.4":[201,222,16,41],"4.0":[10,277,20,57],"4.1":[36,278,21,56],"4.2":[65,282,18,52],"4.3":[94,277,16,57],"4.4":[120,278,20,56],"4.5":[148,278,11,56],"4.6":[165,277,11,57],"4.7":[184,282,20,52],"5.0":[210,312,40,22],"6.0":[10,345,16,53],"6.1":[32,346,16,52],"6.2":[55,341,18,57],"6.3":[81,341,18,57],"6.4":[108,356,16,42],"6.5":[130,355,16,43],"6.6":[156,341,14,57],"6.7":[179,341,14,57],"6.8":[199,341,14,57],"6.9":[220,341,19,57],"7.0":[10,405,14,59],"7.1":[32,405,14,59],"7.2":[52,410,19,54],"7.3":[212,417,18,47],"8.0":[7,469,14,57],"8.1":[26,501,32,25],"8.2":[65,494,16,32],"8.3":[91,473,25,53],"8.4":[121,470,16,56],"8.5":[143,495,24,31],"8.6":[172,473,16,53],"8.7":[200,497,14,29],"8.8":[221,496,15,30],"9.0":[8,546,18,54],"9.1":[30,541,18,59],"9.2":[59,556,19,45],"9.3":[84,555,19,46],"7.4":[125,450,40,14],"SLAMMED":[5,615,32,25],"KICKT":[212,68,28,35],"PINON":[170,2,16,14],"ASLAM1":[2,869,32,65],"ASLAM2":[36,869,32,64],"ASLAM3":[70,869,63,56],"ASLAM4":[135,869,62,52],"ASLAM5":[199,869,62,52],"ASUP1":[263,869,20,56],"ASUP2":[285,869,25,87],"ASUP3":[312,869,21,86],"ASUP4":[335,869,42,52],"ASUP5":[2,958,41,34],"ASUP6":[45,958,65,22],"ASUP7":[112,958,62,47],"SUPLEX1":[2,644,20,57],"SUPLEX2":[24,644,20,56],"SUPLEX3":[46,644,28,52],"SUPLEX4":[76,644,21,86],"SUPLEX5":[99,644,42,52],"SUPLEX6":[143,644,41,34],"SUPLEX7":[186,644,70,23],"SUPLEX8":[258,644,62,47],"SLAM1":[2,732,32,64],"SLAM2":[36,732,62,56],"SLAM3":[100,732,62,52],"SLAM4":[164,732,62,52],"SLAM5":[228,732,59,57],"PILE1":[289,732,26,51],"PILE2":[317,732,36,43],"PILE3":[355,732,22,63],"PILE4":[2,798,24,65],"PILE5":[28,798,24,39],"PFSQUAT":[241,1,17,53],"PFSTRAIN":[260,1,17,56],"PFBENT":[279,1,19,30],"SXR1":[300,1,12,41],"SXR2":[314,1,16,56],"SXR3":[332,1,20,52],"SXR4":[354,1,40,22],"SXR5":[354,25,18,47],"SXR6":[374,25,14,57],"SXA1":[279,44,20,57],"SXA2":[332,55,16,56],"SXA3":[242,56,16,63],"SXA4":[260,59,12,41],"SXA5":[301,59,14,55],"SXA6":[350,74,16,32],"SXA7":[350,108,40,14],"PBSIT":[260,103,25,40],"PBDROP":[292,116,43,30],"PBINV":[213,105,14,57],"PBLIFT":[337,124,40,46],"PBOVER":[150,138,46,27],"PBFALL":[270,148,36,28],"PBFOLD":[308,148,22,33],"PBUP1":[332,172,44,34],"PBUP2":[229,159,37,46],"PBTIP":[268,178,35,38],"PBPIN":[53,203,31,33],"WHIPD":[305,183,22,52],"CLOTH":[219,207,25,53],"BKA1":[38,118,32,25],"BKA2":[86,203,40,16],"BKA3":[128,203,40,16],"BBLIE":[329,208,41,34],"DVV0":[246,218,37,29],"DVV30":[285,237,36,33],"DVV60":[323,244,36,35],"DVV90":[361,244,29,37],"DVV15":[246,249,36,32],"DVV45":[206,265,37,33],"DVF0":[86,221,53,19],"DVF25":[284,281,49,27],"DVF55":[335,283,35,44],"DVL":[229,121,28,34],"DVLD":[252,310,44,28],"DVF10":[298,329,53,22],"DVF40":[353,329,43,36],"DVF70":[241,340,29,50],"DVB10":[272,353,53,23],"DVB25":[327,367,48,29],"DVB40":[272,378,39,41],"DVB55":[313,398,30,49],"DVB70":[241,392,24,52],"DDV20":[372,208,22,30],"DDV45":[372,283,24,28],"DDV70":[345,398,26,26],"DDV90":[245,283,27,25]}}};
+var ATLAS_DATA = {"STAR MAN":{"sheet":"sprites/star_keyed.png?v=41","frames":{"0.0":[5,5,14,56],"0.1":[23,6,14,55],"0.2":[41,4,14,57],"0.3":[59,5,14,56],"0.4":[77,6,16,55],"0.5":[97,6,16,55],"0.6":[121,10,48,48],"1.0":[5,65,14,56],"1.1":[23,65,23,56],"1.2":[50,66,16,55],"1.3":[70,66,16,55],"1.4":[90,65,14,56],"2.0":[108,87,35,34],"3.0":[5,125,8,54],"3.1":[17,127,25,52],"3.2":[46,125,8,54],"3.3":[58,127,25,52],"3.4":[87,130,19,49],"3.5":[110,136,31,43],"3.6":[145,124,15,55],"4.0":[5,183,15,55],"4.1":[24,183,15,55],"4.2":[43,188,16,50],"4.3":[63,196,16,42],"4.4":[83,206,17,32],"4.5":[104,198,16,40],"4.6":[124,190,16,48],"4.7":[144,197,17,41],"4.8":[165,214,25,24],"4.9":[214,206,24,32],"5.0":[5,250,20,56],"5.1":[29,251,21,55],"5.2":[54,242,32,64],"5.3":[90,255,18,51],"6.0":[5,310,20,56],"6.1":[29,311,15,55],"6.2":[126,311,14,55],"6.3":[199,311,11,55],"7.0":[48,347,30,19],"7.1":[144,347,30,19],"8.0":[178,326,17,40],"9.0":[49,370,23,63],"9.1":[82,350,40,16],"10.0":[5,377,20,56],"10.1":[29,376,16,57],"10.2":[76,378,20,55],"10.3":[156,381,16,52],"11.0":[100,402,24,31],"11.1":[128,402,24,25],"12.0":[5,442,20,56],"12.1":[29,443,11,55],"12.2":[44,443,20,55],"12.3":[68,437,11,61],"12.4":[83,438,20,60],"12.5":[107,447,19,51],"12.6":[174,452,18,46],"13.0":[130,476,40,22],"14.0":[5,502,20,56],"14.1":[29,515,14,43],"14.2":[47,514,17,44],"14.3":[68,514,17,44],"14.4":[89,507,20,51],"15.0":[113,535,32,23],"15.1":[149,535,32,23],"16.0":[5,562,14,59],"16.1":[23,562,14,59],"16.2":[41,580,12,41],"16.3":[57,575,14,46],"16.4":[75,566,14,55],"17.0":[93,589,16,32],"17.1":[201,591,24,30],"17.2":[229,580,16,41],"17.3":[249,579,16,42],"17.4":[269,597,32,24],"17.5":[305,596,32,25],"18.0":[5,652,19,30],"18.1":[28,652,24,30],"18.2":[56,625,19,57],"18.3":[79,625,19,57],"18.4":[102,660,40,22],"18.5":[146,666,40,16],"18.6":[191,666,39,16],"18.7":[234,627,20,55],"18.8":[258,627,17,55],"18.9":[279,636,18,46],"19.0":[5,697,18,48],"19.1":[27,696,18,49],"19.2":[49,691,18,54],"19.3":[71,686,18,59],"19.4":[93,713,16,32],"19.5":[113,713,16,32],"19.6":[133,697,21,48],"19.7":[158,697,21,48],"SLAM":[5,761,32,64],"SLAM1":[5,829,32,64],"SLAM2":[39,829,63,55],"SLAM3":[104,829,62,51],"SLAM4":[168,829,62,51],"SLAM5":[232,829,59,56],"PICKUP1":[2,897,40,34],"PICKUP2":[44,897,34,52],"PICKUP3":[80,897,36,56],"PICKUP4":[118,897,38,57],"PILE1":[2,958,26,51],"PILE2":[30,958,36,43],"PILE3":[68,958,22,63],"PILE4":[92,958,24,65],"PILE5":[118,958,24,39],"SUPLEX1":[2,1050,20,56],"SUPLEX2":[24,1050,20,55],"SUPLEX3":[46,1050,28,51],"SUPLEX4":[76,1050,21,86],"SUPLEX5":[99,1050,42,51],"SUPLEX6":[143,1050,41,34],"SUPLEX7":[186,1050,65,22],"SUPLEX8":[253,1050,62,46],"PINON":[319,1050,16,14],"KNOCKB":[172,2,19,54],"LIEFLAT":[194,2,40,14],"LIEGRAB":[193,18,40,15],"PFSQUAT":[171,58,17,53],"PFSTRAIN":[145,60,17,56],"PFBENT":[190,112,19,30],"SXA1":[211,112,20,56],"SXA2":[233,112,16,55],"SXA3":[251,112,16,61],"SXA4":[236,1,12,41],"SXA5":[164,113,14,55],"SXA6":[269,130,16,32],"SXA7":[190,58,40,14],"SXR1":[287,130,12,41],"SXR2":[301,130,16,55],"SXR3":[319,130,20,51],"SXR4":[232,58,40,22],"SXR5":[180,144,18,46],"SXR6":[269,164,14,56],"SOFLIP":[285,173,14,55],"SOTAKE":[240,175,20,56],"BITE0":[319,183,17,50],"BITE1":[262,222,17,50],"BITEF0":[301,187,16,43],"BITEF1":[281,230,16,43],"BOOT":[299,235,34,55],"SKH":[110,240,48,55],"SKM":[160,240,45,37],"PBSIT":[223,307,25,39],"PBDROP":[239,275,43,30],"PBINV":[160,279,14,56],"PBLIFT":[284,292,38,46],"PBOVER":[176,281,45,27],"PBFALL":[200,170,36,28],"PBHUG":[324,292,20,56],"PBFOLD":[207,240,22,33],"PBUP1":[46,308,44,33],"PBUP2":[265,340,37,45],"PBTIP":[212,348,35,36],"PBPIN":[92,308,30,33],"PBTSIT":[304,350,24,39],"WHIPD":[174,368,22,51],"CLOTH":[198,386,25,52],"BKNEEL":[225,386,18,43],"BBLIE":[245,387,41,34],"NSKM":[288,391,45,37],"NSKH":[245,430,48,55],"SSP1":[274,58,40,16],"SSP2":[316,58,30,19],"SSP3":[98,368,37,32],"SSP4":[295,430,14,55],"SSP5":[106,63,30,19],"SSP6":[128,435,39,16],"SSP7":[231,240,25,24],"SSP8":[190,94,15,14],"SSPC":[81,181,22,15],"CLRUN":[311,430,25,52],"CLRUN2":[194,440,19,54],"DVV0":[215,487,38,29],"DVV30":[255,487,36,33],"DVV60":[293,487,36,35],"DVV90":[183,500,29,38],"DVA30":[214,518,32,50],"DVA60":[111,500,51,31],"DVA90":[248,524,56,14],"DVV15":[306,524,37,30],"DVV45":[248,540,37,32],"DVA15":[299,623,20,54],"DVA45":[111,560,43,41],"DVF0":[287,556,53,19],"DVF25":[156,560,50,26],"DVF55":[299,679,35,43],"DMF25":[181,684,33,50],"DMF55":[144,622,48,39],"DMF90":[1,623,49,18],"DVL":[215,440,27,34],"DVLD":[216,684,43,28],"DVF10":[216,714,53,21],"DVF40":[271,724,43,35],"DVF70":[316,724,29,49],"DMF10":[321,623,23,50],"DMF40":[181,737,41,46],"DMF70":[39,747,50,30],"DVB10":[91,747,53,22],"DVB25":[224,761,48,28],"DVB40":[274,761,39,40],"DVB55":[146,747,30,48],"DVB70":[91,771,24,52],"DMB10":[117,771,21,50],"DMB25":[315,775,31,49],"DMB40":[39,779,38,47],"DMB55":[178,785,44,40],"DMB70":[224,791,47,34],"DMBL1":[293,826,48,26],"DMBL2":[293,854,49,20],"DMBL3":[293,876,49,18],"DMBL4":[158,882,50,21],"DMBS1":[210,887,48,25],"DMBS2":[260,896,48,20],"DMBS3":[158,905,48,18],"DMBS4":[208,914,47,19],"DMBS0":[257,918,47,27],"DMBSA":[158,925,48,22],"DMBSB":[208,947,48,18],"DMBS5":[258,947,44,24],"DMBS6":[100,623,40,28],"DMSIT":[213,623,19,26],"DDA20":[310,896,19,44],"DDA45":[306,942,30,36],"DDA70":[91,684,39,25],"DDA90":[128,453,43,14],"DDV20":[271,684,22,30],"DDV45":[140,797,24,28],"DDV70":[158,949,26,26],"DDV90":[186,967,27,25],"DDS60":[1,933,36,23],"DDS30":[215,967,33,28],"DDVL40":[163,192,34,20],"DDVL20":[267,577,37,16],"PGV30":[250,973,25,27],"PGV60":[156,588,30,18],"PAK":[183,540,27,18],"PGV15":[277,973,23,30],"PGV45":[144,977,29,23],"PGV75":[224,737,31,19],"PAJ":[302,980,25,29],"PGVF":[175,997,56,14],"PGVR40":[118,1002,46,38],"PGVR20":[233,1005,54,25],"NBH":[186,1074,38,60],"NBV10":[329,980,17,55],"NBV30":[143,1086,33,49],"NBV55":[1,1011,48,34],"NBV80":[166,1013,56,19],"NBSIT":[289,1011,30,36],"PHB":[142,297,16,44],"PCU":[317,1066,23,55],"PCL0":[226,1074,23,56],"PCL1":[251,1098,22,56],"PCL2":[275,1098,23,56],"PCH":[46,1103,21,58],"F5S70":[273,803,37,19],"F5S35":[208,570,19,19],"F5R30":[178,1136,48,28],"F5R60":[99,1103,32,46],"F5R90":[24,1107,19,53],"F5R120":[300,1123,28,48],"F5R150":[69,1151,46,32],"F5R180":[51,1025,53,19],"F5R210":[117,1151,48,28],"F5R240":[228,1156,32,46],"F5R270":[1,1108,19,53],"F5R300":[262,1156,28,48],"F5R330":[1,1163,46,32]}},"THE AMAZON":{"sheet":"sprites/amazon_keyed.png?v=32","frames":{"0.0":[13,9,14,57],"0.1":[31,9,14,56],"0.2":[49,9,14,57],"0.3":[68,9,14,56],"0.4":[85,9,16,56],"0.5":[106,9,16,56],"0.6":[130,1,67,64],"0.7":[201,17,18,48],"0.8":[221,16,18,49],"1.0":[13,80,23,57],"1.1":[39,81,35,35],"1.2":[77,83,25,53],"1.3":[108,81,8,55],"1.4":[121,81,19,50],"1.5":[143,83,25,53],"1.6":[172,81,19,55],"1.7":[196,81,15,55],"2.0":[9,145,15,56],"2.1":[27,145,15,56],"2.2":[46,150,16,51],"2.3":[68,159,16,42],"2.4":[89,169,17,32],"2.5":[109,153,16,48],"2.6":[131,160,17,41],"2.7":[153,177,25,24],"2.8":[201,169,24,32],"3.0":[7,208,17,56],"3.1":[31,208,20,56],"3.2":[151,233,24,30],"3.3":[179,221,16,42],"3.4":[201,222,16,41],"4.0":[10,277,20,57],"4.1":[36,278,21,56],"4.2":[65,282,18,52],"4.3":[94,277,16,57],"4.4":[120,278,20,56],"4.5":[148,278,11,56],"4.6":[165,277,11,57],"4.7":[184,282,20,52],"5.0":[210,312,40,22],"6.0":[10,345,16,53],"6.1":[32,346,16,52],"6.2":[55,341,18,57],"6.3":[81,341,18,57],"6.4":[108,356,16,42],"6.5":[130,355,16,43],"6.6":[156,341,14,57],"6.7":[179,341,14,57],"6.8":[199,341,14,57],"6.9":[220,341,19,57],"7.0":[10,405,14,59],"7.1":[32,405,14,59],"7.2":[52,410,19,54],"7.3":[212,417,18,47],"8.0":[7,469,14,57],"8.1":[26,501,32,25],"8.2":[65,494,16,32],"8.3":[91,473,25,53],"8.4":[121,470,16,56],"8.5":[143,495,24,31],"8.6":[172,473,16,53],"8.7":[200,497,14,29],"8.8":[221,496,15,30],"9.0":[8,546,18,54],"9.1":[30,541,18,59],"9.2":[59,556,19,45],"9.3":[84,555,19,46],"7.4":[125,450,40,14],"SLAMMED":[5,615,32,25],"KICKT":[212,68,28,35],"PINON":[170,2,16,14],"ASLAM1":[2,869,32,65],"ASLAM2":[36,869,32,64],"ASLAM3":[70,869,63,56],"ASLAM4":[135,869,62,52],"ASLAM5":[199,869,62,52],"ASUP1":[263,869,20,56],"ASUP2":[285,869,25,87],"ASUP3":[312,869,21,86],"ASUP4":[335,869,42,52],"ASUP5":[2,958,41,34],"ASUP6":[45,958,65,22],"ASUP7":[112,958,62,47],"SUPLEX1":[2,644,20,57],"SUPLEX2":[24,644,20,56],"SUPLEX3":[46,644,28,52],"SUPLEX4":[76,644,21,86],"SUPLEX5":[99,644,42,52],"SUPLEX6":[143,644,41,34],"SUPLEX7":[186,644,70,23],"SUPLEX8":[258,644,62,47],"SLAM1":[2,732,32,64],"SLAM2":[36,732,62,56],"SLAM3":[100,732,62,52],"SLAM4":[164,732,62,52],"SLAM5":[228,732,59,57],"PILE1":[289,732,26,51],"PILE2":[317,732,36,43],"PILE3":[355,732,22,63],"PILE4":[2,798,24,65],"PILE5":[28,798,24,39],"PFSQUAT":[241,1,17,53],"PFSTRAIN":[260,1,17,56],"PFBENT":[279,1,19,30],"SXR1":[300,1,12,41],"SXR2":[314,1,16,56],"SXR3":[332,1,20,52],"SXR4":[354,1,40,22],"SXR5":[354,25,18,47],"SXR6":[374,25,14,57],"SXA1":[279,44,20,57],"SXA2":[332,55,16,56],"SXA3":[242,56,16,63],"SXA4":[260,59,12,41],"SXA5":[301,59,14,55],"SXA6":[350,74,16,32],"SXA7":[350,108,40,14],"PBSIT":[260,103,25,40],"PBDROP":[292,116,43,30],"PBINV":[213,105,14,57],"PBLIFT":[337,124,40,46],"PBOVER":[150,138,46,27],"PBFALL":[270,148,36,28],"PBFOLD":[308,148,22,33],"PBUP1":[332,172,44,34],"PBUP2":[229,159,37,46],"PBTIP":[268,178,35,38],"PBPIN":[53,203,31,33],"WHIPD":[305,183,22,52],"CLOTH":[219,207,25,53],"BKA1":[38,118,32,25],"BKA2":[86,203,40,16],"BKA3":[128,203,40,16],"BBLIE":[329,208,41,34],"DVV0":[246,218,37,29],"DVV30":[285,237,36,33],"DVV60":[323,244,36,35],"DVV90":[361,244,29,37],"DVV15":[246,249,36,32],"DVV45":[206,265,37,33],"DVF0":[86,221,53,19],"DVF25":[284,281,49,27],"DVF55":[335,283,35,44],"DVL":[229,121,28,34],"DVLD":[252,310,44,28],"DVF10":[298,329,53,22],"DVF40":[353,329,43,36],"DVF70":[241,340,29,50],"DVB10":[272,353,53,23],"DVB25":[327,367,48,29],"DVB40":[272,378,39,41],"DVB55":[313,398,30,49],"DVB70":[241,392,24,52],"DDV20":[372,208,22,30],"DDV45":[372,283,24,28],"DDV70":[345,398,26,26],"DDV90":[245,283,27,25],"PGV30":[373,398,25,27],"PGV60":[368,84,30,18],"PGV15":[73,400,23,30],"PGV45":[98,400,29,23],"PGV75":[72,138,31,19],"PGVF":[129,400,57,14],"PGVR40":[345,427,45,39],"PGVR20":[145,416,55,26],"NBV10":[379,124,17,56],"NBV30":[267,421,31,50],"NBV55":[300,468,48,36],"NBV80":[23,466,57,19],"F5S70":[98,425,37,19],"F5S35":[127,138,19,19],"F5R30":[350,468,47,29],"F5R60":[232,446,32,47],"F5R90":[266,473,19,53],"F5R120":[350,499,29,47],"F5R150":[287,506,47,32],"F5R180":[50,528,53,19],"F5R210":[105,528,47,29],"F5R240":[154,528,32,47],"F5R270":[238,495,19,53],"F5R300":[188,528,29,47],"F5R330":[259,540,47,32]}}};
 // TODD QUALITY = the user's own wrestler: Star Man's full frame set repainted (tools/py/repaint2.py:
 // slicked-back hair, horseshoe mustache, bare arms, black tank top, gold chain, purple track pants with a
 // gold stripe, black sneakers) — same rects, own sheet (file names still say 'heavy').
-ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=45', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=55', frames:ATLAS_DATA['STAR MAN'].frames };
 // LOKOMBO = the user's 4th wrestler (from their photos): Star Man's full frame set recoloured (deep brown skin, black
 // trunks, black knee pads) with Todd's head designs re-stamped in his colours (black flat-top, beard) —
 // tools/py/build_lokombo.py. Same rects, own sheet.
-ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=26', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=35', frames:ATLAS_DATA['STAR MAN'].frames };
 // SCOTTY MAC = the user's 5th wrestler (from their photos): TODD's art recoloured (black vest, silver chain, sky-blue
 // pants, bleached-blond hair, grey beard) — tools/py/build_scotty.py. Same rects, own sheet.
-ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=27', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=39', frames:ATLAS_DATA['STAR MAN'].frames };
 // NICK PRICE = the user's 6th wrestler (from their photo): Lokombo's recipe in his colours — Star's frames recoloured (pale
 // skin, black trunks, black knee pads/boots) + his OWN head designs (tools/py/nick_heads.py: top-knot, shaved sides, full
 // reddish beard — the user: "his face looks too similar to Todd's") — tools/py/build_nick.py;
 // his own superkick frames NSKM/NSKH via build_hbk.py --sheet nick_keyed.png. Same rects, own sheet.
-ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=25', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=34', frames:ATLAS_DATA['STAR MAN'].frames };
 // AIR ADONIS = the user's 7th wrestler (from their photos, tools/adonis_photos): Nick's recipe in his colours — Star's
 // frames recoloured (tan skin, black trunks + boots) + his own heads (tools/py/adonis_heads.py: black BACKWARDS cap,
 // short dark beard) — tools/py/build_adonis.py — then his colour TATTOO SLEEVES (tools/py/build_adonis_tattoo.py).
-ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=23', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=32', frames:ATLAS_DATA['STAR MAN'].frames };
 // MACHETE BROWN = the user's 8th wrestler (from their photo): TODD's art (like Scotty) with his own heads (tools/py/
 // machete_heads.py: short dark hair greying at the sides, BIG grey beard), Todd's tank -> an open black leather jacket,
 // the chain -> the red print of his tee, black pants, jacket sleeves over Todd's bare arms — tools/py/build_machete.py.
-ATLAS_DATA['MACHETE BROWN'] = { sheet:'sprites/machete_keyed.png?v=23', frames:ATLAS_DATA['STAR MAN'].frames };
+ATLAS_DATA['MACHETE BROWN'] = { sheet:'sprites/machete_keyed.png?v=32', frames:ATLAS_DATA['STAR MAN'].frames };
+// SHAWN MURPHY = the user's 9th wrestler (from their photos, tools/shawn_photos): Adonis's recipe - Star's frames recoloured
+// (his skin, WHITE trunks + boots) + his own heads (tools/py/shawn_heads.py: dark bandana, aviator sunglasses,
+// shoulder-length hair made BLONDE - the user - big aviators + full dark beard (v334), no bandana in the ring (v333))
+// - tools/py/build_shawn.py - then Todd's tank top copied onto him pose by pose as his black tank with a yellow print, and
+// PINK ZEBRA trunks (v334, the user's photo) (tools/py/build_shawn_tank.py).
+ATLAS_DATA['SHAWN MURPHY'] = { sheet:'sprites/shawn_keyed.png?v=7', frames:ATLAS_DATA['STAR MAN'].frames };
+// MATT BRONSON = the user's 10th wrestler (v338, their photo tools/bronson_photos/1.jpg): Shawn's recipe - Star's frames
+// recoloured + his own heads (tools/py/bronson_heads.py: BALD, aviator sunglasses, full brown beard) - tools/py/build_bronson.py -
+// then Todd's trousers + chain copied onto him pose by pose as his TAN 'BB' track pants (red side stripe) and gold chain
+// (tools/py/build_bronson_pants.py). Shirtless, black shoes.
+ATLAS_DATA['MATT BRONSON'] = { sheet:'sprites/bronson_keyed.png?v=6', frames:ATLAS_DATA['STAR MAN'].frames };
+// CREMATOR VON SLASHER = the user's 11th wrestler (v346, their photos tools/cremator_photos 5-7.jpg): the same recipe - Star's
+// frames recoloured + his own heads (tools/py/cremator_heads.py: a SILVER stitched full-face mask, slicked reddish-brown hair) -
+// tools/py/build_cremator.py - then Todd's tank + trousers copied onto him as his dark NAVY sleeveless shirt and dark pants
+// (tools/py/build_cremator_body.py). His finisher (the user): the CHOKE SLAM (Bronson's, his own copies of those frames).
+ATLAS_DATA['CREMATOR VON SLASHER'] = { sheet:'sprites/cremator_keyed.png?v=5', frames:ATLAS_DATA['STAR MAN'].frames };
 // MIRROR MATCHES (the user): the CPU copy of the same wrestler is drawn from '<NAME>#ALT' — same frames, his costume in
 // other colours (tools/py/build_mirror.py). Game logic keeps e.def.name; drawing goes through artKey(e).
-var ALT_SHEET = { 'STAR MAN':'star', 'THE AMAZON':'amazon', 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=26', frames:ATLAS_DATA[_an].frames };
+// v355 FAT MACHETE (the user: 'make Machete look a little fat'): his own sheets (mfat_*, tools/py/machete_fat_pack.py) - every
+// frame re-packed with a 4 px / 3 px empty margin (same w/h, so nothing the game works out from a rect moves) and his middle
+// widened into it. MFAT_PAD: drawImage draws a 'mfat' sheet's frames WITH that margin (the gut spills into it).
+ATLAS_DATA['MACHETE BROWN'] = { sheet:'sprites/mfat_keyed.png?v=14', frames:{"SUPLEX4":[4,3,21,86],"PILE4":[34,3,24,65],"5.2":[67,3,32,64],"SLAM":[108,3,32,64],"SLAM1":[149,3,32,64],"9.0":[190,3,23,63],"PILE3":[222,3,22,63],"12.3":[253,3,11,61],"SXA3":[273,3,16,61],"12.4":[298,3,20,60],"NBH":[327,3,38,60],"16.0":[374,3,14,59],"16.1":[397,3,14,59],"19.3":[420,3,18,59],"PCH":[447,3,21,58],"0.2":[477,3,14,57],"10.1":[500,3,16,57],"18.2":[525,3,19,57],"18.3":[553,3,19,57],"PICKUP4":[581,3,38,57],"0.0":[628,3,14,56],"0.3":[651,3,14,56],"1.0":[674,3,14,56],"1.1":[4,96,23,56],"1.4":[36,96,14,56],"5.0":[59,96,20,56],"6.0":[88,96,20,56],"10.0":[117,96,20,56],"12.0":[146,96,20,56],"14.0":[175,96,20,56],"SLAM5":[204,96,59,56],"PICKUP3":[272,96,36,56],"SUPLEX1":[317,96,20,56],"PFSTRAIN":[346,96,17,56],"SXA1":[372,96,20,56],"SXR6":[401,96,14,56],"SOTAKE":[424,96,20,56],"PBINV":[453,96,14,56],"PBHUG":[476,96,20,56],"PCL0":[505,96,23,56],"PCL1":[537,96,22,56],"PCL2":[568,96,23,56],"0.1":[600,96,14,55],"0.4":[623,96,16,55],"0.5":[648,96,16,55],"1.2":[673,96,16,55],"1.3":[698,96,16,55],"3.6":[4,159,15,55],"4.0":[28,159,15,55],"4.1":[52,159,15,55],"5.1":[76,159,21,55],"6.1":[106,159,15,55],"6.2":[130,159,14,55],"6.3":[153,159,11,55],"10.2":[173,159,20,55],"12.1":[202,159,11,55],"12.2":[222,159,20,55],"16.4":[251,159,14,55],"18.7":[274,159,20,55],"18.8":[303,159,17,55],"SLAM2":[329,159,63,55],"SUPLEX2":[401,159,20,55],"SXA2":[430,159,16,55],"SXA5":[455,159,14,55],"SXR2":[478,159,16,55],"SOFLIP":[503,159,14,55],"BOOT":[526,159,34,55],"SKH":[569,159,48,55],"NSKH":[626,159,48,55],"SSP4":[683,159,14,55],"NBV10":[4,221,17,55],"PCU":[30,221,23,55],"3.0":[62,221,8,54],"3.2":[79,221,8,54],"19.2":[96,221,18,54],"KNOCKB":[123,221,19,54],"CLRUN2":[151,221,19,54],"DVA15":[179,221,20,54],"PFSQUAT":[208,221,17,53],"F5R90":[234,221,19,53],"F5R270":[262,221,19,53],"3.1":[290,221,25,52],"3.3":[324,221,25,52],"10.3":[358,221,16,52],"PICKUP2":[383,221,34,52],"CLOTH":[426,221,25,52],"CLRUN":[460,221,25,52],"DVB70":[494,221,24,52],"5.3":[527,221,18,51],"12.5":[554,221,19,51],"14.4":[582,221,20,51],"SLAM3":[611,221,62,51],"SLAM4":[4,283,62,51],"PILE1":[75,283,26,51],"SUPLEX3":[110,283,28,51],"SUPLEX5":[147,283,42,51],"SXR3":[198,283,20,51],"WHIPD":[227,283,22,51],"4.2":[258,283,16,50],"BITE0":[283,283,17,50],"BITE1":[309,283,17,50],"DVA30":[335,283,32,50],"DMF25":[376,283,33,50],"DMF10":[418,283,23,50],"DMB10":[450,283,21,50],"3.4":[480,283,19,49],"19.1":[508,283,18,49],"DVF70":[535,283,29,49],"DMB25":[573,283,31,49],"NBV30":[613,283,33,49],"0.6":[655,283,48,48],"4.6":[4,341,16,48],"19.0":[29,341,18,48],"19.6":[56,341,21,48],"19.7":[86,341,21,48],"DVB55":[116,341,30,48],"F5R120":[155,341,28,48],"F5R300":[192,341,28,48],"DMB40":[229,341,38,47],"12.6":[276,341,18,46],"16.3":[303,341,14,46],"18.9":[326,341,18,46],"SUPLEX8":[353,341,62,46],"SXR5":[424,341,18,46],"PBLIFT":[451,341,38,46],"DMF40":[498,341,41,46],"F5R60":[548,341,32,46],"F5R240":[589,341,32,46],"PBUP2":[630,341,37,45],"14.2":[676,341,17,44],"14.3":[4,396,17,44],"DDA20":[30,396,19,44],"PHB":[58,396,16,44],"3.5":[83,396,31,43],"14.1":[123,396,14,43],"PILE2":[146,396,36,43],"BITEF0":[191,396,16,43],"BITEF1":[216,396,16,43],"BKNEEL":[241,396,18,43],"DVF55":[268,396,35,43],"4.3":[312,396,16,42],"17.3":[337,396,16,42],"4.7":[362,396,17,41],"16.2":[388,396,12,41],"17.2":[409,396,16,41],"SXA4":[434,396,12,41],"SXR1":[455,396,12,41],"DVA45":[476,396,43,41],"4.5":[528,396,16,40],"8.0":[553,396,17,40],"DVB40":[579,396,39,40],"DMB55":[627,396,44,40],"PILE5":[680,396,24,39],"PBSIT":[4,447,25,39],"PBTSIT":[38,447,24,39],"DMF55":[71,447,48,39],"DVV90":[128,447,29,38],"PGVR40":[166,447,46,38],"SKM":[221,447,45,37],"NSKM":[275,447,45,37],"PBTIP":[329,447,35,36],"DDA45":[373,447,30,36],"NBSIT":[412,447,30,36],"DVV60":[451,447,36,35],"DVF40":[496,447,43,35],"2.0":[548,447,35,34],"PICKUP1":[592,447,40,34],"SUPLEX6":[641,447,41,34],"BBLIE":[4,493,41,34],"DVL":[54,493,27,34],"DMB70":[90,493,47,34],"NBV55":[146,493,48,34],"PBFOLD":[203,493,22,33],"PBUP1":[234,493,44,33],"PBPIN":[287,493,30,33],"DVV30":[326,493,36,33],"4.4":[371,493,17,32],"4.9":[397,493,24,32],"17.0":[430,493,16,32],"19.4":[455,493,16,32],"19.5":[480,493,16,32],"SXA6":[505,493,16,32],"SSP3":[530,493,37,32],"DVV45":[576,493,37,32],"F5R150":[622,493,46,32],"F5R330":[4,534,46,32],"11.0":[59,534,24,31],"DVA60":[92,534,51,31],"17.1":[152,534,24,30],"18.0":[185,534,19,30],"18.1":[213,534,24,30],"PFBENT":[246,534,19,30],"PBDROP":[274,534,43,30],"DVV15":[326,534,37,30],"DMF70":[372,534,50,30],"DDV20":[431,534,22,30],"PGV15":[462,534,23,30],"DVV0":[494,534,38,29],"PAJ":[541,534,25,29],"PBFALL":[575,534,36,28],"DVLD":[620,534,43,28],"DVB25":[4,573,48,28],"DMBS6":[61,573,40,28],"DDV45":[110,573,24,28],"DDS30":[143,573,33,28],"F5R30":[185,573,48,28],"F5R210":[242,573,48,28],"PBOVER":[299,573,45,27],"DMBS0":[353,573,47,27],"PGV30":[409,573,25,27],"DVF25":[443,573,50,26],"DMBL1":[502,573,48,26],"DMSIT":[559,573,19,26],"DDV70":[587,573,26,26],"11.1":[622,573,24,25],"17.5":[655,573,32,25],"DMBS1":[4,608,48,25],"DDA70":[61,608,39,25],"DDV90":[109,608,27,25],"PGVR20":[145,608,54,25],"4.8":[208,608,25,24],"17.4":[242,608,32,24],"SSP7":[283,608,25,24],"DMBS5":[317,608,44,24],"15.0":[370,608,32,23],"15.1":[411,608,32,23],"DDS60":[452,608,36,23],"PGV45":[497,608,29,23],"13.0":[535,608,40,22],"18.4":[584,608,40,22],"SUPLEX7":[633,608,65,22],"SXR4":[4,640,40,22],"DVB10":[53,640,53,22],"DMBSA":[115,640,48,22],"DVF10":[172,640,53,21],"DMBL4":[234,640,50,21],"DMBL2":[293,640,49,20],"DMBS2":[351,640,48,20],"DDVL40":[408,640,34,20],"7.0":[451,640,30,19],"7.1":[490,640,30,19],"SSP2":[529,640,30,19],"SSP5":[568,640,30,19],"DVF0":[607,640,53,19],"DMBS4":[669,640,47,19],"PGV75":[4,669,31,19],"NBV80":[44,669,56,19],"F5S70":[109,669,37,19],"F5S35":[155,669,19,19],"F5R180":[183,669,53,19],"DMF90":[245,669,49,18],"DMBL3":[303,669,49,18],"DMBS3":[361,669,48,18],"DMBSB":[418,669,48,18],"PGV60":[475,669,30,18],"PAK":[514,669,27,18],"9.1":[550,669,40,16],"18.5":[599,669,40,16],"18.6":[648,669,39,16],"SSP1":[4,695,40,16],"SSP6":[53,695,39,16],"DDVL20":[101,695,37,16],"LIEGRAB":[147,695,40,15],"SSPC":[196,695,22,15],"PINON":[227,695,16,14],"LIEFLAT":[252,695,40,14],"SXA7":[301,695,40,14],"SSP8":[350,695,15,14],"DVA90":[374,695,56,14],"DDA90":[439,695,43,14],"PGVF":[491,695,56,14]} };
+var MFAT_PAD = [4, 3];
+(function(){ var P = CanvasRenderingContext2D.prototype, raw = P.drawImage;
+  P.drawImage = function(im, sx, sy, sw, sh, dx, dy, dw, dh){
+    if (arguments.length === 9 && sw > 1 && sh > 1 && im){
+      if (im._mf === undefined) im._mf = !!(im.src && im.src.indexOf('/mfat') >= 0);
+      if (im._mf){ var mx = MFAT_PAD[0], my = MFAT_PAD[1], kx = dw/sw, ky = dh/sh;
+        return raw.call(this, im, sx-mx, sy-my, sw+2*mx, sh+2*my, dx-mx*kx, dy-my*ky, dw+2*mx*kx, dh+2*my*ky); }
+    }
+    return raw.apply(this, arguments); }; })();
+var ALT_SHEET = { 'STAR MAN':'star', 'THE AMAZON':'amazon', 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator' };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=44', frames:ATLAS_DATA[_an].frames };
+ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=18';   // v355: his fat mirror copy
 for (var _nm in ATLAS_DATA) {
   ATLAS[_nm] = ATLAS_DATA[_nm].frames;
   (function(name, src){
@@ -66,75 +96,134 @@ for (var _nm in ATLAS_DATA) {
     SHEET[name] = im;
   })(_nm, ATLAS_DATA[_nm].sheet);
 }
-PORTRAIT['STAR MAN']   = load('sprites/portrait_star.png?v=8');
-PORTRAIT['THE AMAZON'] = load('sprites/portrait_amazon.png?v=8');
-PORTRAIT['TODD QUALITY'] = load('sprites/portrait_heavy.png?v=1');
-PORTRAIT['LOKOMBO'] = load('sprites/portrait_lokombo.png?v=1');   // tools/py/build_lokombo_portrait.py
-PORTRAIT['SCOTTY MAC'] = load('sprites/portrait_scotty.png?v=1');  // same tool, tools/scotty_photos/13.jpg --box 180,120,1220,958
-PORTRAIT['NICK PRICE'] = load('sprites/portrait_nick.png?v=1');    // same tool, tools/nick_photos/1.jpg --box 300,180,1300,985 --out portrait_nick.png
-PORTRAIT['AIR ADONIS'] = load('sprites/portrait_adonis.png?v=3');  // same tool, tools/adonis_photos/4.jpg --size 86,64 (the whole flexed arm - the user) --box 200,130,1600,1172 --keep (cap, fist, forearm, bicep, left arm, torso) --fill --k 12 --out portrait_adonis.png
-PORTRAIT['MACHETE BROWN'] = load('sprites/portrait_machete.png?v=2');   // same tool, tools/machete_photos/1.jpg --box 300,40,1300,845 --keep "420,500,1180,845;730,90,870,170;560,430,1060,520" --fill --k 10 --out portrait_machete.png
+PORTRAIT['STAR MAN']   = load('sprites/portrait_star.png?v=10');
+PORTRAIT['THE AMAZON'] = load('sprites/portrait_amazon.png?v=10');
+PORTRAIT['TODD QUALITY'] = load('sprites/portrait_heavy.png?v=4');   // v356 (the user: same style as the others): his photo tools/todd_photos/1.jpg via build_lokombo_portrait.py --box 230,55,1310,865 --dark 90 --size 86,64 --fill --k 12
+PORTRAIT['LOKOMBO'] = load('sprites/portrait_lokombo.png?v=3');   // tools/py/build_lokombo_portrait.py
+PORTRAIT['SCOTTY MAC'] = load('sprites/portrait_scotty.png?v=3');  // same tool, tools/scotty_photos/13.jpg --box 180,120,1220,958
+PORTRAIT['NICK PRICE'] = load('sprites/portrait_nick.png?v=3');    // same tool, tools/nick_photos/1.jpg --box 300,180,1300,985 --out portrait_nick.png
+PORTRAIT['AIR ADONIS'] = load('sprites/portrait_adonis.png?v=5');  // same tool, tools/adonis_photos/4.jpg --size 86,64 (the whole flexed arm - the user) --box 200,130,1600,1172 --keep (cap, fist, forearm, bicep, left arm, torso) --fill --k 12 --out portrait_adonis.png
+PORTRAIT['MACHETE BROWN'] = load('sprites/portrait_machete.png?v=4');   // same tool, tools/machete_photos/1.jpg --box 300,40,1300,845 --keep "420,500,1180,845;730,90,870,170;560,430,1060,520" --fill --k 10 --out portrait_machete.png
+PORTRAIT['SHAWN MURPHY'] = load('sprites/portrait_shawn.png?v=4');   // tools/shawn_photos/1.jpg via build_lokombo_portrait.py --box 130,50,800,550 --size 86,64, backdrop cleared by hand; his OWN hair (v332, the user: no blonde on the picture)
+PORTRAIT['MATT BRONSON'] = load('sprites/portrait_bronson.png?v=1');   // tools/bronson_photos/1.jpg via build_lokombo_portrait.py --box 300,200,1300,950 --size 86,64 --fill --k 10
+PORTRAIT['CREMATOR VON SLASHER'] = load('sprites/portrait_cremator.png?v=1');   // tools/cremator_photos/5.jpg via build_lokombo_portrait.py --box 220,40,1100,700 --size 86,64 --fill --k 12
 // Throw frames have the victim drawn in, so some pairings use their own copy of the attacker's sheet
 // (same rects): Star<->Todd get a Star-shaped victim, the Amazon's throws get Todd repainted in.
 var SHEET_VS = {
-  'STAR MAN|TODD QUALITY':   load('sprites/star_vs_heavy.png?v=12'),
-  'TODD QUALITY|STAR MAN':   load('sprites/heavy_vs_star.png?v=15'),
-  'THE AMAZON|TODD QUALITY': load('sprites/amazon_vs_heavy.png?v=7'),
+  'STAR MAN|TODD QUALITY':   load('sprites/star_vs_heavy.png?v=15'),
+  'TODD QUALITY|STAR MAN':   load('sprites/heavy_vs_star.png?v=18'),
+  'THE AMAZON|TODD QUALITY': load('sprites/amazon_vs_heavy.png?v=10'),
   // LOKOMBO's pairings (tools/py/build_lokombo.py); vs the Amazon he uses his own sheet, like Star
-  'LOKOMBO|STAR MAN':        load('sprites/lokombo_vs_star.png?v=9'),
-  'LOKOMBO|TODD QUALITY':    load('sprites/lokombo_vs_heavy.png?v=10'),
-  'STAR MAN|LOKOMBO':        load('sprites/star_vs_lokombo.png?v=9'),
-  'TODD QUALITY|LOKOMBO':    load('sprites/heavy_vs_lokombo.png?v=11'),
-  'THE AMAZON|LOKOMBO':      load('sprites/amazon_vs_lokombo.png?v=5'),
+  'LOKOMBO|STAR MAN':        load('sprites/lokombo_vs_star.png?v=11'),
+  'LOKOMBO|TODD QUALITY':    load('sprites/lokombo_vs_heavy.png?v=13'),
+  'STAR MAN|LOKOMBO':        load('sprites/star_vs_lokombo.png?v=11'),
+  'TODD QUALITY|LOKOMBO':    load('sprites/heavy_vs_lokombo.png?v=14'),
+  'THE AMAZON|LOKOMBO':      load('sprites/amazon_vs_lokombo.png?v=7'),
   // SCOTTY MAC's pairings (tools/py/build_scotty.py); vs the Amazon he uses his own sheet
-  'SCOTTY MAC|STAR MAN':     load('sprites/scotty_vs_star.png?v=10'),
-  'SCOTTY MAC|TODD QUALITY': load('sprites/scotty_vs_heavy.png?v=11'),
-  'SCOTTY MAC|LOKOMBO':      load('sprites/scotty_vs_lokombo.png?v=11'),
-  'STAR MAN|SCOTTY MAC':     load('sprites/star_vs_scotty.png?v=9'),
-  'TODD QUALITY|SCOTTY MAC': load('sprites/heavy_vs_scotty.png?v=11'),
-  'THE AMAZON|SCOTTY MAC':   load('sprites/amazon_vs_scotty.png?v=4'),
-  'LOKOMBO|SCOTTY MAC':      load('sprites/lokombo_vs_scotty.png?v=10'),
+  'SCOTTY MAC|STAR MAN':     load('sprites/scotty_vs_star.png?v=15'),
+  'SCOTTY MAC|TODD QUALITY': load('sprites/scotty_vs_heavy.png?v=17'),
+  'SCOTTY MAC|LOKOMBO':      load('sprites/scotty_vs_lokombo.png?v=16'),
+  'STAR MAN|SCOTTY MAC':     load('sprites/star_vs_scotty.png?v=14'),
+  'TODD QUALITY|SCOTTY MAC': load('sprites/heavy_vs_scotty.png?v=17'),
+  'THE AMAZON|SCOTTY MAC':   load('sprites/amazon_vs_scotty.png?v=9'),
+  'LOKOMBO|SCOTTY MAC':      load('sprites/lokombo_vs_scotty.png?v=15'),
   // NICK PRICE's pairings (tools/py/build_nick.py); vs the Amazon he uses his own sheet
-  'NICK PRICE|STAR MAN':     load('sprites/nick_vs_star.png?v=12'),
-  'NICK PRICE|TODD QUALITY': load('sprites/nick_vs_heavy.png?v=13'),
-  'NICK PRICE|LOKOMBO':      load('sprites/nick_vs_lokombo.png?v=13'),
-  'NICK PRICE|SCOTTY MAC':   load('sprites/nick_vs_scotty.png?v=13'),
-  'STAR MAN|NICK PRICE':     load('sprites/star_vs_nick.png?v=11'),
-  'TODD QUALITY|NICK PRICE': load('sprites/heavy_vs_nick.png?v=13'),
-  'THE AMAZON|NICK PRICE':   load('sprites/amazon_vs_nick.png?v=7'),
-  'LOKOMBO|NICK PRICE':      load('sprites/lokombo_vs_nick.png?v=12'),
-  'SCOTTY MAC|NICK PRICE':   load('sprites/scotty_vs_nick.png?v=13'),
+  'NICK PRICE|STAR MAN':     load('sprites/nick_vs_star.png?v=14'),
+  'NICK PRICE|TODD QUALITY': load('sprites/nick_vs_heavy.png?v=16'),
+  'NICK PRICE|LOKOMBO':      load('sprites/nick_vs_lokombo.png?v=15'),
+  'NICK PRICE|SCOTTY MAC':   load('sprites/nick_vs_scotty.png?v=18'),
+  'STAR MAN|NICK PRICE':     load('sprites/star_vs_nick.png?v=13'),
+  'TODD QUALITY|NICK PRICE': load('sprites/heavy_vs_nick.png?v=16'),
+  'THE AMAZON|NICK PRICE':   load('sprites/amazon_vs_nick.png?v=9'),
+  'LOKOMBO|NICK PRICE':      load('sprites/lokombo_vs_nick.png?v=14'),
+  'SCOTTY MAC|NICK PRICE':   load('sprites/scotty_vs_nick.png?v=18'),
   // AIR ADONIS's pairings (tools/py/build_adonis.py + build_adonis_tattoo.py); vs the Amazon he uses his own sheet
-  'AIR ADONIS|STAR MAN':     load('sprites/adonis_vs_star.png?v=9'),
-  'AIR ADONIS|TODD QUALITY': load('sprites/adonis_vs_heavy.png?v=10'),
-  'AIR ADONIS|LOKOMBO':      load('sprites/adonis_vs_lokombo.png?v=10'),
-  'AIR ADONIS|SCOTTY MAC':   load('sprites/adonis_vs_scotty.png?v=10'),
-  'AIR ADONIS|NICK PRICE':   load('sprites/adonis_vs_nick.png?v=10'),
-  'STAR MAN|AIR ADONIS':     load('sprites/star_vs_adonis.png?v=9'),
-  'TODD QUALITY|AIR ADONIS': load('sprites/heavy_vs_adonis.png?v=11'),
-  'THE AMAZON|AIR ADONIS':   load('sprites/amazon_vs_adonis.png?v=5'),
-  'LOKOMBO|AIR ADONIS':      load('sprites/lokombo_vs_adonis.png?v=10'),
-  'SCOTTY MAC|AIR ADONIS':   load('sprites/scotty_vs_adonis.png?v=11'),
-  'NICK PRICE|AIR ADONIS':   load('sprites/nick_vs_adonis.png?v=10'),
+  'AIR ADONIS|STAR MAN':     load('sprites/adonis_vs_star.png?v=11'),
+  'AIR ADONIS|TODD QUALITY': load('sprites/adonis_vs_heavy.png?v=13'),
+  'AIR ADONIS|LOKOMBO':      load('sprites/adonis_vs_lokombo.png?v=12'),
+  'AIR ADONIS|SCOTTY MAC':   load('sprites/adonis_vs_scotty.png?v=15'),
+  'AIR ADONIS|NICK PRICE':   load('sprites/adonis_vs_nick.png?v=12'),
+  'STAR MAN|AIR ADONIS':     load('sprites/star_vs_adonis.png?v=11'),
+  'TODD QUALITY|AIR ADONIS': load('sprites/heavy_vs_adonis.png?v=14'),
+  'THE AMAZON|AIR ADONIS':   load('sprites/amazon_vs_adonis.png?v=7'),
+  'LOKOMBO|AIR ADONIS':      load('sprites/lokombo_vs_adonis.png?v=12'),
+  'SCOTTY MAC|AIR ADONIS':   load('sprites/scotty_vs_adonis.png?v=16'),
+  'NICK PRICE|AIR ADONIS':   load('sprites/nick_vs_adonis.png?v=12'),
   // MACHETE BROWN's pairings (tools/py/build_machete.py); vs the Amazon he uses his own sheet
-  'MACHETE BROWN|STAR MAN':     load('sprites/machete_vs_star.png?v=10'),
-  'MACHETE BROWN|TODD QUALITY': load('sprites/machete_vs_heavy.png?v=11'),
-  'MACHETE BROWN|LOKOMBO':      load('sprites/machete_vs_lokombo.png?v=12'),
-  'MACHETE BROWN|SCOTTY MAC':   load('sprites/machete_vs_scotty.png?v=11'),
-  'MACHETE BROWN|NICK PRICE':   load('sprites/machete_vs_nick.png?v=11'),
-  'MACHETE BROWN|AIR ADONIS':   load('sprites/machete_vs_adonis.png?v=11'),
-  'STAR MAN|MACHETE BROWN':     load('sprites/star_vs_machete.png?v=9'),
-  'TODD QUALITY|MACHETE BROWN': load('sprites/heavy_vs_machete.png?v=11'),
-  'THE AMAZON|MACHETE BROWN':   load('sprites/amazon_vs_machete.png?v=4'),
-  'LOKOMBO|MACHETE BROWN':      load('sprites/lokombo_vs_machete.png?v=10'),
-  'SCOTTY MAC|MACHETE BROWN':   load('sprites/scotty_vs_machete.png?v=11'),
-  'NICK PRICE|MACHETE BROWN':   load('sprites/nick_vs_machete.png?v=10'),
-  'AIR ADONIS|MACHETE BROWN':   load('sprites/adonis_vs_machete.png?v=10')
+  'MACHETE BROWN|STAR MAN':     load('sprites/mfat_vs_star.png?v=13'),
+  'MACHETE BROWN|TODD QUALITY': load('sprites/mfat_vs_heavy.png?v=14'),
+  'MACHETE BROWN|LOKOMBO':      load('sprites/mfat_vs_lokombo.png?v=13'),
+  'MACHETE BROWN|SCOTTY MAC':   load('sprites/mfat_vs_scotty.png?v=16'),
+  'MACHETE BROWN|NICK PRICE':   load('sprites/mfat_vs_nick.png?v=13'),
+  'MACHETE BROWN|AIR ADONIS':   load('sprites/mfat_vs_adonis.png?v=13'),
+  'STAR MAN|MACHETE BROWN':     load('sprites/star_vs_machete.png?v=12'),
+  'TODD QUALITY|MACHETE BROWN': load('sprites/heavy_vs_machete.png?v=15'),
+  'THE AMAZON|MACHETE BROWN':   load('sprites/amazon_vs_machete.png?v=7'),
+  'LOKOMBO|MACHETE BROWN':      load('sprites/lokombo_vs_machete.png?v=13'),
+  'SCOTTY MAC|MACHETE BROWN':   load('sprites/scotty_vs_machete.png?v=17'),
+  'NICK PRICE|MACHETE BROWN':   load('sprites/nick_vs_machete.png?v=13'),
+  'AIR ADONIS|MACHETE BROWN':   load('sprites/adonis_vs_machete.png?v=13'),
+  // SHAWN MURPHY's pairings (tools/py/build_shawn.py + build_shawn_tank.py); vs the Amazon he uses his own sheet
+  'SHAWN MURPHY|STAR MAN':      load('sprites/shawn_vs_star.png?v=5'),
+  'SHAWN MURPHY|TODD QUALITY':  load('sprites/shawn_vs_heavy.png?v=6'),
+  'SHAWN MURPHY|LOKOMBO':       load('sprites/shawn_vs_lokombo.png?v=5'),
+  'SHAWN MURPHY|SCOTTY MAC':    load('sprites/shawn_vs_scotty.png?v=8'),
+  'SHAWN MURPHY|NICK PRICE':    load('sprites/shawn_vs_nick.png?v=5'),
+  'SHAWN MURPHY|AIR ADONIS':    load('sprites/shawn_vs_adonis.png?v=5'),
+  'SHAWN MURPHY|MACHETE BROWN': load('sprites/shawn_vs_machete.png?v=6'),
+  'STAR MAN|SHAWN MURPHY':      load('sprites/star_vs_shawn.png?v=5'),
+  'TODD QUALITY|SHAWN MURPHY':  load('sprites/heavy_vs_shawn.png?v=6'),
+  'THE AMAZON|SHAWN MURPHY':    load('sprites/amazon_vs_shawn.png?v=5'),
+  'LOKOMBO|SHAWN MURPHY':       load('sprites/lokombo_vs_shawn.png?v=5'),
+  'SCOTTY MAC|SHAWN MURPHY':    load('sprites/scotty_vs_shawn.png?v=8'),
+  'NICK PRICE|SHAWN MURPHY':    load('sprites/nick_vs_shawn.png?v=5'),
+  'AIR ADONIS|SHAWN MURPHY':    load('sprites/adonis_vs_shawn.png?v=5'),
+  'MACHETE BROWN|SHAWN MURPHY': load('sprites/mfat_vs_shawn.png?v=13'),
+  // MATT BRONSON's pairings (tools/py/build_bronson.py + build_bronson_pants.py); vs the Amazon he uses his own sheet
+  'MATT BRONSON|STAR MAN':      load('sprites/bronson_vs_star.png?v=1'),
+  'MATT BRONSON|TODD QUALITY':  load('sprites/bronson_vs_heavy.png?v=2'),
+  'MATT BRONSON|LOKOMBO':       load('sprites/bronson_vs_lokombo.png?v=1'),
+  'MATT BRONSON|SCOTTY MAC':    load('sprites/bronson_vs_scotty.png?v=4'),
+  'MATT BRONSON|NICK PRICE':    load('sprites/bronson_vs_nick.png?v=1'),
+  'MATT BRONSON|AIR ADONIS':    load('sprites/bronson_vs_adonis.png?v=1'),
+  'MATT BRONSON|MACHETE BROWN': load('sprites/bronson_vs_machete.png?v=2'),
+  'MATT BRONSON|SHAWN MURPHY':  load('sprites/bronson_vs_shawn.png?v=1'),
+  'STAR MAN|MATT BRONSON':      load('sprites/star_vs_bronson.png?v=1'),
+  'TODD QUALITY|MATT BRONSON':  load('sprites/heavy_vs_bronson.png?v=2'),
+  'THE AMAZON|MATT BRONSON':    load('sprites/amazon_vs_bronson.png?v=1'),
+  'LOKOMBO|MATT BRONSON':       load('sprites/lokombo_vs_bronson.png?v=1'),
+  'SCOTTY MAC|MATT BRONSON':    load('sprites/scotty_vs_bronson.png?v=4'),
+  'NICK PRICE|MATT BRONSON':    load('sprites/nick_vs_bronson.png?v=1'),
+  'AIR ADONIS|MATT BRONSON':    load('sprites/adonis_vs_bronson.png?v=1'),
+  'MACHETE BROWN|MATT BRONSON': load('sprites/mfat_vs_bronson.png?v=13'),
+  'SHAWN MURPHY|MATT BRONSON':  load('sprites/shawn_vs_bronson.png?v=1'),
+  // CREMATOR VON SLASHER's pairings (tools/py/build_cremator.py + build_cremator_body.py); vs the Amazon he uses his own sheet
+  'CREMATOR VON SLASHER|STAR MAN': load('sprites/cremator_vs_star.png?v=2'),
+  'CREMATOR VON SLASHER|TODD QUALITY': load('sprites/cremator_vs_heavy.png?v=3'),
+  'CREMATOR VON SLASHER|LOKOMBO': load('sprites/cremator_vs_lokombo.png?v=2'),
+  'CREMATOR VON SLASHER|SCOTTY MAC': load('sprites/cremator_vs_scotty.png?v=5'),
+  'CREMATOR VON SLASHER|NICK PRICE': load('sprites/cremator_vs_nick.png?v=2'),
+  'CREMATOR VON SLASHER|AIR ADONIS': load('sprites/cremator_vs_adonis.png?v=2'),
+  'CREMATOR VON SLASHER|MACHETE BROWN': load('sprites/cremator_vs_machete.png?v=3'),
+  'CREMATOR VON SLASHER|SHAWN MURPHY': load('sprites/cremator_vs_shawn.png?v=2'),
+  'CREMATOR VON SLASHER|MATT BRONSON': load('sprites/cremator_vs_bronson.png?v=2'),
+  'STAR MAN|CREMATOR VON SLASHER': load('sprites/star_vs_cremator.png?v=2'),
+  'TODD QUALITY|CREMATOR VON SLASHER': load('sprites/heavy_vs_cremator.png?v=3'),
+  'LOKOMBO|CREMATOR VON SLASHER': load('sprites/lokombo_vs_cremator.png?v=2'),
+  'SCOTTY MAC|CREMATOR VON SLASHER': load('sprites/scotty_vs_cremator.png?v=5'),
+  'NICK PRICE|CREMATOR VON SLASHER': load('sprites/nick_vs_cremator.png?v=2'),
+  'AIR ADONIS|CREMATOR VON SLASHER': load('sprites/adonis_vs_cremator.png?v=2'),
+  'MACHETE BROWN|CREMATOR VON SLASHER': load('sprites/mfat_vs_cremator.png?v=14'),
+  'SHAWN MURPHY|CREMATOR VON SLASHER': load('sprites/shawn_vs_cremator.png?v=2'),
+  'MATT BRONSON|CREMATOR VON SLASHER': load('sprites/bronson_vs_cremator.png?v=2'),
+  'THE AMAZON|CREMATOR VON SLASHER': load('sprites/amazon_vs_cremator.png?v=2')
 };
 function artKey(e){ return e && e.alt ? e.def.name+'#ALT' : e.def.name; }   // whose art: the mirror-match copy has his own
 for (var _an in ALT_SHEET){ var _w=ALT_SHEET[_an];
-  SHEET_VS[_an+'|'+_an+'#ALT'] = load('sprites/'+_w+'_vs_'+_w+'alt.png?v=15');     // him throwing his alt copy
-  SHEET_VS[_an+'#ALT|'+_an] = load('sprites/'+_w+'alt_vs_'+_w+'.png?v=15'); }      // the alt copy throwing him
+  SHEET_VS[_an+'|'+_an+'#ALT'] = load('sprites/'+_w+'_vs_'+_w+'alt.png?v=24');     // him throwing his alt copy
+  SHEET_VS[_an+'#ALT|'+_an] = load('sprites/'+_w+'alt_vs_'+_w+'.png?v=24'); }      // the alt copy throwing him
+SHEET_VS['MACHETE BROWN|MACHETE BROWN#ALT'] = load('sprites/mfat_vs_mfatalt.png?v=13');   // v355 fat Machete
+SHEET_VS['MACHETE BROWN#ALT|MACHETE BROWN'] = load('sprites/mfatalt_vs_mfat.png?v=13');
 function sheetVs(e){ var o=foe(e), im=o && SHEET_VS[artKey(e)+'|'+artKey(o)]; return (im && imgOk(im)) ? im : SHEET[artKey(e)]; }
 function starLike(e){ return e.def.name==='STAR MAN' || e.def.base==='STAR MAN'; }
 function load(src){ var im=new Image(); im.src=src; return im; }
@@ -157,6 +246,12 @@ var ROSTER = [
   { name:'AIR ADONIS', nation:'', ht:'', wt:'', pw:4, sp:1.1, base:'STAR MAN',   // sp = the user's pick (2026-10-17); pw/spec unused placeholders
     spec:'' },
   { name:'MACHETE BROWN', nation:'', ht:'', wt:'', pw:4, sp:0.9, base:'STAR MAN',   // sp = the user's pick (2026-10-17); pw/spec unused placeholders
+    spec:'' },
+  { name:'SHAWN MURPHY', nation:'', ht:'', wt:'', pw:4, sp:1.0, base:'STAR MAN',   // v331: the user's 9th wrestler; sp 1.0 until the user picks
+    spec:'' },
+  { name:'MATT BRONSON', nation:'', ht:'', wt:'', pw:4, sp:1.0, base:'STAR MAN',   // v338: the user's 10th wrestler; sp 1.0 until the user picks
+    spec:'' },
+  { name:'CREMATOR VON SLASHER', nation:'', ht:'', wt:'', pw:4, sp:1.0, base:'STAR MAN',   // v346: the user's 11th wrestler; sp 1.0 until the user picks
     spec:'' }
 ];
 
@@ -217,6 +312,9 @@ SEQ['NICK PRICE'] = Object.assign({}, SEQ['STAR MAN'], { hbk: Object.assign({}, 
   { seq: SEQ['TODD QUALITY'].hbk.seq.map(function(k){ return k==='SKM' ? 'NSKM' : k==='SKH' ? 'NSKH' : k; }) }) });
 SEQ['AIR ADONIS'] = Object.assign({}, SEQ['STAR MAN']);
 SEQ['MACHETE BROWN'] = Object.assign({}, SEQ['STAR MAN']);   // (no specials yet - the user picks them)   // Star's body and timing (no specials yet - the user picks them)
+SEQ['SHAWN MURPHY'] = Object.assign({}, SEQ['STAR MAN']);   // Star's body and timing (no specials yet - the user picks them)
+SEQ['MATT BRONSON'] = Object.assign({}, SEQ['STAR MAN']);   // Star's body and timing (no specials yet - the user picks them)
+SEQ['CREMATOR VON SLASHER'] = Object.assign({}, SEQ['STAR MAN'], { bigboot: SEQ['TODD QUALITY'].bigboot });   // (v384: Todd's big boot is his now)   // Star's body and timing (his choke slam is drawn by drawHBC)
 for (var _an in ALT_SHEET) SEQ[_an+'#ALT'] = SEQ[_an];   // mirror-match copies move exactly like him
 
 /* draw a wrestler bottom-anchored (feet at py) purely from the sheet */
@@ -710,7 +808,10 @@ var ENT_THEMES = {   // bpm, lead wave, lead (4 bars of 8ths, 0 = rest), bass ro
     lead:[0,0,0,0,0,0,0,0, 0,0,0,0,0,0,71,74, 76,-1,-1,74,72,-1,71,-1, 69,-1,-1,-1,74,-1,72,71,
           76,-1,-1,79,78,-1,76,-1, 74,-1,71,-1,69,-1,67,69, 71,-1,-1,74,79,-1,78,76, 76,-1,-1,-1,-1,-1,0,0],
     drum:'K.KKS.K.K.KKS.KK' },
-  'MACHETE BROWN':{ bpm:92,  wave:'sawtooth', lv:0.05, lead:[52,52,0,55,52,0,58,57, 52,52,0,55,52,0,50,0, 52,52,0,55,52,0,58,59, 57,55,52,50,52,0,0,0], bass:[40,40,40,38], drum:'K.K.S...K.K.S.S.' }
+  'MACHETE BROWN':{ bpm:92,  wave:'sawtooth', lv:0.05, lead:[52,52,0,55,52,0,58,57, 52,52,0,55,52,0,50,0, 52,52,0,55,52,0,58,59, 57,55,52,50,52,0,0,0], bass:[40,40,40,38], drum:'K.K.S...K.K.S.S.' },
+  'SHAWN MURPHY': { bpm:126, wave:'square', lead:[64,0,67,0,71,0,69,67, 64,0,67,0,72,71,69,0, 64,0,67,0,71,0,74,72, 71,69,67,0,64,0,0,0], bass:[40,43,45,47], drum:'K.H.SKH.K.H.S.H.' },   // v331 placeholder theme (mine) until the user picks
+  'MATT BRONSON': { bpm:100, wave:'sawtooth', lead:[52,0,52,55,0,52,57,55, 52,0,52,55,0,59,57,55, 52,0,52,55,0,52,57,59, 60,59,57,55,52,0,0,0], bass:[28,28,31,33], drum:'K..SK.K.S..HK.S.' },   // v338 placeholder theme (mine) until the user picks
+  'CREMATOR VON SLASHER': { bpm:84, wave:'sawtooth', lead:[45,0,0,44,45,0,0,0, 48,0,47,0,45,0,0,0, 45,0,0,44,45,0,0,0, 52,0,50,0,48,47,45,0], bass:[21,21,24,19], drum:'K...S...K.K.S...' },   // v346 placeholder theme (mine, slow + dark) until the user picks
 };
 var ENTM = { iv:null, step:0, next:0, th:null, audio:null };
 function entMusicStop(){
@@ -963,7 +1064,7 @@ function drawEntOverlay(){                                // screen space: the p
 var CHAIR = null, CHAIR_HOME = { x:238, y:206 },  // (v281 the user: away from the cameraman, on its own - he roams x 40..216)
     CHAIR_DMG = 20, CHAIR_UP = 14, CHAIR_HIT = 18, CHAIR_END = 40, CHAIR_REACH = 32;
 // the chair's sprites (tools/py/build_chair.py: [x, y, w, h, pivot x, pivot y]) + where the hands are in the swing frames
-var CHAIRIMG = new Image(); CHAIRIMG.src = 'sprites/chair.png?v=4';
+var CHAIRIMG = new Image(); CHAIRIMG.src = 'sprites/chair.png?v=6';
 var CHAIR_SPR = {"STAND": [0, 0, 15, 23, 7, 22], "FOLD": [17, 0, 11, 27, 5, 21], "FLOOR": [30, 0, 27, 11, 13.5, 10], "RBACK": [59, 0, 44, 44, 22, 22], "RUP": [105, 0, 44, 44, 22, 22], "RF50": [151, 0, 44, 44, 22, 22], "RF90": [197, 0, 44, 44, 22, 22], "RF125": [243, 0, 44, 44, 22, 22], "RCARRY": [289, 0, 44, 44, 22, 22], "RCARRY2": [335, 0, 44, 44, 22, 22]};
 var CHAIR_HANDS = {"star": {"5.1": [18.5, 5.0], "5.0": [18.0, 10.7], "19.3": [8.5, 1.0], "1.1": [21.0, 7.5], "10.2": [18.0, 19.804878048780488], "1.0": [12.0, 14.055555555555555]}, "amazon": {"4.1": [18.5, 6.0], "4.0": [18.0, 11.7], "9.1": [8.5, 1.0], "1.0": [21.0, 8.5], "4.4": [18.0, 11.5], "0.0": [12.0, 15.055555555555555]}};
 // the swing (the user: "make the swing animation better"): [until tick, body frame (star / amazon), chair frame]
@@ -1102,10 +1203,11 @@ var MOVES = {
   kick: {start:18,end:24,rec:36,range:22,dmg:12,pose:'kick', snd:sfx.whoosh, kd:true},  // real NES: lands at t18, flier airborne until t36 (every wrestler)
   // TODD's BIG BOOT: knee up 10 ticks, the foot lands on the chin at t10 (faster than the flying kick's t18), reaches
   // a bit further, hits harder and knocks down — but a long recovery, so a miss leaves him open
-  bigboot: {start:10,end:14,rec:34,range:26,dmg:18,pose:'bigboot', snd:sfx.whoosh, kd:true}
+  bigboot: {start:10,end:14,rec:34,range:22,dmg:18,pose:'bigboot', snd:sfx.whoosh, kd:true}   // (v384: reach 26 -> 22, his leg is 15% shorter)
 };
 function canPile(e){ return e.def.name==='TODD QUALITY'; }   // the user: only Todd does the piledriver
-function canBigBoot(e){ return e.def.name==='TODD QUALITY' && !!ATLAS[e.def.name]['BOOT']; }
+function canBigBoot(e){ return e.def.name==='CREMATOR VON SLASHER' &&   // v384 (the user): Cremator's, not Todd's (his own BOOT, leg 15% shorter: tools/py/build_cremator_boot.py)
+   !!ATLAS[e.def.name]['BOOT']; }
 
 /* ================= UPDATE ================= */
 function updateMatch(){
@@ -1246,7 +1348,7 @@ function updateEntity(e){
       break;
     case 'down': {
       e.t++;
-      if (f && (f.state==='dvd' || f.state==='ddt')) break;   // v313: stays flat until Machete is back up, THEN his normal stay-down time starts (like every other move)
+      if (f && (f.state==='dvd' || f.state==='ddt' || f.state==='ped' || f.state==='nbk' || f.state==='hbt' || f.state==='choke' || f.state==='f5')) break;   // v313: stays flat until Machete is back up, THEN his normal stay-down time starts (like every other move)
       e.downT--;
       if (!e.cpu && !match.pin){ e.downT -= mash*3; }
       if (e.downT<=0 && !match.pin){ e.state='getup'; e.t=0; e.inv=40; }
@@ -1280,6 +1382,7 @@ function updateEntity(e){
     case 'bkb': updateBKB(e); break;               // Todd's back breaker
     case 'dvd': updateDVD(e); break;               // Machete's Death Valley Driver
     case 'ddt': updateDDT(e); break;               // Machete's DDT
+    case 'ped': updatePED(e); break;               // Nick Price's Pedigree
     case 'pb': e.t++;                                                      // Todd's powerbomb
       if (e.t===PB_SEQ[1][0] || e.t===PB_SEQ[5][0]) sfx.whoosh();         // the lift, the throw down
       if (e.t===PB_IMPACT) pbImpact(e); break;
@@ -1291,6 +1394,9 @@ function updateEntity(e){
       break;
     case 'braced': break;                    // standing, about to take the somersault kick
     case 'bbust': updateBrain(e); break;
+    case 'nbk': updateNBK(e); break;              // Shawn Murphy's hangman's neckbreaker
+    case 'hbt': case 'choke': updateHBC(e); break;
+    case 'f5': updateF5(e); break;                // Matt Bronson's F5 // Matt Bronson's head butt (Giant Panther's) + choke slam
     case 'roll': updateRoll(e); break;            // under the bottom rope (ring out)
     case 'run': updateRun(e); break;              // running (double-tap)
     case 'xchop': updateXChop(e); break;          // Star Man's flying cross chop
@@ -1355,10 +1461,16 @@ var TIE_A = {
   'SCOTTY MAC':   { down:{ ok:function(a,v){ return canHBK(a); },     go:startHBK },                      // superkick (the user, v295: DOWN + A)
                     side:{ ok:function(a,v){ return canBTB(a); },      go:startBTB } },                    // belly-to-back suplex (L/R + A)
   'NICK PRICE':   { up:{ ok:canBrain, go:startBrain },                                                // brain buster (the user, v295: UP + A, in place of the suplex)
-                    side:{ ok:function(a,v){ return canBTB(a); },      go:startBTB } },                    // belly-to-back suplex (L/R + A); DOWN blank for now
+                    side:{ ok:function(a,v){ return canBTB(a); },      go:startBTB },                      // belly-to-back suplex (L/R + A)
+                    down:{ ok:function(a,v){ return canNBK(a); },      go:startNBK } },                    // the hangman's NECKBREAKER (the user, v383: DOWN + A)
   'AIR ADONIS':   { },
-  'MACHETE BROWN':{ down:{ ok:function(a,v){ return canDVD(a); },    go:startDVD },                      // Death Valley Driver (the user: DOWN + X)
-                    side:{ ok:function(a,v){ return canDDT(a); },    go:startDDT } }                     // Death Valley Driver (the user: DOWN + X)
+  'MACHETE BROWN':{ up:{ ok:function(a,v){ return canHBT(a); },        go:startHBT },                      // Giant Panther's HEAD BUTT (the user, v383: UP + A, in place of his suplex)
+                    down:{ ok:function(a,v){ return canDVD(a); },    go:startDVD },                      // Death Valley Driver (the user: DOWN + X)
+                    side:{ ok:function(a,v){ return canDDT(a); },    go:startDDT } },                     // Death Valley Driver (the user: DOWN + X)
+  'SHAWN MURPHY': { down:{ ok:function(a,v){ return canPED(a); },    go:startPED } },                    // the PEDIGREE (the user, v383: DOWN + A)
+  'MATT BRONSON': {
+                    side:{ ok:function(a,v){ return canF5(a); },     go:startF5 } },                     // the F5 (the user, v365: L/R + A)
+  'CREMATOR VON SLASHER': { side:{ ok:function(a,v){ return canChoke(a); }, go:startChoke } }                   // his finisher, the CHOKE SLAM (the user, v346; L/R + A like Bronson's)
 };
 function updateLock(){
   var L=match.lock; L.t++;
@@ -1396,6 +1508,11 @@ function updateLock(){
     if (canBKB(cp)) safe.push(function(){ startBKB(cp, pl); });   // Todd's back breaker
     if (canDVD(cp)) safe.push(function(){ startDVD(cp, pl); });   // Machete's Death Valley Driver
     if (canDDT(cp)) safe.push(function(){ startDDT(cp, pl); });   // Machete's DDT
+    if (canPED(cp)) safe.push(function(){ startPED(cp, pl); });   // Nick Price's Pedigree
+    if (canNBK(cp) && CA['SUPLEX1']) safe.push(function(){ startNBK(cp, pl); });   // Shawn Murphy's hangman's neckbreaker
+    if (canHBT(cp)) safe.push(function(){ startHBT(cp, pl); });       // Matt Bronson's head butt
+    if (canF5(cp)) safe.push(function(){ startF5(cp, pl); });         // Matt Bronson's F5
+    if (canChoke(cp)) safe.push(function(){ startChoke(cp, pl); });   // the choke slam (Bronson, Cremator)
     if (canBrain(cp) && CA['SUPLEX1']) safe.push(function(){ startBrain(cp, pl); });   // brain buster (Nick Price only)
     if (canWhip(cp)) safe.push(function(){ startWhip(cp, pl); });   // anyone can Irish-whip
     if (canPB(cp)) risky.push(function(){ tryPB(cp, pl); });   // the powerbomb can be resisted, like the piledriver
@@ -1688,23 +1805,28 @@ function canCloth(e){ return e.def.name!=='STAR MAN' && !!ATLAS[e.def.name]['CLO
 function startCloth(e){
   var v=foe(e);
   e.state='wcl'; e.t=0; e.cl=0; e.cln=0; e.face = v.x>=e.x ? 1 : -1; e.cly = v.y - 4; sfx.whoosh();   // onto his line (always connects) -
+  e.boot = canBigBoot(e);                                   // v385 (the user): CREMATOR puts the BIG BOOT up instead - plants, the man runs into it
 }                                                                                                     // stepped into 1 px a step, not snapped
 function updateCloth(e){
   e.t++;
   if (e.cl===0){                                            // lunging
     var v=foe(e);
-    e.x += e.face * (((e.cln++) % 2===0) ? 2 : 3);
+    if (!e.boot) e.x += e.face * (((e.cln++) % 2===0) ? 2 : 3);   // (the boot: he stays planted)
     if (e.cly!=null && e.y!==e.cly) e.y += e.cly>e.y ? 1 : -1;
-    if (v.state==='whipped' && v.wh && v.wh.ph==='back' && Math.abs(v.x-e.x)<=6 && Math.abs(v.y-(e.y+4))<=6){
+    var reach = e.boot ? (e.t>=10 ? 18 : -1) : 6;               // the boot's sole is ~18 px out once it's up (t10)
+    if (v.state==='whipped' && v.wh && v.wh.ph==='back' && Math.abs(v.x-e.x)<=Math.max(reach,0) && reach>0 && Math.abs(v.y-(e.y+4))<=6){
+      if (e.boot){ v.x = e.x + e.face*18; v.y = e.y+4; e.cly=null; e.cl=1; e.t=0;   // BIG BOOT: right on the chin
+        hurtBy(v, MOVES.bigboot.dmg); v.wh.ph='cl'; v.wh.ct=0; v.wh.cf = e.face;
+        shake=9; sfx.kick(); crowdBoost && crowdBoost(.4); addSpark(v.x - e.face*2, v.y-44, 12, '#ffffff', 1.6); return; }
       clothMeet(e, v); e.cly=null; e.cl=1; e.t=0;            // CLOTHESLINE
       hurtBy(v, CLOTH_DMG); v.wh.ph='cl'; v.wh.ct=0; v.wh.cf = e.face;
       shake=7; sfx.kick(); addSpark(v.x, v.y-36, 12, '#ffffff', 1.6);
       return;
     }
-    if (e.t>=12){ e.state='idle'; e.t=0; e.cly=null; clamp(e); }   // nobody there
+    if (e.t>=(e.boot ? 60 : 12)){ e.state='idle'; e.t=0; e.cly=null; e.boot=false; clamp(e); }   // nobody there (the boot is held up a second)
     return;
   }
-  if (e.t>=49){ e.state='idle'; e.t=0; clamp(e); }           // hold 29f + recover 20f
+  if (e.t>=(e.boot ? 30 : 49)){ e.state='idle'; e.t=0; e.boot=false; clamp(e); }           // hold 29f + recover 20f (the boot: 30f)
 }
 function updateClothed(v){                                   // (called from updateWhipped while ph==='cl')
   var W=v.wh; W.ct++;
@@ -1715,6 +1837,11 @@ function updateClothed(v){                                   // (called from upd
   }
 }
 function drawCloth(e){
+  if (e.boot){                                              // the big boot: knee up, then the boot held up (Todd's bigboot pose = his now)
+    drawShadow({state:'idle', x:e.x, y:e.y, def:e.def});
+    var bf = e.cl===0 ? Math.min(e.t, 20) : (e.t < 18 ? 20 : 27);
+    drawWrestler(artKey(e), e.x, e.y, e.face, 'bigboot', bf); return;
+  }
   var K=clothKit(e), rx=Math.round(e.x)+1, fy=Math.round(e.y);    // poses measured vs his feet after the 4px step
   drawShadow({state:'idle', x:e.x, y:e.y, def:e.def});
   var p = e.cl===0 ? lungePose(K, e.cln) : (e.t<29 ? K.hold : K.rec);
@@ -2134,7 +2261,7 @@ function dvdPhase(t){ var p=DVD_SEQ[0]; for (var i=0;i<DVD_SEQ.length;i++) if (t
 function updateDVD(a){
   a.t++;
   var v=foe(a), f=a.bbf, X=a.bbx+1, Y=a.bby;
-  if (a.t===8 || a.t===26 || a.t===46 || a.t===66) sfx.whoosh();
+  if (a.t===8 || a.t===26 || a.t===46 || a.t===52 || a.t===68) sfx.whoosh();
   if (a.t===77){ shake=6; sfx.slam && sfx.slam(); addDust(X - f*2, Y, 8); }   // Machete's back hits the mat a beat before the man
   if (a.t===DVD_HIT){                                                       // lands beside Machete's head in an L (drawn below)
     hurtBy(v, DVD_DMG); shake=16; freeze=10; sfx.crash(); crowdBoost && crowdBoost(.6); addDust(X - f*(DVD_HEAD+10), Y, 18);
@@ -2164,6 +2291,80 @@ function drawDVD(a){
   if (man && !p[7]) put(artKey(v), p[4], p[5], p[6]+bob);
   put(artKey(a), p[1], p[2], p[3], p[8]);
   if (man && p[7]) put(artKey(v), p[4], p[5], p[6]+bob);
+}
+
+/* ---- MATT BRONSON's F5 (v365, the user: 'make a move called the F5' - Brock Lesnar's, their Tenor clip vs Seth Rollins;
+   'it starts like the DVD but ENDS like a DDT'; Bronson, tie-up LEFT/RIGHT + A). The DVD's lift into the fireman's
+   carry (DVD_SEQ's first rows, same frames), then he SPINS round with the man across his shoulders (19.1 + DVF0, as
+   the DVD's turn) and flings the legs out: the man comes off his shoulders head-first and is driven face-first into
+   the mat - the DDT's victim frames (DDV20-90, legs coming down DDVL40/20, flat on his front) - while Bronson
+   follows through standing (turned round, 1.1 then 0.0). Same columns as DVD_SEQ. ---- */
+// v366 (the user: 'you did it backwards - it should start the SAME as the DVD, then they land as if they are taking a DDT';
+// their clip: Lesnar goes DOWN with him, Rollins lands face-first): Machete's DVD row for row for Bronson (the lift, the
+// carry, the turn to the camera, the sideways fall, landing seated - DVD_SEQ's own numbers), but the man turns over as
+// they fall and lands like the end of the DDT: head first into the mat (DDV70/90), legs coming down (DDVL40/20),
+// flat on his FRONT.
+var F5_SEQ = [
+  [0,  '11.0',    -18,  0, 'PFBENT',  2,  -2, false, false],
+  [5,  'PFSQUAT', -10,  0, '17.1',  -12, -18, false, false],
+  [10, 'PFSQUAT', -10,  0, 'DVV0',  -18, -22, false, false],
+  [18, 'PFSTRAIN', -9,  0, 'DVV0',  -17, -25, false, false],
+  [26, '0.0',      -7,  0, 'DVV0',  -16, -27, false, false],
+  [42, 'PFSTRAIN', -9,  0, 'DVV0',  -17, -25, false, false],
+  [46, '19.1',     -9,  0, 'DVF0',  -25, -30, false, false],
+  // v379 (the user: 'WRONG kind of rotation' - their Fire Pro F5 at 3:19): he pivots on the part of him resting on
+  // Bronson's shoulder (his chest) and his LEGS swing up and over like a pendulum - straight up, then high over the far
+  // side (the same F5R frames, placed so that point stays put) - then they go down
+  [49, '19.1',     -9,  0, 'F5R30', -23, -28, false, false],
+  [53, '19.1',     -9,  0, 'F5R30', -23, -29, false, false],   // v381 (the user: 4-8 badly wrong): legs only up to the diagonal (clip 115-117), held
+  [58, '19.1',     -9,  0, 'F5R30', -23, -28, false, false],
+  // ...and he's driven down on THAT side: the DDT's frames 3-7 mirrored (last column) - Bronson falls that way
+  [66, 'DDA45',  -32,  0, 'PGVR40', -48,   1, true,  false, null, false],   // v382 (the user: 6-8 FLAT, at an angle then flat on his stomach): the Pedigree's angled-flat frames
+  [69, 'DDA70',  -42,  0, 'PGVR20', -45,   1, true,  false, null, false],
+  [71, 'DDA90',  -47,  0, 'PGVF',   -42,   1, true,  false, null, false],   // IMPACT: flat on his stomach
+  [79, 'DDA90',  -47,  0, 'PGVF',   -42,   1, true,  false, null, false],
+  [83, 'DDA90',  -47,  0, 'PGVF',   -42,   1, true,  false, null, false],
+  [86, 'DDA90',  -47,  0, null,      0,   0, false, false, null, false],   // flat on his front
+  [104,'12.6',   -22,  0, null,      0,   0, false, false, null, false]    // Bronson kneels up
+];
+var F5_HIT = 71, F5_FLAT = 86, F5_END = 114, F5_DMG = 26;
+function canF5(a){ return a.def.name==='MATT BRONSON' && !!ATLAS[a.def.name]['19.1']; }
+function startF5(a, v){
+  match.lock=null; a.grip=v.grip=0; mash=0;
+  a.state='f5'; a.t=0; a.anim=0; a.bbf = v.x>=a.x ? 1 : -1; a.bbx = Math.round(a.x); a.bby = Math.round(a.y);
+  v.state='lifted'; v.t=0;
+  sfx.whoosh();
+}
+function f5Phase(t){ var p=F5_SEQ[0]; for (var i=0;i<F5_SEQ.length;i++) if (t>=F5_SEQ[i][0]) p=F5_SEQ[i]; return p; }
+function updateF5(a){
+  a.t++;
+  var v=foe(a), f=a.bbf, X=a.bbx+1, Y=a.bby;
+  if (a.t===8 || a.t===26 || a.t===46 || a.t===52 || a.t===68) sfx.whoosh();
+  if (a.t===F5_HIT){ hurtBy(v, F5_DMG); shake=15; freeze=9; sfx.crash(); crowdBoost && crowdBoost(.6); addDust(X - f*36, Y, 16); }
+  if (a.t===F5_FLAT){                                                       // flat on his front where his face hit (the DDT's)
+    v.knock=null; v.lie=null; v.kickLie=false;
+    if (ATLAS[v.def.name]['LIEFLAT']){ v.lie='LIEFLAT'; v.face=f; v.x = X - f*22; }   // (the DDT's: face-first, near side - v381)
+    else { v.face=-f; v.x = X - f*24; }
+    v.y = Y + 1; knockDown(v); clamp(v);
+  }
+  if (a.t>=F5_END){ a.state='idle'; a.t=0; a.x = X - f*14; a.y = Y; a.face = f; a.faceLock=10; clamp(a); }   // stands where he knelt (the DDT's)
+}
+function drawF5(a){
+  var v=foe(a), f=a.bbf, X=a.bbx+1, Y=a.bby, t=a.t, p=f5Phase(t);
+  var mir = !!p[10];                                                         // v378: the far side (mirrored about X)
+  var put=function(name, fid, l, b, turn){ var r=ATLAS[name][fid];
+    if (!r && /^DDVL/.test(fid)){ fid='DDV90'; l=-42; b=1; r=ATLAS[name][fid]; }   // (the Amazon: stays spiked, like the DDT)
+    if (!r && fid==='17.1'){ fid='PFBENT'; l=6; b=-6; r=ATLAS[name][fid]; }
+    if (!r){ fid = PICKUP_VIC_AMAZON[fid] || fid; r=ATLAS[name][fid]; }
+    if (!r) return;
+    var g2 = mir ? -f : f;
+    blitAt(name, fid, g2>0 ? X + l : X - l - r[2], Y + b, turn ? g2>0 : g2<0); };
+  var man = t < F5_FLAT && p[4];
+  drawShadow({state: t>=F5_HIT ? 'down' : 'idle', x: X + (mir?-f:f)*(p[2]+10), y:Y, def:a.def});
+  var bob = ((p[1]==='0.0' || p[1]==='19.1') && (t>>3)&1) ? -1 : 0;
+  if (man && !p[7]) put(artKey(v), p[4], p[5], p[6]+bob, p[9]);
+  put(artKey(a), p[1], p[2], p[3], p[8]);
+  if (man && p[7]) put(artKey(v), p[4], p[5], p[6]+bob, p[9]);
 }
 
 /* ---- MACHETE BROWN's DDT (v319; the user: 'add a new move for Machete, a DDT' - the Jake Roberts DDT, named after
@@ -2224,6 +2425,72 @@ function drawDDT(a){
     blitAt(name, fid, f>0 ? X + l : X - l - r[2], Y + b, turn ? f>0 : f<0); };
   var man = t < DDT_FLAT && p[4];
   drawShadow({state: t>=DDT_HIT ? 'down' : 'idle', x: X + f*(p[2]+10), y:Y, def:a.def});
+  if (man && !p[7]) put(artKey(v), p[4], p[5], p[6]);
+  put(artKey(a), p[1], p[2], p[3], p[8]);
+  if (man && p[7]) put(artKey(v), p[4], p[5], p[6]);
+}
+
+/* ---- NICK PRICE's PEDIGREE (v325; the user: 'add the Pedigree, Triple H's move' - Nick, tie-up DOWN + A; reference:
+   Tenor 'triple-h-pedigree' vs Shawn Michaels). The man bent over with his head between Nick's legs (the piledriver
+   set-up PFSQUAT + PFBENT), arms hooked behind him (PFSTRAIN pull), Nick hops (3.4) and drops to his knees (8.0) as the
+   man is driven FACE-FIRST into the mat (PGV30, PGV60 = his PFBENT pitched forward about his head, tools/py/build_pedigree.py),
+   then lies flat on his face; Nick kneels up and stands. Same columns as DVD_SEQ: [first tick, Nick frame, left, bottom,
+   the man's frame, left, bottom, man in front?, turn] vs X = start x+1, Y = his feet, the man on his RIGHT (f=1). ---- */
+var PED_SEQ = [
+  // v327 (the user: 'more frames, make it go slower, follow the gif'): the clip's timing - ~2 s from the grab to the
+  // impact. Nick stays BENT OVER the man (v326), hooks one arm, then the other, pulls them up, JUMPS with his legs split
+  // (PAJ) and lands on his knees bent over him (PAK); the man pitches forward in five steps (PGV15-75), his head held
+  // between Nick's legs (x+10) and driven down to the mat.
+  [0,  'PFSQUAT',  -7,  0, 'PFBENT',  2,  -3, false, false],   // grabs him, bends him over
+  [12, '14.1',     -7,  0, 'PFBENT',  6,  -1, false, false],   // bending over him
+  [22, '11.0',     -7,  0, 'PFBENT',  8,   0, false, false],   // his head between Nick's legs - hooks one arm...
+  [36, '11.0',     -7,  1, 'PFBENT',  8,   0, false, false],   // ...then the other (a dip)
+  [48, '11.0',     -7,  0, 'PFBENT',  8,  -2, false, false],   // pulls both arms up behind his back
+  [60, '11.0',     -7, -2, 'PGV15',   6,  -5, true,  false],   // springs up - the man's legs leave the mat
+  [66, 'PAJ',      -8, -5, 'PGV30',   4,  -8, true,  false],   // in the air, legs split; the man pitched forward
+  [71, 'PAJ',      -8, -4, 'PGV45',   1,  -9, true,  false],
+  [75, 'PAK',      -7,  0, 'PGVR40', -2,   0, false, false],   // lands on his knees, the man's FACE hits the mat, legs still up
+  [78, 'PAK',      -7,  0, 'PGVR20',  1,   0, false, false],   // ...his legs coming down (v330, the user: 'fix 10 and 11')
+  [80, 'PAK',      -7,  0, 'PGVF',    4,   0, false, false],   // IMPACT: FACE-FIRST, flat on his face under Nick (v328)
+  [104,'PAK',      -7, -1, 'PGVF',    4,   0, false, false],   // ...a full second face down
+  [125,'8.0',      -5,  0, null,      0,   0, false, false],   // he rolls over onto his back; Nick kneels up
+  [136,'12.6',     -5,  0, null,      0,   0, false, false]
+];
+var PED_HIT = 80, PED_ROLL = 125, PED_END = 146, PED_DMG = 26;
+function canPED(a){ return a.def.name==='SHAWN MURPHY' &&   // v383 (the user): ONLY Shawn Murphy does the Pedigree
+   !!ATLAS[a.def.name]['PGV60']; }
+function startPED(a, v){
+  match.lock=null; a.grip=v.grip=0; mash=0;
+  a.state='ped'; a.t=0; a.anim=0; a.bbf = v.x>=a.x ? 1 : -1; a.bbx = Math.round(a.x); a.bby = Math.round(a.y);
+  v.state='lifted'; v.t=0;
+  sfx.whoosh();
+}
+function pedPhase(t){ var p=PED_SEQ[0]; for (var i=0;i<PED_SEQ.length;i++) if (t>=PED_SEQ[i][0]) p=PED_SEQ[i]; return p; }
+function updatePED(a){
+  a.t++;
+  var v=foe(a), f=a.bbf, X=a.bbx+1, Y=a.bby;
+  if (a.t===12 || a.t===60) sfx.whoosh();
+  if (a.t===PED_HIT){                                                      // face-first into the mat (drawn by drawPED, face down)
+    hurtBy(v, PED_DMG); shake=14; freeze=8; sfx.crash(); crowdBoost && crowdBoost(.5); addDust(X + f*4, Y, 16);
+  }
+  if (a.t===PED_ROLL){                                                     // after a full second face down he rolls onto his back
+    var sv=starLike(v), lr=ATLAS[v.def.name][sv ? '18.4' : '7.4'], hw=Math.round(lr[2]/2);
+    v.knock=null; v.lie=null; v.kickLie=false;
+    v.face = sv ? -f : f;                                                    // head still toward Nick
+    v.x = X + f*(4 + hw); v.y = Y - 1;
+    if (ATLAS[v.def.name]['LIEFLAT']){ v.lie='LIEFLAT'; v.face=f; v.x = X + f*25; }   // v329 (the user): FLAT, not feet up (head at X+f*4)
+    knockDown(v); clamp(v); sfx.slam && sfx.slam();
+  }
+  if (a.t>=PED_END){
+    a.state='idle'; a.t=0; a.x = X; a.y = Y; a.face = f; a.faceLock=10; clamp(a);
+  }
+}
+function drawPED(a){
+  var v=foe(a), f=a.bbf, X=a.bbx+1, Y=a.bby, t=a.t, p=pedPhase(t);
+  var put=function(name, fid, l, b, turn){ var r=ATLAS[name][fid]; if (!r) return;
+    blitAt(name, fid, f>0 ? X + l : X - l - r[2], Y + b, turn ? f>0 : f<0); };
+  var man = t < PED_ROLL && p[4];
+  drawShadow({state: t>=PED_HIT ? 'down' : 'idle', x: X + f*(p[2]+8), y:Y, def:a.def});
   if (man && !p[7]) put(artKey(v), p[4], p[5], p[6]);
   put(artKey(a), p[1], p[2], p[3], p[8]);
   if (man && p[7]) put(artKey(v), p[4], p[5], p[6]);
@@ -2346,7 +2613,7 @@ function tryPile(a,v){ if (countered(v)) startPileFail(a,v); else doPile(a,v); }
 // [first tick, attacker frame ('GRAB' = his tie-up pose, null = standing), defender bottom vs the mat]
 var PILEFAIL = [[0,'GRAB',-3], [1,'PFSQUAT',-3], [18,'PFSTRAIN',-3], [57,null,-17]];   // 18-56: sweat spray (in PFSTRAIN)
 var PILEFAIL_T = 58;
-var PF_GRAB = { 'STAR MAN':'5.0', 'TODD QUALITY':'5.0', 'LOKOMBO':'5.0', 'SCOTTY MAC':'5.0', 'NICK PRICE':'5.0', 'AIR ADONIS':'5.0', 'MACHETE BROWN':'5.0', 'THE AMAZON':'4.0' };
+var PF_GRAB = { 'STAR MAN':'5.0', 'TODD QUALITY':'5.0', 'LOKOMBO':'5.0', 'SCOTTY MAC':'5.0', 'NICK PRICE':'5.0', 'AIR ADONIS':'5.0', 'MACHETE BROWN':'5.0', 'SHAWN MURPHY':'5.0', 'MATT BRONSON':'5.0', 'CREMATOR VON SLASHER':'5.0', 'THE AMAZON':'4.0' };
 // where the NES draws the ATTACKER over the defender (his hands on the man's back), vs the attacker frame's top-left
 var PF_FRONT = {
   PFSQUAT:  [[10,21],[11,21],[11,22],[12,20],[12,21],[12,22],[12,23],[13,20],[13,21],[13,22],[13,23],[13,24],[13,25],[14,20],[14,21],
@@ -2446,6 +2713,161 @@ function drawBrain(a){
     blitAt(name, p[0], f>0 ? X + p[1] : X - p[1] - r[2], Y + p[2], mir ? f>0 : f<0); };
   if (t < D+BBU_STUCK) put(artKey(v), starLike(v) ? BBU_HEAD.star : BBU_HEAD.amazon, true);   // on his head, mirrored (the user: "the vertical is backwards"),
   put(artKey(a), BBU_LIE);                                                                       // drawn BEHIND the lifter (the user: "his head would be behind the guy doing it")
+}
+/* ---- HANGMAN'S NECKBREAKER (v335, the user's move for SHAWN MURPHY: tie-up DOWN + A, after their Adam Cole clip).
+   v336 redone (the user: 'it starts with the tie up then they are BACK TO BACK - this looks like a suplex'): out of the
+   tie-up Shawn spins round and turns his BACK to the man, the man is turned back to back with him, Shawn reaches back
+   over his own shoulder and hooks the man's head (NBH), holds it, then DROPS TO HIS KNEES so the man's neck is snapped
+   over his shoulder - the man tips over backwards (NBV10..80, his standing frame turned about his head,
+   tools/py/build_nbk.py), his feet flying up - and lands flat on his back, head by Shawn. Shawn gets up and turns to him.
+   [first tick, Shawn's frame, left, bottom, Shawn drawn facing AWAY from the man (mirrored),
+    the man's frame (null = lying, drawn by knockDown), then for '0.0': left, bottom, he faces Shawn (mirrored);
+    for NBV: his HEAD point x, y vs Shawn's feet] all for f = 1 (the man on Shawn's right), mirrored when f < 0. ---- */
+var NBV_OFF = { star:{"NBV10":[-3,50],"NBV30":[-3,44],"NBV55":[-4,29],"NBV80":[-5,10]},           // [left, bottom] vs his head point (build_nbk.py)
+                amazon:{"NBV10":[-4,51],"NBV30":[-3,45],"NBV55":[-4,31],"NBV80":[-5,11]} };
+var NBK_HIT = 88, NBK_FLOP = 96, NBK_END = 134, NBK_DMG = 24;   // (v348: +22 for the facelock)
+var NBK_SEQ = [
+  [0,   '0.0',  -7, 0, false, '0.0', 1, 0, true],      // the tie-up let go, face to face
+  [5,   '14.1', -7, 0, false, '17.1', -1, -10, false, 1],   // (v349: NOT mirrored - facing each other, like the DDT)   // v348 (the user: 'one of the early frames should look like the FRONT
+                                                       //  FACELOCK of the DDT, then they switch to back to back'): Machete's DDT grab,
+                                                       //  the man drawn IN FRONT (last field)
+                                                       // v354 (the user): no in-between frame - from the facelock straight to
+                                                       //  back to back with the head hooked (v350-353's turning frames removed)
+  [44,  'NBH',  -7, 0, false, 'NBV10', 12, 49],        // he reaches back over his shoulder and hooks the head
+  [64,  'NBH',  -7, 1, false, 'NBV10', 12, 48],        // (a squeeze)
+  [72,  'NBH',  -7, 0, false, 'NBV10', 12, 49],
+  [82,  'NBSIT', -23, 0, true, 'NBV30', 8, 32],      // DROP: he sits out (v337, the user: 'frame 7 he should be SITTING')
+  [85,  'NBSIT', -23, 0, true, 'NBV55', 6, 28],
+  [NBK_HIT, 'NBSIT', -23, 0, true, 'NBV80', 5, 26],   // the neck snapped over his shoulder, feet in the air
+  [NBK_FLOP, 'NBSIT', -23, 0, true, null],
+  [NBK_FLOP+22, '8.0', -8, 0, true, null],             // up off the mat
+  [NBK_FLOP+30, '12.6', -8, 0, true, null]
+];
+function canNBK(a){ return a.def.name==='NICK PRICE' &&   // v383 (the user): the neckbreaker is Nick Price's
+   !!ATLAS[a.def.name]['NBH']; }
+function startNBK(a, v){
+  match.lock=null; a.grip=v.grip=0; mash=0;
+  a.state='nbk'; a.t=0; a.anim=0; a.bbf = v.x>=a.x ? 1 : -1; a.bbx=Math.round(a.x); a.bby=Math.round(a.y);
+  v.state='lifted'; v.t=0;
+}
+function nbkPhase(t){ var p=NBK_SEQ[0]; for (var i=0;i<NBK_SEQ.length;i++) if (t>=NBK_SEQ[i][0]) p=NBK_SEQ[i]; return p; }
+function updateNBK(a){
+  a.t++;
+  var v=foe(a), f=a.bbf, X=a.bbx, Y=a.bby;
+  if (a.t===44 || a.t===82) sfx.whoosh();
+  if (a.t===5 || a.t===44) sfx.lock && sfx.lock();
+  if (a.t===NBK_HIT){ hurtBy(v, NBK_DMG); shake=14; freeze=8; sfx.crash(); crowdBoost && crowdBoost(.5); addDust(X + f*8, Y, 14); }
+  if (a.t===NBK_FLOP){                                                       // flat on his back, his head by Shawn
+    v.knock=null; v.lie=null; v.kickLie=false; v.face = f;
+    if (starLike(v) && ATLAS[v.def.name]['LIEFLAT']){ v.lie='LIEFLAT'; v.x = X + f*27; }
+    else { v.face = -f; v.x = X + f*28; }
+    v.y = Y-1; knockDown(v); clamp(v); sfx.slam && sfx.slam();
+  }
+  if (a.t>=NBK_END){ a.state='idle'; a.t=0; a.x=X; a.y=Y; a.face=f; a.faceLock=10; clamp(a); }
+}
+function drawNBK(a){
+  var v=foe(a), f=a.bbf, X=a.bbx, Y=a.bby, p=nbkPhase(a.t);
+  var put=function(name, fid, l, b, turn){ var r=ATLAS[name][fid];
+    if (!r && fid==='17.1'){ fid='PFBENT'; l=6; b=-6; r=ATLAS[name][fid]; }   // (the Amazon: no 17.1 - his own bent-over frame, like the DDT)
+    if (!r && fid==='19.2'){ fid='0.7'; r=ATLAS[name][fid]; }                  // (the Amazon: his own front-on frame)
+    if (!r && fid==='KNOCKB'){ fid='7.2'; r=ATLAS[name][fid]; }                // (the Amazon: his own stagger)
+    if (!r && (fid==='14.1' || fid==='14.3')){ fid='PFBENT'; r=ATLAS[name][fid]; }   // (the Amazon: his bent-over frame)
+    if (!r) return;
+    blitAt(name, fid, f>0 ? X + l : X - l - r[2], Y + b, turn ? f>0 : f<0); };
+  drawShadow({state: a.t>=NBK_FLOP ? 'down' : 'idle', x:X, y:Y, def:a.def});
+  var man=function(){
+    if (p[5].indexOf('NBV')!==0) put(artKey(v), p[5], p[6], p[7], p[8]);      // (his ordinary frames: left/bottom; NBV*: head point)
+    else { var o=(starLike(v) ? NBV_OFF.star : NBV_OFF.amazon)[p[5]]; put(artKey(v), p[5], p[6] + o[0], o[1] - p[7]); } };
+  if (p[5] && !p[9]) man();
+  put(artKey(a), p[1], p[2], p[3], p[4]);
+  if (p[5] && p[9]) man();                                                   // (the facelock: the man in front, his head under Shawn's arm)
+}
+/* ---- GIANT PANTHER's HEAD BUTT + CLAW for MATT BRONSON (v342, the user: 'playing the real game, add two moves done by
+   Giant Panther - the head butt and his claw'; Bronson, tie-up DOWN + A / LEFT-RIGHT + A).
+   v343 (the user: 'how are these moves all so wrong - did you NOT open the real game?'): FRAME FOR FRAME from the real
+   game now (FCEUX sprite captures, tools/captures/panther: pan2.lua, cut.py, match_vic.py): Panther's own poses redrawn
+   as Bronson (PHB / PCU / PCL0-2, tools/py/build_panther_moves.py), the man's poses = the real ones (the real game uses
+   Star's KNOCKB for him sagging, LIEFLAT on the mat), the real timing (tick 0 = the tie-up let go) and the real
+   positions [left vs Bronson's x (Panther stands at x-8), bottom vs his feet].
+   HEAD BUTT: guard up close, at 17 he LEAPS head first (PHB, 12 px off the mat) into the man, whose knees buckle and head
+   snaps back (KNOCKB 5 px up); at 35 the man drops flat (LIEFLAT, under / in front of him).
+   CLAW: he steps back and SHOWS THE CLAW (PCU, arms up), at 20 lunges with the claw on his head (PCL0), the hand
+   SQUEEZING (PCL1 / PCL2 every 8 frames) while the man hangs sagging at the knees (KNOCKB, his head shaking 1 px)
+   until 167, when he collapses flat.
+   Rows: [first tick, his frame, left, bottom, the man's frame (null = lying, drawn by knockDown), left, bottom,
+   the man mirrored]; facing right (mirrored about X when facing left). ---- */
+var HBT_SEQ = [
+  [0,  '5.0',  -8,   0, '0.0',    6,  0, true],
+  [1,  '5.0',  -5,   0, '0.0',    6,  0, true],      // still reaching from the tie-up
+  [9,  '0.0',  -4,   0, '0.0',    6,  0, true],      // guard up, close
+  [15, '0.0',  -4,   0, 'KNOCKB', 4, -5, false],     // (his knees already going)
+  [17, 'PHB',  -3, -12, 'KNOCKB', 1, -5, false],     // HEAD BUTT: head first, off the mat
+  [35, 'PHB',  -3, -12, null],                       // he drops flat
+  [37, '0.0',  -8,   0, null],
+  [44, null]
+];
+// v344 (the user: 'from the move CLAW change it to a CHOKE SLAM'): the claw's grip becomes a hand on the THROAT, he
+// lifts the man off the mat by the neck, raises him high, then drives him straight down flat on his back in front of him.
+var CHOKE_SEQ = [
+  [0,  '5.0',  -8,   0, '0.0',     6,   0, true],
+  [3,  'PCL0', -7,   0, '0.0',     6,   0, true],      // the hand on his throat...
+  [6,  'PCL0', -7,   0, 'KNOCKB',  1,  -5, false],     // ...he chokes, knees buckling
+  [24, 'PCL1', -7,   0, 'KNOCKB',  1,  -9, false],     // LIFTED by the neck
+  [30, 'PCL2', -7,   0, 'KNOCKB',  2, -14, false],
+  [36, 'PCH',  -7,   0, 'KNOCKB',  4, -20, false],     // up high, his arm straight up (PCH, tools/py/build_choke_arm.py)
+  [58, 'PCL0', -7,   0, 'KNOCKB',  2, -10, false],     // DOWN...
+  [61, 'PHB',  -3,   0, 'LIEFLAT', 2,   0, false],     // ...SLAM: flat on his back, FEET by Bronson (v345, the user: feet the other way)
+  [72, '0.0',  -8,   0, null],
+  [84, null]
+];
+var HBT_HIT = 17, HBT_DROP = 35, HBT_DMG = 16, CHOKE_HIT = 61, CHOKE_DROP = 72, CHOKE_DMG = 24;
+var AMZ_VF = { '0.0':'0.0', 'KNOCKB':'7.2', 'LIEFLAT':'7.4' };   // the Amazon as the man: his own frames
+function canHBT(a){ return a.def.name==='MACHETE BROWN' &&   // v383 (the user): Machete gets the head butt
+   !!ATLAS[a.def.name]['PHB']; }
+function canChoke(a){ return a.def.name==='CREMATOR VON SLASHER' && !!ATLAS[a.def.name]['PCH']; }   // v347 (the user): Cremator's finisher ONLY (Bronson had it v344-346)
+function seqRow(Q, t){ var p=Q[0]; for (var i=0;i<Q.length;i++) if (t>=Q[i][0]) p=Q[i]; return p; }
+function startHBC(a, v, kind){
+  match.lock=null; a.grip=v.grip=0; mash=0;
+  a.state=kind; a.t=0; a.anim=0; a.bbf = v.x>=a.x ? 1 : -1; a.bbx=Math.round(a.x); a.bby=Math.round(a.y);
+  v.state='lifted'; v.t=0;
+}
+function startHBT(a, v){ startHBC(a, v, 'hbt'); }
+function startChoke(a, v){ startHBC(a, v, 'choke'); }
+function hbcDrop(a, l, headIn){                                          // flat on the mat (LIEFLAT unmirrored, left X+l; headIn = mirrored, head by him)
+  var v=foe(a), f=a.bbf, X=a.bbx, Y=a.bby;
+  v.knock=null; v.lie=null; v.kickLie=false; v.face = headIn ? f : -f;
+  if (starLike(v) && ATLAS[v.def.name]['LIEFLAT']){ v.lie='LIEFLAT'; v.x = X + f*(l + (headIn ? 19 : 21)); }
+  else v.x = X + f*(l+20);
+  v.y = Y-2; knockDown(v); clamp(v); sfx.slam && sfx.slam();
+}
+function updateHBC(a){
+  a.t++;
+  var v=foe(a), f=a.bbf, X=a.bbx, Y=a.bby, Q = a.state==='hbt' ? HBT_SEQ : CHOKE_SEQ;
+  if (a.state==='hbt'){
+    if (a.t===HBT_HIT-2) sfx.whoosh();
+    if (a.t===HBT_HIT){ hurtBy(v, HBT_DMG); shake=10; freeze=6; sfx.crash(); }
+    if (a.t===HBT_DROP) hbcDrop(a, -8);
+  } else {
+    if (a.t===3) sfx.lock && sfx.lock();
+    if (a.t===24 || a.t===58) sfx.whoosh();
+    if (a.t===CHOKE_HIT){ hurtBy(v, CHOKE_DMG); shake=14; freeze=8; sfx.crash(); crowdBoost && crowdBoost(.5); addDust(X + f*20, Y, 16); }
+    if (a.t===CHOKE_DROP) hbcDrop(a, 2, false);
+  }
+  if (a.t>=Q[Q.length-1][0]){ a.state='idle'; a.t=0; a.x=X; a.y=Y; a.face=f; a.faceLock=10; clamp(a); }
+}
+function drawHBC(a){
+  var v=foe(a), f=a.bbf, X=a.bbx, Y=a.bby, p=seqRow(a.state==='hbt' ? HBT_SEQ : CHOKE_SEQ, a.t);
+  if (!p[1]) p = a.state==='hbt' ? HBT_SEQ[HBT_SEQ.length-2] : CHOKE_SEQ[CHOKE_SEQ.length-2];
+  var put=function(name, fid, l, b, turn){ var r=ATLAS[name][fid]; if (!r) return;
+    blitAt(name, fid, f>0 ? X + l : X - l - r[2], Y + b, turn ? f>0 : f<0); };
+  var sq = p[8] ? ((a.t-p[0])>>3)&1 : 0, af = (p[1]==='PCL1' && sq) ? 'PCL2' : p[1];
+  drawShadow({state:'idle', x:X, y:Y, def:a.def});
+  if (p[4]){
+    var vf = starLike(v) ? p[4] : (AMZ_VF[p[4]] || '0.0');
+    drawShadow({state: p[4]==='LIEFLAT' ? 'down' : 'idle', x:X + f*(p[5]+8), y:Y, def:v.def});
+    put(artKey(v), vf, p[5] + sq, p[6], p[7]);
+  }
+  put(artKey(a), af, p[2], p[3], false);
 }
 // Impacts fire the MOMENT the body lands (mid-animation), so the boom isn't late.
 function slamImpact(a){
@@ -2779,7 +3201,7 @@ function aiThink(e){
      (the wrestlers' midpoint, give or take) and stands still between moves. He was baked into the floor art - painted
      out (the real empty floor) and drawn as a sprite (sprites/cameraman.png: 2 poses 16x46). ---- */
 var CROWD_ANIM = [[-10,8,66,39,[[0,0],[67,0],[134,0]]],[87,8,17,10,[[0,40],[18,40]]],[182,8,50,39,[[0,51],[51,51],[102,51]]],[262,16,50,10,[[0,91],[51,91]]],[-81,41,8,8,[[0,102],[9,102]]],[-81,57,8,8,[[0,111],[9,111]]],[-66,82,10,15,[[0,120],[11,120]]],[310,82,10,15,[[0,136],[11,136]]],[-73,137,8,8,[[0,152],[9,152]]]];
-var CROWD_IMG = load('sprites/crowd_anim.png?v=1'), CAMMAN_IMG = load('sprites/cameraman.png?v=2');
+var CROWD_IMG = load('sprites/crowd_anim.png?v=3'), CAMMAN_IMG = load('sprites/cameraman.png?v=4');
 var crowdCur = [], crowdHype = 0, camMan = null;
 // THE COMMENTATORS (the user: "make the commentators move too"): real game = sprites; every 8 frames their heads swap
 // drawing - talking (mouths open/shut) within a pair, now and then the left one turns his head (another pair).
@@ -2787,7 +3209,7 @@ var crowdCur = [], crowdHype = 0, camMan = null;
 // The user: "make the one on the right also move" - in the real game the bald one only opens / shuts his mouth with the
 // other's pairs, so he now has his own: talking in bursts (open = drawing 0, shut = drawing 2, every 8 frames), pauses,
 // and a nod now and then (head 1px down). The left one keeps the real pairs. (drawings split at column 22)
-var COMM_IMG = load('sprites/commentators.png?v=2'), COMM_PAIRS = [[0,1],[2,3],[3,4]], comm = { pair:0, k:0, hold:120, rt:0, rtalk:90, rk:0, nod:0 };
+var COMM_IMG = load('sprites/commentators.png?v=4'), COMM_PAIRS = [[0,1],[2,3],[3,4]], comm = { pair:0, k:0, hold:120, rt:0, rtalk:90, rk:0, nod:0 };
 function resetCrowd(){
   crowdCur = CROWD_ANIM.map(function(){ return 0; }); crowdHype = 0;
   camMan = { x:128, tx:128, wait:60, t:0 };
@@ -3115,6 +3537,7 @@ function drawEntity(e){
   if (e.state==='btb'){ drawBTB(e); return; }         // Todd's belly-to-back suplex (draws both men)
   if (e.state==='bkb'){ drawBKB(e); return; }         // Todd's back breaker (draws both men)
   if (e.state==='ddt'){ drawDDT(e); return; }         // Machete's DDT (draws both men)
+  if (e.state==='ped'){ drawPED(e); return; }         // Nick Price's Pedigree (draws both men)
   if (e.state==='dvd'){ drawDVD(e); return; }         // Machete's Death Valley Driver (draws both men)
   if (e.state==='whip'){ drawWhipper(e); return; }     // Irish whip (real NES frames)
   if (e.state==='whipped'){ drawWhipped(e); return; }
@@ -3213,6 +3636,9 @@ function drawEntity(e){
     return;
   }
   if (e.state==='bbust'){ drawBrain(e); return; }
+  if (e.state==='nbk'){ drawNBK(e); return; }
+  if (e.state==='hbt' || e.state==='choke'){ drawHBC(e); return; }
+  if (e.state==='f5'){ drawF5(e); return; }
   if (e.state==='roll'){ drawRoll(e); return; }     // under the bottom rope
   if (e.state==='run'){ drawRun(e); return; }       // running (double-tap)
   if (e.state==='xchop'){ drawXChop(e); return; }   // Star Man's flying cross chop
@@ -3503,8 +3929,8 @@ function selLayout(){                                  // select-screen card gri
 // STREET FIGHTER II-style select (the user: "make this look more like the Street Fighter 2 select screen"): a tight grid
 // of square face tiles in the middle with flashing 1P (red) / CPU (blue) cursors, and the two picks as big portraits on
 // the left and right, facing each other, names under them, VS between. FACE = the centre of each face in its portrait.
-var FACE = { 'STAR MAN':[58,30], 'THE AMAZON':[63,36], 'TODD QUALITY':[35,17], 'LOKOMBO':[38,18], 'SCOTTY MAC':[37,19],
-             'NICK PRICE':[37,25], 'AIR ADONIS':[36,16], 'MACHETE BROWN':[34,19] };
+var FACE = { 'STAR MAN':[58,30], 'THE AMAZON':[63,36], 'TODD QUALITY':[43,18], 'LOKOMBO':[38,18], 'SCOTTY MAC':[37,19],
+             'NICK PRICE':[37,25], 'AIR ADONIS':[36,16], 'MACHETE BROWN':[34,19], 'SHAWN MURPHY':[45,30], 'MATT BRONSON':[40,16], 'CREMATOR VON SLASHER':[42,23] };
 var TILE = 38;
 function bigPortrait(i, x, y, w, h, red, mirror){
   bevelBox(x-3, y-3, w+6, h+6, red ? '#c82020' : '#2a5ad0', '#ffffff', '#000');
@@ -3850,11 +4276,14 @@ var ML_SPECIAL = {
   'STAR MAN':     [['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb'], ['SOMERSAULT KICK', 'TIE-UP  DOWN + X', 'somer'], ['FLYING CROSS CHOP', 'WHIP THEN X', 'wxchop'], ['RUNNING CROSS CHOP', 'RUN THEN X', 'xchop']],
   'AIR ADONIS':   [['SHOOTING STAR PRESS', 'ON TOP  UP + X', 'ssp']],
   'THE AMAZON':   [['PIRANHA BITE', 'TIE-UP  L/R + X', 'biteS'], ['FRONT BITE', 'TIE-UP  DOWN + X', 'biteF']],
-  'TODD QUALITY': [['BIG BOOT', 'DOWN + X', 'bigboot'], ['PILEDRIVER', 'TIE-UP  DOWN + X', 'pile'], ['BACK BREAKER', 'TIE-UP  L/R + X', 'bkb']],
+  'TODD QUALITY': [['PILEDRIVER', 'TIE-UP  DOWN + X', 'pile'], ['BACK BREAKER', 'TIE-UP  L/R + X', 'bkb']],
   'LOKOMBO':      [['POWERBOMB', 'TIE-UP  DOWN + X', 'pb']],
   'SCOTTY MAC':   [['SUPERKICK', 'TIE-UP  DOWN + X', 'hbk'], ['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb']],
-  'NICK PRICE':   [['BRAIN BUSTER', 'TIE-UP  UP + X', 'bbust'], ['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb']],
-  'MACHETE BROWN':[['DEATH VALLEY DRIVER', 'TIE-UP  DOWN + X', 'dvd'], ['DDT', 'TIE-UP  L/R + X', 'ddt']]
+  'NICK PRICE':   [['BRAIN BUSTER', 'TIE-UP  UP + X', 'bbust'], ['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb'], ["HANGMAN'S NECKBREAKER", 'TIE-UP  DOWN + X', 'nbk']],
+  'MACHETE BROWN':[['HEAD BUTT', 'TIE-UP  UP + X', 'hbt'], ['DEATH VALLEY DRIVER', 'TIE-UP  DOWN + X', 'dvd'], ['DDT', 'TIE-UP  L/R + X', 'ddt']],
+  'SHAWN MURPHY': [['PEDIGREE', 'TIE-UP  DOWN + X', 'ped']],
+  'MATT BRONSON': [['F5', 'TIE-UP  L/R + X', 'f5']],
+  'CREMATOR VON SLASHER': [['BIG BOOT', 'DOWN + X', 'bigboot'], ['CHOKE SLAM', 'TIE-UP  L/R + X', 'choke']]
 };
 var ML_COMMON = [
   ['PUNCH', 'Z', 'punch'], ['KICK', 'X', 'kick'],
@@ -3865,7 +4294,7 @@ var ML_COMMON = [
   ['PICK HIM UP', 'FOE DOWN  Z', 'pickup'], ['PIN', 'FOE DOWN  X', 'pin'], ['KICK OUT', 'PINNED  MASH Z/X', 'kickout']
 ];
 function mlItems(i){ var nm=ROSTER[i].name;
-  return (ML_SPECIAL[nm]||[]).concat(ML_COMMON.filter(function(it){ return !((it[2]==='wcl' || it[2]==='rcl') && nm==='STAR MAN') && !(it[2]==='suplex' && (TIE_A[nm]||{}).up); })); }   // (Star Man has no clothesline; Nick's UP is the brain buster)
+  return (ML_SPECIAL[nm]||[]).concat(ML_COMMON.map(function(it){ return (it[2]==='wcl' && nm==='CREMATOR VON SLASHER') ? ['BIG BOOT', 'WHIP THEN X', 'wcl'] : it; }).filter(function(it){ return !((it[2]==='wcl' || it[2]==='rcl') && nm==='STAR MAN') && !(it[2]==='suplex' && (TIE_A[nm]||{}).up); })); }   // (Star Man has no clothesline; Nick's UP is the brain buster)   // (v385: Cremator's whip rebound is the big boot)
 // each demo: set-up (gap = apart / lock = start in a tie-up / down = the dummy lies there / downA = the shown man lies
 // there), len = ticks before it replays, ev = {tick: fn(shown man, dummy)}
 var DEMOS = {
@@ -3884,6 +4313,11 @@ var DEMOS = {
   bkb:    { lock:1, len:200, ev:{ 30:startBKB } },
   dvd:    { lock:1, len:230, ev:{ 30:startDVD } },
   ddt:    { lock:1, len:170, ev:{ 30:startDDT } },
+  ped:    { lock:1, len:200, ev:{ 30:startPED } },
+  nbk:    { lock:1, len:200, ev:{ 30:startNBK } },
+  hbt:    { lock:1, len:150, ev:{ 30:startHBT } },
+  choke:  { lock:1, len:150, ev:{ 30:startChoke } },
+  f5:     { lock:1, len:190, ev:{ 30:startF5 } },
   bbust:  { lock:1, len:220, ev:{ 30:startBrain } },
   whip:   { lock:1, len:230, ev:{ 30:startWhip } },
   run:    { gap:80, len:200, ev:{ 20:function(a,v){ startRun(a, 1); } } },                                   // into him: both down
