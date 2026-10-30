@@ -9,8 +9,8 @@
   body{display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:monospace}
   #wrap{position:relative;line-height:0}
   canvas{
-    /* fill the window as large as possible, keeping the 256:240 aspect ratio */
-    width:auto; height:min(96vh, calc(98vw * 240 / 256));
+    /* fill the window as large as possible, keeping the 426:240 (16:9) aspect ratio */
+    width:auto; height:min(96vh, calc(98vw * 240 / 426));
     image-rendering:pixelated;image-rendering:crisp-edges;
     background:#000;border:4px solid #222;border-radius:4px;
   }
@@ -56,11 +56,11 @@
   <img src="goose-prandini-media.png" alt="Goose Prandini Media logo">
 </div>
 <div id="wrap">
-  <canvas id="cv" width="256" height="240"></canvas>
+  <canvas id="cv" width="426" height="240"></canvas>
   <div id="scan"></div>
 </div>
 <script src="sounds.js?v=2"></script>
-<script src="game.js?v=390"></script>
+<script src="game.js?v=409"></script>
 <script>
   /* Fullscreen toggle: press F, or double-click the game. */
   function toggleFS(){
@@ -79,6 +79,10 @@
     if(ev.key==='Escape' && document.body.classList.contains('fs')) toggleFS();   // exe: Esc leaves fullscreen
   });
   document.getElementById('cv').addEventListener('dblclick', toggleFS);
+  /* the exe opens fullscreen (1920x1080): use the fullscreen look from the start */
+  addEventListener('pywebviewready', function(){
+    if (pywebview.api && pywebview.api.starts_fullscreen) pywebview.api.starts_fullscreen().then(function(v){ if (v) document.body.classList.add('fs'); });
+  });
 </script>
 </body>
 </html>
