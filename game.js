@@ -146,7 +146,7 @@ var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'sco
 for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=116', frames:ATLAS_DATA[_an].frames };
 ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=60';   // v355: his fat mirror copy
 ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=46';   // v480: his fat mirror copy
-ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=11', frames:ATLAS_DATA['BASE'].frames };   // v435 Todd's manager (tools/py/build_manager.py)
+ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=14', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
 ATLAS_DATA['RIGOR VON SLASHER'] = { sheet:'sprites/rigor_keyed.png?v=4', frames:ATLAS_DATA['BASE'].frames };   // v627 Cremator's partner (tools/py/build_rigor.py)
 ATLAS_DATA['CREMATOR VON SLASHER#COAT'] = { sheet:'sprites/cremator_coat_keyed.png?v=26', frames:ATLAS_DATA['CREMATOR VON SLASHER'].frames };   // v429 entrance coat
 for (var _nm in ATLAS_DATA) {
@@ -2296,6 +2296,11 @@ function startDive(e, kind){
   e.state='tdive'; e.t=0; e.tkind=kind; e.tland=0; e.tmiss=false;
   e.thit = v.state==='down' && !v.out && vy+11 <= TOP_REACH_Y && topInRange(vx);
   e.tly = Math.min(vy+11, TOP_REACH_Y); e.tlx = Math.max(236 - TOP_RANGE, Math.min(226, vx-5));   // (in range, in the ring)
+  // v639 (the user: 'the splash looks silly when it hits vs misses - see it HIT and MISS in the real game'; FCEUX
+  // miss/splash.lua): a MISS lands 9 px further down the ring than his line (real: man at y52 -> landed y72, not 63);
+  // a HIT lands on a man lying FLAT (ours could be lying legs-up, the splash landing on his raised legs)
+  if (!e.thit) e.tly = Math.min(vy+20, TOP_REACH_Y);
+  else if (v.downPose !== 'LIEFLAT' && v.downPose !== 'PGVF' && ATLAS[v.def.name]['LIEFLAT']) v.downPose = 'LIEFLAT';
   var n=0; while ((n < TOP_Y.length ? TOP_Y[n] : TOP_Y[TOP_Y.length-1] + 3*(n-TOP_Y.length+1)) < e.tly) n++;
   e.tn = n;                                                             // airborne frames until he lands
   sfx.whoosh();
@@ -2308,9 +2313,9 @@ function updateDive(e){
     if (e.tmiss && e.tland > TOP_MISS_HOLD[e.tkind]){                 // v620 the real miss: held in the dive pose, then flat
       e.tmiss=false; e.lie = (e.tkind==='ssp' && ATLAS[e.def.name]['PGVF']) ? 'PGVF' : (ATLAS[e.def.name]['LIEFLAT'] ? 'LIEFLAT' : null); if (!e.lie) e.kickLie=true;
       e.face = (e.tside==='R') !== (e.lie==='PGVF') ? 1 : -1;            // (PGVF is cut head-left: turned so the head stays where it landed)
-      knockDown(e); e.downT = TOP_MISS_DOWN[e.tkind]; e.slowUp = true; clamp(e); return;
+      knockDown(e); e.downT = TOP_MISS_DOWN[e.tkind]; e.slowUp = true; e.y -= 14; clamp(e); return;   // (v639: real - flat 14 px up the screen from the dive pose, so it doesn't jump down)
     }
-    if (!e.tmiss && e.tland > 21){ e.state='idle'; e.t=0; clamp(e); }
+    if (!e.tmiss && e.tland > 20){ e.state='idle'; e.t=0; clamp(e); }   // (v639: real - 20 frames on him, then up)
     return;
   }
   if (e.t <= 8){ topPlace(e, 236, 32); return; }                        // crouch
@@ -3069,7 +3074,7 @@ function drawBrain(a){
   var t=a.t, D=a.bbuV+BBU_HOLD;
   if (t < D){                                                               // the suplex lift, frozen on the straight-up frame
     var u=supFrame(Math.min(t, a.bbuV), a.def.name), r=ATLAS[a.def.name][u[0]];
-    if (soloFrame(a, u[0], u[1], u[2], a.face<0)) return;   // v637 two sprites
+    if (soloFrame(a, u[0], u[1], u[2], a.face<0, true)) return;   // v637 two sprites
     g.save(); g.translate(Math.round(a.x),Math.round(a.y)+u[2]); if(a.face<0) g.scale(-1,1);
     g.drawImage(sheetVs(a), r[0],r[1],r[2],r[3], -u[1], -r[3], r[2], r[3]);
     g.restore(); return;
@@ -4298,11 +4303,13 @@ var SOLO_THROW = { 'TODD QUALITY':1, 'LOKOMBO':1, 'SCOTTY MAC':1, 'NICK PRICE':1
 var SLAMSEQ_SOLO = [['SLAM1',19,38],['SLAM3',32,20],['SLAM4',32,22],['SLAM5',28,6]];
 function throwPhase(e, Q){ var acc=0, cur=Q[Q.length-1]; for (var i=0;i<Q.length;i++){ if (e.t < acc+Q[i][2]){ cur=Q[i]; break; } acc+=Q[i][2]; } return cur; }
 function drawThrowSolo(e, Q){ var ph=throwPhase(e, Q); return soloFrame(e, ph[0], ph[1], 0, e.face<0); }
-function soloFrame(e, fid, anchor, dy, flipArt){        // one throw frame, two sprites (the victim's own pose under the attacker)
+function soloFrame(e, fid, anchor, dy, flipArt, keepAnchor){   // one throw frame, two sprites (the victim's own pose under the attacker)
+  // keepAnchor: the suplex / brain buster frames keep the same anchor in both facings (the flip mirrors about e.x) -
+  // the slam / pick-up / piledriver ones measure it from the far edge when flipped (v640, the user: 'a massive shift')
   var v=foe(e), A=ATLAS[artKey(e)], r=A && A[fid], VI=THROW_VIC[fid];
   if (!r || !VI || !v || !SOLO_THROW[e.def.name]) return false;
   var vr=ATLAS[artKey(v)][VI[0]]; if (!vr) return false;
-  var ax = flipArt ? (r[2]-anchor) : anchor;
+  var ax = (flipArt && !keepAnchor) ? (r[2]-anchor) : anchor;
   g.save(); g.translate(Math.round(e.x), Math.round(e.y)+(dy||0)); if (flipArt) g.scale(-1,1);
   var L0=-ax, T0=-r[3];                                  // the old combined frame's top-left
   g.save(); g.translate(L0 + VI[2] + (VI[1] ? vr[2] : 0), T0 + VI[3]); if (VI[1]) g.scale(-1,1);
@@ -4531,7 +4538,7 @@ function drawEntity(e){
     var A4=ATLAS[e.def.name];
     if (A4 && A4['SUPLEX1']){
       var uc=supFrame(e.t,e.def.name), urc=A4[uc[0]];   // SUPSEQ (above drawShadow)
-      if (soloFrame(e, uc[0], uc[1], uc[2], e.face<0)) return;   // v637 two sprites
+      if (soloFrame(e, uc[0], uc[1], uc[2], e.face<0, true)) return;   // v637 two sprites
       // offset is the same in both facings: the flip mirrors the frame about e.x
       g.save(); g.translate(Math.round(e.x),Math.round(e.y)+uc[2]); if(e.face<0) g.scale(-1,1);
       g.drawImage(sheetVs(e), urc[0],urc[1],urc[2],urc[3], -uc[1], -urc[3], urc[2], urc[3]);
@@ -5234,7 +5241,7 @@ var DEMOS = {
   kickout:{ downA:1, len:250, ev:{ 20:function(a,v){ startPin(v,a); } } }
 };
 function topDemoSetup(a, v){                         // top-rope demos: the man down near the back-right corner
-  a.x=226; a.y=69; a.face=1; v.x=204; v.y=76; v.face=-1; knockDown(v); v.downT=99999; ref.x=60;
+  a.x=226; a.y=69; a.face=1; v.x=204; v.y=76; v.face=-1; if (ATLAS[v.def.name]['LIEFLAT']) v.lie='LIEFLAT'; knockDown(v); v.downT=99999; ref.x=60;   // (v639: flat, like after a real knockdown)
 }
 function demoStart(){
   var ML=moveList, it=mlItems(ML.i)[ML.sel], D=DEMOS[it[2]];
