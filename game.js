@@ -35,7 +35,7 @@ var ATLAS_DATA = {"BASE":{"frames":{"0.0":[5,5,14,56],"LIEUP":[197,1167,18,26],"
 // TODD QUALITY = the user's own wrestler: Star Man's full frame set repainted (tools/py/repaint2.py:
 // slicked-back hair, horseshoe mustache, bare arms, black tank top, gold chain, purple track pants with a
 // gold stripe, black sneakers) — same rects, own sheet (file names still say 'heavy').
-ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=92', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=93', frames:ATLAS_DATA['BASE'].frames };
 // LOKOMBO = the user's 4th wrestler (from their photos): Star Man's full frame set recoloured (deep brown skin, black
 // trunks, black knee pads) with Todd's head designs re-stamped in his colours (black flat-top, beard) —
 // tools/py/build_lokombo.py. Same rects, own sheet.
@@ -143,11 +143,11 @@ function creInit(im){
 ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=37', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
   { FAMJ:[6,720,20,48], FAMS:[36,720,19,26] }) };   // v503: + his own front-on famouser frames (tools/py/build_famouser.py)
 var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator', 'DANCE DADDY DENERO':'deniro' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=116', frames:ATLAS_DATA[_an].frames };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=117', frames:ATLAS_DATA[_an].frames };
 ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=60';   // v355: his fat mirror copy
 ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=46';   // v480: his fat mirror copy
-ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=14', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
-ATLAS_DATA['RIGOR VON SLASHER'] = { sheet:'sprites/rigor_keyed.png?v=4', frames:ATLAS_DATA['BASE'].frames };   // v627 Cremator's partner (tools/py/build_rigor.py)
+ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=18', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
+ATLAS_DATA['RIGOR VON SLASHER'] = { sheet:'sprites/rigor_keyed.png?v=5', frames:ATLAS_DATA['BASE'].frames };   // v627 Cremator's partner (tools/py/build_rigor.py)
 ATLAS_DATA['CREMATOR VON SLASHER#COAT'] = { sheet:'sprites/cremator_coat_keyed.png?v=26', frames:ATLAS_DATA['CREMATOR VON SLASHER'].frames };   // v429 entrance coat
 for (var _nm in ATLAS_DATA) {
   ATLAS[_nm] = ATLAS_DATA[_nm].frames;
@@ -1557,7 +1557,10 @@ function hit(e,f,dmg,kd){
   if (kd || f.hp<=0){
     shake=7; freeze=5; sfx.kick(); addSpark(cx,cy,12,'#ffffff',1.6);
     // real NES (every attacker's kick, captured): Star is knocked back in place 19f, then lies FLAT, then kneels up
-    var fly = e.move==='kick' || e.move==='bigboot' || e.move==='hbk' || e.move==='chair';   // (+ the chair shot)   // (Todd's big boot + superkick drop him the same way: knocked back, then flat)
+    // v648 (the user: 'when people fall down from a punch it's a weird motion, make it look like the real game'): the
+    // real NES never drops a man from punches (Amazon punching Star 40 s, tools/captures/punchkd) - its only standing
+    // knockdown is this one, so the last-health punch now uses it too (was: an 8px jump back + a crouch, then the drop)
+    var fly = true;
     if (fly){   // real game: knocked back in place until the kicker lands, then lies FLAT (Star KNOCKB/LIEFLAT, the Amazon 7.2/7.4)
       f.face=-e.face; f.fallDelay=19;
       if (ATLAS[f.def.name] && ATLAS[f.def.name]['KNOCKB']){ f.knock='KNOCKB'; f.lie='LIEFLAT'; }
@@ -3820,7 +3823,14 @@ function updatePin(){
 // Patrols the back of the ring near the action (1px/frame, stride every 8 frames, ~72-frame pauses,
 // always facing the wrestlers). On a pin he runs over (2px/frame), lies down behind the pinned man and
 // slaps the count. Positions measured from the clips (ring2.png = the real ring, 1px higher).
-var REFIMG = load('sprites/ref_keyed.png');
+// v649 (the user: 'add a ref selection in the options - Robert Mitchell, Scooter Q Hanson', from their photos):
+// both built on the real NES ref's frames (tools/py/build_ref_scooter.py, --robert for Robert); OPTIONS > REFEREE
+var REFS = [ { name:'ROBERT MITCHELL',  img:load('sprites/ref_robert_keyed.png?v=1') },
+             { name:'SCOOTER Q HANSON', img:load('sprites/ref_scooter_keyed.png?v=4') } ];
+var refSel = 0;
+try { var _rn = localStorage.getItem('pw_ref'); for (var _ri=0;_ri<REFS.length;_ri++) if (REFS[_ri].name===_rn) refSel=_ri; } catch(err){}
+function saveRef(){ try { localStorage.setItem('pw_ref', REFS[refSel].name); } catch(err){} }
+var REFIMG = REFS[0].img;
 var REF_FR = { stand:[0,0,16,48], stride:[18,0,16,48], raise:[36,0,16,16], slap:[54,0,16,16] };  // stand/stride face RIGHT
 var REF_BACK_Y = 66;
 var ref = null;
@@ -3891,7 +3901,7 @@ function updateRef(){
   }
 }
 function drawRef(){
-  var R=ref; if(!R||!imgOk(REFIMG)) return;
+  var R=ref; REFIMG = REFS[refSel].img; if(!R||!imgOk(REFIMG)) return;
   if (R.mode==='count'){                                   // lying behind them: hand up, then SLAP on each count
     var ct=(match.pin && match.pin.ct)||0;
     var cf = (ct>0 && ct%60>=30) ? REF_FR.raise : REF_FR.slap;
@@ -3945,7 +3955,7 @@ var DIFFS = [
     grab:0.55, kickTaps:22, aimS:0, sweep:[45,16], react:[0,1], smart:true,
     youPin:[0.99,0.60,0.35,0.15,0.02], cpuPin:[0.99,0.90,0.75,0.50,0.15], escape:6, ropeStop:0.35 }
 ];
-var diff = 1;
+var diff = 1, optRow = 0;   // (optRow: the OPTIONS screen's row - 0 difficulty, 1 referee)
 try { var sn = localStorage.getItem('pw_diffname'), sd = parseInt(localStorage.getItem('pw_diff'), 10);   // v400: saved by NAME (TOUGH was put in at index 2)
   for (var _di=0; _di<DIFFS.length; _di++) if (DIFFS[_di].name===sn) diff = _di;
   if (!sn && sd>=0 && sd<=2) diff = [0,1,3][sd]; } catch(err){}
@@ -4717,7 +4727,7 @@ function updateTitle(){
     var it=MENU_ITEMS[menuSel];
     if (it==='EXHIBITION' || it==='CAW' || it==='TOURNAMENT'){ sfx.select(); startSelect(it); }
     else if (it==='2 PLAYERS'){ sfx.select(); startSelect('2P'); }   // v434: 1P picks, then 2P picks (any controller in the menus)   // TOURNAMENT: pick yourself only   // CAW = the same, without Star Man + the Amazon
-    else if (it==='OPTIONS'){ sfx.select(); scene='diff'; diffOpt=true; T=0; }
+    else if (it==='OPTIONS'){ sfx.select(); scene='diff'; diffOpt=true; optRow=0; T=0; }
     else if (it==='MOVE LIST'){ pressed={}; openMoves(selIdx); return; }
   }
   pressed={};
@@ -4940,17 +4950,35 @@ function drawDiff(){
     var gr=g.createLinearGradient(0,y+2,0,y+bh-2); gr.addColorStop(0, sel ? '#202a5a' : '#14162a'); gr.addColorStop(1, '#06060e');
     g.fillStyle=gr; g.fillRect(bx+2,y+2,bw-4,bh-4);
     fancyC(d.name, 128, y+4, 'reg', 2, sel ? DIFF_GRAD[d.name] : GREYT, '#000', null);
-    if (sel){ var ax=(T>>3)&1; g.fillStyle=d.col;               // bouncing arrows either side
+    if (sel && optRow===0){ var ax=(T>>3)&1; g.fillStyle=d.col;               // bouncing arrows either side
       for (var r=0;r<7;r++){ var aw=4-Math.abs(3-r); g.fillRect(bx-10+ax-aw, y+7+r, aw, 1); g.fillRect(bx+bw+10-ax, y+7+r, aw, 1); } }
   }
   // what it means
   bevelBox(8, 180, W-16, 15, '#0c0c1c', '#3a3e58', '#000');
   fancyC(DIFFS[diff].desc, 128, 184, 'bold', 1, DIFF_GRAD[DIFFS[diff].name], '#000', null, W-24);
+  // v649 REFEREE (Left / Right on this row picks him; Up / Down moves between the difficulty and here)
+  var rs=optRow===1, ry=204, rbx=20, rbw=W-40, rbh=21;
+  if (rs){ g.fillStyle='#ffffff'; g.globalAlpha=0.18; g.fillRect(rbx-3,ry-3,rbw+6,rbh+6); g.globalAlpha=1; }
+  bevelBox(rbx, ry, rbw, rbh, rs ? (pulse ? '#ffd020' : '#ffffff') : '#3a3e58', rs ? '#ffffff' : '#6a6e90', '#000');
+  var rg=g.createLinearGradient(0,ry+2,0,ry+rbh-2); rg.addColorStop(0, rs ? '#202a5a' : '#14162a'); rg.addColorStop(1, '#06060e');
+  g.fillStyle=rg; g.fillRect(rbx+2,ry+2,rbw-4,rbh-4);
+  fancyC('REF: '+REFS[refSel].name, 128, ry+7, 'bold', 1, rs ? GOLD : GREYT, '#000', null, rbw-28);
+  if (rs){ var ax2=(T>>3)&1; g.fillStyle='#ffd020';
+    for (var r2=0;r2<7;r2++){ var aw2=4-Math.abs(3-r2); g.fillRect(rbx+8-ax2, ry+7+r2, aw2, 1); g.fillRect(rbx+rbw-8+ax2-aw2, ry+7+r2, aw2, 1); } }
 }
 function updateDiff(){
   var n=DIFFS.length;
-  if (pressed['ArrowUp']||pressed['ArrowLeft']){ diff=(diff+n-1)%n; sfx.select(); }
-  if (pressed['ArrowDown']||pressed['ArrowRight']){ diff=(diff+1)%n; sfx.select(); }
+  if (optRow===1){                                               // v649 the REFEREE row
+    if (pressed['ArrowLeft']){ refSel=(refSel+REFS.length-1)%REFS.length; saveRef(); sfx.select(); }
+    if (pressed['ArrowRight']){ refSel=(refSel+1)%REFS.length; saveRef(); sfx.select(); }
+    if (pressed['ArrowUp']){ optRow=0; diff=n-1; sfx.select(); }
+    if (pressed['ArrowDown']){ optRow=0; diff=0; sfx.select(); }
+  } else {
+    if (pressed['ArrowUp']){ if (diff===0) optRow=1; else diff--; sfx.select(); }
+    if (pressed['ArrowDown']){ if (diff===n-1) optRow=1; else diff++; sfx.select(); }
+    if (pressed['ArrowLeft']){ diff=(diff+n-1)%n; sfx.select(); }
+    if (pressed['ArrowRight']){ diff=(diff+1)%n; sfx.select(); }
+  }
   if (pressed['Backspace'] || pStart()){                         // OPTIONS: Enter / A / B / Backspace = keep it, back to the menu
     saveDiff();
     sfx.select(); scene='title'; diffOpt=false; T=0;
