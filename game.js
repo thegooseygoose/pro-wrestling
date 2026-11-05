@@ -35,7 +35,7 @@ var ATLAS_DATA = {"BASE":{"frames":{"0.0":[5,5,14,56],"LIEUP":[197,1167,18,26],"
 // TODD QUALITY = the user's own wrestler: Star Man's full frame set repainted (tools/py/repaint2.py:
 // slicked-back hair, horseshoe mustache, bare arms, black tank top, gold chain, purple track pants with a
 // gold stripe, black sneakers) — same rects, own sheet (file names still say 'heavy').
-ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=93', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=94', frames:ATLAS_DATA['BASE'].frames };
 // LOKOMBO = the user's 4th wrestler (from their photos): Star Man's full frame set recoloured (deep brown skin, black
 // trunks, black knee pads) with Todd's head designs re-stamped in his colours (black flat-top, beard) —
 // tools/py/build_lokombo.py. Same rects, own sheet.
@@ -71,7 +71,7 @@ ATLAS_DATA['SHAWN MURPHY'] = { sheet:'sprites/shawn_keyed.png?v=55', frames:Obje
 // recoloured + his own heads (tools/py/bronson_heads.py: BALD, aviator sunglasses, full brown beard) - tools/py/build_bronson.py -
 // then Todd's trousers + chain copied onto him pose by pose as his TAN 'BB' track pants (red side stripe) and gold chain
 // (tools/py/build_bronson_pants.py). Shirtless, black shoes.
-ATLAS_DATA['MATT BRONSON'] = { sheet:'sprites/bronson_keyed.png?v=46', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['MATT BRONSON'] = { sheet:'sprites/bronson_keyed.png?v=47', frames:ATLAS_DATA['BASE'].frames };
 // CREMATOR VON SLASHER = the user's 11th wrestler (v346, their photos tools/cremator_photos 5-7.jpg): the same recipe - Star's
 // frames recoloured + his own heads (tools/py/cremator_heads.py: a SILVER stitched full-face mask, slicked reddish-brown hair) -
 // tools/py/build_cremator.py - then Todd's tank + trousers copied onto him as his dark NAVY sleeveless shirt and dark pants
@@ -143,7 +143,7 @@ function creInit(im){
 ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=37', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
   { FAMJ:[6,720,20,48], FAMS:[36,720,19,26] }) };   // v503: + his own front-on famouser frames (tools/py/build_famouser.py)
 var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator', 'DANCE DADDY DENERO':'deniro' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=117', frames:ATLAS_DATA[_an].frames };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=119', frames:ATLAS_DATA[_an].frames };
 ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=60';   // v355: his fat mirror copy
 ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=46';   // v480: his fat mirror copy
 ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=18', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
@@ -160,16 +160,16 @@ for (var _nm in ATLAS_DATA) {
   })(_nm, ATLAS_DATA[_nm].sheet);
 }
 SHEET['CREMATOR VON SLASHER#COAT']._rm = COAT_MAP; SHEET['CREMATOR VON SLASHER#COAT']._cp = true;
-PORTRAIT['TODD QUALITY'] = load('sprites/portrait_heavy.png?v=13');   // v356 (the user: same style as the others): his photo tools/todd_photos/1.jpg via build_lokombo_portrait.py --box 230,55,1310,865 --dark 90 --size 86,64 --fill --k 12
+PORTRAIT['TODD QUALITY'] = load('sprites/portrait_heavy.png?v=14');   // v660 smoother: recoloured in full colour (tools/py/portrait_recolour.py)   // v356 (the user: same style as the others): his photo tools/todd_photos/1.jpg via build_lokombo_portrait.py --box 230,55,1310,865 --dark 90 --size 86,64 --fill --k 12
 PORTRAIT['LOKOMBO'] = load('sprites/portrait_lokombo.png?v=18');   // tools/py/build_lokombo_portrait.py
-PORTRAIT['SCOTTY MAC'] = load('sprites/portrait_scotty.png?v=12');  // same tool, tools/scotty_photos/13.jpg --box 180,120,1220,958
-PORTRAIT['NICK PRICE'] = load('sprites/portrait_nick.png?v=14');    // same tool, tools/nick_photos/1.jpg --box 300,180,1300,985 --out portrait_nick.png
-PORTRAIT['AIR ADONIS'] = load('sprites/portrait_adonis.png?v=17');  // same tool, tools/adonis_photos/4.jpg --size 86,64 (the whole flexed arm - the user) --box 200,130,1600,1172 --keep (cap, fist, forearm, bicep, left arm, torso) --fill --k 12 --out portrait_adonis.png
-PORTRAIT['MACHETE BROWN'] = load('sprites/portrait_machete.png?v=12');   // same tool, tools/machete_photos/1.jpg --box 300,40,1300,845 --keep "420,500,1180,845;730,90,870,170;560,430,1060,520" --fill --k 10 --out portrait_machete.png
-PORTRAIT['SHAWN MURPHY'] = load('sprites/portrait_shawn.png?v=23');   // v417 tools/shawn_photos/2.jpg via build_lokombo_portrait.py --box 360,80,1240,735 --size 86,64 --dark 40 --k 16 + bandana tinted navy; (old: 1.jpg), backdrop cleared by hand; his OWN hair (v332, the user: no blonde on the picture)
-PORTRAIT['MATT BRONSON'] = load('sprites/portrait_bronson.png?v=17');   // tools/bronson_photos/1.jpg via build_lokombo_portrait.py --box 300,200,1300,950 --size 86,64 --fill --k 10
+PORTRAIT['SCOTTY MAC'] = load('sprites/portrait_scotty.png?v=13');   // v660 smoother: recoloured in full colour (tools/py/portrait_recolour.py)  // same tool, tools/scotty_photos/13.jpg --box 180,120,1220,958
+PORTRAIT['NICK PRICE'] = load('sprites/portrait_nick.png?v=16');   // v662 (the user: 'fix nick price photo' - head cut flat, arms cut off): re-cut by tools/py/nick_portrait_v662.py (wide box, curtain-vs-hair matte, sleeve forced in)   // v660 smoother: recoloured in full colour (tools/py/portrait_recolour.py)    // same tool, tools/nick_photos/1.jpg --box 300,180,1300,985 --out portrait_nick.png
+PORTRAIT['AIR ADONIS'] = load('sprites/portrait_adonis.png?v=18');   // v660 smoother: recoloured in full colour (tools/py/portrait_recolour.py)  // same tool, tools/adonis_photos/4.jpg --size 86,64 (the whole flexed arm - the user) --box 200,130,1600,1172 --keep (cap, fist, forearm, bicep, left arm, torso) --fill --k 12 --out portrait_adonis.png
+PORTRAIT['MACHETE BROWN'] = load('sprites/portrait_machete.png?v=13');   // v660 smoother: recoloured in full colour (tools/py/portrait_recolour.py)   // same tool, tools/machete_photos/1.jpg --box 300,40,1300,845 --keep "420,500,1180,845;730,90,870,170;560,430,1060,520" --fill --k 10 --out portrait_machete.png
+PORTRAIT['SHAWN MURPHY'] = load('sprites/portrait_shawn.png?v=25');   // v658 the user chose the photo WITH his shirt (v657 shirtless try reverted; tools/py/shawn_portrait_shirtless.py unused); v417 tools/shawn_photos/2.jpg via build_lokombo_portrait.py --box 360,80,1240,735 --size 86,64 --dark 40 --k 16 + bandana tinted navy; (old: 1.jpg), backdrop cleared by hand; his OWN hair (v332, the user: no blonde on the picture)
+PORTRAIT['MATT BRONSON'] = load('sprites/portrait_bronson.png?v=18');   // v660 smoother: recoloured in full colour (tools/py/portrait_recolour.py)   // tools/bronson_photos/1.jpg via build_lokombo_portrait.py --box 300,200,1300,950 --size 86,64 --fill --k 10
 PORTRAIT['DANCE DADDY DENERO'] = load('sprites/portrait_deniro.png?v=6');   // tools/deniro_photos/3.jpg via build_lokombo_portrait.py --box 300,180,1300,930 --size 86,64 --fill --k 14
-PORTRAIT['CREMATOR VON SLASHER'] = load('sprites/portrait_cremator.png?v=18');   // tools/cremator_photos/5.jpg via build_lokombo_portrait.py --box 220,40,1100,700 --size 86,64 --fill --k 12
+PORTRAIT['CREMATOR VON SLASHER'] = load('sprites/portrait_cremator.png?v=19');   // v660 smoother: recoloured in full colour (tools/py/portrait_recolour.py)   // tools/cremator_photos/5.jpg via build_lokombo_portrait.py --box 220,40,1100,700 --size 86,64 --fill --k 12
 // Throw frames have the victim drawn in, so some pairings use their own copy of the attacker's sheet
 // (same rects): Star<->Todd get a Star-shaped victim, the Amazon's throws get Todd repainted in.
 var SHEET_VS = {
@@ -1219,7 +1219,7 @@ function chairClang(){ tone(1250,0.28,0.2,'square',640); tone(1880,0.22,0.12,'tr
 // MEDIUM 60% / HARD 85%), walk it over to you and swing when you're in reach and up; after its shot(s) (1, HARD 2), if you
 // roll back in, or as the count-out gets near (12), it drops the chair and heads back in. Returns true while it's busy.
 function aiChair(e, fw){
-  var hitsMax=[1,1,2][diff]||1, near=(match.roCount||0)>=12;
+  var hitsMax=[1,1,1,2][diff]||1, near=(match.roCount||0)>=12;
   if (e.chair){
     if (!fw.out || fw.state==='roll' || near || (e.aiChairHits||0)>=hitsMax){ e.aiMoveX=e.aiMoveY=0; e.aiPunch=false; e.aiKick=true; return true; }   // put it down
     e.aiChairCD=(e.aiChairCD||0)-1;
@@ -1229,7 +1229,7 @@ function aiChair(e, fw){
     e.aiMoveX = Math.abs(tx-e.x)>2 ? (tx>e.x?1:-1) : 0; e.aiMoveY = Math.abs(ty-e.y)>2 ? (ty>e.y?1:-1) : 0;
     e.aiPunch=e.aiKick=false; return true;
   }
-  if (e.aiChairPlan==null) e.aiChairPlan = fw.out && CHAIR && !CHAIR.held && CHAIR.out && Math.random() < ([0.35,0.6,0.85][diff]||0.6);
+  if (e.aiChairPlan==null) e.aiChairPlan = fw.out && CHAIR && !CHAIR.held && CHAIR.out && Math.random() < ([0.35,0.6,0.72,0.85][diff]||0.6);
   if (!e.aiChairPlan || !fw.out || !CHAIR || CHAIR.held || !CHAIR.out || near || (e.aiChairHits||0)>=hitsMax){ e.aiChairPlan=false; return false; }
   if (chairNear(e)){ e.aiMoveX=e.aiMoveY=0; e.aiPunch=true; e.aiKick=false; return true; }   // pick it up
   e.aiMoveX = Math.abs(CHAIR.x-e.x)>3 ? (CHAIR.x>e.x?1:-1) : 0; e.aiMoveY = Math.abs(CHAIR.y-e.y)>3 ? (CHAIR.y>e.y?1:-1) : 0;
@@ -2126,7 +2126,7 @@ function updateRun(e){
     if (pPunch() && R.ph==='run' && R.cyc>=4){ runJump(e); return; }              // Z: running jump (ends the run)
   }
   if (e.cpu && !R.ld && R.ph==='run' && !R.plan && Math.abs(f.x-e.x)<=44 && (f.x-e.x)*R.dir>0){   // the CPU picks as it closes in
-    var cr=Math.random(), cc=[0.35,0.55,0.75][diff]||0.55;
+    var cr=Math.random(), cc=[0.35,0.55,0.65,0.75][diff]||0.55;   // (v656: 4 entries - EASY/MEDIUM/TOUGH/HARD; the old 3 gave HARD the MEDIUM odds)
     R.plan = (canCloth(e) && cr<cc) ? 'cloth' : (canXChop(e) && cr<cc) ? 'xchop' : (cr<cc+0.15 ? 'jump' : 'none');
     if (R.plan==='cloth') R.cl=true;
   }
@@ -3826,7 +3826,10 @@ function updatePin(){
 // v649 (the user: 'add a ref selection in the options - Robert Mitchell, Scooter Q Hanson', from their photos):
 // both built on the real NES ref's frames (tools/py/build_ref_scooter.py, --robert for Robert); OPTIONS > REFEREE
 var REFS = [ { name:'ROBERT MITCHELL',  img:load('sprites/ref_robert_keyed.png?v=1') },
-             { name:'SCOOTER Q HANSON', img:load('sprites/ref_scooter_keyed.png?v=4') } ];
+             { name:'SCOOTER Q HANSON', img:load('sprites/ref_scooter_keyed.png?v=4') },
+             { name:'JESSE WALKER',     img:load('sprites/ref_jesse_keyed.png?v=1'),            // v655 a little heavier: 20px-wide cells
+               fr:{ stand:[0,0,20,48], stride:[20,0,20,48], raise:[40,0,16,16], slap:[58,0,16,16] } },
+             { name:'CLASSIC REF',      img:load('sprites/ref_keyed.png') } ];   // v654 (the user: 'also have the generic ref'): the real NES ref
 var refSel = 0;
 try { var _rn = localStorage.getItem('pw_ref'); for (var _ri=0;_ri<REFS.length;_ri++) if (REFS[_ri].name===_rn) refSel=_ri; } catch(err){}
 function saveRef(){ try { localStorage.setItem('pw_ref', REFS[refSel].name); } catch(err){} }
@@ -3904,14 +3907,14 @@ function drawRef(){
   var R=ref; REFIMG = REFS[refSel].img; if(!R||!imgOk(REFIMG)) return;
   if (R.mode==='count'){                                   // lying behind them: hand up, then SLAP on each count
     var ct=(match.pin && match.pin.ct)||0;
-    var cf = (ct>0 && ct%60>=30) ? REF_FR.raise : REF_FR.slap;
+    var FR_=REFS[refSel].fr||REF_FR, cf = (ct>0 && ct%60>=30) ? FR_.raise : FR_.slap;
     g.drawImage(REFIMG, cf[0],cf[1],cf[2],cf[3], R.cx-8, R.cy-cf[3], cf[2], cf[3]);
     return;
   }
-  var x=Math.round(R.x), y=Math.round(R.y), f=REF_FR[R.pose];
+  var x=Math.round(R.x), y=Math.round(R.y), f=(REFS[refSel].fr||REF_FR)[R.pose];
   var sg=SHADOW_G||g; sg.fillStyle='rgba(0,0,30,0.28)'; sg.beginPath(); sg.ellipse(x, y, 8, 2, 0, 0, 6.2832); sg.fill();
   g.save(); g.translate(x,y); if(R.face<0) g.scale(-1,1);
-  g.drawImage(REFIMG, f[0],f[1],f[2],f[3], -8, -f[3], f[2], f[3]);
+  g.drawImage(REFIMG, f[0],f[1],f[2],f[3], -(f[2]>>1), -f[3], f[2], f[3]);
   g.restore();
 }
 
@@ -3970,16 +3973,33 @@ function aiThink(e){
   // levels) it runs at you - and as it closes in picks a running clothesline (not Star) / a jump / just running into you
   // (with a gap between you it decides now and then, steps up/down onto your line, then goes)
   var runOk = (e.state==='idle'||e.state==='walk') && !e.out && !fw.out && (fw.state==='idle'||fw.state==='walk')
-      && Math.abs(fw.x-e.x)>=56 && Math.abs(fw.x-e.x)<=170;
+      && Math.abs(fw.x-e.x)>=(e.aiRunNear ? 34 : 56) && Math.abs(fw.x-e.x)<=170
+      && match.t >= 140 + 360;   // v656 (the user: run SOMETIMES, not always at the start): no runs in the first ~6 s after the bell
   if (e.aiRunPlan>0){
-    if (!runOk){ e.aiRunPlan=0; }
+    if (!runOk){ e.aiRunPlan=0; e.aiRunNear=false; }
     else { e.aiRunPlan--;
-      if (Math.abs(fw.y-e.y)<=2){ e.aiRunPlan=0; e.aiRunCD=240; e.aiMoveX=e.aiMoveY=0; startRun(e, fw.x>=e.x ? 1 : -1); return; }
+      if (Math.abs(fw.y-e.y)<=2){ e.aiRunPlan=0; e.aiRunNear=false; e.aiRunCD=240; e.aiMoveX=e.aiMoveY=0; startRun(e, fw.x>=e.x ? 1 : -1); return; }
       e.aiMoveX=0; e.aiMoveY = fw.y>e.y ? 1 : -1; e.aiPunch=e.aiKick=false; return; }
   }
   e.aiRunCD=(e.aiRunCD||0)-1;
   if (Math.abs(fw.x-e.x)<40) e.aiGapSeen=false;                      // close again: the next gap gets a fresh decision
-  if (runOk && !e.aiGapSeen && e.aiRunCD<=0){ e.aiGapSeen=true; if (Math.random() < ([0.3,0.5,0.7][diff]||0.5)) e.aiRunPlan = 60; }   // once per gap
+  // v656 BACK OFF + RUN (the user: the CPU should SOMETIMES run, not always at the start): close up and standing, now
+  // and then it steps back toward the ropes behind it to make room, then runs at you (the gap rule above rarely fires,
+  // the CPU walks in too fast for a gap to stay open)
+  if (e.aiBack!=null){
+    if (!(e.state==='idle'||e.state==='walk') || e.out || fw.out || !(fw.state==='idle'||fw.state==='walk')) e.aiBack=null;
+    else if (Math.abs(fw.x-e.x)>=72 || Math.abs(e.x-e.aiBack)<=2 || --e.aiBackT<=0){
+      e.aiBack=null; if (Math.abs(fw.x-e.x)>=34){ e.aiGapSeen=true; e.aiRunNear=true; e.aiRunPlan=60; } }   // (he followed? still go if there's room to)
+    else { e.aiMoveX = e.aiBack>e.x ? 1 : -1; e.aiMoveY=0; e.aiPunch=e.aiKick=false; return; }
+  }
+  var bothFree = (e.state==='idle'||e.state==='walk') && (fw.state==='idle'||fw.state==='walk') && !e.out && !fw.out;
+  var freshFree = bothFree && !e.aiWasFree; e.aiWasFree = bothFree;     // one roll each time both are free again
+  if (freshFree && e.aiBack==null && e.aiRunCD<=0 && match.t >= 140+360
+      && Math.abs(fw.x-e.x)<56 && Math.random() < ([0.12,0.18,0.24,0.3][diff]||0.18)){
+    var bx = e.x < fw.x ? RING.x1+16 : RING.x2-16;
+    if (Math.abs(bx-fw.x) >= 80){ e.aiBack=bx; e.aiBackT=100; }
+  }
+  if (runOk && !e.aiGapSeen && e.aiRunCD<=0){ e.aiGapSeen=true; if (Math.random() < ([0.2,0.3,0.4,0.5][diff]||0.3)) e.aiRunPlan = 60; }   // once per gap (v656: rarer, 4 levels)
   if (!e.out){ e.aiChairPlan=null; e.aiChairHits=0; }   // (back in the ring: a fresh chair decision next time out)
   if (e.out && (e.state==='idle'||e.state==='walk') && aiChair(e, fw)) return;   // THE CHAIR (the user: the CPU uses it too)
   if (e.out && (e.state==='idle'||e.state==='walk')){   // thrown out: back in - round to the front floor, then up under the rope
@@ -3990,7 +4010,7 @@ function aiThink(e){
   }
   if (fw.state==='whipped' && fw.wh && fw.wh.w===e){   // the CPU whipped you: stand still, then knee / leapfrog / nothing
     e.aiMoveX=e.aiMoveY=0;
-    if (!fw.wh.plan){ var kp=[0.35,0.6,0.85][diff]||0.6, rr=Math.random(); fw.wh.plan = rr<kp ? ((canRebound(e) && Math.random()<0.45) ? 'cloth' : 'knee') : (rr<kp+(1-kp)/2 ? 'frog' : 'none'); }
+    if (!fw.wh.plan){ var kp=[0.35,0.6,0.72,0.85][diff]||0.6, rr=Math.random(); fw.wh.plan = rr<kp ? ((canRebound(e) && Math.random()<0.45) ? 'cloth' : 'knee') : (rr<kp+(1-kp)/2 ? 'frog' : 'none'); }
     if (fw.wh.plan!=='none' && !e.whQ) e.aiWhipQ = fw.wh.plan;   // queued like the player's (fires in range by itself)
     return;
   }
@@ -4002,7 +4022,7 @@ function aiThink(e){
       e.aiTopFor=fw.kdN; e.aiTop=null;
       var tside = fw.x>=128 ? 'R' : 'L', tcx = tside==='R' ? 227 : 25, tcy = 69;
       var twalk = Math.max(Math.abs(tcx-e.x), Math.max(0, e.y-tcy)/0.7) / (1.15*e.def.sp);
-      if (!fw.out && !e.out && fw.y - 24 + 11 <= TOP_REACH_Y && topInRange(topMirror(tside, Math.round(fw.x)+1)) && twalk <= 110 && Math.random() < ([0.25,0.45,0.65][diff]||0.45)){
+      if (!fw.out && !e.out && fw.y - 24 + 11 <= TOP_REACH_Y && topInRange(topMirror(tside, Math.round(fw.x)+1)) && twalk <= 110 && Math.random() < ([0.25,0.45,0.55,0.65][diff]||0.45)){
         e.aiTop = { side:tside, cx:tcx, kind: (canSSP(e) && Math.random()<0.4) ? 'ssp' : (Math.random()<0.5 ? 'splash' : 'knee') };
         // the climb + dive takes ~2 s and a human is only down ~1 s (the real numbers), so you stay down long enough
         // for it to arrive — but MASHING still gets you up early (downT -= mash*3), so you can escape the dive
@@ -4835,9 +4855,10 @@ function selLayout(){                                  // select-screen card gri
 // STREET FIGHTER II-style select (the user: "make this look more like the Street Fighter 2 select screen"): a tight grid
 // of square face tiles in the middle with flashing 1P (red) / CPU (blue) cursors, and the two picks as big portraits on
 // the left and right, facing each other, names under them, VS between. FACE = the centre of each face in its portrait.
-var FACE = { 'TODD QUALITY':[43,18], 'LOKOMBO':[38,18], 'SCOTTY MAC':[37,19],
-             'NICK PRICE':[37,25], 'AIR ADONIS':[36,16], 'MACHETE BROWN':[34,19], 'SHAWN MURPHY':[45,30], 'MATT BRONSON':[40,16], 'CREMATOR VON SLASHER':[42,23], 'DANCE DADDY DENERO':[43,22] };
+var FACE = { 'TODD QUALITY':[42,20], 'LOKOMBO':[40,19], 'SCOTTY MAC':[38,21],   // v659 (the user: heads cut off / off-centre): each crop centred on the head, top of the head inside the tile
+             'NICK PRICE':[42,21], 'AIR ADONIS':[34,20], 'MACHETE BROWN':[38,20], 'SHAWN MURPHY':[40,19], 'MATT BRONSON':[39,21], 'CREMATOR VON SLASHER':[38,21], 'DANCE DADDY DENERO':[42,21] };
 var TILE = 38;
+var PORTRAIT_TILE = { 'AIR ADONIS': load('sprites/portrait_adonis_tile.png?v=1') };   // v660 (the user): his flexed fist poked into the face tile's corner - this copy has it erased (the big portrait keeps it)
 function bigPortrait(i, x, y, w, h, red, mirror){
   bevelBox(x-3, y-3, w+6, h+6, red ? '#c82020' : '#2a5ad0', '#ffffff', '#000');
   var gr=g.createLinearGradient(0,y,0,y+h); gr.addColorStop(0, red ? '#5a1626' : '#16306e'); gr.addColorStop(1,'#05050c');
@@ -4877,7 +4898,7 @@ function drawSelect(){
     var x=gx0+c*(TILE+gap)+Math.round((per-inRow)*(TILE+gap)/2), y=gy0+r*(TILE+gap);
     var gr=g.createLinearGradient(0,y,0,y+TILE); gr.addColorStop(0,'#2a3060'); gr.addColorStop(1,'#0a0c1c');
     g.fillStyle=gr; g.fillRect(x,y,TILE,TILE);
-    var im=PORTRAIT[ROSTER[i].name], f=FACE[ROSTER[i].name]||[38,18];
+    var im=PORTRAIT_TILE[ROSTER[i].name]||PORTRAIT[ROSTER[i].name], f=FACE[ROSTER[i].name]||[38,18];
     if (imgOk(im)){ var sx=Math.max(0, Math.min(im.naturalWidth-TILE, f[0]-TILE/2)), sy=Math.max(0, Math.min(im.naturalHeight-TILE, f[1]-TILE/2));
       g.drawImage(im, sx, sy, TILE, TILE, x, y, TILE, TILE); }
     var sel=i===selIdx, opp=i===oppIdx && !tourSel;
@@ -5046,7 +5067,7 @@ function tourFace(i, x, y, s, st){
   g.fillRect(x-1,y-1,s+2,s+2);
   var gr=g.createLinearGradient(0,y,0,y+s); gr.addColorStop(0,'#2a3060'); gr.addColorStop(1,'#0a0c1c'); g.fillStyle=gr; g.fillRect(x,y,s,s);
   if (i==null){ fancyC('?', x+s/2+0.5, y+s/2-3, 'bold', 1, GREYT, '#000', null); return; }
-  var im=PORTRAIT[ROSTER[i].name], f=FACE[ROSTER[i].name]||[38,18];
+  var im=PORTRAIT_TILE[ROSTER[i].name]||PORTRAIT[ROSTER[i].name], f=FACE[ROSTER[i].name]||[38,18];
   if (imgOk(im)){ var sx=Math.max(0, Math.min(im.naturalWidth-TILE, f[0]-TILE/2)), sy=Math.max(0, Math.min(im.naturalHeight-TILE, f[1]-TILE/2));
     g.drawImage(im, sx, sy, TILE, TILE, x, y, s, s); }
   if (st==='out'){ g.fillStyle='rgba(0,0,0,0.62)'; g.fillRect(x,y,s,s); }
