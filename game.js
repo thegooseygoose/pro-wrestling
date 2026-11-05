@@ -3941,17 +3941,23 @@ function endMatch(winner, byPin){
    youPin   chance YOUR pin holds for the 3, by the CPU's health bars left (0,1,2,3,4+)
    cpuPin   chance the CPU's pin on you holds, by your bars left
    escape   taps needed to kick out of the CPU's pin when it doesn't hold ---- */
+// v663 (the user OK'd 'fix that': MEDIUM / EASY CPU only punched + kicked): EASY / MEDIUM now walk in for tie-ups
+// too (grab - its throws, whips + specials all come from tie-ups) and aim the meter better (MEDIUM aimS 10->3.5 hot
+// 0.2: ~half the tie-ups vs a good player, was 2 of 18; EASY 20->8). Measured (bot, 14 matches): MEDIUM now whips,
+// specials, runs, top-rope dives + ~coin-flip matches; EASY still a walkover); TOUGH grabs more (0.3->0.42). HARD unchanged.
 // ropeStop (v497): chance the CPU stops on the ropes after your Irish whip instead of running back into your move
 var DIFFS = [
   { name:'EASY',   col:'#40e040', desc:'THE CPU IS SLOW AND EASY TO PIN',
-    think:[36,40], hesitate:0.45, kick:0.35, grip:150, gripT:80, cpuDown:190, punish:false, kickTaps:10, aimS:20, hot:0.05, sweep:[80,41], react:[45,40],
+    think:[36,40], hesitate:0.45, kick:0.35, grip:150, gripT:80, cpuDown:190, punish:false,
+    grab:0.15, kickTaps:10, aimS:8, hot:0.05, sweep:[80,41], react:[45,40],
     youPin:[0.99,0.90,0.75,0.50,0.15], cpuPin:[0.99,0.60,0.35,0.15,0.02], escape:3, ropeStop:0.15 },
   { name:'MEDIUM', col:'#ffd020', desc:'THE NORMAL GAME',
-    think:[20,30], hesitate:0,    kick:0.5,  grip:100, gripT:40, cpuDown:150, punish:false, kickTaps:14, aimS:10, hot:0.10, sweep:[70,41], react:[20,25],
+    think:[20,30], hesitate:0,    kick:0.5,  grip:100, gripT:40, cpuDown:150, punish:false,
+    grab:0.2, kickTaps:14, aimS:3.5, hot:0.2, sweep:[70,41], react:[20,25],
     youPin:PIN_HOLD, cpuPin:PIN_HOLD, escape:4, ropeStop:0.25 },
   { name:'TOUGH',  col:'#ff8020', desc:'QUICKER CPU - WIN THE TIE-UPS ON TIME',   // v400 (the user): between MEDIUM and HARD
     think:[12,22], hesitate:0,    kick:0.55, grip:80,  gripT:32, cpuDown:125, punish:false,
-    grab:0.3, kickTaps:18, aimS:2.5, hot:0.30, cold:0.04, sweep:[50,21], react:[9,10],
+    grab:0.42, kickTaps:18, aimS:2.5, hot:0.30, cold:0.04, sweep:[50,21], react:[9,10],
     youPin:[0.99,0.68,0.42,0.20,0.03], cpuPin:[0.99,0.82,0.62,0.38,0.10], escape:5, ropeStop:0.30 },
   { name:'HARD',   col:'#e02020', desc:'THE CPU IS QUICK AND HARD TO PIN',
     think:[8,16],  hesitate:0,    kick:0.6,  grip:60,  gripT:24, cpuDown:100, punish:true,
