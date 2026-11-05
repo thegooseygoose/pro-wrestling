@@ -1214,11 +1214,23 @@ function drawEntOverlay(){                                // screen space: the p
   g.fillStyle=cl[0]; g.fillRect(x, y, 4, h); g.fillRect(x, y+h, tw, 2);
   g.fillStyle='rgba(255,255,255,0.25)'; g.fillRect(x+4, y, tw-4, 1);
   fancyC(name, x+4+(tw-4)/2, y+(big?5:4), 'bold', big?2:1, e===p1 ? REDT : BLUET, '#000', null);
-  var sub = entStyle(e).withName; if (!sub) return;                 // v629 (the user): 'w/ Rigor Von Slasher' / 'w/ Lance Skullz' under it
-  var sw = sub.length*7 + 16, S0 = -VX - sw, sx = Math.round(S0 + (8-S0)*inT - (8-S0)*outT), sy = y + h + 3;
-  g.fillStyle='rgba(0,0,0,0.75)'; g.fillRect(sx, sy, sw, 13);
-  g.fillStyle=cl[0]; g.fillRect(sx, sy, 3, 13);
-  fancyC(sub, sx+3+(sw-3)/2, sy+3, 'bold', 1, WHITE, '#000', null);
+  // under it: v681 (the user: 'when they have the title write on their name plate CAW CHAMPION') in gold, then
+  // v629 (the user) 'w/ Rigor Von Slasher' / 'w/ Lance Skullz'
+  var subs = []; if (CHAMP_OPT===name && !e.alt) subs.push(['CAW CHAMPION', GOLD]);
+  if (entStyle(e).withName) subs.push([entStyle(e).withName, WHITE]);
+  var sy = y + h + 3;
+  if (y + h + 3 + subs.length*16 > H && subs.length>1){                  // (no room for both below: the title sits above the name)
+    var top=subs.shift(), tw2=top[0].length*7+16, T0=-VX-tw2, tx=Math.round(T0 + (8-T0)*inT - (8-T0)*outT);
+    g.fillStyle='rgba(0,0,0,0.75)'; g.fillRect(tx, y-16, tw2, 13); g.fillStyle='#e8b428'; g.fillRect(tx, y-16, 3, 13);
+    fancyC(top[0], tx+3+(tw2-3)/2, y-13, 'bold', 1, top[1], '#000', null);
+  }
+  subs.forEach(function(S){
+    var sub=S[0], sw = sub.length*7 + 16, S0 = -VX - sw, sx = Math.round(S0 + (8-S0)*inT - (8-S0)*outT);
+    g.fillStyle='rgba(0,0,0,0.75)'; g.fillRect(sx, sy, sw, 13);
+    g.fillStyle=S[1]===GOLD ? '#e8b428' : cl[0]; g.fillRect(sx, sy, 3, 13);
+    fancyC(sub, sx+3+(sw-3)/2, sy+3, 'bold', 1, S[1], '#000', null);
+    sy += 16;
+  });
 }
 /* ---- THE CHAIR (the user: "add a chair on the outside you can pick up and hit the wrestler with"). A steel folding
    chair lies on the left floor beside the ring. Out of the ring, standing on it: Z (pad X) PICKS IT UP and you carry
@@ -4644,6 +4656,143 @@ function drawEntity(e){
     drawWrestler(artKey(e), e.x, e.y, e.face, poseOf(e), f);
   }
 }
+/* ---- v675 THE CHAMPION'S BELT ON HIS WAIST (the user: 'an actual belt the wrestlers come out with, around their waist
+   - we can pick who we put it on just to test'). OPTIONS > CHAMPION picks him (NONE = nobody). He wears a small Apex
+   belt (black strap, silver side plates, the silver centre plate with its red leaf) through his entrance, and takes it
+   off when he rolls into the ring. It's fitted per frame: the waist row is ~47% of his standing height up from his
+   feet, and the strap spans his torso on that row (the run of body pixels round the frame's centre, from the sheet). */
+var CHAMP_OPT = null;   // the wrestler's name, or null
+try { var _co = localStorage.getItem('pw_champ'); if (_co && _co!=='NONE') CHAMP_OPT = _co; } catch(err){}
+function saveChamp(){ try { localStorage.setItem('pw_champ', CHAMP_OPT || 'NONE'); } catch(err){} }
+var BELT_ALPHA = {};
+// v677 (the user: 'have it be on him like a piece of clothing and move with him whoever the champ is'): the champion
+// wears it for his ENTRANCE only ('they dont wrestle with the belt on - they only come out with it'). It's PAINTED ONTO HIS TRUNKS' WAISTBAND in every frame
+// of his sheet - found per frame from his own colours (trunks colours vs the torso colours above them, read off his
+// standing frame) - so it bends, bobs, turns and lies down with him, and never sticks out past his body. The silver
+// plate sits on his belly side. Hooked into drawImage, so every move that draws his sheet gets it.
+function wearsBelt(e){ return !!(CHAMP_OPT && match && match.phase==='entrance' && e && e.out && e.def && e.def.name===CHAMP_OPT && !e.alt && !e.hidden); }   // only for his entrance - off once he's in the ring
+var BELT_ON = null, BELT_PAL = {}, BELT_OV = {};
+function beltSheetNow(){                              // the image of the champion's current sheet (or null)
+  BELT_ON = null; if (!CHAMP_OPT || !match) return;
+  [p1, p2].forEach(function(e){ if (wearsBelt(e)){ var k=artKey(e), im=SHEET[k]; if (im){ im.__beltKey=k; BELT_ON=im; } } });
+}
+function sheetAlpha(img){                            // rgba of a whole sheet, cached per image
+  var k = img.src || img.__nm || ''; if (BELT_ALPHA[k]) return BELT_ALPHA[k];
+  var w=img.naturalWidth||img.width, h=img.naturalHeight||img.height, c=document.createElement('canvas'); c.width=w; c.height=h;
+  var x=c.getContext('2d'); x.drawImage(img,0,0); var d=x.getImageData(0,0,w,h).data;
+  return BELT_ALPHA[k]={w:w,h:h,d:d};
+}
+function pxAt(S,x,y){ var i=(y*S.w+x)*4; return S.d[i+3]>40 ? (S.d[i]<<16|S.d[i+1]<<8|S.d[i+2]) : -1; }
+function beltPal(key, img){                          // { T: trunks colours, U: torso colours, wr: waist row / idle height }
+  if (BELT_PAL[key]) return BELT_PAL[key];
+  var base=key.replace(/#.*$/,''), A=ATLAS[key]||ATLAS[base], SQ=SEQ[key]||SEQ[base], f=A && SQ && SQ.idle && A[SQ.idle.seq[0]];
+  if (!f) return BELT_PAL[key]={T:{},U:{},n:0};
+  var S=sheetAlpha(img), rows=[], x, y, j, c;
+  for (y=0;y<f[3];y++){ var s={}; for (x=0;x<f[2];x++){ c=pxAt(S,f[0]+x,f[1]+y); if (c>=0) s[c]=1; } rows.push(s); }
+  var wr=Math.round(f[3]*0.43);                       // the waistband: row 24 of the shared 56-px standing body
+  var U={}, T={}, nT=0; for (j=Math.max(0,wr-7);j<wr;j++) for (c in rows[j]) U[c]=1;
+  for (j=wr;j<wr+4;j++) for (c in rows[j]) if (!U[c]){ T[c]=1; nT++; }
+  return BELT_PAL[key]={T:T,U:U,n:nT,wr:wr/f[3],wrow:wr};
+}
+var BELT_UP = 3, BELT_TH = 4, BELT_C = { hi:[64,64,76], mid:[28,28,34], lo:[8,8,10], st:[96,86,74] };
+// v678 (the user sent the classic NES champ: 'the belt will sort of look like this when on them' - a thick strap with a
+// BIG plate on the belly, taller than the strap, and a smaller plate on the hip): 4 px strap, 7x9 centre plate (dark
+// CANADIAN field + red leaf, 2 px poking out past his belly), 3x5 hip plate with a red gem.
+// v679 (the user: 'make it look better, like an actual belt - it looks a bit silly'; the Murphy fit is right): the plate
+// redrawn as a real round championship plate - dark outline, a polished silver rim lit top-left / shaded bottom-right
+// with a white glint, crossed by gold engraving and the dark CANADIAN band; a small rounded hip plate.
+var SIDE_PLATE = ["..OOOO..", ".O1122O.", "O112223O", "O1kggk3O", "O455554O", "O2kggk3O", "O223334O", ".O3344O.", "..OOOO.."];   // (the user picked A: silver, gold band - the real Apex look)
+var HIP_PLATE = [".OO.", "O12O", "O2gO", "O34O", ".OO."], PLATE_OFF=[-5,-3], HIP_OFF=[-2,-1];
+var SIDE_COL = { O:[18,18,24], 1:[252,252,255], 2:[214,218,226], 3:[160,164,176], 4:[104,108,120], 5:[62,64,74], g:[240,192,48], k:[168,112,16], R:[220,30,30] };
+// v680 (the user: rolling in, 'it goes to his ass which looks weird - have it make sense'): the roll-in frames get their
+// own rules. 18.8 / 18.7 / 18.9 are seen from BEHIND (he steps up to the apron) - just the strap across his back, the
+// plates are round the front; 18.6 is face-down under the rope - strap only; 18.5 is on his back - the plate shows.
+var BELT_FRAME = { '18.8':{plate:0, hip:0}, '18.7':{plate:0, hip:0}, '18.9':{plate:0, hip:0}, '18.6':{plate:0, hip:0}, '18.5':{hip:0},
+                   '19.2':{dx:-2}, '19.3':{dx:-2} };   // v685 the arms-up pose (faces us): plate 2 px left (the user)
+var BELT_FNAME = {};
+function beltFrameName(key, sx, sy, sw, sh){        // which atlas frame this rect is (the same names on every sheet)
+  var id=key+'|'+sx+','+sy+','+sw+','+sh; if (id in BELT_FNAME) return BELT_FNAME[id];
+  var A=ATLAS[key]||ATLAS[key.replace(/#.*$/,'')], nm=null;
+  for (var k in A){ var r=A[k]; if (r[0]===sx && r[1]===sy && r[2]===sw && r[3]===sh){ nm=k; break; } }
+  return BELT_FNAME[id]=nm;
+}
+function beltOverlay(img, sx, sy, sw, sh){           // a (sw+8)x(sh+8) canvas (4 px pad) with the belt for this frame
+  var key=img.__beltKey, id=key+'|'+sx+','+sy+','+sw+','+sh; if (id in BELT_OV) return BELT_OV[id];
+  var P=beltPal(key, img), S=sheetAlpha(img), PAD=4, W=sw+PAD*2, H=sh+PAD*2, out=null;
+  var at=function(x,y){ return (x<0||y<0||x>=sw||y>=sh) ? -1 : pxAt(S,sx+x,sy+y); };
+  var isT0=function(x,y){ var c=at(x,y); return c>=0 && P.T[c]; };
+  var up = sh >= sw*0.9, hits=[], x, y, k, dir='down';
+  // his trunks = the trunks-coloured blob nearest the middle of his body (not black boots / hair of the same colour)
+  var bx0=0, by0=0, bn=0; for (y=0;y<sh;y++) for (x=0;x<sw;x++) if (at(x,y)>=0){ bx0+=x; by0+=y; bn++; }
+  bx0/=Math.max(1,bn); by0/=Math.max(1,bn);
+  var lab=new Int32Array(sw*sh), best=0, bestSc=-1e9, comp=0, tx=0, tc=0;
+  for (y=0;y<sh;y++) for (x=0;x<sw;x++) if (isT0(x,y) && !lab[y*sw+x]){
+    comp++; var st=[[x,y]], n=0, cx=0, cy=0; lab[y*sw+x]=comp;
+    while (st.length){ var q=st.pop(); n++; cx+=q[0]; cy+=q[1];
+      for (var dy=-1;dy<=1;dy++) for (var dx=-1;dx<=1;dx++){ var nx=q[0]+dx, ny=q[1]+dy;
+        if (nx>=0&&ny>=0&&nx<sw&&ny<sh && !lab[ny*sw+nx] && isT0(nx,ny)){ lab[ny*sw+nx]=comp; st.push([nx,ny]); } } }
+    var sc = n - 4*Math.hypot(cx/n-bx0, cy/n-by0); if (sc>bestSc){ bestSc=sc; best=comp; tx=cx/n; tc=n; }
+  }
+  var isT=function(x,y){ return x>=0&&y>=0&&x<sw&&y<sh && lab[y*sw+x]===best && best>0; };
+  if (tc>=6){
+    // which way is his head: upright frames = up; lying ones = the side of his trunks with more of his body
+    if (!up){ var l=0, r=0; for (y=0;y<sh;y++) for (x=0;x<sw;x++) if (at(x,y)>=0 && !isT(x,y)){ if (x<tx) l++; else r++; } dir = l>=r ? 'right' : 'left'; }
+    var L = (dir==='down') ? sw : sh, M = (dir==='down') ? sh : sw;
+    for (k=0;k<L;k++){                                // per scanline: the first trunks pixel coming from the head side
+      var hit=-1;
+      for (var s=0;s<M;s++){ var px = dir==='down' ? k : dir==='right' ? s : sw-1-s, py = dir==='down' ? s : k;
+        if (isT(px,py)){ hit=s; break; } }
+      if (hit>=0 && (dir!=='down' || hit < sh*0.8)) hits.push([k,hit]);
+    }
+    if (hits.length){
+      var hs=hits.map(function(h){ return h[1]; }).sort(function(a,b){ return a-b; }), med=hs[hs.length>>1];
+      hits=hits.filter(function(h){ return Math.abs(h[1]-med)<=3; });
+    }
+  }
+  if (hits.length < 3 && up && P.wr){                 // no trunks colour to go by (dark coat over dark pants): his waist row
+    var wy=Math.round(sh*P.wr); dir='down'; hits=[]; for (x=0;x<sw;x++) if (at(x,wy)>=0) hits.push([x,wy]);
+  }
+  // v683 (the user: 'a little higher, like 5 pixels higher on their waist'): up from the trunks' top toward his head
+  hits = hits.map(function(h){ return [h[0], Math.max(0, h[1]-BELT_UP)]; });
+  if (hits.length >= 2){
+    var cv=document.createElement('canvas'); cv.width=W; cv.height=H; var cg=cv.getContext('2d'), im=cg.createImageData(W,H), d=im.data;
+    var put=function(px,py,col){ px+=PAD; py+=PAD; if (px<0||py<0||px>=W||py>=H) return; var i=(py*W+px)*4; d[i]=col[0]; d[i+1]=col[1]; d[i+2]=col[2]; d[i+3]=255; };
+    var front=null;
+    hits.forEach(function(h){
+      for (var t=0;t<BELT_TH;t++){                   // the strap: highlight, leather (+stitches), shadow; keeps his outline
+        var s=h[1]+t, px = dir==='down' ? h[0] : dir==='right' ? s : sw-1-s, py = dir==='down' ? s : h[0];
+        var c0=at(px,py); if (c0<0) continue;
+        var lum=((c0>>16&255)*3+(c0>>8&255)*6+(c0&255))/10;
+        var edge = at(px-1,py)<0 || at(px+1,py)<0 || at(px,py-1)<0 || at(px,py+1)<0;
+        if (edge && lum<40) continue;
+        put(px,py, t===0 ? BELT_C.hi : t===BELT_TH-1 ? BELT_C.lo : (t===1 && (h[0]&1)) ? BELT_C.st : BELT_C.mid);
+      }
+      // belly side: upright = the frame's right (he faces right; flipped frames mirror it), lying = the top
+      if (dir==='down'){ if (!front || h[0]>front[0]) front=h; } else { if (!front || h[0]<front[0]) front=h; }
+    });
+    var stamp=function(pat, ref, ox, oy){             // pattern cell (i,j) -> ref + (ox+i, oy+j), turned for lying frames
+      pat.forEach(function(row, j){ for (var i=0;i<row.length;i++){ var ch=row[i]; if (ch==='.') continue;
+        if (dir==='down') put(ref[0]+ox+i, ref[1]+oy+j, SIDE_COL[ch]);
+        else { var al = ref[1]+oy+j, along = dir==='right' ? al : sw-1-al; put(along, ref[0]-(ox+i), SIDE_COL[ch]); } } });
+    };
+    var FO = BELT_FRAME[beltFrameName(key, sx, sy, sw, sh)] || {};
+    if (FO.hip!==0 && hits.length >= 6){ var hb = dir==='down' ? hits.slice().sort(function(a,b){ return a[0]-b[0]; }) : hits.slice().sort(function(a,b){ return b[0]-a[0]; });
+      stamp(HIP_PLATE, hb[Math.floor(hb.length*0.3)], HIP_OFF[0], HIP_OFF[1]); }                 // the hip plate (his back half)
+    if (front && FO.plate!==0){ var hm=hits.map(function(h){ return h[1]; }).sort(function(a,b){ return a-b; })[hits.length>>1];
+      stamp(SIDE_PLATE, [front[0]+(FO.dx||0), Math.min(front[1], hm)], PLATE_OFF[0], PLATE_OFF[1]); }   // (level with the strap, not the lowest front pixel)                                 // the big plate on his belly
+    cg.putImageData(im,0,0); out=cv;
+  }
+  return BELT_OV[id]=out;
+}
+(function(){                                         // every draw of the champion's sheet gets his belt on top
+  var P=CanvasRenderingContext2D.prototype, orig=P.drawImage;
+  P.drawImage = function(img, sx, sy, sw, sh, dx, dy, dw, dh){
+    orig.apply(this, arguments);
+    if (img!==BELT_ON || arguments.length!==9 || sw<8 || sh<8) return;
+    var ov=beltOverlay(img, sx, sy, sw, sh); if (!ov) return;
+    var kx=dw/sw, ky=dh/sh; orig.call(this, ov, 0,0,ov.width,ov.height, dx-4*kx, dy-4*ky, ov.width*kx, ov.height*ky);
+  };
+})();
 // HEALTH BARS (the user: "fix the health bar, make it look better", v269): one smooth bar (1 px = 1.5 hp) in a bevelled
 // frame instead of 10 blocks; gold > 50, orange > 25, red below (blinking under 15); a DAMAGE TRAIL - the chunk a hit
 // takes off flashes white, holds, then drains away - and a 1P red / CPU blue accent edge. flip = drains toward the
@@ -4703,6 +4852,7 @@ function drawClock(str, cx, y, col){
   }
 }
 function drawMatch(){
+  beltSheetNow();
   var sx=0,sy=0; if(shake>0) shake--;   // v399 (the user): no screen shake on impacts (shake still counts down: the crowd reacts to big hits)
   g.save(); g.translate(sx-Math.round(camX),sy+Math.round(camY));   // world -> screen (ring out: the camera slides sideways; top rope: it pans up)
   drawArena();
@@ -5022,12 +5172,12 @@ function drawDiff(){
   g.fillStyle='#000'; g.fillRect(0,22,W,1);
   fancyC('OPTIONS', 128, 5, 'reg', 2, GOLD, '#1c0400', '#000');
   // (OPTIONS holds the CPU difficulty - the user's pick)
-  fancyC('CPU DIFFICULTY', 128, 52, 'bold', 2, WHITE, '#000', null);
-  g.fillStyle='#c83030'; g.fillRect(48,72,W-96,1); g.fillStyle='#6e1010'; g.fillRect(48,73,W-96,1);
+  fancyC('CPU DIFFICULTY', 128, 32, 'bold', 2, WHITE, '#000', null);   // (v675: everything up a bit - a 3rd row, CHAMPION)
+  g.fillStyle='#c83030'; g.fillRect(48,52,W-96,1); g.fillStyle='#6e1010'; g.fillRect(48,53,W-96,1);
   // the three choices
   var pulse=(T>>3)&1;
   for (var i=0;i<DIFFS.length;i++){
-    var d=DIFFS[i], sel=i===diff, y=82+i*23, bx=70, bw=116, bh=21;   // (v400: 4 choices)
+    var d=DIFFS[i], sel=i===diff, y=60+i*23, bx=70, bw=116, bh=21;   // (v400: 4 choices)
     if (sel){ g.fillStyle=d.col; g.globalAlpha=0.25; g.fillRect(bx-3,y-3,bw+6,bh+6); g.globalAlpha=1; }
     bevelBox(bx, y, bw, bh, sel ? (pulse ? d.col : '#ffffff') : '#3a3e58', sel ? '#ffffff' : '#6a6e90', '#000');
     var gr=g.createLinearGradient(0,y+2,0,y+bh-2); gr.addColorStop(0, sel ? '#202a5a' : '#14162a'); gr.addColorStop(1, '#06060e');
@@ -5037,10 +5187,10 @@ function drawDiff(){
       for (var r=0;r<7;r++){ var aw=4-Math.abs(3-r); g.fillRect(bx-10+ax-aw, y+7+r, aw, 1); g.fillRect(bx+bw+10-ax, y+7+r, aw, 1); } }
   }
   // what it means
-  bevelBox(8, 180, W-16, 15, '#0c0c1c', '#3a3e58', '#000');
-  fancyC(DIFFS[diff].desc, 128, 184, 'bold', 1, DIFF_GRAD[DIFFS[diff].name], '#000', null, W-24);
+  bevelBox(8, 156, W-16, 15, '#0c0c1c', '#3a3e58', '#000');
+  fancyC(DIFFS[diff].desc, 128, 160, 'bold', 1, DIFF_GRAD[DIFFS[diff].name], '#000', null, W-24);
   // v649 REFEREE (Left / Right on this row picks him; Up / Down moves between the difficulty and here)
-  var rs=optRow===1, ry=204, rbx=20, rbw=W-40, rbh=21;
+  var rs=optRow===1, ry=180, rbx=20, rbw=W-40, rbh=21;
   if (rs){ g.fillStyle='#ffffff'; g.globalAlpha=0.18; g.fillRect(rbx-3,ry-3,rbw+6,rbh+6); g.globalAlpha=1; }
   bevelBox(rbx, ry, rbw, rbh, rs ? (pulse ? '#ffd020' : '#ffffff') : '#3a3e58', rs ? '#ffffff' : '#6a6e90', '#000');
   var rg=g.createLinearGradient(0,ry+2,0,ry+rbh-2); rg.addColorStop(0, rs ? '#202a5a' : '#14162a'); rg.addColorStop(1, '#06060e');
@@ -5048,6 +5198,19 @@ function drawDiff(){
   fancyC('REF: '+refName(), 128, ry+7, 'bold', 1, rs ? GOLD : GREYT, '#000', null, rbw-28);
   if (rs){ var ax2=(T>>3)&1; g.fillStyle='#ffd020';
     for (var r2=0;r2<7;r2++){ var aw2=4-Math.abs(3-r2); g.fillRect(rbx+8-ax2, ry+7+r2, aw2, 1); g.fillRect(rbx+rbw-8+ax2-aw2, ry+7+r2, aw2, 1); } }
+  // v675 CHAMPION (the user: pick who wears the belt, to test it): NONE or any wrestler - he comes out wearing it
+  var cs=optRow===2, cyy=206;
+  if (cs){ g.fillStyle='#ffffff'; g.globalAlpha=0.18; g.fillRect(rbx-3,cyy-3,rbw+6,rbh+6); g.globalAlpha=1; }
+  bevelBox(rbx, cyy, rbw, rbh, cs ? (pulse ? '#ffd020' : '#ffffff') : '#3a3e58', cs ? '#ffffff' : '#6a6e90', '#000');
+  var cg=g.createLinearGradient(0,cyy+2,0,cyy+rbh-2); cg.addColorStop(0, cs ? '#202a5a' : '#14162a'); cg.addColorStop(1, '#06060e');
+  g.fillStyle=cg; g.fillRect(rbx+2,cyy+2,rbw-4,rbh-4);
+  fancyC('CHAMPION: '+(CHAMP_OPT||'NONE'), 128, cyy+7, 'bold', 1, cs ? GOLD : GREYT, '#000', null, rbw-28);
+  if (cs){ var ax3=(T>>3)&1; g.fillStyle='#ffd020';
+    for (var r3=0;r3<7;r3++){ var aw3=4-Math.abs(3-r3); g.fillRect(rbx+8-ax3, cyy+7+r3, aw3, 1); g.fillRect(rbx+rbw-8+ax3-aw3, cyy+7+r3, aw3, 1); } }
+}
+function champCycle(d){                                         // NONE, then every wrestler on the select screen
+  var L=[null].concat(selPool().map(function(i){ return ROSTER[i].name; })), k=L.indexOf(CHAMP_OPT); if (k<0) k=0;
+  CHAMP_OPT = L[(k+d+L.length)%L.length]; saveChamp();
 }
 function updateDiff(){
   var n=DIFFS.length;
@@ -5055,9 +5218,14 @@ function updateDiff(){
     if (pressed['ArrowLeft']){ refOpt=(refOpt+1+REFS.length)%(REFS.length+1)-1; if (refOpt>=0) refSel=refOpt; saveRef(); sfx.select(); }   // (RANDOM, then each ref)
     if (pressed['ArrowRight']){ refOpt=(refOpt+2)%(REFS.length+1)-1; if (refOpt>=0) refSel=refOpt; saveRef(); sfx.select(); }
     if (pressed['ArrowUp']){ optRow=0; diff=n-1; sfx.select(); }
+    if (pressed['ArrowDown']){ optRow=2; sfx.select(); }
+  } else if (optRow===2){                                        // v675 the CHAMPION row
+    if (pressed['ArrowLeft']){ champCycle(-1); sfx.select(); }
+    if (pressed['ArrowRight']){ champCycle(1); sfx.select(); }
+    if (pressed['ArrowUp']){ optRow=1; sfx.select(); }
     if (pressed['ArrowDown']){ optRow=0; diff=0; sfx.select(); }
   } else {
-    if (pressed['ArrowUp']){ if (diff===0) optRow=1; else diff--; sfx.select(); }
+    if (pressed['ArrowUp']){ if (diff===0) optRow=2; else diff--; sfx.select(); }
     if (pressed['ArrowDown']){ if (diff===n-1) optRow=1; else diff++; sfx.select(); }
     if (pressed['ArrowLeft']){ diff=(diff+n-1)%n; sfx.select(); }
     if (pressed['ArrowRight']){ diff=(diff+1)%n; sfx.select(); }
@@ -5219,19 +5387,36 @@ function drawTourCont(){
     g.fillStyle=bg; g.fillRect(bx+2,y+2,bw-4,bh-4);
     fancyC(items[m], 128, y+4, 'reg', 2, sel ? GOLD : GREYT, '#000', null); }
 }
+var BELT_IMG = load('sprites/belt.png?v=2'), BELT_FX = document.createElement('canvas'), BELT_MASK = null;   // v673 the champion's belt
+function beltMask(){                     // the belt's metal (bright) pixels, white - the shine only lights those
+  if (BELT_MASK) return BELT_MASK;
+  var w=BELT_IMG.naturalWidth, h=BELT_IMG.naturalHeight, c=document.createElement('canvas'); c.width=w; c.height=h;
+  var x=c.getContext('2d'); x.drawImage(BELT_IMG,0,0); var d=x.getImageData(0,0,w,h);
+  for (var i=0;i<d.data.length;i+=4){ var l=0.3*d.data[i]+0.59*d.data[i+1]+0.11*d.data[i+2]; var on=d.data[i+3]>0 && l>80; d.data[i]=d.data[i+1]=d.data[i+2]=255; d.data[i+3]=on?255:0; }
+  x.putImageData(d,0,0); return BELT_MASK=c;
+}
 function drawChamp(){
   menuBG(); drawTourBanner('CHAMPION!', GOLD, '#6e1010', '#c83030');
   var you=TOUR ? TOUR.you : selIdx;
   bigPortrait(you, 128-43, 34, 86, 64, true, false);
   fancyC(ROSTER[you].name, 128, 106, 'bold', 2, GOLD, '#1c0400', '#000', 240);
   fancyC('WINS THE TOURNAMENT', 128, 126, 'bold', 1, GREYT, '#000', null);
-  // a gold belt: strap, centre plate with a red stone, side plates
-  var bx=72, by=148; g.fillStyle='#000'; g.fillRect(bx-1,by+5,114,13); g.fillStyle='#5a3410'; g.fillRect(bx,by+6,112,11);
-  g.fillStyle='#000'; g.fillRect(bx+33,by-1,46,25); g.fillStyle='#f8c828'; g.fillRect(bx+34,by,44,23); g.fillStyle='#fff4a0'; g.fillRect(bx+34,by,44,2);
-  g.fillStyle='#b88a10'; g.fillRect(bx+38,by+4,36,15); g.fillStyle='#e83030'; g.fillRect(bx+52,by+7,8,9);
-  for (var k=0;k<2;k++){ var px = k ? bx+86 : bx+8; g.fillStyle='#000'; g.fillRect(px-1,by+3,20,17); g.fillStyle='#f8c828'; g.fillRect(px,by+4,18,15); g.fillStyle='#b88a10'; g.fillRect(px+3,by+7,12,9); }
+  // v673 (the user: 'fix that' - the belt was a few flat rectangles; then sent the real Apex belt): sprites/belt.png
+  // = the real CANADIAN APEX WRESTLING heavyweight belt as pixel art (tools/py/build_belt_photo.py), a light sweeping
+  // across its silver every ~2.5 s and a few twinkles
+  if (imgOk(BELT_IMG)){
+    var BW=BELT_IMG.naturalWidth, BH=BELT_IMG.naturalHeight, bx=128-(BW>>1), by=134;
+    g.drawImage(BELT_IMG, bx, by);
+    BELT_FX.width=BW; BELT_FX.height=BH; var bc=BELT_FX.getContext('2d'); bc.clearRect(0,0,BW,BH);
+    var sw=(T%110)*2.4-20;                                                         // the shine: a slanted band, silver only
+    bc.fillStyle='rgba(255,255,255,0.5)'; bc.beginPath(); bc.moveTo(sw,0); bc.lineTo(sw+8,0); bc.lineTo(sw+8-22,BH); bc.lineTo(sw-22,BH); bc.fill();
+    bc.globalCompositeOperation='destination-in'; bc.drawImage(beltMask(),0,0); bc.globalCompositeOperation='source-over';
+    g.drawImage(BELT_FX, bx, by);
+    for (var tw=0; tw<3; tw++){ var ph=(T+tw*37)%74; if (ph<10){ var tx=[bx+50,bx+108,bx+80][tw], ty=[by+14,by+62,by+4][tw], s2=ph<5?ph:10-ph;   // twinkles
+      g.fillStyle='#ffffff'; g.fillRect(tx,ty-s2,1,s2*2+1); g.fillRect(tx-s2,ty,s2*2+1,1); } }
+  }
   for (var c=0;c<16;c++){ var cy=(T*0.8+c*37)%240, cx=(c*53+((T>>3)&3)*3)%W; g.fillStyle=['#ffd020','#ffffff','#e83030','#3a7aff'][c&3]; g.fillRect(cx, cy, 2, 2); }   // confetti
-  if (T>60 && (T>>4)&1) fancyC('PUSH START', 128, 214, 'reg', 1, GREYT, null, '#000');
+  if (T>60 && (T>>4)&1) fancyC('PUSH START', 128, 226, 'reg', 1, GREYT, null, '#000');
 }
 
 /* ================= PAUSE MENU (the user's request) =================
@@ -5563,6 +5748,7 @@ function frame(ts){
   acc += ts-last; last=ts; if (acc>100) acc=100;
   while (acc>=STEP){ acc-=STEP; if (scene==='match') lerpSnap(); step(); }
   g.setTransform(1,0,0,1,0,0); g.fillStyle='#000'; g.fillRect(0,0,VW,H); g.setTransform(1,0,0,1,VX,0);   // v397 widescreen
+  BELT_ON = null;                                   // (v677 drawMatch/drawWinner turn the champion's belt on)
   if (scene==='title') drawTitle();
   else if (scene==='select') drawSelect();
   else if (scene==='diff') drawDiff();
