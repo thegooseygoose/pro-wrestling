@@ -35,26 +35,26 @@ var ATLAS_DATA = {"BASE":{"frames":{"0.0":[5,5,14,56],"LIEUP":[197,1167,18,26],"
 // TODD QUALITY = the user's own wrestler: Star Man's full frame set repainted (tools/py/repaint2.py:
 // slicked-back hair, horseshoe mustache, bare arms, black tank top, gold chain, purple track pants with a
 // gold stripe, black sneakers) — same rects, own sheet (file names still say 'heavy').
-ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=94', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=95', frames:ATLAS_DATA['BASE'].frames };
 // LOKOMBO = the user's 4th wrestler (from their photos): Star Man's full frame set recoloured (deep brown skin, black
 // trunks, black knee pads) with Todd's head designs re-stamped in his colours (black flat-top, beard) —
 // tools/py/build_lokombo.py. Same rects, own sheet.
-ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=76', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=77', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { PSCOOP:[2,1208,21,55] }) };   // v557 + his press slam scoop (tools/py/build_press_scoop.py --who lokombo)
 // SCOTTY MAC = the user's 5th wrestler (from their photos): TODD's art recoloured (black vest, silver chain, sky-blue
 // pants, bleached-blond hair, grey beard) — tools/py/build_scotty.py. Same rects, own sheet.
-ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=79', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=80', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { ADS60:[294,1329,49,23], ADS30:[233,1207,41,34] }) };   // v611 + his own DDT sit-up (ADS_NAMES=scotty_keyed,scotty_alt_keyed tools/py/build_adonis_ddt.py)
 // NICK PRICE = the user's 6th wrestler (from their photo): Lokombo's recipe in his colours — Star's frames recoloured (pale
 // skin, black trunks, black knee pads/boots) + his OWN head designs (tools/py/nick_heads.py: top-knot, shaved sides, full
 // reddish beard — the user: "his face looks too similar to Todd's") — tools/py/build_nick.py;
 // his own superkick frames NSKM/NSKH via build_hbk.py --sheet nick_keyed.png. Same rects, own sheet.
-ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=70', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=71', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { LDV:[64,1335,46,26], LDS:[64,1281,39,34], LDSIT:[113,1335,36,36] }) };   // v617 the LEG DROP is his now (the user: swap with Shawn's neckbreaker) - WHO=nick build_legdrop_air.py + shawn_bigboot.py (BOOT)
 // AIR ADONIS = the user's 7th wrestler (from their photos, tools/adonis_photos): Nick's recipe in his colours — Star's
 // frames recoloured (tan skin, black trunks + boots) + his own heads (tools/py/adonis_heads.py: black BACKWARDS cap,
 // short dark beard) — tools/py/build_adonis.py — then his colour TATTOO SLEEVES (tools/py/build_adonis_tattoo.py).
-ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=73', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=74', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { RKBL:[2,1284,34,42], PSCOOP:[40,1284,21,55], ADS60:[157,1261,49,23], ADS30:[230,1261,41,34] }) };   // v596 + his own DDT sit-up (tools/py/build_adonis_ddt.py)   // v528: + his rock bottom lunge (tools/py/build_rkb_lunge.py); v554 + PSCOOP (tools/py/build_press_scoop.py)
 // MACHETE BROWN = the user's 8th wrestler (from their photo): TODD's art (like Scotty) with his own heads (tools/py/
 // machete_heads.py: short dark hair greying at the sides, BIG grey beard), Todd's tank -> an open black leather jacket,
@@ -65,24 +65,24 @@ ATLAS_DATA['MACHETE BROWN'] = { sheet:'sprites/machete_keyed.png?v=47', frames:A
 // shoulder-length hair made BLONDE - the user - big aviators + full dark beard (v334), no bandana in the ring (v333))
 // - tools/py/build_shawn.py - then Todd's tank top copied onto him pose by pose as his black tank with a yellow print, and
 // PINK ZEBRA trunks (v334, the user's photo) (tools/py/build_shawn_tank.py).
-ATLAS_DATA['SHAWN MURPHY'] = { sheet:'sprites/shawn_keyed.png?v=55', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['SHAWN MURPHY'] = { sheet:'sprites/shawn_keyed.png?v=56', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { LDV:[118,1182,45,26], LDS:[50,1186,39,34], LDSIT:[293,1174,36,36] }) };   // v579 the leg drop in the air (tools/py/build_legdrop_air.py)
 // MATT BRONSON = the user's 10th wrestler (v338, their photo tools/bronson_photos/1.jpg): Shawn's recipe - Star's frames
 // recoloured + his own heads (tools/py/bronson_heads.py: BALD, aviator sunglasses, full brown beard) - tools/py/build_bronson.py -
 // then Todd's trousers + chain copied onto him pose by pose as his TAN 'BB' track pants (red side stripe) and gold chain
 // (tools/py/build_bronson_pants.py). Shirtless, black shoes.
-ATLAS_DATA['MATT BRONSON'] = { sheet:'sprites/bronson_keyed.png?v=47', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['MATT BRONSON'] = { sheet:'sprites/bronson_keyed.png?v=48', frames:ATLAS_DATA['BASE'].frames };
 // CREMATOR VON SLASHER = the user's 11th wrestler (v346, their photos tools/cremator_photos 5-7.jpg): the same recipe - Star's
 // frames recoloured + his own heads (tools/py/cremator_heads.py: a SILVER stitched full-face mask, slicked reddish-brown hair) -
 // tools/py/build_cremator.py - then Todd's tank + trousers copied onto him as his dark NAVY sleeveless shirt and dark pants
 // (tools/py/build_cremator_body.py). His finisher (the user): the CHOKE SLAM (Bronson's, his own copies of those frames).
-ATLAS_DATA['CREMATOR VON SLASHER'] = { sheet:'sprites/cremator_keyed.png?v=53', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['CREMATOR VON SLASHER'] = { sheet:'sprites/cremator_keyed.png?v=54', frames:ATLAS_DATA['BASE'].frames };
 // MIRROR MATCHES (the user): the CPU copy of the same wrestler is drawn from '<NAME>#ALT' — same frames, his costume in
 // other colours (tools/py/build_mirror.py). Game logic keeps e.def.name; drawing goes through artKey(e).
 // v355 FAT MACHETE (the user: 'make Machete look a little fat'): his own sheets (mfat_*, tools/py/machete_fat_pack.py) - every
 // frame re-packed with a 4 px / 3 px empty margin (same w/h, so nothing the game works out from a rect moves) and his middle
 // widened into it. MFAT_PAD: drawImage draws a 'mfat' sheet's frames WITH that margin (the gut spills into it).
-ATLAS_DATA['MACHETE BROWN'] = { sheet:'sprites/mfat_keyed.png?v=43', frames:{"LIEUP":[695,29,18,26],"KNEELF":[680,220,18,34],"TBL0":[225,715,56,54],"TBL1":[288,715,56,54],"TBD0":[554,691,48,63],"TBD1":[351,715,48,63],"TBS0":[406,715,38,63],"TBS1":[451,715,38,63],"SLPC0":[694,666,19,55],"SLPC0B":[609,691,22,55],"SLPC1":[638,691,19,55],"SLPC1B":[664,691,22,55],"SUPLEX4":[4,3,21,86],"PILE4":[34,3,24,65],"5.2":[67,3,32,64],"SLAM":[108,3,32,64],"SLAM1":[149,3,32,64],"9.0":[190,3,23,63],"PILE3":[222,3,22,63],"12.3":[253,3,11,61],"SXA3":[273,3,16,61],"12.4":[298,3,20,60],"NBH":[327,3,38,60],"16.0":[374,3,14,59],"16.1":[397,3,14,59],"19.3":[420,3,18,59],"PCH":[447,3,21,58],"0.2":[477,3,14,57],"10.1":[500,3,16,57],"18.2":[525,3,19,57],"18.3":[553,3,19,57],"PICKUP4":[581,3,38,57],"0.0":[628,3,14,56],"0.3":[651,3,14,56],"1.0":[674,3,14,56],"1.1":[4,96,23,56],"1.4":[36,96,14,56],"5.0":[59,96,20,56],"6.0":[88,96,20,56],"10.0":[117,96,20,56],"12.0":[146,96,20,56],"14.0":[175,96,20,56],"SLAM5":[204,96,59,56],"PICKUP3":[272,96,36,56],"SUPLEX1":[317,96,20,56],"PFSTRAIN":[346,96,17,56],"SXA1":[372,96,20,56],"SXR6":[401,96,14,56],"SOTAKE":[424,96,20,56],"PBINV":[453,96,14,56],"PBHUG":[476,96,20,56],"PCL0":[505,96,23,56],"PCL1":[537,96,22,56],"PCL2":[568,96,23,56],"0.1":[600,96,14,55],"0.4":[623,96,16,55],"0.5":[648,96,16,55],"1.2":[673,96,16,55],"1.3":[698,96,16,55],"3.6":[4,159,15,55],"4.0":[28,159,15,55],"4.1":[52,159,15,55],"5.1":[76,159,21,55],"6.1":[106,159,15,55],"6.2":[130,159,14,55],"6.3":[153,159,11,55],"10.2":[173,159,20,55],"12.1":[202,159,11,55],"12.2":[222,159,20,55],"16.4":[251,159,14,55],"18.7":[274,159,20,55],"18.8":[303,159,17,55],"SLAM2":[329,159,63,55],"SUPLEX2":[401,159,20,55],"SXA2":[430,159,16,55],"SXA5":[455,159,14,55],"SXR2":[478,159,16,55],"SOFLIP":[503,159,14,55],"BOOT":[526,159,34,55],"SKH":[569,159,48,55],"NSKH":[626,159,48,55],"SSP4":[683,159,14,55],"NBV10":[4,221,17,55],"PCU":[30,221,23,55],"3.0":[62,221,8,54],"3.2":[79,221,8,54],"19.2":[96,221,18,54],"KNOCKB":[123,221,19,54],"CLRUN2":[151,221,19,54],"DVA15":[179,221,20,54],"PFSQUAT":[208,221,17,53],"F5R90":[234,221,19,53],"F5R270":[262,221,19,53],"3.1":[290,221,25,52],"3.3":[324,221,25,52],"10.3":[358,221,16,52],"PICKUP2":[383,221,34,52],"CLOTH":[426,221,25,52],"CLRUN":[460,221,25,52],"DVB70":[494,221,24,52],"5.3":[527,221,18,51],"12.5":[554,221,19,51],"14.4":[582,221,20,51],"SLAM3":[611,221,62,51],"SLAM4":[4,283,62,51],"PILE1":[75,283,26,51],"SUPLEX3":[110,283,28,51],"SUPLEX5":[147,283,42,51],"SXR3":[198,283,20,51],"WHIPD":[227,283,22,51],"4.2":[258,283,16,50],"BITE0":[283,283,17,50],"BITE1":[309,283,17,50],"DVA30":[335,283,32,50],"DMF25":[376,283,33,50],"DMF10":[418,283,23,50],"DMB10":[450,283,21,50],"3.4":[480,283,19,49],"19.1":[508,283,18,49],"DVF70":[535,283,29,49],"DMB25":[573,283,31,49],"NBV30":[613,283,33,49],"0.6":[655,283,48,48],"4.6":[4,341,16,48],"19.0":[29,341,18,48],"19.6":[56,341,21,48],"19.7":[86,341,21,48],"DVB55":[116,341,30,48],"F5R120":[155,341,28,48],"F5R300":[192,341,28,48],"DMB40":[229,341,38,47],"12.6":[276,341,18,46],"16.3":[303,341,14,46],"18.9":[326,341,18,46],"SUPLEX8":[353,341,62,46],"SXR5":[424,341,18,46],"PBLIFT":[451,341,38,46],"DMF40":[498,341,41,46],"F5R60":[548,341,32,46],"F5R240":[589,341,32,46],"PBUP2":[630,341,37,45],"14.2":[676,341,17,44],"14.3":[4,396,17,44],"DDA20":[30,396,19,44],"PHB":[58,396,16,44],"3.5":[83,396,31,43],"14.1":[123,396,14,43],"PILE2":[146,396,36,43],"BITEF0":[191,396,16,43],"BITEF1":[216,396,16,43],"BKNEEL":[241,396,18,43],"DVF55":[268,396,35,43],"4.3":[312,396,16,42],"17.3":[337,396,16,42],"4.7":[362,396,17,41],"16.2":[388,396,12,41],"17.2":[409,396,16,41],"SXA4":[434,396,12,41],"SXR1":[455,396,12,41],"DVA45":[476,396,43,41],"4.5":[528,396,16,40],"8.0":[553,396,17,40],"DVB40":[579,396,39,40],"DMB55":[627,396,44,40],"PILE5":[680,396,24,39],"PBSIT":[4,447,25,39],"PBTSIT":[38,447,24,39],"DMF55":[71,447,48,39],"DVV90":[128,447,29,38],"PGVR40":[166,447,46,38],"SKM":[221,447,45,37],"NSKM":[275,447,45,37],"PBTIP":[329,447,35,36],"DDA45":[373,447,30,36],"NBSIT":[412,447,30,36],"DVV60":[451,447,36,35],"DVF40":[496,447,43,35],"2.0":[548,447,35,34],"PICKUP1":[592,447,40,34],"SUPLEX6":[641,447,41,34],"BBLIE":[4,493,41,34],"DVL":[54,493,27,34],"DMB70":[90,493,47,34],"NBV55":[146,493,48,34],"PBFOLD":[203,493,22,33],"PBUP1":[234,493,44,33],"PBPIN":[287,493,30,33],"DVV30":[326,493,36,33],"4.4":[371,493,17,32],"4.9":[397,493,24,32],"17.0":[430,493,16,32],"19.4":[455,493,16,32],"19.5":[480,493,16,32],"SXA6":[505,493,16,32],"SSP3":[530,493,37,32],"DVV45":[576,493,37,32],"F5R150":[622,493,46,32],"F5R330":[4,534,46,32],"11.0":[59,534,24,31],"DVA60":[92,534,51,31],"17.1":[152,534,24,30],"18.0":[185,534,19,30],"18.1":[213,534,24,30],"PFBENT":[246,534,19,30],"PBDROP":[274,534,43,30],"DVV15":[326,534,37,30],"DMF70":[372,534,50,30],"DDV20":[431,534,22,30],"PGV15":[462,534,23,30],"DVV0":[494,534,38,29],"PAJ":[541,534,25,29],"PBFALL":[575,534,36,28],"DVLD":[620,534,43,28],"DVB25":[4,573,48,28],"DMBS6":[61,573,40,28],"DDV45":[110,573,24,28],"DDS30":[143,573,33,28],"F5R30":[185,573,48,28],"F5R210":[242,573,48,28],"PBOVER":[299,573,45,27],"DMBS0":[353,573,47,27],"PGV30":[409,573,25,27],"DVF25":[443,573,50,26],"DMBL1":[502,573,48,26],"DMSIT":[559,573,19,26],"DDV70":[587,573,26,26],"11.1":[622,573,24,25],"17.5":[655,573,32,25],"DMBS1":[4,608,48,25],"DDA70":[61,608,39,25],"DDV90":[109,608,27,25],"PGVR20":[145,608,54,25],"4.8":[208,608,25,24],"17.4":[242,608,32,24],"SSP7":[283,608,25,24],"DMBS5":[317,608,44,24],"15.0":[370,608,32,23],"15.1":[411,608,32,23],"DDS60":[452,608,36,23],"PGV45":[497,608,29,23],"13.0":[535,608,40,22],"18.4":[584,608,40,22],"SUPLEX7":[633,608,65,22],"SXR4":[4,640,40,22],"DVB10":[53,640,53,22],"DMBSA":[115,640,48,22],"DVF10":[172,640,53,21],"DMBL4":[234,640,50,21],"DMBL2":[293,640,49,20],"DMBS2":[351,640,48,20],"DDVL40":[408,640,34,20],"7.0":[451,640,30,19],"7.1":[490,640,30,19],"SSP2":[529,640,30,19],"SSP5":[568,640,30,19],"DVF0":[607,640,53,19],"DMBS4":[669,640,47,19],"PGV75":[4,669,31,19],"NBV80":[44,669,56,19],"F5S70":[109,669,37,19],"F5S35":[155,669,19,19],"F5R180":[183,669,53,19],"DMF90":[245,669,49,18],"DMBL3":[303,669,49,18],"DMBS3":[361,669,48,18],"DMBSB":[418,669,48,18],"PGV60":[475,669,30,18],"PAK":[514,669,27,18],"9.1":[550,669,40,16],"18.5":[599,669,40,16],"18.6":[648,669,39,16],"SSP1":[4,695,40,16],"SSP6":[53,695,39,16],"DDVL20":[101,695,37,16],"LIEGRAB":[147,695,40,15],"SSPC":[196,695,22,15],"PINON":[227,695,16,14],"LIEFLAT":[252,695,40,14],"SXA7":[301,695,40,14],"SSP8":[350,695,15,14],"DVA90":[374,695,56,14],"DDA90":[439,695,43,14],"PGVF":[491,695,56,14],"PEND":[690,1,27,22]} };
+ATLAS_DATA['MACHETE BROWN'] = { sheet:'sprites/mfat_keyed.png?v=44', frames:{"LIEUP":[695,29,18,26],"KNEELF":[680,220,18,34],"TBL0":[225,715,56,54],"TBL1":[288,715,56,54],"TBD0":[554,691,48,63],"TBD1":[351,715,48,63],"TBS0":[406,715,38,63],"TBS1":[451,715,38,63],"SLPC0":[694,666,19,55],"SLPC0B":[609,691,22,55],"SLPC1":[638,691,19,55],"SLPC1B":[664,691,22,55],"SUPLEX4":[4,3,21,86],"PILE4":[34,3,24,65],"5.2":[67,3,32,64],"SLAM":[108,3,32,64],"SLAM1":[149,3,32,64],"9.0":[190,3,23,63],"PILE3":[222,3,22,63],"12.3":[253,3,11,61],"SXA3":[273,3,16,61],"12.4":[298,3,20,60],"NBH":[327,3,38,60],"16.0":[374,3,14,59],"16.1":[397,3,14,59],"19.3":[420,3,18,59],"PCH":[447,3,21,58],"0.2":[477,3,14,57],"10.1":[500,3,16,57],"18.2":[525,3,19,57],"18.3":[553,3,19,57],"PICKUP4":[581,3,38,57],"0.0":[628,3,14,56],"0.3":[651,3,14,56],"1.0":[674,3,14,56],"1.1":[4,96,23,56],"1.4":[36,96,14,56],"5.0":[59,96,20,56],"6.0":[88,96,20,56],"10.0":[117,96,20,56],"12.0":[146,96,20,56],"14.0":[175,96,20,56],"SLAM5":[204,96,59,56],"PICKUP3":[272,96,36,56],"SUPLEX1":[317,96,20,56],"PFSTRAIN":[346,96,17,56],"SXA1":[372,96,20,56],"SXR6":[401,96,14,56],"SOTAKE":[424,96,20,56],"PBINV":[453,96,14,56],"PBHUG":[476,96,20,56],"PCL0":[505,96,23,56],"PCL1":[537,96,22,56],"PCL2":[568,96,23,56],"0.1":[600,96,14,55],"0.4":[623,96,16,55],"0.5":[648,96,16,55],"1.2":[673,96,16,55],"1.3":[698,96,16,55],"3.6":[4,159,15,55],"4.0":[28,159,15,55],"4.1":[52,159,15,55],"5.1":[76,159,21,55],"6.1":[106,159,15,55],"6.2":[130,159,14,55],"6.3":[153,159,11,55],"10.2":[173,159,20,55],"12.1":[202,159,11,55],"12.2":[222,159,20,55],"16.4":[251,159,14,55],"18.7":[274,159,20,55],"18.8":[303,159,17,55],"SLAM2":[329,159,63,55],"SUPLEX2":[401,159,20,55],"SXA2":[430,159,16,55],"SXA5":[455,159,14,55],"SXR2":[478,159,16,55],"SOFLIP":[503,159,14,55],"BOOT":[526,159,34,55],"SKH":[569,159,48,55],"NSKH":[626,159,48,55],"SSP4":[683,159,14,55],"NBV10":[4,221,17,55],"PCU":[30,221,23,55],"3.0":[62,221,8,54],"3.2":[79,221,8,54],"19.2":[96,221,18,54],"KNOCKB":[123,221,19,54],"CLRUN2":[151,221,19,54],"DVA15":[179,221,20,54],"PFSQUAT":[208,221,17,53],"F5R90":[234,221,19,53],"F5R270":[262,221,19,53],"3.1":[290,221,25,52],"3.3":[324,221,25,52],"10.3":[358,221,16,52],"PICKUP2":[383,221,34,52],"CLOTH":[426,221,25,52],"CLRUN":[460,221,25,52],"DVB70":[494,221,24,52],"5.3":[527,221,18,51],"12.5":[554,221,19,51],"14.4":[582,221,20,51],"SLAM3":[611,221,62,51],"SLAM4":[4,283,62,51],"PILE1":[75,283,26,51],"SUPLEX3":[110,283,28,51],"SUPLEX5":[147,283,42,51],"SXR3":[198,283,20,51],"WHIPD":[227,283,22,51],"4.2":[258,283,16,50],"BITE0":[283,283,17,50],"BITE1":[309,283,17,50],"DVA30":[335,283,32,50],"DMF25":[376,283,33,50],"DMF10":[418,283,23,50],"DMB10":[450,283,21,50],"3.4":[480,283,19,49],"19.1":[508,283,18,49],"DVF70":[535,283,29,49],"DMB25":[573,283,31,49],"NBV30":[613,283,33,49],"0.6":[655,283,48,48],"4.6":[4,341,16,48],"19.0":[29,341,18,48],"19.6":[56,341,21,48],"19.7":[86,341,21,48],"DVB55":[116,341,30,48],"F5R120":[155,341,28,48],"F5R300":[192,341,28,48],"DMB40":[229,341,38,47],"12.6":[276,341,18,46],"16.3":[303,341,14,46],"18.9":[326,341,18,46],"SUPLEX8":[353,341,62,46],"SXR5":[424,341,18,46],"PBLIFT":[451,341,38,46],"DMF40":[498,341,41,46],"F5R60":[548,341,32,46],"F5R240":[589,341,32,46],"PBUP2":[630,341,37,45],"14.2":[676,341,17,44],"14.3":[4,396,17,44],"DDA20":[30,396,19,44],"PHB":[58,396,16,44],"3.5":[83,396,31,43],"14.1":[123,396,14,43],"PILE2":[146,396,36,43],"BITEF0":[191,396,16,43],"BITEF1":[216,396,16,43],"BKNEEL":[241,396,18,43],"DVF55":[268,396,35,43],"4.3":[312,396,16,42],"17.3":[337,396,16,42],"4.7":[362,396,17,41],"16.2":[388,396,12,41],"17.2":[409,396,16,41],"SXA4":[434,396,12,41],"SXR1":[455,396,12,41],"DVA45":[476,396,43,41],"4.5":[528,396,16,40],"8.0":[553,396,17,40],"DVB40":[579,396,39,40],"DMB55":[627,396,44,40],"PILE5":[680,396,24,39],"PBSIT":[4,447,25,39],"PBTSIT":[38,447,24,39],"DMF55":[71,447,48,39],"DVV90":[128,447,29,38],"PGVR40":[166,447,46,38],"SKM":[221,447,45,37],"NSKM":[275,447,45,37],"PBTIP":[329,447,35,36],"DDA45":[373,447,30,36],"NBSIT":[412,447,30,36],"DVV60":[451,447,36,35],"DVF40":[496,447,43,35],"2.0":[548,447,35,34],"PICKUP1":[592,447,40,34],"SUPLEX6":[641,447,41,34],"BBLIE":[4,493,41,34],"DVL":[54,493,27,34],"DMB70":[90,493,47,34],"NBV55":[146,493,48,34],"PBFOLD":[203,493,22,33],"PBUP1":[234,493,44,33],"PBPIN":[287,493,30,33],"DVV30":[326,493,36,33],"4.4":[371,493,17,32],"4.9":[397,493,24,32],"17.0":[430,493,16,32],"19.4":[455,493,16,32],"19.5":[480,493,16,32],"SXA6":[505,493,16,32],"SSP3":[530,493,37,32],"DVV45":[576,493,37,32],"F5R150":[622,493,46,32],"F5R330":[4,534,46,32],"11.0":[59,534,24,31],"DVA60":[92,534,51,31],"17.1":[152,534,24,30],"18.0":[185,534,19,30],"18.1":[213,534,24,30],"PFBENT":[246,534,19,30],"PBDROP":[274,534,43,30],"DVV15":[326,534,37,30],"DMF70":[372,534,50,30],"DDV20":[431,534,22,30],"PGV15":[462,534,23,30],"DVV0":[494,534,38,29],"PAJ":[541,534,25,29],"PBFALL":[575,534,36,28],"DVLD":[620,534,43,28],"DVB25":[4,573,48,28],"DMBS6":[61,573,40,28],"DDV45":[110,573,24,28],"DDS30":[143,573,33,28],"F5R30":[185,573,48,28],"F5R210":[242,573,48,28],"PBOVER":[299,573,45,27],"DMBS0":[353,573,47,27],"PGV30":[409,573,25,27],"DVF25":[443,573,50,26],"DMBL1":[502,573,48,26],"DMSIT":[559,573,19,26],"DDV70":[587,573,26,26],"11.1":[622,573,24,25],"17.5":[655,573,32,25],"DMBS1":[4,608,48,25],"DDA70":[61,608,39,25],"DDV90":[109,608,27,25],"PGVR20":[145,608,54,25],"4.8":[208,608,25,24],"17.4":[242,608,32,24],"SSP7":[283,608,25,24],"DMBS5":[317,608,44,24],"15.0":[370,608,32,23],"15.1":[411,608,32,23],"DDS60":[452,608,36,23],"PGV45":[497,608,29,23],"13.0":[535,608,40,22],"18.4":[584,608,40,22],"SUPLEX7":[633,608,65,22],"SXR4":[4,640,40,22],"DVB10":[53,640,53,22],"DMBSA":[115,640,48,22],"DVF10":[172,640,53,21],"DMBL4":[234,640,50,21],"DMBL2":[293,640,49,20],"DMBS2":[351,640,48,20],"DDVL40":[408,640,34,20],"7.0":[451,640,30,19],"7.1":[490,640,30,19],"SSP2":[529,640,30,19],"SSP5":[568,640,30,19],"DVF0":[607,640,53,19],"DMBS4":[669,640,47,19],"PGV75":[4,669,31,19],"NBV80":[44,669,56,19],"F5S70":[109,669,37,19],"F5S35":[155,669,19,19],"F5R180":[183,669,53,19],"DMF90":[245,669,49,18],"DMBL3":[303,669,49,18],"DMBS3":[361,669,48,18],"DMBSB":[418,669,48,18],"PGV60":[475,669,30,18],"PAK":[514,669,27,18],"9.1":[550,669,40,16],"18.5":[599,669,40,16],"18.6":[648,669,39,16],"SSP1":[4,695,40,16],"SSP6":[53,695,39,16],"DDVL20":[101,695,37,16],"LIEGRAB":[147,695,40,15],"SSPC":[196,695,22,15],"PINON":[227,695,16,14],"LIEFLAT":[252,695,40,14],"SXA7":[301,695,40,14],"SSP8":[350,695,15,14],"DVA90":[374,695,56,14],"DDA90":[439,695,43,14],"PGVF":[491,695,56,14],"PEND":[690,1,27,22]} };
 var MFAT_PAD = [4, 3];
 // v429 CREMATOR's ENTRANCE COAT + FEDORA (tools/py/build_cremator_coat.py): cremator_coat_keyed.png = his sheet + padded
 // cells for his walk/idle frames; COAT_MAP sends those frames to the cells, drawn with COAT_PAD px of room (hat, flare).
@@ -140,12 +140,12 @@ function creInit(im){
 // (tools/py/build_deniro.py: neon print tank + pink/blue tights, ginger hair + full beard, pink/purple/yellow headband, wraparound
 // shades), then made FAT like Machete but more (machete_fat_pack.py --who deniro: dfat_* sheets, widen 0.36; the drawImage
 // hook pads '/dfat' like '/mfat'), so he shares Machete's fat frames table.
-ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=37', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
+ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=38', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
   { FAMJ:[6,720,20,48], FAMS:[36,720,19,26] }) };   // v503: + his own front-on famouser frames (tools/py/build_famouser.py)
 var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator', 'DANCE DADDY DENERO':'deniro' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=119', frames:ATLAS_DATA[_an].frames };
-ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=60';   // v355: his fat mirror copy
-ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=46';   // v480: his fat mirror copy
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=120', frames:ATLAS_DATA[_an].frames };
+ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=61';   // v355: his fat mirror copy
+ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=47';   // v480: his fat mirror copy
 ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=18', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
 ATLAS_DATA['RIGOR VON SLASHER'] = { sheet:'sprites/rigor_keyed.png?v=5', frames:ATLAS_DATA['BASE'].frames };   // v627 Cremator's partner (tools/py/build_rigor.py)
 ATLAS_DATA['CREMATOR VON SLASHER#COAT'] = { sheet:'sprites/cremator_coat_keyed.png?v=26', frames:ATLAS_DATA['CREMATOR VON SLASHER'].frames };   // v429 entrance coat
@@ -547,6 +547,20 @@ var sfx = {
     gn.gain.exponentialRampToValueAtTime(0.0001,t+0.9);      // fade
     s.connect(f); f.connect(gn); gn.connect(MASTER); s.start(t); s.stop(t+0.95);
   },
+  // v669 CROWD BOO (the user: Scotty comes out 'to a lot of crowd boos'): a crowd of low 'oooo' voices - many detuned
+  // sawtooths (90-190 Hz, each its own slow wobble, sagging in pitch) through a vowel-ish low-pass, over low murmur noise;
+  // swells in, holds, fades. dur = seconds.
+  boo:function(dur, vol){ var c=actx(); if(!c) return; var t=c.currentTime, d=dur||3, v=vol||0.12;
+    var out=c.createGain(); out.gain.setValueAtTime(0.0001,t); out.gain.exponentialRampToValueAtTime(v,t+0.5);
+    out.gain.setValueAtTime(v,t+Math.max(0.6,d-0.8)); out.gain.exponentialRampToValueAtTime(0.0001,t+d);
+    var lp=c.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=520; lp.Q.value=2.5; lp.connect(out); out.connect(MASTER);
+    for (var k=0;k<14;k++){ var o=c.createOscillator(), og=c.createGain(), lf=c.createOscillator(), lg=c.createGain(), f0=90+Math.random()*100, st=t+Math.random()*0.4;
+      o.type='sawtooth'; o.frequency.setValueAtTime(f0,st); o.frequency.linearRampToValueAtTime(f0*0.88,t+d);
+      lf.frequency.value=3+Math.random()*3; lg.gain.value=f0*0.025; lf.connect(lg); lg.connect(o.frequency);
+      og.gain.value=0.09; o.connect(og); og.connect(lp); o.start(st); lf.start(st); o.stop(t+d+0.05); lf.stop(t+d+0.05); }
+    var s=c.createBufferSource(); s.buffer=noiseBuf(c); s.loop=true; var nf=c.createBiquadFilter(), ng=c.createGain();
+    nf.type='lowpass'; nf.frequency.value=400; ng.gain.value=0.5; s.connect(nf); nf.connect(ng); ng.connect(out); s.start(t); s.stop(t+d+0.05);
+  },
   select:function(){ tone(740,0.05,0.12,'square',980); },
   win:function(){ [0,120,240,380].forEach(function(d,i){ setTimeout(function(){tone([523,659,784,1047][i],0.18,0.14,'triangle');},d); }); },
   lose:function(){ tone(330,0.5,0.16,'sawtooth',90); }
@@ -916,7 +930,12 @@ function startEntrances(){
     var home=e.x;                                  // his spot for the bell (95 / 161)
     e.ent={ t:0, i:0, wp:[[ENT_RAMP.x0, ENT_FEET], [ENT_RAMP.x1, ENT_FEET+ENT_RAMP.drop], [-26, ENT_FEET+ENT_RAMP.drop], [-26, FLOOR.f1], [home-24, FLOOR.f1], 'roll', [home, 110]] };
     e.x=ENT_DOOR_X; e.y=ENT_FEET; e.face=1; e.out=true; e.hidden=true; e.state='idle'; e.anim=0;
-    if (e.def.name==='MACHETE BROWN') e.ent.wp.splice(0, 0, [ENT_RAMP.x0-30, ENT_FEET], 'argue');   // v321: he stops to argue with the fans
+    if (e.def.name==='MACHETE BROWN')   // v321: he stops to argue with the fans in the aisle; v670 (the user: 'the real one argues
+      e.ent.wp = [[ENT_RAMP.x0-30, ENT_FEET], { argue:0, dir:1 },        // with all the fans he can'): then the fans by the LEFT side
+        [ENT_RAMP.x0, ENT_FEET], [ENT_RAMP.x1, ENT_FEET+ENT_RAMP.drop], [-26, ENT_FEET+ENT_RAMP.drop],   // floor, round the front
+        [-36, 164], { argue:1, dir:1, fan:-1 },                             // floor to the RIGHT side's fans, then rolls in
+        [-30, 206], [288, 206], [292, 162], { argue:2, dir:-1, fan:1 },
+        [272, FLOOR.f1], [home-24, FLOOR.f1], 'roll', [home, 110]];
   });
   match.ent={ order:order, k:-1, cur:null, wait:20 };
   camX=CAM_ENT;
@@ -927,6 +946,8 @@ function startEntrances(){
 var ENT_STYLE = {
   'NICK PRICE':           { hold:8, noPose:true, poseAtRing:true },   // v394: 8 s after his music starts
   'CREMATOR VON SLASHER': { hold:12, speed:0.5, noPose:true, coat:true, partner:'RIGOR VON SLASHER', withName:'W/ RIGOR VON SLASHER' },   // v627 + Rigor Von Slasher walks out with him (the user)   // v429 + his duster coat and fedora        // out after 12 s, very slow walk, no arms up
+  'DANCE DADDY DENERO':   { hold:12 },
+  'SCOTTY MAC':           { hold:5, boo:true },   // v669 (the user added his song): out after 5 s, to a lot of crowd boos (sfx.boo + BOOO! bubbles all the way to the ring)   // v668 (the user added his song: 'he doesn't make his entrance until 12 seconds')
   'AIR ADONIS':           { run:true, speed:2.5, rollX:2, ropes:2 },  // runs to the ring, rolls in fast, then runs the ropes twice (v432)
   'TODD QUALITY':         { poseEvery:50, poseFor:30, manager:true, withName:'W/ LANCE SKULLZ' }   // v629 the plate's 2nd line (the user)                // arms up all the way to the ring
 };
@@ -940,7 +961,7 @@ function entNext(){
   if (entStyle(e).partner){ MGR = { who:e, x:e.x, y:e.y, face:1, walk:false, anim:0, done:false, art:entStyle(e).partner,   // v627: out with him - just
     spd:entStyle(e).speed || ENT_SPEED, wait:Math.max(0, e.ent.hold - 120), hide:true }; }                                  // ahead (v628: 120 ticks = ~60 px; was 40), at his pace
   if (MGR && MGR.who===e && !e.ent.hold){ e.ent.hold = 34; e.hidden = true; }   // v436: the manager comes out first, Todd ~34 steps behind
-  entMusicStart(e.def.name); sfx.cheer(0.16);
+  entMusicStart(e.def.name); if (!entStyle(e).boo) sfx.cheer(0.16);
   camX=CAM_ENT;                                    // cut to the entrance stage (like a TV cut)
 }
 function entDone(){
@@ -982,7 +1003,13 @@ function updateEntrance(){
   if (E.bub) E.bub = E.bub.filter(function(b){ return ++b.t < ARGUE_BUB_T; });
   if (!E.cur){ if (E.wait-- <= 0) entNext(); return; }
   var e=E.cur, N=e.ent; N.t++; updateManager();
-  if (N.hold > 0){ N.t=0; if (--N.hold === 0){ e.hidden=false; sfx.cheer(0.16); if (entStyle(e).noPose) e.state='idle'; } return; }
+  if (N.hold > 0){ N.t=0; if (--N.hold === 0){ e.hidden=false; if (entStyle(e).boo) N.booT=0; else sfx.cheer(0.16); if (entStyle(e).noPose) e.state='idle'; } return; }
+  if (entStyle(e).boo && N.i < N.wp.indexOf('roll')){                 // v669 booed all the way to the ring
+    var bt = N.booT = (N.booT||0) + 1;
+    if (bt===1 || bt%170===0) sfx.boo(4.2, bt===1 ? 0.14 : 0.11);
+    if (bt%13===1){ var BOOS=['BOOO!','BOOO!','YOU SUCK!','BOOOO!','GO HOME!','BOOO!'], sd = Math.random()<0.5 ? -1 : 1;
+      E.bub = E.bub || []; E.bub.push({ who:'c', text:BOOS[(bt/13|0)%BOOS.length], t:0, x: e.x + sd*(34 + Math.random()*30), y: e.y - 78 - Math.random()*14 }); }
+  }
   // camera: follow him (the entrance stage is left of the arena)
   var tx=Math.max(CAM_ENT, Math.min(CAMV, Math.round(e.x)-128));
   if (N.i>=N.wp.length) tx=0;
@@ -1006,7 +1033,7 @@ function updateEntrance(){
     if (S.poseAtRing && !N.rang){ N.rang=true; N.pose=ENT_POSE; e.face=1; e.state='win'; e.anim=0; sfx.cheer(0.16); return; }   // v412 Nick
     e.face=1; e.coat=false; startRoll(e, 'in'); return;
   }
-  if (w==='argue'){ argueTick(e, N); return; }
+  if (w==='argue' || (w && w.argue!=null)){ argueTick(e, N, w.argue!=null ? w : { argue:0, dir:1 }); return; }
   var dx=w[0]-e.x, dy=w[1]-e.y, d=Math.sqrt(dx*dx+dy*dy);
   if (d<=spd){ e.x=w[0]; e.y=w[1]; N.i++; return; }
   e.x += dx/d*spd; e.y += dy/d*spd;
@@ -1042,35 +1069,42 @@ function entRopes(e, N, hits){
    other side, then throws his arms up at them and walks on. [tick, face (1 = toward the ring), pose, who, line] ---- */
 var ARGUE = [
   [0,   -1, 'idle'],
-  [6,   -1, 'point', 'm', 'SHUT UP!'],
+  [6,   -1, 'point', 'm', 0],
   [34,  -1, 'idle',  'c', 'BOOO!'],
   [44,  -1, 'idle',  'c', 'YOU SUCK!'],
-  [62,   1, 'point', 'm', 'WHAT?!'],
+  [62,   1, 'point', 'm', 1],
   [90,   1, 'idle',  'c', 'BOOO!'],
   [98,   1, 'idle',  'c', 'LOSER!'],
-  [114, -1, 'point', 'm', 'SAY IT AGAIN!'],
-  [146,  1, 'win',   'm', 'HA!']
+  [114, -1, 'point', 'm', 2],
+  [146,  1, 'win',   'm', 3]
 ];
+// his lines at each stop (v670: the aisle, the left-side fans, the right-side fans) - 'm' rows above pick by number
+var ARGUE_LINES = [['SHUT UP!', 'WHAT?!', 'SAY IT AGAIN!', 'HA!'],
+                   ['YOU TALKING TO ME?!', 'SIT DOWN!', 'NOBODY ASKED YOU!', 'HA!'],
+                   ['HEY! SHUT IT!', 'COME SAY IT HERE!', 'BUNCH OF LOSERS!', 'HA!']];
 var ARGUE_END = 176, ARGUE_BUB_T = 40;
-function argueTick(e, N){
+// A = { argue: which stop (ARGUE_LINES), dir: 1 = as in the aisle / -1 = mirrored (fans on his right), fan: -1 / 1 = the
+// fans' side for their boos (none = either side, the aisle runs through the crowd) }
+function argueTick(e, N, A){
+  A = A || { argue:0, dir:1 };
   var t = N.ag = (N.ag||0) + 1, E = match.ent;
   ARGUE.forEach(function(r){
     if (r[0] !== t) return;
-    e.face = r[1];
+    e.face = r[1] * (A.dir||1);
     if (r[2]==='point'){ e.state='atk'; e.move='punch'; e.t=0; sfx.whoosh(); }
     else if (r[2]==='win'){ e.state='win'; e.anim=0; }
     else if (e.state!=='atk'){ e.state='idle'; }
     if (r[3]){
       E.bub = E.bub || [];
-      if (r[3]==='m') E.bub.push({ who:'m', text:r[4], t:0, x: e.x + e.face*6, y: e.y - 66 });
-      else { var sd = Math.random()<0.5 ? -1 : 1;
-        E.bub.push({ who:'c', text:r[4], t:0, x: e.x + sd*(34 + Math.random()*30), y: e.y - 78 - Math.random()*14 });
+      if (r[3]==='m') E.bub.push({ who:'m', text:ARGUE_LINES[A.argue||0][r[4]], t:0, x: e.x + e.face*6, y: e.y - 66 });
+      else { var sd = A.fan || (Math.random()<0.5 ? -1 : 1);
+        E.bub.push({ who:'c', text:r[4], t:0, x: e.x + sd*((A.fan ? 22 : 34) + Math.random()*(A.fan ? 18 : 30)), y: e.y - 78 - Math.random()*14 });
         sfx.cheer && sfx.cheer(0.08); }
     }
   });
   if (e.state==='atk'){ e.t++; if (e.t > 21){ e.state='idle'; e.t=0; } }
   else e.anim++;
-  if (t >= ARGUE_END){ N.i++; e.state='walk'; e.t=0; }
+  if (t >= ARGUE_END){ N.i++; N.ag=0; e.state='walk'; e.t=0; }
 }
 function drawArgue(){                                       // screen space: his yells (white speech boxes) + the fans' boos
   var E=match && match.ent; if (!E || !E.bub) return;
@@ -1312,6 +1346,7 @@ function drawChairSwing(e){
   } else drawWrestler(artKey(e), e.x, e.y, e.face, 'idle', 0);
 }
 function startMatch(idx, opp, twoP){
+  if (refOpt<0) refSel = Math.floor(Math.random()*REFS.length);   // v671 a random ref every match (OPTIONS: RANDOM)
   var pIdx=idx, cIdx=(opp!=null) ? opp : (idx===0?1:0);   // opp may be idx: a MIRROR MATCH (the user)
   TWO_P = !!twoP;                                          // v434: 2 players = p2 is the second controller, no CPU
   p1=makeWrestler(ROSTER[pIdx], 95, 1, false);
@@ -1362,7 +1397,7 @@ function updateMatch(){
       if (M.t2===END_ROAR) sfx.roar();   // (the crowd eruption on screen fires on this too - endPartyLevel)
     }
     if (M.winner && !M.pin){ M.winner.state='win'; M.winner.anim++; }
-    if (M.t2>200){ scene='winner'; T=0; }
+    if (M.t2>200){ scene='winner'; T=0; if (M.winner) entMusicStart(M.winner.def.name); }   // v670 (the user): the winner's own entrance music on his victory screen
     return;
   }
 
@@ -1549,7 +1584,7 @@ function updateEntity(e){
 function neutral(e){ return e.state==='idle'||e.state==='walk'; }
 function sameSide(e,f){ return (f.x-e.x)*e.face >= -2; } // foe is in front
 // DAMAGE_SCALE: every hit and throw takes this share of its listed damage (the user asked for health to go down slower)
-var DAMAGE_SCALE = 0.75;
+var DAMAGE_SCALE = 0.4;   // v667 (the user: the 5:00 clock never mattered - 'slower damage'): 0.75 -> 0.4, matches ~1:20 -> ~2:00-2:30 (bot)
 function hurtBy(e, n){ e.hp = Math.max(0, e.hp - n*DAMAGE_SCALE); }
 function hit(e,f,dmg,kd){
   hurtBy(f, dmg); f.inv=10;
@@ -3754,6 +3789,9 @@ function startPin(a,v){
   var bars=Math.ceil(Math.max(0,v.hp)/10);
   var tbl = v.cpu ? DIFF().youPin : DIFF().cpuPin;
   var holds=Math.random() < tbl[Math.min(bars,tbl.length-1)];
+  // v665 (the user OK'd, playtest: 'a pin on a CPU at 82% won the match in 8 s'): no 3-count on a CPU with more than
+  // 60% health left - the 4+ bars odds (5% MEDIUM) gave fluke wins in the first 20 s. (You kick out by mashing anyway.)
+  if (v.cpu && v.hp > 60) holds = false;
   // decided up front: if the pin holds, nobody kicks out; if not, the CPU kicks out somewhere
   // between the 1 and the 3 (the player kicks out by mashing, as before)
   match.pin={ a:a, v:v, count:0, t:0, mashCount:0, holds:holds, kickT:KICK_EARLIEST+Math.floor(Math.random()*50) }; a.state='pin'; a.t=0; mash=0;   // v408: the CPU kicks out between the 2 and the 3
@@ -3830,9 +3868,14 @@ var REFS = [ { name:'ROBERT MITCHELL',  img:load('sprites/ref_robert_keyed.png?v
              { name:'JESSE WALKER',     img:load('sprites/ref_jesse_keyed.png?v=1'),            // v655 a little heavier: 20px-wide cells
                fr:{ stand:[0,0,20,48], stride:[20,0,20,48], raise:[40,0,16,16], slap:[58,0,16,16] } },
              { name:'CLASSIC REF',      img:load('sprites/ref_keyed.png') } ];   // v654 (the user: 'also have the generic ref'): the real NES ref
-var refSel = 0;
-try { var _rn = localStorage.getItem('pw_ref'); for (var _ri=0;_ri<REFS.length;_ri++) if (REFS[_ri].name===_rn) refSel=_ri; } catch(err){}
-function saveRef(){ try { localStorage.setItem('pw_ref', REFS[refSel].name); } catch(err){} }
+var refSel = 0;   // the ref in THIS match
+// v671 (the user: 'pick the refs at random for each match'): OPTIONS > REF = RANDOM (the default, -1: a new ref drawn
+// every match in startMatch) or one fixed ref. Saved as 'pw_refopt' (the old 'pw_ref' pick is ignored -> RANDOM).
+var refOpt = -1;
+try { var _rn = localStorage.getItem('pw_refopt'); for (var _ri=0;_ri<REFS.length;_ri++) if (REFS[_ri].name===_rn) refOpt=_ri; } catch(err){}
+if (refOpt>=0) refSel=refOpt;
+function saveRef(){ try { localStorage.setItem('pw_refopt', refOpt<0 ? 'RANDOM' : REFS[refOpt].name); } catch(err){} }
+function refName(){ return refOpt<0 ? 'RANDOM' : REFS[refOpt].name; }
 var REFIMG = REFS[0].img;
 var REF_FR = { stand:[0,0,16,48], stride:[18,0,16,48], raise:[36,0,16,16], slap:[54,0,16,16] };  // stand/stride face RIGHT
 var REF_BACK_Y = 66;
@@ -3945,23 +3988,30 @@ function endMatch(winner, byPin){
 // too (grab - its throws, whips + specials all come from tie-ups) and aim the meter better (MEDIUM aimS 10->3.5 hot
 // 0.2: ~half the tie-ups vs a good player, was 2 of 18; EASY 20->8). Measured (bot, 14 matches): MEDIUM now whips,
 // specials, runs, top-rope dives + ~coin-flip matches; EASY still a walkover); TOUGH grabs more (0.3->0.42). HARD unchanged.
+// v667 TOUGH (the user: TOUGH felt like HARD): tie-up aim 2.5 -> 3.5, hot .3 -> .25 - same bot skill: MEDIUM won 5/10,
+// TOUGH 6/20, HARD 1/10; TOUGH wins ~half its tie-ups (HARD ~3/4).
+// v665 HARD tie-ups (the user OK'd): aimS 0 -> 1.5, hot 0.4, cold 0.03 - it won ~90% even vs near-perfect timing,
+// now ~2/3 (TOUGH 2.5 stays looser).
+// v664 (the user: 'fix kicks' - the CPU's kicks knocked you down ~3x as often as its punches even hit): kick is the
+// CPU's pick less often (EASY .35->.25, MEDIUM .5->.3, TOUGH .55->.4, HARD .6->.45). The kick itself is unchanged
+// (real NES: always a knockdown). Bot, MEDIUM 14 matches: CPU knockdowns 73 -> 38, punch hits 28 -> 64, wins ~same.
 // ropeStop (v497): chance the CPU stops on the ropes after your Irish whip instead of running back into your move
 var DIFFS = [
   { name:'EASY',   col:'#40e040', desc:'THE CPU IS SLOW AND EASY TO PIN',
-    think:[36,40], hesitate:0.45, kick:0.35, grip:150, gripT:80, cpuDown:190, punish:false,
+    think:[36,40], hesitate:0.45, kick:0.25, grip:150, gripT:80, cpuDown:190, punish:false,
     grab:0.15, kickTaps:10, aimS:8, hot:0.05, sweep:[80,41], react:[45,40],
     youPin:[0.99,0.90,0.75,0.50,0.15], cpuPin:[0.99,0.60,0.35,0.15,0.02], escape:3, ropeStop:0.15 },
   { name:'MEDIUM', col:'#ffd020', desc:'THE NORMAL GAME',
-    think:[20,30], hesitate:0,    kick:0.5,  grip:100, gripT:40, cpuDown:150, punish:false,
+    think:[20,30], hesitate:0,    kick:0.3,  grip:100, gripT:40, cpuDown:150, punish:false,
     grab:0.2, kickTaps:14, aimS:3.5, hot:0.2, sweep:[70,41], react:[20,25],
     youPin:PIN_HOLD, cpuPin:PIN_HOLD, escape:4, ropeStop:0.25 },
   { name:'TOUGH',  col:'#ff8020', desc:'QUICKER CPU - WIN THE TIE-UPS ON TIME',   // v400 (the user): between MEDIUM and HARD
-    think:[12,22], hesitate:0,    kick:0.55, grip:80,  gripT:32, cpuDown:125, punish:false,
-    grab:0.42, kickTaps:18, aimS:2.5, hot:0.30, cold:0.04, sweep:[50,21], react:[9,10],
+    think:[12,22], hesitate:0,    kick:0.4,  grip:80,  gripT:32, cpuDown:125, punish:false,
+    grab:0.42, kickTaps:18, aimS:3.5, hot:0.25, cold:0.04, sweep:[50,21], react:[9,10],
     youPin:[0.99,0.68,0.42,0.20,0.03], cpuPin:[0.99,0.82,0.62,0.38,0.10], escape:5, ropeStop:0.30 },
   { name:'HARD',   col:'#e02020', desc:'THE CPU IS QUICK AND HARD TO PIN',
-    think:[8,16],  hesitate:0,    kick:0.6,  grip:60,  gripT:24, cpuDown:100, punish:true,
-    grab:0.55, kickTaps:22, aimS:0, sweep:[45,16], react:[0,1], smart:true,
+    think:[8,16],  hesitate:0,    kick:0.45, grip:60,  gripT:24, cpuDown:100, punish:true,
+    grab:0.55, kickTaps:22, aimS:1.5, hot:0.4, cold:0.03, sweep:[45,16], react:[0,1], smart:true,
     youPin:[0.99,0.60,0.35,0.15,0.02], cpuPin:[0.99,0.90,0.75,0.50,0.15], escape:6, ropeStop:0.35 }
 ];
 var diff = 1, optRow = 0;   // (optRow: the OPTIONS screen's row - 0 difficulty, 1 referee)
@@ -4061,7 +4111,13 @@ function aiThink(e){
   // attack when close
   if (Math.abs(dx)<22 && Math.abs(dy)<12){
     e.aiMoveX=0;
-    if (f.state==='down'){ e.aiPunch=true; }        // go for pin
+    // v667 (the user: fewer pins - 'below 60%'): the CPU only pins you once you're under 60% health. Before that it
+    // picks you up (the same pick-up you have) - or, without pick-up art, lets you get up. (Its top-rope chance on a
+    // knockdown is rolled above, as before.)
+    if (f.state==='down'){
+      if (f.hp < 60) e.aiPunch=true;                                     // go for pin
+      else if (canPickup(e,f) && dist(e,f)<24 && nearY(e,f,14)){ startPickup(e,f); return; }
+      else e.aiMoveX=e.aiMoveY=0; }
     else if (Math.random()<D.hesitate){ }           // EASY: dithers instead of swinging
     else if (D.grab && Math.random()<D.grab){       // HARD: walk right into you to start a tie-up (where its throws come from)
       e.aiMoveX = dx>0?1:-1; e.aiMoveY = Math.abs(dy)>2 ? (dy>0?1:-1) : 0;
@@ -4989,15 +5045,15 @@ function drawDiff(){
   bevelBox(rbx, ry, rbw, rbh, rs ? (pulse ? '#ffd020' : '#ffffff') : '#3a3e58', rs ? '#ffffff' : '#6a6e90', '#000');
   var rg=g.createLinearGradient(0,ry+2,0,ry+rbh-2); rg.addColorStop(0, rs ? '#202a5a' : '#14162a'); rg.addColorStop(1, '#06060e');
   g.fillStyle=rg; g.fillRect(rbx+2,ry+2,rbw-4,rbh-4);
-  fancyC('REF: '+REFS[refSel].name, 128, ry+7, 'bold', 1, rs ? GOLD : GREYT, '#000', null, rbw-28);
+  fancyC('REF: '+refName(), 128, ry+7, 'bold', 1, rs ? GOLD : GREYT, '#000', null, rbw-28);
   if (rs){ var ax2=(T>>3)&1; g.fillStyle='#ffd020';
     for (var r2=0;r2<7;r2++){ var aw2=4-Math.abs(3-r2); g.fillRect(rbx+8-ax2, ry+7+r2, aw2, 1); g.fillRect(rbx+rbw-8+ax2-aw2, ry+7+r2, aw2, 1); } }
 }
 function updateDiff(){
   var n=DIFFS.length;
   if (optRow===1){                                               // v649 the REFEREE row
-    if (pressed['ArrowLeft']){ refSel=(refSel+REFS.length-1)%REFS.length; saveRef(); sfx.select(); }
-    if (pressed['ArrowRight']){ refSel=(refSel+1)%REFS.length; saveRef(); sfx.select(); }
+    if (pressed['ArrowLeft']){ refOpt=(refOpt+1+REFS.length)%(REFS.length+1)-1; if (refOpt>=0) refSel=refOpt; saveRef(); sfx.select(); }   // (RANDOM, then each ref)
+    if (pressed['ArrowRight']){ refOpt=(refOpt+2)%(REFS.length+1)-1; if (refOpt>=0) refSel=refOpt; saveRef(); sfx.select(); }
     if (pressed['ArrowUp']){ optRow=0; diff=n-1; sfx.select(); }
     if (pressed['ArrowDown']){ optRow=0; diff=0; sfx.select(); }
   } else {
@@ -5013,18 +5069,36 @@ function updateDiff(){
   pressed={};
 }
 
+// v666 (the user picked 'Win screen' - it was bare black next to the menus): the menus' striped background + banner,
+// the winner's portrait (red frame = 1P, blue = CPU / 2P), name, how it ended, the winner's sprite in his win pose
+// on a little lit mat; YOU LOSE dims it and goes red. No winner (time up / double count out) = both portraits, dimmed.
 function drawWinner(){
-  g.fillStyle='#000'; g.fillRect(0,0,W,H);
-  var win = match && match.winner;
-  var pName = win ? win.def.name : null;
-  var youWon = win && win===p1;
-  if (TWO_P) drawTextC(win ? (win===p1 ? '1P WINS' : '2P WINS') : 'DRAW', 128, 40, '#ffd020');
-  else drawTextC(youWon?'YOU WIN':'YOU LOSE',128,40, youWon?'#ffd020':'#e02020');
-  if (win) drawWrestler(artKey(win), 128, 150, 1, 'win', T);
-  if (pName) drawTextC(pName+' WINS',128,180,'#fff');
-  if ((T>>4)&1) drawTextC('PUSH ENTER OR START',128,210,'#888');
+  menuBG();
+  var M=match, win = M && M.winner, youWon = win && win===p1, lose = !TWO_P && win && !youWon;
+  var title = TWO_P ? (win ? (win===p1 ? '1P WINS' : '2P WINS') : 'DRAW') : (!win ? 'DRAW' : youWon ? 'YOU WIN' : 'YOU LOSE');
+  drawTourBanner(title, lose || !win ? REDT : GOLD, lose ? '#3a0808' : '#6e1010', '#c83030');
+  function idxOf(e){ for (var i=0;i<ROSTER.length;i++) if (ROSTER[i].name===e.def.name) return i; return 0; }
+  var how = M && M.endMsg ? M.endMsg : win ? 'BY PINFALL' : 'TIME UP';
+  if (win){
+    bigPortrait(idxOf(win), 128-43, 34, 86, 64, win===p1, win!==p1);
+    if (lose){ g.fillStyle='rgba(20,0,0,0.35)'; g.fillRect(85,34,86,64); }
+    fancyC(win.def.name, 128, 106, 'bold', 2, lose ? REDT : GOLD, '#1c0400', '#000', 240);
+    fancyC('WINS '+(M && M.endMsg ? 'BY ' : '')+how, 128, 124, 'bold', 1, GREYT, '#000', null);
+    // the winner on a lit mat
+    var sg=g.createRadialGradient(128,196,4,128,196,70); sg.addColorStop(0, lose ? 'rgba(200,40,40,0.35)' : 'rgba(255,208,32,0.30)'); sg.addColorStop(1,'rgba(0,0,0,0)');
+    g.fillStyle=sg; g.fillRect(40,140,176,70);
+    g.fillStyle='rgba(0,0,0,0.5)'; g.beginPath(); g.ellipse(128,197,22,4,0,0,Math.PI*2); g.fill();
+    drawWrestler(artKey(win), 128, 196, 1, 'win', T);
+  } else if (p1 && p2){
+    bigPortrait(idxOf(p1), 30, 40, 86, 64, true, false); bigPortrait(idxOf(p2), 140, 40, 86, 64, false, true);
+    g.fillStyle='rgba(0,0,0,0.45)'; g.fillRect(30,40,86,64); g.fillRect(140,40,86,64);
+    fancyC(how, 128, 124, 'bold', 2, REDT, '#1c0400', '#000', 240);
+    fancyC('NO WINNER', 128, 146, 'bold', 1, GREYT, '#000', null);
+  }
+  if (!win || !lose){ for (var c=0; c<(win ? 12 : 0); c++){ var cy=(T*0.8+c*41)%240, cx=(c*53+((T>>3)&3)*3)%W; g.fillStyle=['#ffd020','#ffffff','#e83030','#3a7aff'][c&3]; g.fillRect(cx, cy, 2, 2); } }   // confetti for a win
+  if ((T>>4)&1) fancyC('PUSH START', 128, 214, 'reg', 1, GREYT, null, '#000');
 }
-function updateWinner(){ if (pStart()){ if (TOUR) tourAfterMatch(); else { scene='title'; T=0; } } pressed={}; }
+function updateWinner(){ if (pStart()){ entMusicStop(); if (TOUR) tourAfterMatch(); else { scene='title'; T=0; } } pressed={}; }
 
 /* ================= TOURNAMENT (the user's pick, v272) =================
    8-man single-elimination bracket: you pick your wrestler, the other 7 are shuffled into the slots. Quarter-final,

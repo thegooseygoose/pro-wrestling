@@ -12,6 +12,7 @@ They are picked up every time the game starts - no rebuild needed. Name each fil
   shawn.mp3      SHAWN MURPHY
   bronson.mp3    MATT BRONSON
   cremator.mp3   CREMATOR VON SLASHER
+  deniro.mp3     DANCE DADDY DENERO   (denero.mp3 / dancedaddy.mp3 also work)
 (Full names like "Matt Bronson.mp3" work too. mp3, ogg, wav or m4a.)
 A wrestler with no file keeps his built-in chiptune theme.
 
