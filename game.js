@@ -35,26 +35,26 @@ var ATLAS_DATA = {"BASE":{"frames":{"0.0":[5,5,14,56],"LIEUP":[197,1167,18,26],"
 // TODD QUALITY = the user's own wrestler: Star Man's full frame set repainted (tools/py/repaint2.py:
 // slicked-back hair, horseshoe mustache, bare arms, black tank top, gold chain, purple track pants with a
 // gold stripe, black sneakers) — same rects, own sheet (file names still say 'heavy').
-ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=116', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=117', frames:ATLAS_DATA['BASE'].frames };
 // LOKOMBO = the user's 4th wrestler (from their photos): Star Man's full frame set recoloured (deep brown skin, black
 // trunks, black knee pads) with Todd's head designs re-stamped in his colours (black flat-top, beard) —
 // tools/py/build_lokombo.py. Same rects, own sheet.
-ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=83', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=84', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { PSCOOP:[2,1208,21,55] }) };   // v557 + his press slam scoop (tools/py/build_press_scoop.py --who lokombo)
 // SCOTTY MAC = the user's 5th wrestler (from their photos): TODD's art recoloured (black vest, silver chain, sky-blue
 // pants, bleached-blond hair, grey beard) — tools/py/build_scotty.py. Same rects, own sheet.
-ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=89', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=90', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { ADS60:[294,1329,49,23], ADS30:[233,1207,41,34] }) };   // v611 + his own DDT sit-up (ADS_NAMES=scotty_keyed,scotty_alt_keyed tools/py/build_adonis_ddt.py)
 // NICK PRICE = the user's 6th wrestler (from their photo): Lokombo's recipe in his colours — Star's frames recoloured (pale
 // skin, black trunks, black knee pads/boots) + his OWN head designs (tools/py/nick_heads.py: top-knot, shaved sides, full
 // reddish beard — the user: "his face looks too similar to Todd's") — tools/py/build_nick.py;
 // his own superkick frames NSKM/NSKH via build_hbk.py --sheet nick_keyed.png. Same rects, own sheet.
-ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=73', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=74', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { LDV:[64,1335,46,26], LDS:[64,1281,39,34], LDSIT:[113,1335,36,36] }) };   // v617 the LEG DROP is his now (the user: swap with Shawn's neckbreaker) - WHO=nick build_legdrop_air.py + shawn_bigboot.py (BOOT)
 // AIR ADONIS = the user's 7th wrestler (from their photos, tools/adonis_photos): Nick's recipe in his colours — Star's
 // frames recoloured (tan skin, black trunks + boots) + his own heads (tools/py/adonis_heads.py: black BACKWARDS cap,
 // short dark beard) — tools/py/build_adonis.py — then his colour TATTOO SLEEVES (tools/py/build_adonis_tattoo.py).
-ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=78', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=79', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { RKBL:[2,1284,34,42], PSCOOP:[40,1284,21,55], ADS60:[157,1261,49,23], ADS30:[230,1261,41,34] }) };   // v596 + his own DDT sit-up (tools/py/build_adonis_ddt.py)   // v528: + his rock bottom lunge (tools/py/build_rkb_lunge.py); v554 + PSCOOP (tools/py/build_press_scoop.py)
 // MACHETE BROWN = the user's 8th wrestler (from their photo): TODD's art (like Scotty) with his own heads (tools/py/
 // machete_heads.py: short dark hair greying at the sides, BIG grey beard), Todd's tank -> an open black leather jacket,
@@ -65,18 +65,18 @@ ATLAS_DATA['MACHETE BROWN'] = { sheet:'sprites/machete_keyed.png?v=47', frames:A
 // shoulder-length hair made BLONDE - the user - big aviators + full dark beard (v334), no bandana in the ring (v333))
 // - tools/py/build_shawn.py - then Todd's tank top copied onto him pose by pose as his black tank with a yellow print, and
 // PINK ZEBRA trunks (v334, the user's photo) (tools/py/build_shawn_tank.py).
-ATLAS_DATA['SHAWN MURPHY'] = { sheet:'sprites/shawn_keyed.png?v=58', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['SHAWN MURPHY'] = { sheet:'sprites/shawn_keyed.png?v=59', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { LDV:[118,1182,45,26], LDS:[50,1186,39,34], LDSIT:[293,1174,36,36] }) };   // v579 the leg drop in the air (tools/py/build_legdrop_air.py)
 // MATT BRONSON = the user's 10th wrestler (v338, their photo tools/bronson_photos/1.jpg): Shawn's recipe - Star's frames
 // recoloured + his own heads (tools/py/bronson_heads.py: BALD, aviator sunglasses, full brown beard) - tools/py/build_bronson.py -
 // then Todd's trousers + chain copied onto him pose by pose as his TAN 'BB' track pants (red side stripe) and gold chain
 // (tools/py/build_bronson_pants.py). Shirtless, black shoes.
-ATLAS_DATA['MATT BRONSON'] = { sheet:'sprites/bronson_keyed.png?v=49', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['MATT BRONSON'] = { sheet:'sprites/bronson_keyed.png?v=50', frames:ATLAS_DATA['BASE'].frames };
 // CREMATOR VON SLASHER = the user's 11th wrestler (v346, their photos tools/cremator_photos 5-7.jpg): the same recipe - Star's
 // frames recoloured + his own heads (tools/py/cremator_heads.py: a SILVER stitched full-face mask, slicked reddish-brown hair) -
 // tools/py/build_cremator.py - then Todd's tank + trousers copied onto him as his dark NAVY sleeveless shirt and dark pants
 // (tools/py/build_cremator_body.py). His finisher (the user): the CHOKE SLAM (Bronson's, his own copies of those frames).
-ATLAS_DATA['CREMATOR VON SLASHER'] = { sheet:'sprites/cremator_keyed.png?v=55', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['CREMATOR VON SLASHER'] = { sheet:'sprites/cremator_keyed.png?v=56', frames:ATLAS_DATA['BASE'].frames };
 // MIRROR MATCHES (the user): the CPU copy of the same wrestler is drawn from '<NAME>#ALT' — same frames, his costume in
 // other colours (tools/py/build_mirror.py). Game logic keeps e.def.name; drawing goes through artKey(e).
 // v355 FAT MACHETE (the user: 'make Machete look a little fat'): his own sheets (mfat_*, tools/py/machete_fat_pack.py) - every
@@ -140,12 +140,12 @@ function creInit(im){
 // (tools/py/build_deniro.py: neon print tank + pink/blue tights, ginger hair + full beard, pink/purple/yellow headband, wraparound
 // shades), then made FAT like Machete but more (machete_fat_pack.py --who deniro: dfat_* sheets, widen 0.36; the drawImage
 // hook pads '/dfat' like '/mfat'), so he shares Machete's fat frames table.
-ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=40', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
+ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=41', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
   { FAMJ:[6,720,20,48], FAMS:[36,720,19,26] }) };   // v503: + his own front-on famouser frames (tools/py/build_famouser.py)
 var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator', 'DANCE DADDY DENERO':'deniro' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=155', frames:ATLAS_DATA[_an].frames };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=156', frames:ATLAS_DATA[_an].frames };
 ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=64';   // v355: his fat mirror copy
-ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=50';   // v480: his fat mirror copy
+ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=51';   // v480: his fat mirror copy
 ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=19', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
 ATLAS_DATA['RIGOR VON SLASHER'] = { sheet:'sprites/rigor_keyed.png?v=6', frames:ATLAS_DATA['BASE'].frames };   // v627 Cremator's partner (tools/py/build_rigor.py)
 ATLAS_DATA['CREMATOR VON SLASHER#COAT'] = { sheet:'sprites/cremator_coat_keyed.png?v=27', frames:ATLAS_DATA['CREMATOR VON SLASHER'].frames };   // v429 entrance coat
