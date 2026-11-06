@@ -35,11 +35,11 @@ var ATLAS_DATA = {"BASE":{"frames":{"0.0":[5,5,14,56],"LIEUP":[197,1167,18,26],"
 // TODD QUALITY = the user's own wrestler: Star Man's full frame set repainted (tools/py/repaint2.py:
 // slicked-back hair, horseshoe mustache, bare arms, black tank top, gold chain, purple track pants with a
 // gold stripe, black sneakers) — same rects, own sheet (file names still say 'heavy').
-ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=97', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=116', frames:ATLAS_DATA['BASE'].frames };
 // LOKOMBO = the user's 4th wrestler (from their photos): Star Man's full frame set recoloured (deep brown skin, black
 // trunks, black knee pads) with Todd's head designs re-stamped in his colours (black flat-top, beard) —
 // tools/py/build_lokombo.py. Same rects, own sheet.
-ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=79', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=81', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { PSCOOP:[2,1208,21,55] }) };   // v557 + his press slam scoop (tools/py/build_press_scoop.py --who lokombo)
 // SCOTTY MAC = the user's 5th wrestler (from their photos): TODD's art recoloured (black vest, silver chain, sky-blue
 // pants, bleached-blond hair, grey beard) — tools/py/build_scotty.py. Same rects, own sheet.
@@ -143,7 +143,7 @@ function creInit(im){
 ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=40', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
   { FAMJ:[6,720,20,48], FAMS:[36,720,19,26] }) };   // v503: + his own front-on famouser frames (tools/py/build_famouser.py)
 var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator', 'DANCE DADDY DENERO':'deniro' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=122', frames:ATLAS_DATA[_an].frames };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=143', frames:ATLAS_DATA[_an].frames };
 ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=63';   // v355: his fat mirror copy
 ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=50';   // v480: his fat mirror copy
 ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=19', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
@@ -4389,6 +4389,12 @@ function drawRel(e,fid,L,dy){
   g.restore();
 }
 // blit a sheet frame with its box's LEFT edge / BOTTOM at screen px, mirrored in place when flip
+function blitPart(name, fid, left, bottom, flip, cx, cy, cw, ch){   // v703: one rectangle of a frame, placed as blitAt places the whole
+  var r=ATLAS[name][fid]; if (!r || cw<=0 || ch<=0) return;
+  g.save(); g.translate(Math.round(left)+(flip?r[2]:0), Math.round(bottom)); if (flip) g.scale(-1,1);
+  g.drawImage(SHEET[name], r[0]+cx,r[1]+cy,cw,ch, cx, -r[3]+cy, cw, ch);
+  g.restore();
+}
 function blitAt(name, fid, left, bottom, flip){
   var r=ATLAS[name][fid]; if (!r) return;
   g.save(); g.translate(Math.round(left)+(flip?r[2]:0), Math.round(bottom)); if (flip) g.scale(-1,1);
@@ -4404,6 +4410,7 @@ function blitAt(name, fid, left, bottom, flip){
 var THROW_VIC = {"SLAM1":["17.5",0,0,0],"SLAM2":["LIEFLAT",1,23,41],"SLAM3":["LIEFLAT",1,22,36],"SLAM4":["LIEFLAT",1,22,36],"SLAM5":["LIEFLAT",1,19,41],"PICKUP1":["LIEFLAT",1,0,20],"PICKUP2":["17.1",1,-2,21],"PICKUP3":["17.2",1,0,15],"PICKUP4":["0.2",0,0,0],"PILE1":["11.0",1,2,17],"PILE2":["17.1",0,12,11],"PILE3":["6.2",1,8,0],"PILE4":["6.2",1,8,0],"PILE5":["17.0",1,6,7],"SUPLEX1":["14.1",1,6,11],"SUPLEX2":["14.1",1,6,10],"SUPLEX3":["14.1",1,14,7],"SUPLEX4":["6.2",1,0,0],"SUPLEX5":["17.0",1,0,16],"SUPLEX6":["17.0",1,0,0],"SUPLEX7":["LIEFLAT",0,0,7],"SUPLEX8":["LIEFLAT",0,0,28]};
 var SOLO_THROW = { 'TODD QUALITY':1, 'LOKOMBO':1, 'SCOTTY MAC':1, 'NICK PRICE':1, 'AIR ADONIS':1, 'SHAWN MURPHY':1, 'MATT BRONSON':1,
   'MACHETE BROWN':1, 'DANCE DADDY DENERO':1, 'CREMATOR VON SLASHER':1 };   // v638 + the fat two and Cremator (tools/py/solo_throws_special.py) - all 10
+var VIC_CROP = { 'PILE1':[12,12] };   // [rows, cols]: only the victim art's top-left cols x rows is drawn above that row (his head, top-right, hidden)
 var SLAMSEQ_SOLO = [['SLAM1',19,38],['SLAM3',32,20],['SLAM4',32,22],['SLAM5',28,6]];
 function throwPhase(e, Q){ var acc=0, cur=Q[Q.length-1]; for (var i=0;i<Q.length;i++){ if (e.t < acc+Q[i][2]){ cur=Q[i]; break; } acc+=Q[i][2]; } return cur; }
 function drawThrowSolo(e, Q){ var ph=throwPhase(e, Q); return soloFrame(e, ph[0], ph[1], 0, e.face<0); }
@@ -4417,7 +4424,11 @@ function soloFrame(e, fid, anchor, dy, flipArt, keepAnchor){   // one throw fram
   g.save(); g.translate(Math.round(e.x), Math.round(e.y)+(dy||0)); if (flipArt) g.scale(-1,1);
   var L0=-ax, T0=-r[3];                                  // the old combined frame's top-left
   g.save(); g.translate(L0 + VI[2] + (VI[1] ? vr[2] : 0), T0 + VI[3]); if (VI[1]) g.scale(-1,1);
-  g.drawImage(SHEET[artKey(v)], vr[0],vr[1],vr[2],vr[3], 0, 0, vr[2], vr[3]);   // the victim, his own pose
+  var VC=VIC_CROP[fid];
+  if (VC){   // v696 piledriver grab: his head is tucked between the attacker's legs - hide it (the user: a brown blob there)
+    g.drawImage(SHEET[artKey(v)], vr[0],vr[1],VC[1],VC[0], 0, 0, VC[1], VC[0]);
+    g.drawImage(SHEET[artKey(v)], vr[0],vr[1]+VC[0],vr[2],vr[3]-VC[0], 0, VC[0], vr[2], vr[3]-VC[0]);
+  } else g.drawImage(SHEET[artKey(v)], vr[0],vr[1],vr[2],vr[3], 0, 0, vr[2], vr[3]);   // the victim, his own pose
   g.restore();
   g.drawImage(SHEET[artKey(e)], r[0],r[1],r[2],r[3], L0, T0, r[2], r[3]);       // the attacker over him
   g.restore();
@@ -4450,8 +4461,11 @@ function drawPileFail(e){
   if (vr) drawShadow({state:'idle', x:vl+vr[2]/2, y:ay, def:v.def});
   if (!att) drawWrestler(artKey(e), e.x, e.y, e.face, 'idle', 0);
   var ar = att && ATLAS[e.def.name][att], al = ar ? left(0, ar[2]) : 0;
+  // v703 (the user: a brown block at his crotch): the bent man's HEAD (PFBENT's left 4 cols, top 13 rows) is drawn
+  // BEHIND the attacker - tucked between his legs - and the rest of him in front as before
+  if (vr) blitPart(artKey(v), 'PFBENT', vl, ay+ph[2], fl, 0, 0, 4, 13);
   if (ar) blitAt(artKey(e), att, al, ay, fl);
-  if (vr) blitAt(artKey(v), 'PFBENT', vl, ay+ph[2], fl);
+  if (vr){ blitPart(artKey(v), 'PFBENT', vl, ay+ph[2], fl, 4, 0, vr[2]-4, vr[3]); blitPart(artKey(v), 'PFBENT', vl, ay+ph[2], fl, 0, 13, 4, vr[3]-13); }
   var FR = ar && PF_FRONT[att];
   if (FR) for (var k=0;k<FR.length;k++){
     var dx=FR[k][0], dy=FR[k][1];
@@ -5742,11 +5756,99 @@ function lerpDraw(fn, a){
   try { fn(); }
   finally { for (i=0;i<saved.length;i++){ saved[i][0].x=saved[i][1]; saved[i][0].y=saved[i][2]; } camX=cx; camY=cy; }
 }
+// ===== v704 FRAME INSPECTOR (the user: 'a pause feature and also a rewind when I pause, frame by frame, to show you the
+// issues'). In a match press F8: the game freezes and every sprite on screen gets its frame name written next to it
+// ('TODD 17.2', 'RED TODD PFBENT'). LEFT / RIGHT step one game frame back / forward through the last ~13 seconds
+// (hold SHIFT for 10), HOME / END jump to the oldest / newest. F8 again = carry on playing from where it was paused.
+// Recording: after every match step a copy of the wrestlers, ref, manager, match + camera goes in a ring buffer.
+var INSPECT = false, INS_HIST = [], INS_MAX = 600, INS_I = 0, INS_LIVE = null, INS_DRAWN = [];
+function insClone(o, seen){
+  if (o === null || typeof o !== 'object') return o;
+  if (o instanceof HTMLImageElement || o instanceof HTMLCanvasElement || (typeof AudioNode!=='undefined' && o instanceof AudioNode)) return o;
+  if (seen.has(o)) return seen.get(o);
+  var c = Array.isArray(o) ? [] : {}; seen.set(o, c);
+  for (var k in o){ if (!Object.prototype.hasOwnProperty.call(o, k)) continue;
+    var v = o[k]; c[k] = (k === 'def') ? v : insClone(v, seen); }
+  return c;
+}
+function insGrab(){ var s = new Map(); return { p1:insClone(p1,s), p2:insClone(p2,s), ref:insClone(ref,s), MGR:insClone(MGR,s), match:insClone(match,s),
+  FX:insClone(FX,s), camX:camX, camY:camY, shake:shake, freeze:freeze, T:T }; }
+function insPut(st){ p1=st.p1; p2=st.p2; ref=st.ref; MGR=st.MGR; match=st.match; FX=st.FX; camX=st.camX; camY=st.camY; shake=0; freeze=st.freeze; T=st.T; }
+function insRecord(){ if (scene!=='match' || paused) return; INS_HIST.push(insGrab()); if (INS_HIST.length > INS_MAX) INS_HIST.shift(); }
+function insToggle(){
+  if (scene!=='match') return;
+  if (!INSPECT){ if (!INS_HIST.length) INS_HIST.push(insGrab()); INS_LIVE = insGrab(); INS_I = INS_HIST.length-1; INSPECT = true; }
+  else { insPut(INS_LIVE); INSPECT = false; acc = 0; clearPress(); }
+}
+// which atlas frame an image draw is: reverse look-up by sheet + source rect (a part-frame draw finds the frame it's inside)
+var INS_SHEETKEY = new Map();
+function insFrameOf(img, sx, sy, sw, sh){
+  var key = INS_SHEETKEY.get(img);
+  if (key === undefined){ key = null; for (var k in SHEET) if (SHEET[k] === img){ key = k; break; } INS_SHEETKEY.set(img, key); }
+  if (!key || !ATLAS[key]) return null;
+  var F = ATLAS[key], best = null;
+  for (var f in F){ var r = F[f];
+    if (r[0]===sx && r[1]===sy && r[2]===sw && r[3]===sh) return [key, f];
+    if (!best && sx>=r[0] && sy>=r[1] && sx+sw<=r[0]+r[2] && sy+sh<=r[1]+r[3]) best = [key, f]; }
+  return best;
+}
+(function(){
+  var P = CanvasRenderingContext2D.prototype, base = P.drawImage;
+  P.drawImage = function(img, sx, sy, sw, sh, dx, dy, dw, dh){
+    if (INSPECT && INS_DRAWN && arguments.length === 9){
+      var hit = insFrameOf(img, sx, sy, sw, sh);
+      if (hit){ var m = this.getTransform(); var x0 = m.a*dx + m.c*dy + m.e, y0 = m.b*dx + m.d*dy + m.f, x1 = m.a*(dx+dw) + m.c*(dy+dh) + m.e;
+        INS_DRAWN.push({ key:hit[0], f:hit[1], x:Math.min(x0,x1), y:y0, a:Math.abs(sw*sh) }); }
+    }
+    return base.apply(this, arguments);
+  };
+})();
+function insName(key){
+  var alt = /#ALT$/.test(key), n = key.replace(/#.*$/, '');
+  var sh = { 'TODD QUALITY':'TODD', 'LOKOMBO':'LOKOMBO', 'SCOTTY MAC':'SCOTTY', 'NICK PRICE':'NICK', 'AIR ADONIS':'ADONIS', 'MACHETE BROWN':'MACHETE',
+    'SHAWN MURPHY':'SHAWN', 'MATT BRONSON':'BRONSON', 'CREMATOR VON SLASHER':'CREMATOR', 'DANCE DADDY DENERO':'DANCE', 'RIGOR VON SLASHER':'RIGOR' }[n] || n.split(' ')[0];
+  return (alt ? 'ALT ' : '') + sh;
+}
+function insDraw(){
+  var st = INS_HIST[INS_I]; if (!st) return;
+  var keep = { p1:p1, p2:p2, ref:ref, MGR:MGR, match:match, FX:FX, camX:camX, camY:camY, shake:shake, freeze:freeze, T:T };
+  insPut(insClone(st, new Map()));
+  INS_DRAWN = [];
+  try { drawMatch(); } finally { var drawn = INS_DRAWN; INS_DRAWN = null; insPut(keep); shake = keep.shake;
+    g.setTransform(1,0,0,1,0,0); g.font = '7px monospace'; g.textBaseline = 'top';
+    var seen = {}, placed = [];
+    var big = {};                                   // one label per sprite frame: its biggest piece (throws draw in parts / 1-px hand fixes)
+    for (var i=0;i<drawn.length;i++){ var d0 = drawn[i], l0 = insName(d0.key) + ' ' + d0.f; if (d0.a < 16) continue; if (!big[l0] || d0.a > big[l0].a) big[l0] = d0; }
+    drawn = Object.keys(big).map(function(k){ return big[k]; });
+    for (var i=0;i<drawn.length;i++){ var d = drawn[i], lab = insName(d.key) + ' ' + d.f;
+      var lw = g.measureText(lab).width, tx = Math.max(1, Math.min(VW - lw - 2, Math.round(d.x))), ty = Math.max(12, Math.round(d.y) - 10);
+      for (var tries=0; tries<12; tries++){ var hitR = false;            // stack labels that would overlap
+        for (var j=0;j<placed.length;j++){ var q = placed[j]; if (tx < q[0]+q[2]+2 && tx+lw+2 > q[0] && ty < q[1]+9 && ty+9 > q[1]){ hitR = true; break; } }
+        if (!hitR) break; ty = ty - 9 < 12 ? ty + 30 : ty - 9; }
+      placed.push([tx, ty, lw]);
+      g.fillStyle = 'rgba(0,0,0,.75)'; g.fillRect(tx-1, ty-1, lw+2, 9);
+      g.fillStyle = '#ff0'; g.fillText(lab, tx, ty); }
+    var back = INS_HIST.length-1-INS_I, bar = 'PAUSED  F8 = play   <- -> step (SHIFT x10)   ' + (back ? back + ' frames back' : 'newest frame');
+    g.fillStyle = 'rgba(0,0,0,.85)'; g.fillRect(0, 0, VW, 10); g.fillStyle = '#0ff'; g.fillText(bar, 3, 1); }
+}
+addEventListener('keydown', function(e){
+  if (e.key === 'F8'){ e.preventDefault(); insToggle(); return; }
+  if (!INSPECT) return;
+  var n = e.shiftKey ? 10 : 1;
+  if (e.key === 'ArrowLeft') INS_I = Math.max(0, INS_I - n);
+  else if (e.key === 'ArrowRight') INS_I = Math.min(INS_HIST.length-1, INS_I + n);
+  else if (e.key === 'Home') INS_I = 0;
+  else if (e.key === 'End') INS_I = INS_HIST.length-1;
+});
 function frame(ts){
   requestAnimationFrame(frame);
+  if (INSPECT && scene==='match'){ last = ts; acc = 0;
+    g.setTransform(1,0,0,1,0,0); g.fillStyle='#000'; g.fillRect(0,0,VW,H); g.setTransform(1,0,0,1,VX,0); BELT_ON = null;
+    insDraw(); return; }
+  if (INSPECT) INSPECT = false;
   if (!last) last=ts;
   acc += ts-last; last=ts; if (acc>100) acc=100;
-  while (acc>=STEP){ acc-=STEP; if (scene==='match') lerpSnap(); step(); }
+  while (acc>=STEP){ acc-=STEP; if (scene==='match') lerpSnap(); step(); insRecord(); }
   g.setTransform(1,0,0,1,0,0); g.fillStyle='#000'; g.fillRect(0,0,VW,H); g.setTransform(1,0,0,1,VX,0);   // v397 widescreen
   BELT_ON = null;                                   // (v677 drawMatch/drawWinner turn the champion's belt on)
   if (scene==='title') drawTitle();
