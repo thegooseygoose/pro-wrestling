@@ -43,7 +43,7 @@ ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=81', frames:Object.
   { PSCOOP:[2,1208,21,55] }) };   // v557 + his press slam scoop (tools/py/build_press_scoop.py --who lokombo)
 // SCOTTY MAC = the user's 5th wrestler (from their photos): TODD's art recoloured (black vest, silver chain, sky-blue
 // pants, bleached-blond hair, grey beard) — tools/py/build_scotty.py. Same rects, own sheet.
-ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=81', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=82', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { ADS60:[294,1329,49,23], ADS30:[233,1207,41,34] }) };   // v611 + his own DDT sit-up (ADS_NAMES=scotty_keyed,scotty_alt_keyed tools/py/build_adonis_ddt.py)
 // NICK PRICE = the user's 6th wrestler (from their photo): Lokombo's recipe in his colours — Star's frames recoloured (pale
 // skin, black trunks, black knee pads/boots) + his OWN head designs (tools/py/nick_heads.py: top-knot, shaved sides, full
@@ -143,7 +143,7 @@ function creInit(im){
 ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=40', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
   { FAMJ:[6,720,20,48], FAMS:[36,720,19,26] }) };   // v503: + his own front-on famouser frames (tools/py/build_famouser.py)
 var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator', 'DANCE DADDY DENERO':'deniro' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=143', frames:ATLAS_DATA[_an].frames };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=144', frames:ATLAS_DATA[_an].frames };
 ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=63';   // v355: his fat mirror copy
 ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=50';   // v480: his fat mirror copy
 ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=19', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
@@ -5727,6 +5727,7 @@ function step(){
   else if (scene==='match'){
     if (paused) updatePause();
     else if (match.phase==='entrance' && (pressed['Enter']||pressed['PadStart']||pressed['x']||pressed['X']||pressed['z']||pressed['Z']||pressed[' '])){ pressed={}; entSkip(); }
+    else if (PRESLIDE){ pressed={}; preslideTick(); }
     else if (pressed['Enter']||pressed['PadStart']||pressed['p']||pressed['P']){ pressed={}; openPause(); }
     else updateMatch();
   }
@@ -5755,6 +5756,35 @@ function lerpDraw(fn, a){
   if (ok(lerpSnap.cy,camY)) camY = lerpSnap.cy + (camY-lerpSnap.cy)*a;
   try { fn(); }
   finally { for (i=0;i<saved.length;i++){ saved[i][0].x=saved[i][1]; saved[i][0].y=saved[i][2]; } camX=cx; camY=cy; }
+}
+// ===== v710 MOVES STAY IN THE RING (the user: 'some moves are semi out of the ring - the suplex and body slam go to the
+// outside, but what else should be done'). Every grapple move except the suplex / slam (which throw him over the ropes)
+// first SLIDES both men toward the middle, just far enough that the whole move - both bodies, every frame - fits inside
+// the ropes. MOVE_REACH = how far each wrestler's move reaches behind / in front of him (px, facing right), measured by
+// playing every move-list demo and recording where each sprite was drawn (tools: the v710 measuring script).
+var MOVE_REACH = {"TODD QUALITY":{"doPile":[-27,26],"startBKB":[-19,26]},"LOKOMBO":{"startPB":[-15,46],"startKM:press":[-37,27]},"SCOTTY MAC":{"startHBK":[-41,32],"startBTB":[7,67],"startDDT":[-51,23]},"NICK PRICE":{"startBrain":[-72,10],"startBTB":[7,67]},"AIR ADONIS":{"startDDT":[-51,23],"startBTB":[7,67]},"MACHETE BROWN":{"startHBT":[-8,32],"startDVD":[-58,29],"startKM:sleeper":[-18,23]},"SHAWN MURPHY":{"startPED":[-7,61],"startNBK":[-23,56]},"MATT BRONSON":{"startF5":[-47,29],"startHTS":[-56,54]},"CREMATOR VON SLASHER":{"startChoke":[-8,42],"startKM:tomb":[-28,48]},"DANCE DADDY DENERO":{"startFAM":[-16,56],"startRMD":[-14,54]}};
+var RING_VIS = [14, 242];                            // world x the drawn bodies must stay inside (inside the corner posts)
+var PRESLIDE = null, PRESLIDE_RUN = false;
+function preslideWrap(nm){
+  var orig = window[nm];
+  var w = function(a, v, kind){
+    if (PRESLIDE_RUN || PRESLIDE || !a || !v || a.out || v.out || (match && match.demo)) return orig.apply(this, arguments);
+    var R = (MOVE_REACH[a.def.name] || {})[nm + (typeof kind === 'string' ? ':' + kind : '')];
+    if (!R) return orig.apply(this, arguments);
+    var L = a.x + (a.face > 0 ? R[0] : -R[1]), Rr = a.x + (a.face > 0 ? R[1] : -R[0]), d = 0;
+    if (L < RING_VIS[0]) d = RING_VIS[0] - L; else if (Rr > RING_VIS[1]) d = RING_VIS[1] - Rr;
+    if (Math.abs(d) < 1) return orig.apply(this, arguments);
+    PRESLIDE = { a:a, v:v, orig:orig, args:Array.prototype.slice.call(arguments), self:this, d:d, n:Math.max(4, Math.min(12, Math.ceil(Math.abs(d)/3))), i:0, ax:a.x, vx:v.x };
+  };
+  window[nm] = w;
+  for (var who in TIE_A) for (var slot in TIE_A[who]) if (TIE_A[who][slot] && TIE_A[who][slot].go === orig) TIE_A[who][slot].go = w;
+}
+['doPile','startBKB','startPB','startKM','startHBK','startBTB','startDDT','startBrain','startHBT','startDVD','startPED','startNBK',
+ 'startF5','startHTS','startChoke','startFAM','startRMD'].forEach(preslideWrap);
+function preslideTick(){                            // the two slide in together (still locked up), then the move starts
+  var S = PRESLIDE; S.i++;
+  var k = S.i / S.n; S.a.x = S.ax + S.d*k; S.v.x = S.vx + S.d*k;
+  if (S.i >= S.n){ PRESLIDE = null; PRESLIDE_RUN = true; try { S.orig.apply(S.self, S.args); } finally { PRESLIDE_RUN = false; } }
 }
 // ===== v704 FRAME INSPECTOR (the user: 'a pause feature and also a rewind when I pause, frame by frame, to show you the
 // issues'). In a match press F8: the game freezes and every sprite on screen gets its frame name written next to it
