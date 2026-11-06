@@ -39,11 +39,11 @@ ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=116', frames:ATL
 // LOKOMBO = the user's 4th wrestler (from their photos): Star Man's full frame set recoloured (deep brown skin, black
 // trunks, black knee pads) with Todd's head designs re-stamped in his colours (black flat-top, beard) —
 // tools/py/build_lokombo.py. Same rects, own sheet.
-ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=81', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=83', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { PSCOOP:[2,1208,21,55] }) };   // v557 + his press slam scoop (tools/py/build_press_scoop.py --who lokombo)
 // SCOTTY MAC = the user's 5th wrestler (from their photos): TODD's art recoloured (black vest, silver chain, sky-blue
 // pants, bleached-blond hair, grey beard) — tools/py/build_scotty.py. Same rects, own sheet.
-ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=82', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=89', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { ADS60:[294,1329,49,23], ADS30:[233,1207,41,34] }) };   // v611 + his own DDT sit-up (ADS_NAMES=scotty_keyed,scotty_alt_keyed tools/py/build_adonis_ddt.py)
 // NICK PRICE = the user's 6th wrestler (from their photo): Lokombo's recipe in his colours — Star's frames recoloured (pale
 // skin, black trunks, black knee pads/boots) + his OWN head designs (tools/py/nick_heads.py: top-knot, shaved sides, full
@@ -54,7 +54,7 @@ ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=73', frames:Object.
 // AIR ADONIS = the user's 7th wrestler (from their photos, tools/adonis_photos): Nick's recipe in his colours — Star's
 // frames recoloured (tan skin, black trunks + boots) + his own heads (tools/py/adonis_heads.py: black BACKWARDS cap,
 // short dark beard) — tools/py/build_adonis.py — then his colour TATTOO SLEEVES (tools/py/build_adonis_tattoo.py).
-ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=76', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=78', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { RKBL:[2,1284,34,42], PSCOOP:[40,1284,21,55], ADS60:[157,1261,49,23], ADS30:[230,1261,41,34] }) };   // v596 + his own DDT sit-up (tools/py/build_adonis_ddt.py)   // v528: + his rock bottom lunge (tools/py/build_rkb_lunge.py); v554 + PSCOOP (tools/py/build_press_scoop.py)
 // MACHETE BROWN = the user's 8th wrestler (from their photo): TODD's art (like Scotty) with his own heads (tools/py/
 // machete_heads.py: short dark hair greying at the sides, BIG grey beard), Todd's tank -> an open black leather jacket,
@@ -143,7 +143,7 @@ function creInit(im){
 ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=40', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
   { FAMJ:[6,720,20,48], FAMS:[36,720,19,26] }) };   // v503: + his own front-on famouser frames (tools/py/build_famouser.py)
 var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator', 'DANCE DADDY DENERO':'deniro' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=144', frames:ATLAS_DATA[_an].frames };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=155', frames:ATLAS_DATA[_an].frames };
 ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=63';   // v355: his fat mirror copy
 ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=50';   // v480: his fat mirror copy
 ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=19', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
@@ -1654,7 +1654,6 @@ var TIE_A = {
   'LOKOMBO':      { down:{ ok:function(a,v){ return canPB(a); },      go:tryPB },                         // powerbomb (the user: DOWN + A)
                     side:{ ok:function(a,v){ return canKM(a,'press'); }, go:function(a,v){ startKM(a,v,'press'); } } },   // v557 PRESS SLAM (Warrior's - the user: Lokombo does it)
   'SCOTTY MAC':   { down:{ ok:function(a,v){ return canHBK(a); },     go:startHBK },                      // superkick (the user, v295: DOWN + A)
-                    plain:{ ok:function(a,v){ return canDDT(a); },   go:startDDT },                      // v613 the DDT on A alone (v611 it was UP + A; the user: give him the suplex back)
                     side:{ ok:function(a,v){ return canBTB(a); },      go:startBTB } },                    // belly-to-back suplex (L/R + A)
   'NICK PRICE':   { up:{ ok:canBrain, go:startBrain },                                                // brain buster (the user, v295: UP + A, in place of the suplex)
                     side:{ ok:function(a,v){ return canBTB(a); },      go:startBTB },                      // belly-to-back suplex (L/R + A)
@@ -2775,7 +2774,7 @@ var DDT_SEQ = [
   [64, '12.6',   -22,  0, null,      0,   0, false, false]    // kneels up
 ];
 var DDT_HIT = 23, DDT_FLAT = 38, DDT_END = 72, DDT_DMG = 22;
-function canDDT(a){ return (a.def.name==='AIR ADONIS' || a.def.name==='SCOTTY MAC') && !!ATLAS[a.def.name]['DDA90']; }   // v595: Adonis's (was Machete's)
+function canDDT(a){ return a.def.name==='AIR ADONIS' && !!ATLAS[a.def.name]['DDA90']; }   // v721 (the user): Scotty Mac's DDT removed   // v595: Adonis's (was Machete's)
 function startDDT(a, v){
   match.lock=null; a.grip=v.grip=0; mash=0;
   a.state='ddt'; a.t=0; a.anim=0; a.bbf = v.x>=a.x ? 1 : -1; a.bbx = Math.round(a.x); a.bby = Math.round(a.y);
@@ -5501,7 +5500,7 @@ var ML_SPECIAL = {
   'AIR ADONIS':   [['SHOOTING STAR PRESS', 'ON TOP  UP + X', 'ssp'], ['DDT', 'TIE-UP  DOWN + X', 'ddt'], ['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb']],   // v613 belly to back (+ the common SUPLEX, UP + X); v595 the DDT (from Machete)
   'TODD QUALITY': [['PILEDRIVER', 'TIE-UP  DOWN + X', 'pile'], ['BACK BREAKER', 'TIE-UP  L/R + X', 'bkb']],
   'LOKOMBO':      [['POWERBOMB', 'TIE-UP  DOWN + X', 'pb'], ['PRESS SLAM', 'TIE-UP  L/R + X', 'press']],
-  'SCOTTY MAC':   [['SUPERKICK', 'TIE-UP  DOWN + X', 'hbk'], ['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb'], ['DDT', 'TIE-UP  X', 'ddt']],   // (+ the common SUPLEX, UP + X)
+  'SCOTTY MAC':   [['SUPERKICK', 'TIE-UP  DOWN + X', 'hbk'], ['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb']],   // (+ the common SUPLEX, UP + X)   v721: DDT removed
   'NICK PRICE':   [['BRAIN BUSTER', 'TIE-UP  UP + X', 'bbust'], ['BELLY TO BACK', 'TIE-UP  L/R + X', 'btb'], ['LEG DROP', 'TIE-UP  DOWN + X', 'legdrop']],
   'MACHETE BROWN':[['HEAD BUTT', 'TIE-UP  UP + X', 'hbt'], ['DEATH VALLEY DRIVER', 'TIE-UP  DOWN + X', 'dvd'], ['SLEEPER', 'TIE-UP  L/R + X', 'sleeper']],   // v595
   'SHAWN MURPHY': [['PEDIGREE', 'TIE-UP  DOWN + X', 'ped'], ["HANGMAN'S NECKBREAKER", 'TIE-UP  L/R + X', 'nbk']],   // v617 swapped with Nick's leg drop   // v596: no standing big boot (the user)
