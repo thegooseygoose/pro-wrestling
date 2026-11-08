@@ -39,7 +39,7 @@ ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=118', frames:ATL
 // LOKOMBO = the user's 4th wrestler (from their photos): Star Man's full frame set recoloured (deep brown skin, black
 // trunks, black knee pads) with Todd's head designs re-stamped in his colours (black flat-top, beard) —
 // tools/py/build_lokombo.py. Same rects, own sheet.
-ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=84', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=85', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { PSCOOP:[2,1208,21,55] }) };   // v557 + his press slam scoop (tools/py/build_press_scoop.py --who lokombo)
 // SCOTTY MAC = the user's 5th wrestler (from their photos): TODD's art recoloured (black vest, silver chain, sky-blue
 // pants, bleached-blond hair, grey beard) — tools/py/build_scotty.py. Same rects, own sheet.
@@ -49,12 +49,12 @@ ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=91', frames:Objec
 // skin, black trunks, black knee pads/boots) + his OWN head designs (tools/py/nick_heads.py: top-knot, shaved sides, full
 // reddish beard — the user: "his face looks too similar to Todd's") — tools/py/build_nick.py;
 // his own superkick frames NSKM/NSKH via build_hbk.py --sheet nick_keyed.png. Same rects, own sheet.
-ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=74', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=77', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { LDV:[64,1335,46,26], LDS:[64,1281,39,34], LDSIT:[113,1335,36,36] }) };   // v617 the LEG DROP is his now (the user: swap with Shawn's neckbreaker) - WHO=nick build_legdrop_air.py + shawn_bigboot.py (BOOT)
 // AIR ADONIS = the user's 7th wrestler (from their photos, tools/adonis_photos): Nick's recipe in his colours — Star's
 // frames recoloured (tan skin, black trunks + boots) + his own heads (tools/py/adonis_heads.py: black BACKWARDS cap,
 // short dark beard) — tools/py/build_adonis.py — then his colour TATTOO SLEEVES (tools/py/build_adonis_tattoo.py).
-ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=81', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['AIR ADONIS'] = { sheet:'sprites/adonis_keyed.png?v=84', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { RKBL:[2,1284,34,42], PSCOOP:[40,1284,21,55], ADS60:[157,1261,49,23], ADS30:[230,1261,41,34] }) };   // v596 + his own DDT sit-up (tools/py/build_adonis_ddt.py)   // v528: + his rock bottom lunge (tools/py/build_rkb_lunge.py); v554 + PSCOOP (tools/py/build_press_scoop.py)
 // MACHETE BROWN = the user's 8th wrestler (from their photo): TODD's art (like Scotty) with his own heads (tools/py/
 // machete_heads.py: short dark hair greying at the sides, BIG grey beard), Todd's tank -> an open black leather jacket,
@@ -140,12 +140,12 @@ function creInit(im){
 // (tools/py/build_deniro.py: neon print tank + pink/blue tights, ginger hair + full beard, pink/purple/yellow headband, wraparound
 // shades), then made FAT like Machete but more (machete_fat_pack.py --who deniro: dfat_* sheets, widen 0.36; the drawImage
 // hook pads '/dfat' like '/mfat'), so he shares Machete's fat frames table.
-ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=42', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
+ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=43', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
   { FAMJ:[6,720,20,48], FAMS:[36,720,19,26] }) };   // v503: + his own front-on famouser frames (tools/py/build_famouser.py)
 var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator', 'DANCE DADDY DENERO':'deniro' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=162', frames:ATLAS_DATA[_an].frames };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=166', frames:ATLAS_DATA[_an].frames };
 ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=65';   // v355: his fat mirror copy
-ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=52';   // v480: his fat mirror copy
+ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=53';   // v480: his fat mirror copy
 ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=19', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
 ATLAS_DATA['RIGOR VON SLASHER'] = { sheet:'sprites/rigor_keyed.png?v=6', frames:ATLAS_DATA['BASE'].frames };   // v627 Cremator's partner (tools/py/build_rigor.py)
 ATLAS_DATA['CREMATOR VON SLASHER#COAT'] = { sheet:'sprites/cremator_coat_keyed.png?v=27', frames:ATLAS_DATA['CREMATOR VON SLASHER'].frames };   // v429 entrance coat
@@ -1533,8 +1533,12 @@ function updateEntity(e){
       e.t++;
       if (f && (f.state==='dvd' || f.state==='ddt' || f.state==='ped' || f.state==='nbk' || f.state==='fam' || f.state==='rmd' || f.state==='rkb' || f.state==='km' || f.ldc || f.state==='hts' || f.state==='hbt' || f.state==='choke' || f.state==='f5')) break;   // v313: stays flat until Machete is back up, THEN his normal stay-down time starts (like every other move)
       e.downT--;
-      if (!e.cpu && !match.pin){ e.downT -= mash*3; }
-      if (e.downT<=0 && !match.pin){ e.state='getup'; e.t=0; e.inv=40; }
+      if (!e.cpu && !match.pin && !e.sspFlat){ e.downT -= mash*3; }   // (v738: not while he lies flat after a missed SSP)
+      // v736 (the user: 'the ssp when it misses - don't go to getting up from that frame, flip to the regular down frame,
+      // make a miss look like it did damage'): face down (PGVF) for the first half, then over onto his back like any
+      // knockdown (SSP_MISS_FLIP frames of that before he gets up)
+      if (e.sspMiss && e.downPose==='PGVF' && e.downT <= SSP_MISS_FLIP){ e.downPose = ATLAS[e.def.name]['LIEFLAT'] ? 'LIEFLAT' : null; e.sspMiss=false; e.sspFlat=true;   /* v737 the user's pick: flat on his back (LIEFLAT) */ e.downT=Math.max(e.downT, SSP_MISS_FLIP); }
+      if (e.downT<=0 && !match.pin){ e.state='getup'; e.t=0; e.inv=40; e.sspFlat=false; }
       break;
     }
     case 'getup': e.t++; e.downPose=null; if (e.t>(e.slowUp ? TOP_MISS_KNEEL : 19)){ e.state='idle'; e.t=0; e.slowUp=false; } break;   // (v626: slower after a missed dive)  // kneel held ~19f then stand (matched to clip)
@@ -1626,7 +1630,7 @@ function hit(e,f,dmg,kd){
     // real NES: every wrestler takes a punch IN PLACE, recoiling for 8 frames
     f.state='hurt'; f.t=0; f.willFall=false; f.knock=null; }
 }
-function knockDown(f){ f.downPose=f.lie||null; f.lie=null; f.slowUp=false; f.state='down'; f.t=0; f.inv=30; f.kdN=(f.kdN||0)+1;   // (kdN: the CPU decides once per knockdown whether to go up top)
+function knockDown(f){ f.sspFlat=false; f.downPose=f.lie||null; f.lie=null; f.slowUp=false; f.state='down'; f.t=0; f.inv=30; f.kdN=(f.kdN||0)+1;   // (kdN: the CPU decides once per knockdown whether to go up top)
   if (f.kickLie){ f.x += f.face; f.y += 1; f.kickLie=false; }   // the Amazon kicked down: lies where the real game puts 7.4 (1px back, 1px low)
   if (f.somerLie){ f.y -= 2; f.somerLie=false; }                 // after Star's somersault kick the real game lays him 2px further up
   // real NES timing for a human player: ~46 frames on the mat at full health, longer as he weakens
@@ -2294,7 +2298,7 @@ var TOP_REACH_Y = 99, TOP_DMG = 20;   // the real game (v625: re-checked with re
 // 20f), then lies flat (splash 88f, knee 78f), kneels up and stands.
 var TOP_RANGE = 66, TOP_MISS_DMG = 8,   // the real 66 (miss/grid.lua: the real game hits RAM x >= ~165-170, y <= 88)
     TOP_MISS_HOLD = { splash:22, knee:20, ssp:22 }, TOP_MISS_DOWN = { splash:176, knee:156, ssp:176 };   // v626 (the user: 'get up slower for missing'): twice the real 88 / 78, + a slow kneel-up (TOP_MISS_KNEEL)
-var TOP_MISS_KNEEL = 40;
+var TOP_MISS_KNEEL = 40, SSP_MISS_FLIP = 80;   // v736: the last 80 frames of a missed SSP on his back (the regular down frame)
 function topInRange(vx){ return vx >= 236 - TOP_RANGE; }
 // SHOOTING STAR PRESS (the user's move + frames: 'new sprites/ssp.png' -> SSP1..SSP8, tools/py/build_ssp.py): Star Man
 // only, on top UP + X. Same leap as the splash (crouch, take-off off the top of the screen, the real arc onto the man);
@@ -2366,7 +2370,7 @@ function updateDive(e){
     if (e.tmiss && e.tland > TOP_MISS_HOLD[e.tkind]){                 // v620 the real miss: held in the dive pose, then flat
       e.tmiss=false; e.lie = (e.tkind==='ssp' && ATLAS[e.def.name]['PGVF']) ? 'PGVF' : (ATLAS[e.def.name]['LIEFLAT'] ? 'LIEFLAT' : null); if (!e.lie) e.kickLie=true;
       e.face = (e.tside==='R') !== (e.lie==='PGVF') ? 1 : -1;            // (PGVF is cut head-left: turned so the head stays where it landed)
-      knockDown(e); e.downT = TOP_MISS_DOWN[e.tkind]; e.slowUp = true; e.y -= 14; clamp(e); return;   // (v639: real - flat 14 px up the screen from the dive pose, so it doesn't jump down)
+      knockDown(e); e.downT = TOP_MISS_DOWN[e.tkind]; e.slowUp = true; e.sspMiss = (e.downPose==='PGVF'); e.y -= 14; clamp(e); return;   // (v639: real - flat 14 px up the screen from the dive pose, so it doesn't jump down)
     }
     if (!e.tmiss && e.tland > 20){ e.state='idle'; e.t=0; clamp(e); }   // (v639: real - 20 frames on him, then up)
     return;
@@ -2378,6 +2382,7 @@ function updateDive(e){
   topPlace(e, rx, ry);
   if (k >= e.tn){                                                       // landed
     var v=foe(e);
+    if (e.thit && (v.state!=='down' || v.out)) e.thit = false;          // v742 (the user: 'missed the ssp but still counts the pin'): he got up mid-flight -> a miss
     if (e.thit && e.tkind==='ssp'){                                     // SHOOTING STAR PRESS: chest to chest - and he covers him
       hurtBy(v, SSP_DMG); v.downT = Math.max(v.downT, 40); shake=10; freeze=6; sfx.crash(); addDust(v.x, v.y, 14);
       startPin(e, v); if (match.pin){ match.pin.ssp=true; } else { e.tland=1; }   // (the user: "ends in a pin")
