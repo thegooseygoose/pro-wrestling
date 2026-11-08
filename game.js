@@ -35,7 +35,7 @@ var ATLAS_DATA = {"BASE":{"frames":{"0.0":[5,5,14,56],"LIEUP":[197,1167,18,26],"
 // TODD QUALITY = the user's own wrestler: Star Man's full frame set repainted (tools/py/repaint2.py:
 // slicked-back hair, horseshoe mustache, bare arms, black tank top, gold chain, purple track pants with a
 // gold stripe, black sneakers) — same rects, own sheet (file names still say 'heavy').
-ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=118', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=124', frames:ATLAS_DATA['BASE'].frames };
 // LOKOMBO = the user's 4th wrestler (from their photos): Star Man's full frame set recoloured (deep brown skin, black
 // trunks, black knee pads) with Todd's head designs re-stamped in his colours (black flat-top, beard) —
 // tools/py/build_lokombo.py. Same rects, own sheet.
@@ -143,7 +143,7 @@ function creInit(im){
 ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=51', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
   { FAMJ:[6,720,20,48], FAMS:[36,720,19,26] }) };   // v503: + his own front-on famouser frames (tools/py/build_famouser.py)
 var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator', 'DANCE DADDY DENERO':'deniro' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=169', frames:ATLAS_DATA[_an].frames };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=175', frames:ATLAS_DATA[_an].frames };
 ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=65';   // v355: his fat mirror copy
 ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=61';   // v480: his fat mirror copy
 ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=19', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
@@ -4372,7 +4372,13 @@ var OL_LG = OL_LAYER.getContext('2d'), OL_SG = OL_SIL.getContext('2d');
 OL_LG.imageSmoothingEnabled = OL_SG.imageSmoothingEnabled = false;
 var OUTLINE_SEL = true, OL_DK = document.createElement('canvas'); OL_DK.width = VW; OL_DK.height = H;
 var OL_DG = OL_DK.getContext('2d'); OL_DG.imageSmoothingEnabled = false;
-function drawOutlined(fn){
+// v765 (the user: blue P1 / red P2 glow tried, then 'make them both have a silverish glow instead'): both wrestlers'
+// outer outline is silver. OPTIONS > GLOW turns it off (= the old black outline). Saved like the other options.
+var OUTLINE_GLOW_COL = '#c4cad6', GLOW_ON = true;
+try { if (localStorage.getItem('pw_glow')==='OFF') GLOW_ON = false; } catch(err){}
+function saveGlow(){ try { localStorage.setItem('pw_glow', GLOW_ON ? 'ON' : 'OFF'); } catch(err){} }
+function playerOutline(e){ return GLOW_ON && (e===p1 || e===p2) ? OUTLINE_GLOW_COL : null; }
+function drawOutlined(fn, col){
   if (!OUTLINE_ON) return fn();
   var main = g===OL_LG ? CV_G : g;                // never stamp the layer onto itself (if g was ever left swapped)
   OL_LG.setTransform(1,0,0,1,0,0); OL_LG.clearRect(0,0,VW,H);
@@ -4380,7 +4386,7 @@ function drawOutlined(fn){
   g = OL_LG; SHADOW_G = main;
   try { fn(); } finally { g = main; SHADOW_G = null; OL_LG.setTransform(1,0,0,1,0,0); }
   OL_SG.globalCompositeOperation='source-over'; OL_SG.clearRect(0,0,VW,H); OL_SG.drawImage(OL_LAYER,0,0);
-  OL_SG.globalCompositeOperation='source-in'; OL_SG.fillStyle=OUTLINE_COL; OL_SG.fillRect(0,0,VW,H);
+  OL_SG.globalCompositeOperation='source-in'; OL_SG.fillStyle=col||OUTLINE_COL; OL_SG.fillRect(0,0,VW,H);
   OL_SG.globalCompositeOperation='source-over';
   main.save(); main.setTransform(1,0,0,1,0,0);
   if (OUTLINE_SEL){
@@ -4930,7 +4936,7 @@ function drawMatch(){
     if (!chairDrawn && CHAIR && !CHAIR.held && CHAIR.y<=RING.y2+20 && CHAIR.y<=list[di].y && !(list[di].out && list[di].y>RING.y2+20)){ drawChairFloor(); chairDrawn=true; }
     if (list[di].out && list[di].y>RING.y2+20 && list[di].state!=='roll'){ front.push(list[di]); continue; }
     if (!refDrawn && ry<=list[di].y){ drawOutlined(drawRef); refDrawn=true; }
-    var de=list[di]; drawOutlined(function(){ drawChairHeld(de); drawEntity(de); drawChairGrip(de); });
+    var de=list[di]; drawOutlined(function(){ drawChairHeld(de); drawEntity(de); drawChairGrip(de); }, playerOutline(de));
   }
   if (!chairDrawn && CHAIR && CHAIR.y<=RING.y2+20){ drawChairFloor(); chairDrawn=true; }
   if (bm) bm.noShadow=bt.noShadow=false;
@@ -4940,7 +4946,7 @@ function drawMatch(){
   if (MGR && MGR.y>RING.y2+20) drawOutlined(drawManager);   // v435 Todd's manager (on the floor)
   for (var fi=0; fi<front.length; fi++){
     if (!chairDrawn && CHAIR && CHAIR.y<=front[fi].y){ drawChairFloor(); chairDrawn=true; }
-    var fe=front[fi]; drawOutlined(function(){ drawChairHeld(fe); drawEntity(fe); drawChairGrip(fe); }); }
+    var fe=front[fi]; drawOutlined(function(){ drawChairHeld(fe); drawEntity(fe); drawChairGrip(fe); }, playerOutline(fe)); }
   if (!chairDrawn) drawChairFloor();                 // (on the front floor, in front of everyone there)
   drawCameraman();           // on the floor at the very front (real game)
   drawFX();
@@ -5227,23 +5233,32 @@ function drawDiff(){
   bevelBox(8, 156, W-16, 15, '#0c0c1c', '#3a3e58', '#000');
   fancyC(DIFFS[diff].desc, 128, 160, 'bold', 1, DIFF_GRAD[DIFFS[diff].name], '#000', null, W-24);
   // v649 REFEREE (Left / Right on this row picks him; Up / Down moves between the difficulty and here)
-  var rs=optRow===1, ry=180, rbx=20, rbw=W-40, rbh=21;
+  var rs=optRow===1, ry=175, rbx=20, rbw=W-40, rbh=19;   // (v765: rows a bit tighter - a 4th row, GLOW)
   if (rs){ g.fillStyle='#ffffff'; g.globalAlpha=0.18; g.fillRect(rbx-3,ry-3,rbw+6,rbh+6); g.globalAlpha=1; }
   bevelBox(rbx, ry, rbw, rbh, rs ? (pulse ? '#ffd020' : '#ffffff') : '#3a3e58', rs ? '#ffffff' : '#6a6e90', '#000');
   var rg=g.createLinearGradient(0,ry+2,0,ry+rbh-2); rg.addColorStop(0, rs ? '#202a5a' : '#14162a'); rg.addColorStop(1, '#06060e');
   g.fillStyle=rg; g.fillRect(rbx+2,ry+2,rbw-4,rbh-4);
-  fancyC('REF: '+refName(), 128, ry+7, 'bold', 1, rs ? GOLD : GREYT, '#000', null, rbw-28);
+  fancyC('REF: '+refName(), 128, ry+6, 'bold', 1, rs ? GOLD : GREYT, '#000', null, rbw-28);
   if (rs){ var ax2=(T>>3)&1; g.fillStyle='#ffd020';
-    for (var r2=0;r2<7;r2++){ var aw2=4-Math.abs(3-r2); g.fillRect(rbx+8-ax2, ry+7+r2, aw2, 1); g.fillRect(rbx+rbw-8+ax2-aw2, ry+7+r2, aw2, 1); } }
+    for (var r2=0;r2<7;r2++){ var aw2=4-Math.abs(3-r2); g.fillRect(rbx+8-ax2, ry+6+r2, aw2, 1); g.fillRect(rbx+rbw-8+ax2-aw2, ry+6+r2, aw2, 1); } }
   // v675 CHAMPION (the user: pick who wears the belt, to test it): NONE or any wrestler - he comes out wearing it
-  var cs=optRow===2, cyy=206;
+  var cs=optRow===2, cyy=196;
   if (cs){ g.fillStyle='#ffffff'; g.globalAlpha=0.18; g.fillRect(rbx-3,cyy-3,rbw+6,rbh+6); g.globalAlpha=1; }
   bevelBox(rbx, cyy, rbw, rbh, cs ? (pulse ? '#ffd020' : '#ffffff') : '#3a3e58', cs ? '#ffffff' : '#6a6e90', '#000');
   var cg=g.createLinearGradient(0,cyy+2,0,cyy+rbh-2); cg.addColorStop(0, cs ? '#202a5a' : '#14162a'); cg.addColorStop(1, '#06060e');
   g.fillStyle=cg; g.fillRect(rbx+2,cyy+2,rbw-4,rbh-4);
-  fancyC('CHAMPION: '+(CHAMP_OPT||'NONE'), 128, cyy+7, 'bold', 1, cs ? GOLD : GREYT, '#000', null, rbw-28);
+  fancyC('CHAMPION: '+(CHAMP_OPT||'NONE'), 128, cyy+6, 'bold', 1, cs ? GOLD : GREYT, '#000', null, rbw-28);
   if (cs){ var ax3=(T>>3)&1; g.fillStyle='#ffd020';
-    for (var r3=0;r3<7;r3++){ var aw3=4-Math.abs(3-r3); g.fillRect(rbx+8-ax3, cyy+7+r3, aw3, 1); g.fillRect(rbx+rbw-8+ax3-aw3, cyy+7+r3, aw3, 1); } }
+    for (var r3=0;r3<7;r3++){ var aw3=4-Math.abs(3-r3); g.fillRect(rbx+8-ax3, cyy+6+r3, aw3, 1); g.fillRect(rbx+rbw-8+ax3-aw3, cyy+6+r3, aw3, 1); } }
+  // v765 GLOW (the user: 'an option in the menu to turn glow on and off'): the wrestlers' silver outline, or the old black
+  var gs=optRow===3, gy=217;
+  if (gs){ g.fillStyle='#ffffff'; g.globalAlpha=0.18; g.fillRect(rbx-3,gy-3,rbw+6,rbh+6); g.globalAlpha=1; }
+  bevelBox(rbx, gy, rbw, rbh, gs ? (pulse ? '#ffd020' : '#ffffff') : '#3a3e58', gs ? '#ffffff' : '#6a6e90', '#000');
+  var gg=g.createLinearGradient(0,gy+2,0,gy+rbh-2); gg.addColorStop(0, gs ? '#202a5a' : '#14162a'); gg.addColorStop(1, '#06060e');
+  g.fillStyle=gg; g.fillRect(rbx+2,gy+2,rbw-4,rbh-4);
+  fancyC('GLOW: '+(GLOW_ON ? 'ON' : 'OFF'), 128, gy+6, 'bold', 1, gs ? GOLD : GREYT, '#000', null, rbw-28);
+  if (gs){ var ax4=(T>>3)&1; g.fillStyle='#ffd020';
+    for (var r4=0;r4<7;r4++){ var aw4=4-Math.abs(3-r4); g.fillRect(rbx+8-ax4, gy+6+r4, aw4, 1); g.fillRect(rbx+rbw-8+ax4-aw4, gy+6+r4, aw4, 1); } }
 }
 function champCycle(d){                                         // NONE, then every wrestler on the select screen
   var L=[null].concat(selPool().map(function(i){ return ROSTER[i].name; })), k=L.indexOf(CHAMP_OPT); if (k<0) k=0;
@@ -5260,9 +5275,13 @@ function updateDiff(){
     if (pressed['ArrowLeft']){ champCycle(-1); sfx.select(); }
     if (pressed['ArrowRight']){ champCycle(1); sfx.select(); }
     if (pressed['ArrowUp']){ optRow=1; sfx.select(); }
+    if (pressed['ArrowDown']){ optRow=3; sfx.select(); }
+  } else if (optRow===3){                                        // v765 the GLOW row
+    if (pressed['ArrowLeft'] || pressed['ArrowRight']){ GLOW_ON=!GLOW_ON; saveGlow(); sfx.select(); }
+    if (pressed['ArrowUp']){ optRow=2; sfx.select(); }
     if (pressed['ArrowDown']){ optRow=0; diff=0; sfx.select(); }
   } else {
-    if (pressed['ArrowUp']){ if (diff===0) optRow=2; else diff--; sfx.select(); }
+    if (pressed['ArrowUp']){ if (diff===0) optRow=3; else diff--; sfx.select(); }
     if (pressed['ArrowDown']){ if (diff===n-1) optRow=1; else diff++; sfx.select(); }
     if (pressed['ArrowLeft']){ diff=(diff+n-1)%n; sfx.select(); }
     if (pressed['ArrowRight']){ diff=(diff+1)%n; sfx.select(); }
