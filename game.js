@@ -49,7 +49,7 @@ ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=91', frames:Objec
 // skin, black trunks, black knee pads/boots) + his OWN head designs (tools/py/nick_heads.py: top-knot, shaved sides, full
 // reddish beard — the user: "his face looks too similar to Todd's") — tools/py/build_nick.py;
 // his own superkick frames NSKM/NSKH via build_hbk.py --sheet nick_keyed.png. Same rects, own sheet.
-ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=77', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=79', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { LDV:[64,1335,46,26], LDS:[64,1281,39,34], LDSIT:[113,1335,36,36] }) };   // v617 the LEG DROP is his now (the user: swap with Shawn's neckbreaker) - WHO=nick build_legdrop_air.py + shawn_bigboot.py (BOOT)
 // AIR ADONIS = the user's 7th wrestler (from their photos, tools/adonis_photos): Nick's recipe in his colours — Star's
 // frames recoloured (tan skin, black trunks + boots) + his own heads (tools/py/adonis_heads.py: black BACKWARDS cap,
@@ -65,7 +65,7 @@ ATLAS_DATA['MACHETE BROWN'] = { sheet:'sprites/machete_keyed.png?v=47', frames:A
 // shoulder-length hair made BLONDE - the user - big aviators + full dark beard (v334), no bandana in the ring (v333))
 // - tools/py/build_shawn.py - then Todd's tank top copied onto him pose by pose as his black tank with a yellow print, and
 // PINK ZEBRA trunks (v334, the user's photo) (tools/py/build_shawn_tank.py).
-ATLAS_DATA['SHAWN MURPHY'] = { sheet:'sprites/shawn_keyed.png?v=59', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['SHAWN MURPHY'] = { sheet:'sprites/shawn_keyed.png?v=60', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { LDV:[118,1182,45,26], LDS:[50,1186,39,34], LDSIT:[293,1174,36,36] }) };   // v579 the leg drop in the air (tools/py/build_legdrop_air.py)
 // MATT BRONSON = the user's 10th wrestler (v338, their photo tools/bronson_photos/1.jpg): Shawn's recipe - Star's frames
 // recoloured + his own heads (tools/py/bronson_heads.py: BALD, aviator sunglasses, full brown beard) - tools/py/build_bronson.py -
@@ -140,12 +140,12 @@ function creInit(im){
 // (tools/py/build_deniro.py: neon print tank + pink/blue tights, ginger hair + full beard, pink/purple/yellow headband, wraparound
 // shades), then made FAT like Machete but more (machete_fat_pack.py --who deniro: dfat_* sheets, widen 0.36; the drawImage
 // hook pads '/dfat' like '/mfat'), so he shares Machete's fat frames table.
-ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=43', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
+ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=51', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
   { FAMJ:[6,720,20,48], FAMS:[36,720,19,26] }) };   // v503: + his own front-on famouser frames (tools/py/build_famouser.py)
 var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator', 'DANCE DADDY DENERO':'deniro' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=166', frames:ATLAS_DATA[_an].frames };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=169', frames:ATLAS_DATA[_an].frames };
 ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=65';   // v355: his fat mirror copy
-ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=53';   // v480: his fat mirror copy
+ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=61';   // v480: his fat mirror copy
 ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=19', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
 ATLAS_DATA['RIGOR VON SLASHER'] = { sheet:'sprites/rigor_keyed.png?v=6', frames:ATLAS_DATA['BASE'].frames };   // v627 Cremator's partner (tools/py/build_rigor.py)
 ATLAS_DATA['CREMATOR VON SLASHER#COAT'] = { sheet:'sprites/cremator_coat_keyed.png?v=27', frames:ATLAS_DATA['CREMATOR VON SLASHER'].frames };   // v429 entrance coat
@@ -3219,16 +3219,18 @@ function drawNBK(a){
 var FAM_HIT = 54, FAM_FLAT = 80, FAM_END = 98, FAM_DMG = 24;   // v504 FAM_FLAT: face down (PGVF) until he gets up, then flat
 var FAM_SEQ = [
   [0,   '0.0',  -7,   0, false, '0.0',   1,   0, true],
-  [5,   '14.1', -7,   0, false, '17.1', -1, -10, false, 1],   // shoves his head down: bent over in front of him
-  [25,  '0.0', -15,   0, false, '17.1', -1, -10, false],      // backs off a step
-  [33,  '8.0', -16,   0, false, '17.1', -1, -10, false],      // crouches...
-  [39,  '3.6', -15,  -8, false, '17.1', -1, -10, false],      // ...LEAPS
+  // v747 (the user: 'they look like they are floating in the air to start it'): the bent-over man on the mat (was -10)
+  [5,   '14.1', -7,   0, false, '17.1', -1,   0, false, 1],   // shoves his head down: bent over in front of him
+  [25,  '0.0', -15,   0, false, '17.1', -1,   0, false],      // backs off a step
+  [33,  '8.0', -16,   0, false, '17.1', -1,   0, false],      // crouches...
+  [39,  '3.6', -15,  -8, false, '17.1', -1,   0, false],      // ...LEAPS
   // v503 (the user: his leg goes ACROSS the man, facing the camera when he hits): FAMJ / FAMS, his new front-on frames
-  [43,  'FAMJ',  -8, -14, false, '17.1', -1, -10, false],     // in the air facing the camera, his leg raised toward the camera over the man's neck (v504)
-  [49,  'FAMJ',  -8,  -8, false, '17.1', -1,  -6, false],     // riding him down
+  [43,  'FAMJ',  -8,  -4, false, '17.1', -1,   0, false],     // in the air facing the camera, his leg raised toward the camera over the man's neck (v504)
+  [49,  'FAMJ',  -8,   0, false, '17.1', -1,   2, false],     // riding him down
   [FAM_HIT, 'FAMS', -9, 0, false, 'PGVF', 0, 0, false],        // DOWN: sitting facing the camera, legs forward; the man FACE FIRST (v504, the user:
                                                                //  'the opponent lands face first' - the Pedigree's face-down PGVF), head by his legs
-  [FAM_FLAT, '8.0', -8, 0, false, null],                       // up off the mat (the man rolls flat)
+  // v748 (the user: 'take out this frame'): no 8.0 crouch here any more - he sits (FAMS) until he gets up (12.6)
+  [FAM_FLAT, 'FAMS', -9, 0, false, null],                      // (the man rolls flat)
   [FAM_HIT+34, '12.6', -8, 0, false, null]
 ];
 function canFAM(a){ return a.def.name==='DANCE DADDY DENERO' && !!ATLAS[a.def.name]['FAMS'] && !!ATLAS[a.def.name]['FAMJ']; }
@@ -3284,7 +3286,7 @@ var RMD_SEQ = [
   [RMD_LIFT, 'PFSQUAT', -7, 0, false, 'F5R90',  -1, -22, true,  'F3'],   // MIDDLE: he squats, the man driven down head first in FRONT of him
   [RMD_HIT,  'PBTSIT', -5, 0, false, 'PBPIN',   -1,   0, false, 'F2'],   // FINISH: the sit-out, spiked on his shoulders (Dance Daddy in front)
   [RMD_FLAT, 'PBTSIT', -5, 0, false, null],                              // (he flops flat)
-  [RMD_FLAT+10, '8.0', -8,  0, false, null],                             // up off the mat
+  // v749 (the user: take out Dance 8.0): he sits (PBTSIT) until he gets up (12.6)
   [RMD_FLAT+16, '12.6', -8, 0, false, null]
 ];
 function canRMD(a){ return a.def.name==='DANCE DADDY DENERO' && !!ATLAS[a.def.name]['5.1'] && !!ATLAS[a.def.name]['PBTSIT']; }
@@ -4368,6 +4370,8 @@ var OL_LAYER = document.createElement('canvas'), OL_SIL = document.createElement
 OL_LAYER.width = OL_SIL.width = VW; OL_LAYER.height = OL_SIL.height = H;
 var OL_LG = OL_LAYER.getContext('2d'), OL_SG = OL_SIL.getContext('2d');
 OL_LG.imageSmoothingEnabled = OL_SG.imageSmoothingEnabled = false;
+var OUTLINE_SEL = true, OL_DK = document.createElement('canvas'); OL_DK.width = VW; OL_DK.height = H;
+var OL_DG = OL_DK.getContext('2d'); OL_DG.imageSmoothingEnabled = false;
 function drawOutlined(fn){
   if (!OUTLINE_ON) return fn();
   var main = g===OL_LG ? CV_G : g;                // never stamp the layer onto itself (if g was ever left swapped)
@@ -4379,7 +4383,18 @@ function drawOutlined(fn){
   OL_SG.globalCompositeOperation='source-in'; OL_SG.fillStyle=OUTLINE_COL; OL_SG.fillRect(0,0,VW,H);
   OL_SG.globalCompositeOperation='source-over';
   main.save(); main.setTransform(1,0,0,1,0,0);
-  main.drawImage(OL_SIL,-1,0); main.drawImage(OL_SIL,1,0); main.drawImage(OL_SIL,0,-1); main.drawImage(OL_SIL,0,1);
+  if (OUTLINE_SEL){
+    // v756 (the user: 'the boxing game has a better outline - add that'): the boxers' SELECTIVE outline (boxing
+    // tools/build_boxers.py polish()): a 1 px ring in each part's own colour darkened (skin -> dark brown, blue -> navy),
+    // then the black outline round that. Done live here (no sheet edits). OUTLINE_SEL = false = the old single black line.
+    OL_DG.globalCompositeOperation='source-over'; OL_DG.clearRect(0,0,VW,H); OL_DG.drawImage(OL_LAYER,0,0);
+    OL_DG.globalCompositeOperation='multiply'; OL_DG.fillStyle='rgb(72,56,61)'; OL_DG.fillRect(0,0,VW,H);
+    OL_DG.globalCompositeOperation='destination-in'; OL_DG.drawImage(OL_LAYER,0,0);
+    OL_DG.globalCompositeOperation='source-over';
+    main.drawImage(OL_SIL,-2,0); main.drawImage(OL_SIL,2,0); main.drawImage(OL_SIL,0,-2); main.drawImage(OL_SIL,0,2);
+    main.drawImage(OL_SIL,-1,-1); main.drawImage(OL_SIL,1,-1); main.drawImage(OL_SIL,-1,1); main.drawImage(OL_SIL,1,1);
+    main.drawImage(OL_DK,-1,0); main.drawImage(OL_DK,1,0); main.drawImage(OL_DK,0,-1); main.drawImage(OL_DK,0,1);
+  } else { main.drawImage(OL_SIL,-1,0); main.drawImage(OL_SIL,1,0); main.drawImage(OL_SIL,0,-1); main.drawImage(OL_SIL,0,1); }
   main.drawImage(OL_LAYER,0,0);
   main.restore();
 }
