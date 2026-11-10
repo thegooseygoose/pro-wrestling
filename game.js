@@ -967,12 +967,13 @@ var ENT_STYLE = {
   'NICK PRICE':           { hold:8, noPose:true, poseAtRing:true },   // v394: 8 s after his music starts
   'CREMATOR VON SLASHER': { hold:12, speed:0.5, noPose:true, coat:true, partner:'RIGOR VON SLASHER', withName:'W/ RIGOR VON SLASHER' },   // v627 + Rigor Von Slasher walks out with him (the user)   // v429 + his duster coat and fedora        // out after 12 s, very slow walk, no arms up
   'DANCE DADDY DENERO':   { hold:12 },
-  'MACHETE BROWN':        { boo:true },   // v775 (the user): the fans boo him, curtain to ring, on top of arguing with them
-  'SCOTTY MAC':           { hold:5, boo:true },   // v669 (the user added his song): out after 5 s, to a lot of crowd boos (sfx.boo + BOOO! bubbles all the way to the ring)   // v668 (the user added his song: 'he doesn't make his entrance until 12 seconds')
+  'MACHETE BROWN':        { boo:true, heel:true },   // v783 heel: the fans boo his wins + kick-outs too (the user)   // v775 (the user): the fans boo him, curtain to ring, on top of arguing with them
+  'SCOTTY MAC':           { hold:5, boo:true, heel:true },   // v784 heel too (the user): his wins + kick-outs get booed   // v669 (the user added his song): out after 5 s, to a lot of crowd boos (sfx.boo + BOOO! bubbles all the way to the ring)   // v668 (the user added his song: 'he doesn't make his entrance until 12 seconds')
   'AIR ADONIS':           { run:true, speed:2.5, rollX:2, ropes:2 },  // runs to the ring, rolls in fast, then runs the ropes twice (v432)
   'TODD QUALITY':         { poseEvery:50, poseFor:30, manager:true, withName:'W/ LANCE SKULLZ' }   // v629 the plate's 2nd line (the user)                // arms up all the way to the ring
 };
 function entStyle(e){ return ENT_STYLE[e.def.name] || {}; }
+function isHeel(e){ return !!(e && e.def && entStyle(e).heel); }
 function entNext(){
   var E=match.ent; E.k++; E.cur=E.order[E.k]||null;
   if (!E.cur){ entDone(); return; }
@@ -1420,7 +1421,7 @@ function updateMatch(){
     if (M.winner){   // real game after the 3 (kick.avi): music cuts 44f later, bell DING x3, then the crowd ROAR
       if (M.t2===44) stopMusic();
       if (M.t2===55||M.t2===78||M.t2===101) sfx.bell();
-      if (M.t2===END_ROAR) sfx.roar();   // (the crowd eruption on screen fires on this too - endPartyLevel)
+      if (M.t2===END_ROAR){ if (isHeel(M.winner)) sfx.boo(3.6, 0.15); else sfx.roar(); }   // (the crowd eruption on screen fires on this too - endPartyLevel)   // v783 a heel's win gets booed
     }
     if (M.winner && !M.pin){ M.winner.state='win'; M.winner.anim++; }
     if (M.t2>200){ scene='winner'; T=0; if (M.winner) entMusicStart(M.winner.def.name); }   // v670 (the user): the winner's own entrance music on his victory screen
@@ -3877,11 +3878,11 @@ function updatePin(){
   else if (!P.holds && (P.ct||0)>=P.kickT) escaped=true;   // CPU kicks out between the 2 and the 3
   if (escaped && P.pb){                         // kicked out of the powerbomb: Todd lets go, the man lies there
     match.pin=null; finishPB(P.a); P.v.state='getup'; P.v.t=0; P.v.inv=40;   // (v623: he gets up)
-    match.msg='KICK OUT!'; match.msgT=50; sfx.pop(); return;
+    match.msg='KICK OUT!'; match.msgT=50; if (isHeel(P.v)){ crowdBoost(1); sfx.boo(1.8, 0.13); } else sfx.pop(); return;   // v783 the heel kicks out: boos
   }
   if (escaped){                                 // kick out any time before the 3-count lands
     match.pin=null; startKickOut(P.a, P.v);
-    match.msg='KICK OUT!'; match.msgT=50; sfx.pop(); return;
+    match.msg='KICK OUT!'; match.msgT=50; if (isHeel(P.v)){ crowdBoost(1); sfx.boo(1.8, 0.13); } else sfx.pop(); return;   // v783 the heel kicks out: boos
   }
   if (refDown && P.ct % 60===0){                // slower count (1s per number) = more time to escape
     P.count++; sfx.count(P.count);              // the ding lands on the ref's mat slap
