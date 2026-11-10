@@ -1692,6 +1692,22 @@ var TIE_A = {
   'DANCE DADDY DENERO': { down:{ ok:function(a,v){ return canFAM(a); }, go:startFAM },
                           side:{ ok:function(a,v){ return canRMD(a); }, go:startRMD } }     // the RM DRIVER (the user, v515: L/R + X)                   // the FAMOUSER (the user, v502: DOWN + X)
 };
+// v785 (the user: 'during signature moves the fans cheer or boo'): every wrestler's tie-up specials (the TIE_A moves - the
+// CPU starts the same ones) get a crowd reaction as they start: a cheer, or boos for a heel (ENT_STYLE heel: Machete, Scotty).
+// Wraps the start functions once, here; TIE_A's own references are swapped for the wrapped ones too. Not in move-list demos.
+var SIG_KM = { press:1, sleeper:1, tomb:1 }, sigCrowdT = 0, sigCrowdM = null;
+function sigCrowd(a){
+  if (!match || match.demo || match.phase!=='fight' || !a || !a.def) return;
+  if (sigCrowdM===match && match.t - sigCrowdT < 90) return; sigCrowdT = match.t; sigCrowdM = match;   // (not twice in 2 s)
+  if (isHeel(a)) sfx.boo(1.7, 0.1); else sfx.cheer(0.14);
+}
+['tryPile','startBKB','tryPB','startHBK','startBTB','startBrain','startLDChain','startDDT','startHBT','startDVD','startPED',
+ 'startNBK','startHTS','startF5','startChoke','startFAM','startRMD','startKM'].forEach(function(n){
+  var f0 = window[n]; if (typeof f0!=='function') return;
+  var f1 = function(a, v, kind){ if (n!=='startKM' || SIG_KM[kind]) sigCrowd(a); return f0.apply(this, arguments); };
+  window[n] = f1;
+  Object.keys(TIE_A).forEach(function(w){ Object.keys(TIE_A[w]).forEach(function(d){ if (TIE_A[w][d].go===f0) TIE_A[w][d].go=f1; }); });
+});
 // v400 TIE-UP TIMING (the user): nobody can do a move until a full second into the tie-up; then it's a race - HARD's CPU
 // goes on that exact frame, the others a beat later (DIFFS react). 1 s in game steps (GAME_SPEED: 45 steps a second).
 function TIE_LOCK(){ return Math.round(60*GAME_SPEED); }
@@ -2692,7 +2708,7 @@ function drawF5(a){
    toward Bronson. Bronson stays on his feet (no slam), turns to him.
    Rows: [tick, his frame, left, bottom, mirrored, the man's frame (null = lying), CENTRE x, centre height above the mat,
    mirrored] for f = 1 (the man on Bronson's right; he lands on the left); the man placed by his frame's centre. ---- */
-var HTS_HIT = 40, HTS_END = 70, HTS_DMG = 14;   // v510 (the user: 'make him go farther, more frames, smoother'): a longer, farther arc
+var HTS_HIT = 40, HTS_END = 70, HTS_DMG = 22;   // v786 (the user): was 14, the weakest special - Bronson trailed on HARD   // v510 (the user: 'make him go farther, more frames, smoother'): a longer, farther arc
 var HTS_SEQ = [
   [0,  '5.0',  -8, 0, false, '0.0',     13, 28, true],
   // v511 = THE USER'S OWN LAYOUT ('put here/matt done.png', 10 panels pasted from the exported frames; read back by exact
