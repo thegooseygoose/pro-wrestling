@@ -43,13 +43,13 @@ ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=85', frames:Object.
   { PSCOOP:[2,1208,21,55] }) };   // v557 + his press slam scoop (tools/py/build_press_scoop.py --who lokombo)
 // SCOTTY MAC = the user's 5th wrestler (from their photos): TODD's art recoloured (black vest, silver chain, sky-blue
 // pants, bleached-blond hair, grey beard) — tools/py/build_scotty.py. Same rects, own sheet.
-ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=91', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['SCOTTY MAC'] = { sheet:'sprites/scotty_keyed.png?v=93', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { ADS60:[294,1329,49,23], ADS30:[233,1207,41,34] }) };   // v611 + his own DDT sit-up (ADS_NAMES=scotty_keyed,scotty_alt_keyed tools/py/build_adonis_ddt.py)
 // NICK PRICE = the user's 6th wrestler (from their photo): Lokombo's recipe in his colours — Star's frames recoloured (pale
 // skin, black trunks, black knee pads/boots) + his OWN head designs (tools/py/nick_heads.py: top-knot, shaved sides, full
 // reddish beard — the user: "his face looks too similar to Todd's") — tools/py/build_nick.py;
 // his own superkick frames NSKM/NSKH via build_hbk.py --sheet nick_keyed.png. Same rects, own sheet.
-ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=79', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['NICK PRICE'] = { sheet:'sprites/nick_keyed.png?v=81', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { LDV:[64,1335,46,26], LDS:[64,1281,39,34], LDSIT:[113,1335,36,36] }) };   // v617 the LEG DROP is his now (the user: swap with Shawn's neckbreaker) - WHO=nick build_legdrop_air.py + shawn_bigboot.py (BOOT)
 // AIR ADONIS = the user's 7th wrestler (from their photos, tools/adonis_photos): Nick's recipe in his colours — Star's
 // frames recoloured (tan skin, black trunks + boots) + his own heads (tools/py/adonis_heads.py: black BACKWARDS cap,
@@ -65,13 +65,13 @@ ATLAS_DATA['MACHETE BROWN'] = { sheet:'sprites/machete_keyed.png?v=47', frames:A
 // shoulder-length hair made BLONDE - the user - big aviators + full dark beard (v334), no bandana in the ring (v333))
 // - tools/py/build_shawn.py - then Todd's tank top copied onto him pose by pose as his black tank with a yellow print, and
 // PINK ZEBRA trunks (v334, the user's photo) (tools/py/build_shawn_tank.py).
-ATLAS_DATA['SHAWN MURPHY'] = { sheet:'sprites/shawn_keyed.png?v=60', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['SHAWN MURPHY'] = { sheet:'sprites/shawn_keyed.png?v=63', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { LDV:[118,1182,45,26], LDS:[50,1186,39,34], LDSIT:[293,1174,36,36] }) };   // v579 the leg drop in the air (tools/py/build_legdrop_air.py)
 // MATT BRONSON = the user's 10th wrestler (v338, their photo tools/bronson_photos/1.jpg): Shawn's recipe - Star's frames
 // recoloured + his own heads (tools/py/bronson_heads.py: BALD, aviator sunglasses, full brown beard) - tools/py/build_bronson.py -
 // then Todd's trousers + chain copied onto him pose by pose as his TAN 'BB' track pants (red side stripe) and gold chain
 // (tools/py/build_bronson_pants.py). Shirtless, black shoes.
-ATLAS_DATA['MATT BRONSON'] = { sheet:'sprites/bronson_keyed.png?v=51', frames:ATLAS_DATA['BASE'].frames };
+ATLAS_DATA['MATT BRONSON'] = { sheet:'sprites/bronson_keyed.png?v=52', frames:ATLAS_DATA['BASE'].frames };
 // CREMATOR VON SLASHER = the user's 11th wrestler (v346, their photos tools/cremator_photos 5-7.jpg): the same recipe - Star's
 // frames recoloured + his own heads (tools/py/cremator_heads.py: a SILVER stitched full-face mask, slicked reddish-brown hair) -
 // tools/py/build_cremator.py - then Todd's tank + trousers copied onto him as his dark NAVY sleeveless shirt and dark pants
@@ -143,7 +143,7 @@ function creInit(im){
 ATLAS_DATA['DANCE DADDY DENERO'] = { sheet:'sprites/dfat_keyed.png?v=51', frames:Object.assign({}, ATLAS_DATA['MACHETE BROWN'].frames,
   { FAMJ:[6,720,20,48], FAMS:[36,720,19,26] }) };   // v503: + his own front-on famouser frames (tools/py/build_famouser.py)
 var ALT_SHEET = { 'TODD QUALITY':'heavy', 'LOKOMBO':'lokombo', 'SCOTTY MAC':'scotty', 'NICK PRICE':'nick', 'AIR ADONIS':'adonis', 'MACHETE BROWN':'machete', 'SHAWN MURPHY':'shawn', 'MATT BRONSON':'bronson', 'CREMATOR VON SLASHER':'cremator', 'DANCE DADDY DENERO':'deniro' };
-for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=175', frames:ATLAS_DATA[_an].frames };
+for (var _an in ALT_SHEET) ATLAS_DATA[_an+'#ALT'] = { sheet:'sprites/'+ALT_SHEET[_an]+'_alt_keyed.png?v=182', frames:ATLAS_DATA[_an].frames };
 ATLAS_DATA['MACHETE BROWN#ALT'].sheet = 'sprites/mfat_alt_keyed.png?v=65';   // v355: his fat mirror copy
 ATLAS_DATA['DANCE DADDY DENERO#ALT'].sheet = 'sprites/dfat_alt_keyed.png?v=61';   // v480: his fat mirror copy
 ATLAS_DATA['TODD MANAGER'] = { sheet:'sprites/manager_keyed.png?v=19', frames:ATLAS_DATA['BASE'].frames };   // LANCE SKULLZ, Todd's manager (the user's photos E:/Shared/apex/apex photos/lance): v435 tools/py/build_manager.py, v643 tools/py/build_lance_v2.py (cowboy hat, shades, beard, brocade, cane)
@@ -537,7 +537,7 @@ var sfx = {
   count:function(n){ if(smp('count'+Math.min(3,Math.max(1,n)))) return; tone(150,0.12,0.4,'sine',48); noise(0.06,0.22,'lowpass',800); },
   bell:function(){ if(smp('ding')) return; tone(1568,0.5,0.16,'triangle'); tone(2093,0.45,0.08,'triangle'); },
   roar:function(){ if(smp('roar')) return; sfx.cheer(0.22); setTimeout(function(){sfx.win();},400); },   // end-of-match crowd
-  cheer:function(vol){ var c=actx(); if(!c) return;       // crowd roar: swelling filtered noise
+  cheer:function(vol){ if(smpR('cheer', Math.min(1.2,(vol||0.14)/0.14), rnd(0.96,1.05))) return; var c=actx(); if(!c) return;       // v775 the CHEER sample (tools/py/make_crowd_sfx.py); below = fallback: swelling filtered noise
     var s=c.createBufferSource(); s.buffer=noiseBuf(c); s.loop=true;
     var f=c.createBiquadFilter(), gn=c.createGain(), t=c.currentTime, v=vol||0.14;
     f.type='bandpass'; f.frequency.setValueAtTime(700,t); f.frequency.linearRampToValueAtTime(1600,t+0.25); f.Q.value=0.8;
@@ -550,7 +550,8 @@ var sfx = {
   // v669 CROWD BOO (the user: Scotty comes out 'to a lot of crowd boos'): a crowd of low 'oooo' voices - many detuned
   // sawtooths (90-190 Hz, each its own slow wobble, sagging in pitch) through a vowel-ish low-pass, over low murmur noise;
   // swells in, holds, fades. dur = seconds.
-  boo:function(dur, vol){ var c=actx(); if(!c) return; var t=c.currentTime, d=dur||3, v=vol||0.12;
+  boo:function(dur, vol){ if(booShot(dur||3, (vol||0.12)/0.12)) return; var c=actx(); if(!c) return; var t=c.currentTime, d=dur||3, v=vol||0.12;   // v775 the BOO sample first; the oscillators below = fallback
+   
     var out=c.createGain(); out.gain.setValueAtTime(0.0001,t); out.gain.exponentialRampToValueAtTime(v,t+0.5);
     out.gain.setValueAtTime(v,t+Math.max(0.6,d-0.8)); out.gain.exponentialRampToValueAtTime(0.0001,t+d);
     var lp=c.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=520; lp.Q.value=2.5; lp.connect(out); out.connect(MASTER);
@@ -577,6 +578,18 @@ function smpR(name, vol, rate){ var c=actx(); if(!c||!SBUF[name]) return false;
   var s=c.createBufferSource(), gn=c.createGain(); s.buffer=SBUF[name]; s.playbackRate.value=rate||1;
   gn.gain.value=(vol==null?1:vol); s.connect(gn); gn.connect(MASTER); s.start(); return true; }
 function rnd(a, b){ return a + Math.random()*(b-a); }
+/* ---- v775 CROWD BOOS (the user: 'have the fans boo him' - Machete; Scotty too): SND_DATA.boo is a seamless 6 s loop of a
+   crowd booing (tools/py/make_crowd_sfx.py). booLoopTick() = keep it running while he walks to the ring; booLoopStop()
+   fades it (he rolls in, the entrance is skipped, pause). booShot() = a short swell on top, cut from a random spot. ---- */
+var BOO_LOOP = null;
+function booNode(c, offset, gv){ var s=c.createBufferSource(), gn=c.createGain(); s.buffer=SBUF.boo; s.loop=true; s.playbackRate.value=rnd(0.97,1.03);
+  gn.gain.value=gv; s.connect(gn); gn.connect(MASTER); s.start(c.currentTime, offset); return { s:s, g:gn }; }
+function booLoopTick(vol){ var c=actx(); if(!c||!SBUF.boo||BOO_LOOP) return;
+  var t=c.currentTime; BOO_LOOP=booNode(c, Math.random()*SBUF.boo.duration, 0.0001); BOO_LOOP.g.gain.setValueAtTime(0.0001, t); BOO_LOOP.g.gain.linearRampToValueAtTime(vol, t+0.6); }
+function booLoopStop(){ if(!BOO_LOOP||!AC) return; var n=BOO_LOOP, t=AC.currentTime; BOO_LOOP=null;
+  n.g.gain.cancelScheduledValues(t); n.g.gain.setTargetAtTime(0.0001, t, 0.35); n.s.stop(t+1.6); }
+function booShot(dur, vol){ var c=actx(); if(!c||!SBUF.boo) return false; var t=c.currentTime, n=booNode(c, Math.random()*SBUF.boo.duration, 0.0001);
+  n.g.gain.setValueAtTime(0.0001, t); n.g.gain.linearRampToValueAtTime(vol, t+0.18); n.g.gain.setValueAtTime(vol, t+Math.max(0.2,dur-0.6)); n.g.gain.linearRampToValueAtTime(0.0001, t+dur); n.s.stop(t+dur+0.02); return true; }
 var CROWD_AMB = { src:null, g:null, f:null, lfo:null, boost:0 };
 function crowdAmbStart(){
   var c=actx(); if (!c || CROWD_AMB.src) return;
@@ -621,6 +634,7 @@ sfx.climb = function(){ tone(rnd(900,1100), 0.06, 0.06, 'square', 700); noise(0.
 sfx.roll = function(){ noise(0.32, 0.14, 'lowpass', 520, 180); tone(80, 0.18, 0.1, 'sine', 50); };
 sfx.runStep = function(){ noise(0.05, 0.11, 'lowpass', 480); tone(rnd(95,110), 0.05, 0.09, 'sine', 60); };
 sfx.pop = function(){ crowdBoost(1); crowdHype = 150;      // a kick-out: the crowd POPS
+  if (smpR('cheer', 1.1, rnd(1.0,1.08))) return;           // v775 the CHEER sample
   var c=actx(); if (!c) return; var s=c.createBufferSource(); s.buffer=noiseBuf(c); s.loop=true;
   var f=c.createBiquadFilter(), gn=c.createGain(), t=c.currentTime; f.type='bandpass'; f.frequency.setValueAtTime(600,t); f.frequency.linearRampToValueAtTime(1500,t+0.3); f.Q.value=0.7;
   gn.gain.setValueAtTime(0.0001,t); gn.gain.exponentialRampToValueAtTime(0.2,t+0.12); gn.gain.exponentialRampToValueAtTime(0.0001,t+1.3);
@@ -889,6 +903,7 @@ var ENT_THEMES = {   // bpm, lead wave, lead (4 bars of 8ths, 0 = rest), bass ro
 };
 var ENTM = { iv:null, step:0, next:0, th:null, audio:null };
 function entMusicStop(){
+  booLoopStop();
   if (ENTM.iv){ clearInterval(ENTM.iv); ENTM.iv=null; } ENTM.th=null;
   if (ENTM.audio){ try{ ENTM.audio.pause(); }catch(e){} ENTM.audio=null; }
 }
@@ -952,6 +967,7 @@ var ENT_STYLE = {
   'NICK PRICE':           { hold:8, noPose:true, poseAtRing:true },   // v394: 8 s after his music starts
   'CREMATOR VON SLASHER': { hold:12, speed:0.5, noPose:true, coat:true, partner:'RIGOR VON SLASHER', withName:'W/ RIGOR VON SLASHER' },   // v627 + Rigor Von Slasher walks out with him (the user)   // v429 + his duster coat and fedora        // out after 12 s, very slow walk, no arms up
   'DANCE DADDY DENERO':   { hold:12 },
+  'MACHETE BROWN':        { boo:true },   // v775 (the user): the fans boo him, curtain to ring, on top of arguing with them
   'SCOTTY MAC':           { hold:5, boo:true },   // v669 (the user added his song): out after 5 s, to a lot of crowd boos (sfx.boo + BOOO! bubbles all the way to the ring)   // v668 (the user added his song: 'he doesn't make his entrance until 12 seconds')
   'AIR ADONIS':           { run:true, speed:2.5, rollX:2, ropes:2 },  // runs to the ring, rolls in fast, then runs the ropes twice (v432)
   'TODD QUALITY':         { poseEvery:50, poseFor:30, manager:true, withName:'W/ LANCE SKULLZ' }   // v629 the plate's 2nd line (the user)                // arms up all the way to the ring
@@ -1011,10 +1027,9 @@ function updateEntrance(){
   if (N.hold > 0){ N.t=0; if (--N.hold === 0){ e.hidden=false; if (entStyle(e).boo) N.booT=0; else sfx.cheer(0.16); if (entStyle(e).noPose) e.state='idle'; } return; }
   if (entStyle(e).boo && N.i < N.wp.indexOf('roll')){                 // v669 booed all the way to the ring
     var bt = N.booT = (N.booT||0) + 1;
-    if (bt===1 || bt%170===0) sfx.boo(4.2, bt===1 ? 0.14 : 0.11);
-    if (bt%13===1){ var BOOS=['BOOO!','BOOO!','YOU SUCK!','BOOOO!','GO HOME!','BOOO!'], sd = Math.random()<0.5 ? -1 : 1;
-      E.bub = E.bub || []; E.bub.push({ who:'c', text:BOOS[(bt/13|0)%BOOS.length], t:0, x: e.x + sd*(34 + Math.random()*30), y: e.y - 78 - Math.random()*14 }); }
-  }
+    if (SBUF.boo) booLoopTick(0.95); else if (bt===1 || bt%170===0) sfx.boo(4.2, bt===1 ? 0.14 : 0.11);   // v775 the sample loop (the oscillators only if it's missing)
+    // v776 (the user): no BOOO! bubbles for Machete or Scotty, just the sound
+  } else if (entStyle(e).boo) booLoopStop();
   // camera: follow him (the entrance stage is left of the arena)
   var tx=Math.max(CAM_ENT, Math.min(CAMV, Math.round(e.x)-128));
   if (N.i>=N.wp.length) tx=0;
@@ -1099,13 +1114,7 @@ function argueTick(e, N, A){
     if (r[2]==='point'){ e.state='atk'; e.move='punch'; e.t=0; sfx.whoosh(); }
     else if (r[2]==='win'){ e.state='win'; e.anim=0; }
     else if (e.state!=='atk'){ e.state='idle'; }
-    if (r[3]){
-      E.bub = E.bub || [];
-      if (r[3]==='m') E.bub.push({ who:'m', text:ARGUE_LINES[A.argue||0][r[4]], t:0, x: e.x + e.face*6, y: e.y - 66 });
-      else { var sd = A.fan || (Math.random()<0.5 ? -1 : 1);
-        E.bub.push({ who:'c', text:r[4], t:0, x: e.x + sd*((A.fan ? 22 : 34) + Math.random()*(A.fan ? 18 : 30)), y: e.y - 78 - Math.random()*14 });
-        sfx.cheer && sfx.cheer(0.08); }
-    }
+    if (r[3]==='c') sfx.boo(1.6, 0.075);   // v775 they boo him back; v776 (the user): no words or speech bubbles in his entrance, just the sound
   });
   if (e.state==='atk'){ e.t++; if (e.t > 21){ e.state='idle'; e.t=0; } }
   else e.anim++;
@@ -3484,11 +3493,12 @@ var KM = {
            // (tools/py/build_tomb_combo.py): TBL he ducks in, the man leaning over his back (1956-1964); TBD the man DRAPED over
            // his shoulders - head hanging behind, legs in front (1968-1980); TBS swung upside down against his chest, legs
            // bent back over his shoulder (1988-1996); then the hold (the user's tomb done.png spacing), the spike, the cover
-           M:[[0,'0.0',11,28,0,1],[5,'0.0',11,28,0,1],[6,'-',0,0,0,1],[33,'-',0,0,0,1],[34,'0.0',-3,51,0,1,1],[35,'0.0',-3,51,0,1,1],[36,'0.0',-3,51,0,1,1],      // turned upside down, legs swinging up straight (1988-2004)
-              [37,'0.0',-3,51,0,1,1],[116,'0.0',-3,51,0,1,1],[117,'0.0',-3,51,0,1,1],
-              [123,'0.0',2,29,0,1,1],[124,'0.0',2,29,0,1,1],[155,'0.0',2,29,0,1,1],[156,'0.0',2,29,0,1,1],
+           M:[[0,'0.0',11,28,0,1],[5,'0.0',11,28,0,1],[6,'-',0,0,0,1],[33,'-',0,0,0,1],[34,'0.0',-2,45,0,1,1],[35,'0.0',-2,45,0,1,1],[36,'0.0',-2,45,0,1,1],      // turned upside down, legs swinging up straight (1988-2004)
+              [37,'0.0',-2,45,0,1,1],[116,'0.0',-2,45,0,1,1],[117,'0.0',-2,45,0,1,1],
+              [123,'0.0',2,28,0,1,1],[124,'0.0',2,28,0,1,1],[155,'0.0',2,28,0,1,1],[156,'0.0',2,28,0,1,1],
               [157,'LIEFLAT',26,1,0,1],[160,'LIEFLAT',26,1,0,1]],   // v610 (the user): straight down FLAT after the spike - no tilted in-between
-           rel:160, end:170, endX:6, dmg:26, hit:123, over:true },   // v608 no pin after (the user),   // v603 (the user's 'tomb done.png'): the man pulled in tight, Cremator drawn over him
+           rel:160, end:170, endX:6, dmg:26, hit:123, over:true, ovm:[[123,157,'0.0',0,0,14,25]] },   // v770-771 (the user's tomb done.png): the hold is (-2,45), was (-3,51); kneel (2,28): his chest + head over the man, the man's waist + upper body (rows 0-24 of the upside-down 0.0) back over him
+    // v608 no pin after (the user),   // v603 (the user's 'tomb done.png'): the man pulled in tight, Cremator drawn over him
   // LEG DROP - v573 (the user: 'do the leg drop'; video 2996-3232 read every 3-6 frames): the man is down - he turns and
   // walks off UPSTAGE away from him, runs to the far ropes, bounces off them and takes a big LEAP back down at him, legs
   // out in front, leaning back flat in the air (NBSIT turned back, video 3088-3100), sitting up as he comes down, and lands sitting across his chest (the hit); sits there, gets up, poses. 7th column
@@ -3568,7 +3578,7 @@ function drawKM(a){
     g.drawImage(SHEET[an], r[0]+q[3], r[1]+q[4], q[5], q[6], 0, 0, q[5], q[6]); g.restore(); });
   if (K.ovm && only!=='him') K.ovm.forEach(function(q){ if (a.t < q[0] || a.t >= q[1]) return; var P=kmManAt(a, a.t); if (!P || P.f!==q[2]) return;
     var vn=artKey(v), r=ATLAS[vn][P.f]; if (!r) return; var wf=-f*P.fa;                    // v589: the man's hands back over the holder's arm
-    g.save(); g.translate(Math.round(X + f*P.x), Math.round(Y - P.y)); if (wf<0) g.scale(-1,1);
+    g.save(); g.translate(Math.round(X + f*P.x), Math.round(Y - P.y)); if (wf<0) g.scale(-1,1); if (P.vf) g.scale(1,-1);   // (v771: upside-down men too)
     g.drawImage(SHEET[vn], r[0]+q[3], r[1]+q[4], q[5], q[6], -Math.round(r[2]/2)+q[3], -Math.round(r[3]/2)+q[4], q[5], q[6]); g.restore(); });
   if (K.zzz && a.t >= K.zzz[0] && a.t < K.zzz[1] && only!=='him'){ var zn = Math.min(3, 1 + Math.floor((a.t - K.zzz[0]) / 22)); drawZBubble(X + f*K.zzz[2], Y - K.zzz[3], zn); }
 }
