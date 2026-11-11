@@ -2094,6 +2094,7 @@ function updateWJump(e){
   if (e.jland){ e.jland++; if (e.jland>2){ e.state='idle'; e.t=0; e.jland=0; e.jh=0; } return; }
   if (e.jhang){ e.jhang--; if (e.jhang===0){ e.jh=0; e.jland=1; } return; }
   e.jt++; e.x += 2*e.face;
+  if (!e.out) e.x = Math.max(RING.x1, Math.min(RING.x2, e.x));   // v796 (the user: the running knee showed outside the ring for a second): stop at the ropes mid-air
   e.jh = e.jt<=10 ? 2*e.jt : (e.jt<=20 ? 20 : Math.max(0, 20-2*(e.jt-20)));
   if (e.jt>=30){ e.jh=0; e.state='idle'; e.t=0; clamp(e); }
 }
@@ -3007,7 +3008,7 @@ var PB_SEQ_BY = { 'AIR ADONIS': PB_SEQ.slice(0, 5).concat([32,36,40,44,48,52].ma
   [[56, '5.1', -3, 0, 'PBTIP', -8, -38, true, false, '51'], [61, 'PBTSIT', 2, 0, 'PBPIN', 5, 0, true, false, 'SIT']]) };
 function pbSeq(a){ return (a && PB_SEQ_BY[a.def.name]) || PB_SEQ; }
 function canPB(a){ return a.def.name==='LOKOMBO' && !!ATLAS[a.def.name]['PBHUG']; }   // the user moved the powerbomb from Todd to Lokombo
-function tryPB(a,v){ if (countered(v)) startPileFail(a,v); else startPB(a,v); }
+function tryPB(a,v){ if (Math.random()*100 < 0.5*Math.max(0, Math.min(100, v.hp))) startPileFail(a,v); else startPB(a,v); }   // v795 (the user): Todd's piledriver rule (50% at full health, less the lower he is)
 function startPB(a,v){
   match.lock=null; a.grip=v.grip=0; mash=0;
   a.state='pb'; a.t=0; a.anim=0;
@@ -3919,6 +3920,7 @@ function startKickOut(a, v){
   v.state='kickup'; v.t=0; v.inv=KO_LEGS+30;
   a.state='flung'; a.t=0; a.inv=KO_FLY+10; a.fdir=LI.hs;
   a.fx0 = Math.round(LI.cx + LI.hs*12);                 // over his chest
+  if (!a.out) a.fx0 = Math.max(RING.x1, Math.min(RING.x2, a.fx0));   // v797 (the user): a pin by the ropes doesn't fling him outside them
   a.x = a.fx0; a.y = v.y + 1;                           // drawn in front of him
 }
 function updatePin(){
@@ -4134,6 +4136,15 @@ function DIFF(){ return DIFFS[diff]; }
 function aiThink(e){
   if (!e.cpu || match.demo) return;
   var fw=foe(e);
+  // v798 (the user: 'the computer walks into the running clothesline too easily - have them try to side step it'): when
+  // you run at it with your arms up, once per run it may (EASY 20% / MEDIUM 40% / TOUGH 55% / HARD 70%) step up or down
+  // the ring out of your line (the clothesline needs you within 6 px up/down) - else it stands there and takes it
+  if (fw.state==='run' && fw.run && fw.run.cl && fw.run.ph==='run' && (e.state==='idle'||e.state==='walk') && !e.out && !fw.out
+      && (e.x-fw.x)*fw.run.dir>0 && Math.abs(e.x-fw.x)<=80){
+    var RN=fw.run;
+    if (RN.dodge==null){ RN.dodge = Math.random() < ([0.2,0.4,0.55,0.7][diff]||0.4) ? ((e.y-RING.y1 > RING.y2-e.y) ? -1 : 1) : 0; }
+    if (RN.dodge){ e.aiMoveX=0; e.aiMoveY=RN.dodge; e.aiPunch=e.aiKick=false; return; }
+  }
   // RUNNING (the user: "let the CPU run at me sometimes too"): lined up across the ring, now and then (more on harder
   // levels) it runs at you - and as it closes in picks a running clothesline (not Star) / a jump / just running into you
   // (with a gap between you it decides now and then, steps up/down onto your line, then goes)
