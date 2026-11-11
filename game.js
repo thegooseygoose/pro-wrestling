@@ -275,7 +275,7 @@ SHEET_VS['DANCE DADDY DENERO#ALT|DANCE DADDY DENERO'] = load('sprites/dfatalt_vs
 function sheetVs(e){ var o=foe(e), im=o && SHEET_VS[artKey(e)+'|'+artKey(o)]; return (im && imgOk(im)) ? im : SHEET[artKey(e)]; }
 function load(src){ var im=new Image(); if (/sprites\/[a-z]+_vs_|sprites\/[a-z]+v_/.test(src)) return im;   // v638: the per-pairing throw sheets are retired (two-sprite throws) - never loaded
   im.src=src; return im; }
-function imgOk(im){ return im && im.complete && im.naturalWidth>0; }
+function imgOk(im){ return im && (im.getContext ? im.width>0 : (im.complete && im.naturalWidth>0)); }   // v787 (canvases too: the split manager sheet)
 
 /* ---------------- roster ---------------- */
 var ROSTER = [
@@ -349,6 +349,29 @@ SEQ['CREMATOR VON SLASHER'] = Object.assign({}, SEQ['BASE'], { bigboot: SEQ['TOD
 for (var _an in ALT_SHEET) SEQ[_an+'#ALT'] = SEQ[_an];
 SEQ['CREMATOR VON SLASHER#COAT'] = SEQ['CREMATOR VON SLASHER'];
 SEQ['TODD MANAGER'] = { idle:{seq:['1.0'], loop:true, dur:20}, walk:{seq:['0.0','0.1','0.2','0.3'], loop:true, dur:6} };
+SEQ['TODD MANAGER#CANE'] = SEQ['TODD MANAGER']; ATLAS['TODD MANAGER#CANE'] = ATLAS['TODD MANAGER'];
+// v787 (the user: 'make lance skullz cane less thick'): the cane is 1 px in the sheet but the outline pass made it ~5 px; now 2 px, no outline.
+// At load the cane pixels (build_lance_v2.py CANE / CANE_TOP / CANE_TOP2) are split onto their own sheet, drawn after the outline.
+(function(){
+  var im = SHEET['TODD MANAGER']; if (!im) return;
+  function split(){
+    var w = im.naturalWidth, h = im.naturalHeight; if (!w) return;
+    var a = document.createElement('canvas'), b = document.createElement('canvas'); a.width = b.width = w; a.height = b.height = h;
+    var ga = a.getContext('2d'), gb = b.getContext('2d'); ga.drawImage(im, 0, 0);
+    var A = ga.getImageData(0, 0, w, h), B = gb.createImageData(w, h), d = A.data, e = B.data;
+    for (var i = 0; i < d.length; i += 4){
+      if (!d[i+3]) continue; var r = d[i], g2 = d[i+1], bl = d[i+2];
+      if ((r===18&&g2===18&&bl===22) || (r===236&&g2===196&&bl===80) || (r===168&&g2===124&&bl===40)){
+        e[i]=r; e[i+1]=g2; e[i+2]=bl; e[i+3]=d[i+3]; d[i+3]=0;
+        // v787 (the user: 'not just one pixel wide, at least 2-3'): a 2nd column beside it, a shade lighter (the shaft's shine)
+        if ((i/4) % w < w-1){ var j = i+4; e[j]=Math.min(255,r+(r<40?40:-28)); e[j+1]=Math.min(255,g2+(r<40?40:-28)); e[j+2]=Math.min(255,bl+(r<40?46:-20)); e[j+3]=255; }
+      }
+    }
+    ga.putImageData(A, 0, 0); gb.putImageData(B, 0, 0);
+    SHEET['TODD MANAGER'] = a; SHEET['TODD MANAGER#CANE'] = b; READY['TODD MANAGER#CANE'] = true;
+  }
+  if (im.complete && im.naturalWidth) split(); else im.addEventListener('load', split);
+})();
 SEQ['RIGOR VON SLASHER'] = SEQ['TODD MANAGER'];   // v627   // v435   // v429   // mirror-match copies move exactly like him
 
 /* draw a wrestler bottom-anchored (feet at py) purely from the sheet */
@@ -964,7 +987,7 @@ function startEntrances(){
 // noPose = no arms up at the curtain, poseEvery/poseFor = he stops and throws his arms up every so often on the way,
 // poseAtRing = arms up just before he rolls in, run = runs to the ring, rollX = roll-in speed multiplier
 var ENT_STYLE = {
-  'NICK PRICE':           { hold:8, noPose:true, poseAtRing:true },   // v394: 8 s after his music starts
+  'NICK PRICE':           { hold:8, noPose:true, poseAtRing:true, boo:true, heel:true },   // v789 heel too (the user): booed to the ring, on wins + kick-outs   // v394: 8 s after his music starts
   'CREMATOR VON SLASHER': { hold:12, speed:0.5, noPose:true, coat:true, partner:'RIGOR VON SLASHER', withName:'W/ RIGOR VON SLASHER' },   // v627 + Rigor Von Slasher walks out with him (the user)   // v429 + his duster coat and fedora        // out after 12 s, very slow walk, no arms up
   'DANCE DADDY DENERO':   { hold:12 },
   'MACHETE BROWN':        { boo:true, heel:true },   // v783 heel: the fans boo his wins + kick-outs too (the user)   // v775 (the user): the fans boo him, curtain to ring, on top of arguing with them
@@ -1013,6 +1036,12 @@ function drawManager(){
   var x = Math.round(M.x), y = Math.round(M.y);
   drawShadow({ state:'idle', x:x, y:y, def:{ name:A } });
   drawWrestler(A, x, y, M.face, M.walk ? 'walk' : 'idle', M.anim);
+}
+function drawManagerOL(){   // v787 outlined body, then the thin cane on top (no outline)
+  drawOutlined(drawManager);
+  var M = MGR, A = (M && M.art) || 'TODD MANAGER';
+  if (!M || M.hide || A!=='TODD MANAGER' || !READY['TODD MANAGER#CANE']) return;
+  drawWrestler('TODD MANAGER#CANE', Math.round(M.x), Math.round(M.y), M.face, M.walk ? 'walk' : 'idle', M.anim);
 }
 function entSkip(){
   var E=match.ent; if (!E) return;
@@ -1696,15 +1725,33 @@ var TIE_A = {
 // CPU starts the same ones) get a crowd reaction as they start: a cheer, or boos for a heel (ENT_STYLE heel: Machete, Scotty).
 // Wraps the start functions once, here; TIE_A's own references are swapped for the wrapped ones too. Not in move-list demos.
 var SIG_KM = { press:1, sleeper:1, tomb:1 }, sigCrowdT = 0, sigCrowdM = null;
-function sigCrowd(a){
+// v787 (the user: 'it's done at the start, make it closer to the end of the moves' + 'when Todd's piledriver gets countered
+// there's still cheering'): starting a move only ARMS the reaction; it plays when the move's damage lands on the victim
+// (hurtBy below), so a countered / missed move (the attacker gets hurt, or nothing lands in 4 s) gets no cheer or boo.
+// Holds (choke, sleeper) hurt from the first tick, so they wait 1 s in.
+var sigPend = null, SIG_HOLD = { startChoke:1, sleeper:1 };
+function sigCrowd(a, v, n){
   if (!match || match.demo || match.phase!=='fight' || !a || !a.def) return;
+  sigPend = { a:a, v:v, m:match, t:match.t, wait:SIG_HOLD[n] ? 45 : n==='startHBK' ? HBK_KICK : 0 };   // v788 superkick: its opening punch hurts first - wait for the kick
+}
+function sigCrowdFire(a){
   if (sigCrowdM===match && match.t - sigCrowdT < 90) return; sigCrowdT = match.t; sigCrowdM = match;   // (not twice in 2 s)
   if (isHeel(a)) sfx.boo(1.7, 0.1); else sfx.cheer(0.14);
 }
+(function(){
+  var h0 = hurtBy;
+  window.hurtBy = function(e, n){
+    var P = sigPend;
+    if (P && (P.m!==match || match.t - P.t > 180 || match.phase!=='fight')) P = sigPend = null;   // stale: never landed
+    if (P && e===P.a) sigPend = null;                                                              // countered: he took the hit
+    else if (P && e===P.v && n > 0 && match.t - P.t >= P.wait){ sigPend = null; sigCrowdFire(P.a); }
+    return h0.apply(this, arguments);
+  };
+})();
 ['tryPile','startBKB','tryPB','startHBK','startBTB','startBrain','startLDChain','startDDT','startHBT','startDVD','startPED',
  'startNBK','startHTS','startF5','startChoke','startFAM','startRMD','startKM'].forEach(function(n){
   var f0 = window[n]; if (typeof f0!=='function') return;
-  var f1 = function(a, v, kind){ if (n!=='startKM' || SIG_KM[kind]) sigCrowd(a); return f0.apply(this, arguments); };
+  var f1 = function(a, v, kind){ if (n!=='startKM' || SIG_KM[kind]) sigCrowd(a, v, n==='startKM' ? kind : n); return f0.apply(this, arguments); };
   window[n] = f1;
   Object.keys(TIE_A).forEach(function(w){ Object.keys(TIE_A[w]).forEach(function(d){ if (TIE_A[w][d].go===f0) TIE_A[w][d].go=f1; }); });
 });
@@ -2973,6 +3020,7 @@ function pbImpact(a){ var v=foe(a); hurtBy(v, PB_DMG); shake=16; freeze=9; sfx.c
 function pbPin(a){
   var v=foe(a), ax=a.x, ay=a.y, t=a.t;
   startPin(a, v);
+  if (!match.pin){ a.x=ax; a.y=ay; finishPB(a); return; }   // v793 crash fix: no pin outside the ring (startPin refuses) - just leave him lying
   a.x=ax; a.y=ay; a.t=t; a.state='pb'; match.pin.pb=true;
   v.x = a.x + (a.face>0 ? 22 : -28); v.y = a.y;               // the ref lies down at the man's head end (clear of his raised legs)
 }
@@ -3060,7 +3108,9 @@ function finishSupRev(a){
   a.x = x0 + f*62; a.y = y0 - 4; a.lie='LIEFLAT';   // flat on his front, exactly as he landed
   a.face = f; knockDown(a); clamp(a); clamp(v);
 }
-function tryPile(a,v){ if (countered(v)) startPileFail(a,v); else doPile(a,v); }
+// v794 (the user): Todd's piledriver is reversed 50% of the time at most, and less the lower the man's health
+// (50% at full, 25% at half, 0 at empty) - the suplex / powerbomb keep the NES odds (= his health)
+function tryPile(a,v){ if (Math.random()*100 < 0.5*Math.max(0, Math.min(100, v.hp))) startPileFail(a,v); else doPile(a,v); }
 // piledriver countered, frame-exact from the real NES (FCEUX: Kin Corn Karn vs a full-health Amazon / Star, with
 // each wrestler hidden in turn to cut clean sprites; tools/py/build_pilefail.py). Karn's body IS Star's, so the
 // attacker frames are Karn's poses with each wrestler's own head; the bent defender is the real captured sprite.
@@ -3744,7 +3794,7 @@ function pileImpact(a){
 }
 function finishPile(a){
   var v=foe(a);
-  hurtBy(v, 26);                      // piledriver = big damage (head-first)
+  hurtBy(v, 39);                      // piledriver = big damage (head-first)   // v794 (the user): 50% more than the original 26
   v.x = a.x + a.face*5; v.y=a.y;      // land where he's baked in PILE5 (Star foot + face*5)
   v.face = -a.face;
   v.face = a.face; v.lie='LIEFLAT';   // a Star-shaped victim lies flat (as after every real-game throw), head at the attacker's feet
@@ -3892,13 +3942,17 @@ function updatePin(){
     if (P.kickAt && (P.ct||0)>=P.kickAt) escaped=true;
   }
   else if (!P.holds && (P.ct||0)>=P.kickT) escaped=true;   // CPU kicks out between the 2 and the 3
+  // v789 EASTER EGG (the user): Scooter Q Hanson never counts 3 on Nick Price - every time, at the 2 he gets up and WALKS
+  // AWAY (v790), then Nick kicks out (the usual KICK OUT! + the heel boo)
+  if (!escaped && !P.walk && refDown && P.ct % 60===0 && P.count>=2 && P.v.def && P.v.def.name==='NICK PRICE' && REFS[refSel] && REFS[refSel].name==='SCOOTER Q HANSON'){ P.walk=1; refDown=false; }
+  if (P.walk){ escaped = ++P.walk > 75; refDown=false; }
   if (escaped && P.pb){                         // kicked out of the powerbomb: Todd lets go, the man lies there
     match.pin=null; finishPB(P.a); P.v.state='getup'; P.v.t=0; P.v.inv=40;   // (v623: he gets up)
-    match.msg='KICK OUT!'; match.msgT=50; if (isHeel(P.v)){ crowdBoost(1); sfx.boo(1.8, 0.13); } else sfx.pop(); return;   // v783 the heel kicks out: boos
+    match.msg='KICK OUT!'; match.msgT=50; if (P.walk){ crowdBoost(1); sfx.boo(1.8, 0.13); } else sfx.pop();   // v791 (the user): only Scooter's screw job is booed return;   // v783 the heel kicks out: boos
   }
   if (escaped){                                 // kick out any time before the 3-count lands
     match.pin=null; startKickOut(P.a, P.v);
-    match.msg='KICK OUT!'; match.msgT=50; if (isHeel(P.v)){ crowdBoost(1); sfx.boo(1.8, 0.13); } else sfx.pop(); return;   // v783 the heel kicks out: boos
+    match.msg='KICK OUT!'; match.msgT=50; if (P.walk){ crowdBoost(1); sfx.boo(1.8, 0.13); } else sfx.pop();   // v791 (the user): only Scooter's screw job is booed return;   // v783 the heel kicks out: boos
   }
   if (refDown && P.ct % 60===0){                // slower count (1s per number) = more time to escape
     P.count++; sfx.count(P.count);              // the ding lands on the ref's mat slap
@@ -3960,6 +4014,12 @@ function refCrowded(R){
 }
 function updateRef(){
   var R=ref, P=match.pin; if(!R) return; R.t++;
+  if (P && P.walk){                                       // v790 Scooter's Easter egg: up off the mat and away from Nick's pin
+    if (R.mode!=='walkoff'){ R.mode='walkoff'; R.t=0; R.pose='stand'; R.wx = R.x < (P.a.x+P.v.x)/2 ? RING.x1+12 : RING.x2-12; }
+    if (R.t>20) refStep(R.wx, REF_BACK_Y, 1); else R.face = R.wx>=R.x ? 1 : -1;
+    return;
+  }
+  if (!P && R.mode==='walkoff'){ R.mode='patrol'; R.pause=30; R.tx=R.x; }
   if (P && P.t>=9){                                       // the pinner has landed: go count
     if (R.mode!=='count'){
       R.mode='run';
@@ -4968,9 +5028,9 @@ function drawMatch(){
   if (!chairDrawn && CHAIR && CHAIR.y<=RING.y2+20){ drawChairFloor(); chairDrawn=true; }
   if (bm) bm.noShadow=bt.noShadow=false;
   if (!refDrawn) drawOutlined(drawRef);
-  if (MGR && MGR.y<=RING.y2+20) drawOutlined(drawManager);
+  if (MGR && MGR.y<=RING.y2+20) drawManagerOL();
   drawFrontRopes();          // near ropes pass IN FRONT of the wrestlers (they're inside the ring)
-  if (MGR && MGR.y>RING.y2+20) drawOutlined(drawManager);   // v435 Todd's manager (on the floor)
+  if (MGR && MGR.y>RING.y2+20) drawManagerOL();   // v435 Todd's manager (on the floor)
   for (var fi=0; fi<front.length; fi++){
     if (!chairDrawn && CHAIR && CHAIR.y<=front[fi].y){ drawChairFloor(); chairDrawn=true; }
     var fe=front[fi]; drawOutlined(function(){ drawChairHeld(fe); drawEntity(fe); drawChairGrip(fe); }, playerOutline(fe)); }
