@@ -39,7 +39,7 @@ ATLAS_DATA['TODD QUALITY'] = { sheet:'sprites/heavy_keyed.png?v=124', frames:ATL
 // LOKOMBO = the user's 4th wrestler (from their photos): Star Man's full frame set recoloured (deep brown skin, black
 // trunks, black knee pads) with Todd's head designs re-stamped in his colours (black flat-top, beard) —
 // tools/py/build_lokombo.py. Same rects, own sheet.
-ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=85', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
+ATLAS_DATA['LOKOMBO'] = { sheet:'sprites/lokombo_keyed.png?v=86', frames:Object.assign({}, ATLAS_DATA['BASE'].frames,
   { PSCOOP:[2,1208,21,55] }) };   // v557 + his press slam scoop (tools/py/build_press_scoop.py --who lokombo)
 // SCOTTY MAC = the user's 5th wrestler (from their photos): TODD's art recoloured (black vest, silver chain, sky-blue
 // pants, bleached-blond hair, grey beard) — tools/py/build_scotty.py. Same rects, own sheet.
@@ -1570,7 +1570,9 @@ function updateEntity(e){
       break;
     case 'down': {
       e.t++;
-      if (f && (f.state==='dvd' || f.state==='ddt' || f.state==='ped' || f.state==='nbk' || f.state==='fam' || f.state==='rmd' || f.state==='rkb' || f.state==='km' || f.ldc || f.state==='hts' || f.state==='hbt' || f.state==='choke' || f.state==='f5')) break;   // v313: stays flat until Machete is back up, THEN his normal stay-down time starts (like every other move)
+      if (f && (f.state==='dvd' || f.state==='ddt' || f.state==='ped' || f.state==='nbk' || f.state==='fam' || f.state==='rmd' || f.state==='rkb' || f.state==='km' || f.ldc || f.state==='hts' || f.state==='hbt' || f.state==='choke' || f.state==='f5')){
+        if (f.ldc && f.state!=='km' && !e.cpu && !match.pin){ e.downT -= newPresses(e)*LD_MASH; if (e.downT<=0){ e.state='getup'; e.t=0; e.inv=40; e.sspFlat=false; } }   // v799: mash up before Nick's leg drop lands
+        break; }   // v313: stays flat until Machete is back up, THEN his normal stay-down time starts (like every other move)
       e.downT--;
       if (!e.cpu && !match.pin && !e.sspFlat){ e.downT -= mash*3; }   // (v738: not while he lies flat after a missed SSP)
       // v736 (the user: 'the ssp when it misses - don't go to getting up from that frame, flip to the regular down frame,
@@ -1669,7 +1671,10 @@ function hit(e,f,dmg,kd){
     // real NES: every wrestler takes a punch IN PLACE, recoiling for 8 frames
     f.state='hurt'; f.t=0; f.willFall=false; f.knock=null; }
 }
-function knockDown(f){ f.sspFlat=false; f.downPose=f.lie||null; f.lie=null; f.slowUp=false; f.state='down'; f.t=0; f.inv=30; f.kdN=(f.kdN||0)+1;   // (kdN: the CPU decides once per knockdown whether to go up top)
+// v799 fresh presses by this (human) wrestler since the last call - mashing out of a long hold (the sleeper, Nick's leg drop setup)
+function newPresses(v){ var m = (CTL===(v.ctl||0)) ? mash : MASHC[v.ctl||0], n = v.mSeen==null ? 0 : Math.max(0, m - v.mSeen); v.mSeen = m; return n; }
+var SLEEPER_MASH = 5, LD_MASH = 5;    // ticks of the sleeper skipped / frames off the get-up per press
+function knockDown(f){ f.mSeen=null; f.sspFlat=false; f.downPose=f.lie||null; f.lie=null; f.slowUp=false; f.state='down'; f.t=0; f.inv=30; f.kdN=(f.kdN||0)+1;   // (kdN: the CPU decides once per knockdown whether to go up top)
   if (f.kickLie){ f.x += f.face; f.y += 1; f.kickLie=false; }   // the Amazon kicked down: lies where the real game puts 7.4 (1px back, 1px low)
   if (f.somerLie){ f.y -= 2; f.somerLie=false; }                 // after Star's somersault kick the real game lays him 2px further up
   // real NES timing for a human player: ~46 frames on the mat at full health, longer as he weakens
@@ -2247,6 +2252,7 @@ function runStep(e){ var R=e.run; var st = ((R.n++) % 2===0) ? R.s0 : 5-R.s0; e.
 function stopRun(e){ e.state='idle'; e.t=0; e.run=null; clamp(e); }
 function updateRun(e){
   var R=e.run, f=foe(e); e.t++;
+  if (R.ld && f.state!=='down'){ R.ld=false; e.ldc=null; }   // v799: he got up in time - no leap at nobody
   if (R.ld && R.back && R.ph==='run' && (f.x-e.x)*R.dir>0 && Math.abs(f.x-e.x)<=50){ e.run=null; startKM(e, f, 'ldleap'); return; }   // v578 the leg drop's leap
   if (!e.cpu && !R.ld){
     if ((R.dir>0 && kL()) || (R.dir<0 && kR())){ stopRun(e); return; }              // the other way: he stops and walks
@@ -3590,7 +3596,7 @@ function canKM(a, k){ var A=ATLAS[a.def.name]; return !!A && !!A['LIEFLAT'] && K
 function startKM(a, v, k){
   match.lock=null; a.grip=v.grip=0; mash=0;
   a.state='km'; a.km=k; a.t=0; a.anim=0; a.bbf = v.x>=a.x ? 1 : -1; a.face=a.bbf; a.bbx=Math.round(a.x); a.bby=Math.round(a.y);
-  if (KM[k].M){ v.state='lifted'; v.t=0; } sfx.lock && sfx.lock();
+  v.mSeen=null; if (KM[k].M){ v.state='lifted'; v.t=0; } sfx.lock && sfx.lock();
   if (KM[k].depth) a.kmD = Math.min(0, Math.max(-40, RING.y1 + 10 - a.bby));      // v573: room to run upstage to the far ropes
   if (KM[k].land) a.kmMx = (v.x - a.bbx) * a.bbf;                                   // where the man really lies
   if (KM[k].landY != null) a.kmMy = (v.y - a.bby) + KM[k].landY;                     // v576: and how far up/down the ring (lands on his chest)
@@ -3601,6 +3607,8 @@ function kmManAt(a, t){ var K=KM[a.km], o=kmPose(K.M, t, [2,3,4]); if (!o) retur
 function updateKM(a){
   var K=KM[a.km], v=foe(a), f=a.bbf, X=a.bbx, Y=a.bby; a.t++;
   if (K.drain) K.drain.forEach(function(d){ if (a.t===d[0]) hurtBy(v, d[1]); });
+  if (a.km==='sleeper' && !v.cpu && K.rel && a.t < K.rel - 1){   // v799 (the user): mashing gets you through the sleeper sooner (same damage)
+    for (var sk = Math.min(newPresses(v)*SLEEPER_MASH, K.rel - 1 - a.t); sk > 0; sk--){ a.t++; if (K.drain) K.drain.forEach(function(d){ if (a.t===d[0]) hurtBy(v, d[1]); }); } }
   if (K.hit && a.t===K.hit){ hurtBy(v, K.dmg); shake=13; freeze=6; sfx.crash(); crowdBoost && crowdBoost(.5); addDust(X + f*18, Y, 14); }
   if (K.M && a.t===K.rel){                                                   // down exactly where his last row left him
     var P=kmManAt(a, K.rel-0.01), wf=-f*P.fa, mir=wf<0;
