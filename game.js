@@ -24,7 +24,7 @@ var _boot = document.getElementById('bootIntro');
 if (_boot) _boot.style.display = 'none';
 
 /* ---------------- assets ---------------- */
-var ARENA = new Image(); ARENA.src = 'sprites/ring_wide.png?v=20'; var ENTIMG = new Image(); ENTIMG.src = 'sprites/entrance.png?v=9';   //v6: the entrance AISLE cut through the left crowd (tools/py/build_entrance.py) | ENTIMG: the ENTRANCE STAGE left of the arena (world x -92-ENT_W .. -92), same tool   // 440x225: the real floor strips either side of OUR ring (ring2.png), drawn at world x -92 (tools/py/build_ring_wide.py)
+var ARENA = new Image(); ARENA.src = 'sprites/ring_wide.png?v=21'; var ENTIMG = new Image(); ENTIMG.src = 'sprites/entrance.png?v=9';   //v6: the entrance AISLE cut through the left crowd (tools/py/build_entrance.py) | ENTIMG: the ENTRANCE STAGE left of the arena (world x -92-ENT_W .. -92), same tool   // 440x225: the real floor strips either side of OUR ring (ring2.png), drawn at world x -92 (tools/py/build_ring_wide.py)
 var SHEET = {}, ATLAS = {}, READY = {};
 var PORTRAIT = {};
 
