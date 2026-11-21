@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>PRO WRESTLING - BLACK BOX SERIES</title>
 <style>
   html,body{margin:0;padding:0;background:#000;height:100%;overflow:hidden}
@@ -34,6 +36,42 @@
   body.fs #scan{ inset:0; border-radius:0 }
   body.fs #hint{ display:none }
 
+  /* ---- PHONE / TABLET (touch screens only): on-screen controls ---- */
+  #touch{display:none}
+  body.touch{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+  body.touch #hint{display:none}
+  body.touch #touch{display:block;position:fixed;inset:0;pointer-events:none;z-index:50}
+  body.touch .tb{position:absolute;pointer-events:auto;touch-action:none;display:flex;align-items:center;justify-content:center;
+    color:rgba(255,255,255,.85);font:bold 14px monospace;letter-spacing:1px;border:2px solid rgba(255,255,255,.35);
+    background:rgba(40,40,60,.45);-webkit-tap-highlight-color:transparent}
+  body.touch .tb.on{background:rgba(255,210,60,.55);color:#000;border-color:rgba(255,230,120,.9)}
+  #dpad{border-radius:50%;width:var(--dp);height:var(--dp);left:calc(env(safe-area-inset-left) + 14px);bottom:calc(env(safe-area-inset-bottom) + 14px)}
+  #dpad .arm{position:absolute;background:rgba(255,255,255,.18);border-radius:6px}
+  #dpad .h{left:12%;right:12%;top:38%;bottom:38%} #dpad .v{top:12%;bottom:12%;left:38%;right:38%}
+  #dpad .dot{position:absolute;width:30%;height:30%;border-radius:50%;background:rgba(255,210,60,.7);left:35%;top:35%;display:none}
+  #bP,#bK{border-radius:50%;width:var(--bt);height:var(--bt);font-size:15px}
+  #bK{right:calc(env(safe-area-inset-right) + 14px);bottom:calc(env(safe-area-inset-bottom) + 14px)}
+  #bP{right:calc(env(safe-area-inset-right) + 14px + var(--bt) + 12px);bottom:calc(env(safe-area-inset-bottom) + 14px + var(--bt)*0.55)}
+  #bStart,#bBack,#bFS{border-radius:14px;height:30px;padding:0 12px;font-size:12px;top:calc(env(safe-area-inset-top) + 8px)}
+  #bStart{left:50%;transform:translateX(-50%)}
+  #bBack{left:calc(env(safe-area-inset-left) + 10px)}
+  #bFS{right:calc(env(safe-area-inset-right) + 10px)}
+  body.touch{--dp:min(38vh,150px);--bt:min(20vh,78px)}
+  /* sideways phone: the game fills the screen, the pads sit over its edges */
+  @media (orientation:landscape){ body.touch canvas{height:100vh;width:auto;max-width:100vw;border:0;border-radius:0}
+    body.touch #scan{inset:0;border-radius:0} }
+  /* upright phone: the game on top, big pads underneath */
+  @media (orientation:portrait){
+    body.touch{justify-content:flex-start}
+    body.touch #wrap{margin-top:calc(env(safe-area-inset-top) + 46px)}
+    body.touch canvas{width:100vw;height:auto;border:0;border-radius:0}
+    body.touch #scan{inset:0;border-radius:0}
+    body.touch{--dp:min(44vw,190px);--bt:min(22vw,92px)}
+    body.touch #dpad{bottom:calc(env(safe-area-inset-bottom) + 6vh)}
+    body.touch #bK{bottom:calc(env(safe-area-inset-bottom) + 6vh)}
+    body.touch #bP{right:calc(env(safe-area-inset-right) + 14px + var(--bt)*0.7);bottom:calc(env(safe-area-inset-bottom) + 6vh + var(--bt)*1.05)}
+  }
+
   #bootIntro{
     position:fixed;inset:0;z-index:9999;background:#000;
     display:flex;align-items:center;justify-content:center;overflow:hidden;
@@ -59,8 +97,16 @@
   <canvas id="cv" width="426" height="240"></canvas>
   <div id="scan"></div>
 </div>
+<div id="touch" aria-hidden="true">
+  <div class="tb" id="dpad"><div class="arm h"></div><div class="arm v"></div><div class="dot"></div></div>
+  <div class="tb" id="bP" data-key="z">PUNCH</div>
+  <div class="tb" id="bK" data-key="x">KICK</div>
+  <div class="tb" id="bStart" data-key="Enter">START</div>
+  <div class="tb" id="bBack" data-key="Backspace">BACK</div>
+  <div class="tb" id="bFS">FULL</div>
+</div>
 <script src="sounds.js?v=802"></script>
-<script src="game.js?v=820"></script>
+<script src="game.js?v=821"></script>
 <script>
   /* Fullscreen toggle: press F, or double-click the game. */
   function toggleFS(){
@@ -79,6 +125,56 @@
     if(ev.key==='Escape' && document.body.classList.contains('fs')) toggleFS();   // exe: Esc leaves fullscreen
   });
   document.getElementById('cv').addEventListener('dblclick', toggleFS);
+  /* PHONE / TABLET: on-screen D-pad + buttons, only on touch screens. Each one presses the same key the keyboard does,
+     so every move, menu, double-tap run and mash works unchanged. */
+  (function(){
+    var coarse = window.matchMedia && matchMedia('(pointer:coarse)').matches;
+    if (!coarse && !('ontouchstart' in window && navigator.maxTouchPoints > 1)) return;
+    document.body.classList.add('touch');
+    var down = {};
+    function key(k, on){
+      if (!!down[k] === on) return; down[k] = on;
+      dispatchEvent(new KeyboardEvent(on ? 'keydown' : 'keyup', { key:k, bubbles:true, cancelable:true }));
+    }
+    var unlocked = false;
+    function unlock(){ if (unlocked) return; unlocked = true; try { actx(); } catch(e){} }   // phones only allow sound after a tap
+    // D-pad: where your thumb is (from the middle) = up to 2 arrows; slide around freely
+    var dp = document.getElementById('dpad'), dot = dp.querySelector('.dot'), dpId = null;
+    function dpSet(t){
+      var r = dp.getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
+      var dx = t ? t.clientX - cx : 0, dy = t ? t.clientY - cy : 0, R = r.width/2, dead = R*0.22, d = Math.hypot(dx, dy);
+      var on = { ArrowLeft:false, ArrowRight:false, ArrowUp:false, ArrowDown:false };
+      if (t && d > dead){
+        var a = Math.atan2(dy, dx) * 180/Math.PI;          // 8 slices of 45 degrees
+        if (a > -67.5 && a < 67.5) on.ArrowRight = true;
+        if (a > 112.5 || a < -112.5) on.ArrowLeft = true;
+        if (a > 22.5 && a < 157.5) on.ArrowDown = true;
+        if (a < -22.5 && a > -157.5) on.ArrowUp = true;
+      }
+      for (var k in on) key(k, on[k]);
+      if (t){ var m = Math.min(d, R*0.7), s = d ? m/d : 0; dot.style.display = 'block';
+        dot.style.transform = 'translate(' + (dx*s) + 'px,' + (dy*s) + 'px)'; dp.classList.add('on'); }
+      else { dot.style.display = 'none'; dot.style.transform = ''; dp.classList.remove('on'); }
+    }
+    function findT(list, id){ for (var i=0;i<list.length;i++) if (list[i].identifier === id) return list[i]; return null; }
+    dp.addEventListener('touchstart', function(e){ e.preventDefault(); unlock(); var t = e.changedTouches[0]; dpId = t.identifier; dpSet(t); }, { passive:false });
+    dp.addEventListener('touchmove', function(e){ e.preventDefault(); var t = findT(e.touches, dpId); if (t) dpSet(t); }, { passive:false });
+    function dpEnd(e){ e.preventDefault(); if (findT(e.changedTouches, dpId)){ dpId = null; dpSet(null); } }
+    dp.addEventListener('touchend', dpEnd, { passive:false }); dp.addEventListener('touchcancel', dpEnd, { passive:false });
+    // buttons: held while your finger is on them
+    Array.prototype.forEach.call(document.querySelectorAll('#touch [data-key]'), function(b){
+      var k = b.getAttribute('data-key');
+      b.addEventListener('touchstart', function(e){ e.preventDefault(); unlock(); b.classList.add('on'); key(k, true); }, { passive:false });
+      function up(e){ e.preventDefault(); b.classList.remove('on'); key(k, false); }
+      b.addEventListener('touchend', up, { passive:false }); b.addEventListener('touchcancel', up, { passive:false });
+    });
+    document.getElementById('bFS').addEventListener('touchend', function(e){ e.preventDefault(); unlock(); toggleFS();
+      try { screen.orientation && screen.orientation.lock && screen.orientation.lock('landscape').catch(function(){}); } catch(x){} }, { passive:false });
+    // no page scroll / pinch zoom / long-press menu while playing
+    document.addEventListener('touchmove', function(e){ e.preventDefault(); }, { passive:false });
+    document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+    document.addEventListener('touchstart', unlock, { passive:true });
+  })();
   /* the exe opens fullscreen (1920x1080): use the fullscreen look from the start */
   addEventListener('pywebviewready', function(){
     if (pywebview.api && pywebview.api.starts_fullscreen) pywebview.api.starts_fullscreen().then(function(v){ if (v) document.body.classList.add('fs'); });
